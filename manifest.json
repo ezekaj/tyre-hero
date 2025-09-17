@@ -1,0 +1,167 @@
+{
+  "name": "TyreHero Emergency Service",
+  "short_name": "TyreHero",
+  "description": "24/7 Emergency Mobile Tyre Fitting Service with 90-minute response time",
+  "start_url": "/emergency.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#E53935",
+  "background_color": "#FFFFFF",
+  "scope": "/",
+  "lang": "en-GB",
+  "categories": ["emergency", "automotive", "services"],
+  "shortcuts": [
+    {
+      "name": "Emergency Call",
+      "short_name": "Call",
+      "description": "Call emergency service directly",
+      "url": "tel:08001234567",
+      "icons": [
+        {
+          "src": "images/emergency-call-icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Request Service",
+      "short_name": "Request",
+      "description": "Fill emergency service form",
+      "url": "/emergency.html#emergencyForm",
+      "icons": [
+        {
+          "src": "images/emergency-form-icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Find Location",
+      "short_name": "Location",
+      "description": "Share your location for emergency service",
+      "url": "/emergency.html?action=location",
+      "icons": [
+        {
+          "src": "images/location-icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "icons": [
+    {
+      "src": "images/tyrehero-icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/tyrehero-icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/tyrehero-icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/tyrehero-icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/tyrehero-icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/tyrehero-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/tyrehero-icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/tyrehero-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/tyrehero-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/tyrehero-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "prefer_related_applications": false,
+  "capture_links": "existing-client-navigate",
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "tel",
+      "url": "tel:%s"
+    }
+  ],
+  "features": [
+    "geolocation",
+    "notifications",
+    "background-sync"
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot-emergency-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Emergency service request on mobile"
+    },
+    {
+      "src": "images/screenshot-emergency-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Emergency service dashboard"
+    }
+  ],
+  "offline_enabled": true,
+  "emergency_contacts": [
+    {
+      "name": "Emergency Service",
+      "phone": "08001234567",
+      "type": "emergency"
+    }
+  ],
+  "performance": {
+    "critical_request_chains": [
+      "/emergency.html",
+      "/critical.css", 
+      "/emergency-scripts.js"
+    ],
+    "preload_resources": [
+      "/images/tyrehero-logo.svg",
+      "/images/emergency-bg.webp"
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': 'Let me click on the "What Is Mobile Tyre Fitting?" FAQ to see the detailed information:\n\n<function_calls>\n<browser-click-element>\n39\n</browser-click-element>\n</function_calls>'}

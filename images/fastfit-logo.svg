@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="50" viewBox="0 0 200 50">
+  <style>
+    .logo-text { font-family: 'Arial', sans-serif; font-weight: bold; }
+    .primary { fill: #e53935; }
+    .secondary { fill: #1565c0; }
+    .dark { fill: #212121; }
+  </style>
+  <g>
+    <!-- Tyre icon -->
+    <circle cx="25" cy="25" r="20" fill="#212121"/>
+    <circle cx="25" cy="25" r="15" fill="#444444"/>
+    <circle cx="25" cy="25" r="10" fill="#666666"/>
+    <circle cx="25" cy="25" r="5" fill="#888888"/>
+    
+    <!-- Lightning bolt for emergency service -->
+    <path d="M22,10 L28,10 L25,20 L30,20 L20,40 L23,25 L18,25 Z" class="primary"/>
+    
+    <!-- Text -->
+    <text x="55" y="28" class="logo-text dark" font-size="20">Fast</text>
+    <text x="95" y="28" class="logo-text primary" font-size="20">Fit</text>
+    <text x="55" y="42" class="logo-text secondary" font-size="12">MOBILE TYRES</text>
+  </g>
+</svg>

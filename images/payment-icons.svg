@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="30" viewBox="0 0 240 30">
+  <!-- Visa -->
+  <g transform="translate(10, 5)">
+    <rect x="0" y="0" width="40" height="20" rx="3" ry="3" fill="#FFFFFF"/>
+    <path d="M10,10 L15,5 L20,10 L25,5 L30,10" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+    <text x="5" y="18" font-family="Arial" font-weight="bold" font-size="8" fill="#1A1A1A">VISA</text>
+  </g>
+  
+  <!-- Mastercard -->
+  <g transform="translate(60, 5)">
+    <rect x="0" y="0" width="40" height="20" rx="3" ry="3" fill="#FFFFFF"/>
+    <circle cx="15" cy="10" r="8" fill="#FF0000" opacity="0.7"/>
+    <circle cx="25" cy="10" r="8" fill="#FFAA00" opacity="0.7"/>
+  </g>
+  
+  <!-- PayPal -->
+  <g transform="translate(110, 5)">
+    <rect x="0" y="0" width="40" height="20" rx="3" ry="3" fill="#FFFFFF"/>
+    <text x="5" y="15" font-family="Arial" font-weight="bold" font-size="10" fill="#0000AA">Pay</text>
+    <text x="22" y="15" font-family="Arial" font-weight="bold" font-size="10" fill="#3333FF">Pal</text>
+  </g>
+  
+  <!-- Apple Pay -->
+  <g transform="translate(160, 5)">
+    <rect x="0" y="0" width="40" height="20" rx="3" ry="3" fill="#000000"/>
+    <text x="5" y="15" font-family="Arial" font-weight="bold" font-size="8" fill="#FFFFFF">Apple Pay</text>
+  </g>
+  
+  <!-- Google Pay -->
+  <g transform="translate(210, 5)">
+    <rect x="0" y="0" width="40" height="20" rx="3" ry="3" fill="#FFFFFF"/>
+    <text x="2" y="15" font-family="Arial" font-weight="bold" font-size="8" fill="#4285F4">G</text>
+    <text x="10" y="15" font-family="Arial" font-weight="bold" font-size="8" fill="#EA4335">o</text>
+    <text x="18" y="15" font-family="Arial" font-weight="bold" font-size="8" fill="#FBBC05">o</text>
+    <text x="26" y="15" font-family="Arial" font-weight="bold" font-size="8" fill="#4285F4">g</text>
+    <text x="34" y="15" font-family="Arial" font-weight="bold" font-size="8" fill="#34A853">l</text>
+    <text x="38" y="15" font-family="Arial" font-weight="bold" font-size="8" fill="#EA4335">e</text>
+  </g>
+</svg>

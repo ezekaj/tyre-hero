@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': 'Let me continue scrolling to see more of the Kwik Fit mobile tyre fitting page content.\n\n<function_calls>\n<browser-scroll-down>\n500\n</browser-scroll-down>\n</function_calls>'}

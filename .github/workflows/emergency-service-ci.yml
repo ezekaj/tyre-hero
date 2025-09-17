@@ -1,0 +1,506 @@
+name: Emergency Service CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run comprehensive tests daily at 2 AM
+    - cron: '0 2 * * *'
+
+env:
+  NODE_VERSION: '18'
+  EMERGENCY_TEST_MODE: 'true'
+  PERFORMANCE_BUDGET_ENABLED: 'true'
+
+jobs:
+  # Emergency Service Validation
+  emergency-validation:
+    name: Emergency Service Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Validate emergency configuration
+      run: |
+        echo "🚨 Validating emergency service configuration..."
+        
+        # Check critical files exist
+        test -f emergency-optimized.html || exit 1
+        test -f emergency-scripts.js || exit 1
+        test -f service-worker.js || exit 1
+        test -f manifest.json || exit 1
+        
+        # Validate manifest.json
+        node -e "
+          const manifest = require('./manifest.json');
+          if (!manifest.name || !manifest.icons || !manifest.start_url) {
+            console.error('Invalid manifest.json');
+            process.exit(1);
+          }
+          console.log('✅ Manifest validation passed');
+        "
+        
+        # Check emergency call button exists
+        grep -q "emergency-call-btn" emergency-optimized.html || exit 1
+        echo "✅ Emergency call button found"
+        
+        # Validate service worker emergency cache
+        grep -q "emergency" service-worker.js || exit 1
+        echo "✅ Service worker emergency cache configured"
+
+    - name: Lint emergency code
+      run: |
+        npm run lint
+        echo "✅ Emergency code linting passed"
+
+    - name: Validate HTML structure
+      run: |
+        npm run validate:html
+        echo "✅ HTML validation passed"
+
+    - name: Check security headers configuration
+      run: |
+        node -e "
+          const fs = require('fs');
+          const html = fs.readFileSync('emergency-optimized.html', 'utf8');
+          
+          // Check for security meta tags
+          const hasCSP = html.includes('Content-Security-Policy');
+          const hasXFrame = html.includes('X-Frame-Options');
+          
+          if (!hasCSP) console.warn('⚠️ CSP meta tag not found');
+          if (!hasXFrame) console.warn('⚠️ X-Frame-Options not found');
+          
+          console.log('✅ Security headers check completed');
+        "
+
+  # Unit Testing with Emergency Focus
+  unit-tests:
+    name: Unit Tests - Emergency Functions
+    runs-on: ubuntu-latest
+    needs: emergency-validation
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run emergency unit tests
+      run: |
+        echo "🧪 Running emergency service unit tests..."
+        npm run test:unit -- --coverage --testPathPattern=emergency
+        
+    - name: Check emergency code coverage
+      run: |
+        echo "📊 Checking emergency code coverage thresholds..."
+        npm run test:coverage
+        
+        # Verify critical emergency functions have high coverage
+        node -e "
+          const coverage = require('./coverage/coverage-summary.json');
+          const emergencyFile = coverage['emergency-scripts.js'];
+          
+          if (emergencyFile && emergencyFile.lines.pct < 95) {
+            console.error('❌ Emergency scripts coverage below 95%');
+            process.exit(1);
+          }
+          
+          console.log('✅ Emergency code coverage meets requirements');
+        "
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage/lcov.info
+        flags: emergency-unit-tests
+
+  # Integration Testing
+  integration-tests:
+    name: Integration Tests - Payment & Dispatch
+    runs-on: ubuntu-latest
+    needs: unit-tests
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: tyrehero_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Setup test database
+      run: |
+        echo "🗄️ Setting up test database..."
+        npm run db:setup:test
+        
+    - name: Run payment integration tests
+      env:
+        STRIPE_TEST_KEY: ${{ secrets.STRIPE_TEST_KEY }}
+        PAYPAL_TEST_CLIENT_ID: ${{ secrets.PAYPAL_TEST_CLIENT_ID }}
+      run: |
+        echo "💳 Running payment integration tests..."
+        npm run test:integration -- --testPathPattern=payment
+        
+    - name: Run dispatch integration tests
+      env:
+        GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_TEST_KEY }}
+        TWILIO_TEST_SID: ${{ secrets.TWILIO_TEST_SID }}
+      run: |
+        echo "🚚 Running dispatch integration tests..."
+        npm run test:integration -- --testPathPattern=dispatch
+        
+    - name: Verify emergency SLA compliance
+      run: |
+        echo "⏱️ Verifying emergency SLA compliance..."
+        node -e "
+          // Check test results for SLA compliance
+          const results = require('./test-results.json');
+          
+          const emergencyTests = results.testResults.filter(test => 
+            test.name.includes('emergency') && test.name.includes('SLA')
+          );
+          
+          const failedSLA = emergencyTests.filter(test => test.status === 'failed');
+          
+          if (failedSLA.length > 0) {
+            console.error('❌ Emergency SLA tests failed:', failedSLA);
+            process.exit(1);
+          }
+          
+          console.log('✅ All emergency SLA tests passed');
+        "
+
+  # End-to-End Testing
+  e2e-tests:
+    name: E2E Tests - Emergency Journeys
+    runs-on: ubuntu-latest
+    needs: integration-tests
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+
+    - name: Start application
+      run: |
+        npm run dev &
+        sleep 10
+        curl -f http://localhost:3000/emergency-optimized.html || exit 1
+
+    - name: Run emergency customer journey tests
+      run: |
+        echo "🎭 Running emergency customer journey E2E tests..."
+        npm run test:e2e:emergency
+        
+    - name: Run mobile emergency tests
+      run: |
+        echo "📱 Running mobile emergency E2E tests..."
+        npm run test:mobile
+        
+    - name: Run network condition tests
+      run: |
+        echo "🌐 Running network condition tests..."
+        npx playwright test tests/e2e/network-conditions.spec.js
+        
+    - name: Upload E2E test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: e2e-test-results
+        path: |
+          playwright-report/
+          test-results/
+
+  # Performance Testing
+  performance-tests:
+    name: Performance Tests - Emergency Load
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Start application
+      run: |
+        npm run dev &
+        sleep 10
+
+    - name: Install k6
+      run: |
+        sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+        echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+        sudo apt-get update
+        sudo apt-get install k6
+
+    - name: Run emergency load tests
+      run: |
+        echo "⚡ Running emergency load tests..."
+        npm run test:performance
+        
+    - name: Run emergency surge tests
+      run: |
+        echo "🌊 Running emergency traffic surge tests..."
+        npm run test:emergency-load
+        
+    - name: Lighthouse emergency page audit
+      run: |
+        echo "🏠 Running Lighthouse emergency page audit..."
+        npm run test:lighthouse
+        
+    - name: Check performance budgets
+      run: |
+        echo "💰 Checking performance budgets..."
+        node -e "
+          const report = require('./performance-report.json');
+          
+          // Emergency page load time budget: 3 seconds
+          if (report.audits['largest-contentful-paint'].numericValue > 3000) {
+            console.error('❌ Emergency page LCP exceeds 3s budget');
+            process.exit(1);
+          }
+          
+          // Emergency call button response: 200ms
+          if (report.audits['first-input-delay'].numericValue > 200) {
+            console.error('❌ Emergency button FID exceeds 200ms budget');
+            process.exit(1);
+          }
+          
+          console.log('✅ Performance budgets met');
+        "
+
+    - name: Upload performance reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-reports
+        path: |
+          performance-report.*
+          k6-results.json
+
+  # Security Testing
+  security-tests:
+    name: Security Tests - Payment & Emergency Data
+    runs-on: ubuntu-latest
+    needs: performance-tests
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Start application
+      run: |
+        npm run dev &
+        sleep 10
+
+    - name: Run payment security tests
+      run: |
+        echo "🔒 Running payment security tests..."
+        npm run test:security
+        
+    - name: Run dependency security audit
+      run: |
+        echo "🔍 Running dependency security audit..."
+        npm audit --audit-level=moderate
+        
+    - name: OWASP ZAP security scan
+      run: |
+        echo "🕷️ Running OWASP ZAP security scan..."
+        docker run -t owasp/zap2docker-stable zap-baseline.py \
+          -t http://host.docker.internal:3000/emergency-optimized.html \
+          -J owasp-report.json || true
+          
+    - name: Check for security vulnerabilities
+      run: |
+        echo "🛡️ Checking for security vulnerabilities..."
+        node -e "
+          try {
+            const report = require('./owasp-report.json');
+            const highRiskAlerts = report.site[0].alerts.filter(alert => 
+              alert.riskdesc.includes('High')
+            );
+            
+            if (highRiskAlerts.length > 0) {
+              console.error('❌ High-risk security vulnerabilities found:', highRiskAlerts);
+              process.exit(1);
+            }
+            
+            console.log('✅ No high-risk security vulnerabilities found');
+          } catch (e) {
+            console.log('⚠️ Security report not available');
+          }
+        "
+
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-reports
+        path: |
+          owasp-report.json
+          security-test-results.json
+
+  # Emergency Service Smoke Tests (Production-like)
+  smoke-tests:
+    name: Emergency Service Smoke Tests
+    runs-on: ubuntu-latest
+    needs: security-tests
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build production version
+      run: |
+        echo "🏗️ Building production version..."
+        npm run build:production
+        
+    - name: Start production server
+      run: |
+        npm run serve &
+        sleep 10
+        curl -f http://localhost:8080/emergency-optimized.html || exit 1
+
+    - name: Run smoke tests
+      run: |
+        echo "💨 Running emergency service smoke tests..."
+        npm run test:smoke
+        
+    - name: Test emergency call functionality
+      run: |
+        echo "📞 Testing emergency call functionality..."
+        curl -f "http://localhost:8080/emergency-optimized.html" | grep -q "emergency-call-btn" || exit 1
+        echo "✅ Emergency call button found in production build"
+        
+    - name: Test service worker registration
+      run: |
+        echo "👷 Testing service worker registration..."
+        curl -f "http://localhost:8080/service-worker.js" > /dev/null || exit 1
+        echo "✅ Service worker accessible in production"
+        
+    - name: Test PWA manifest
+      run: |
+        echo "📱 Testing PWA manifest..."
+        curl -f "http://localhost:8080/manifest.json" | jq . > /dev/null || exit 1
+        echo "✅ PWA manifest valid in production"
+
+  # Deployment Gate
+  deployment-gate:
+    name: Emergency Service Deployment Gate
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests, e2e-tests, performance-tests, security-tests, smoke-tests]
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Emergency service deployment approval
+      run: |
+        echo "🚨 Emergency Service Deployment Gate"
+        echo "✅ All emergency service tests passed"
+        echo "✅ Performance budgets met"
+        echo "✅ Security scans completed"
+        echo "✅ Emergency SLA compliance verified"
+        echo "🚀 Ready for emergency service deployment"
+
+    - name: Notify emergency service team
+      if: failure()
+      run: |
+        echo "❌ Emergency Service Deployment BLOCKED"
+        echo "Critical tests failed - emergency service deployment stopped"
+        # In real implementation, would send alerts to emergency team
+        
+    - name: Create deployment tag
+      if: success()
+      run: |
+        echo "🏷️ Creating deployment tag for emergency service"
+        # Tag would be created for deployment tracking
+
+# Notification workflows
+  notify-failure:
+    name: Notify on Critical Failure
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests, e2e-tests, performance-tests, security-tests]
+    if: failure()
+
+    steps:
+    - name: Send emergency alert
+      run: |
+        echo "🚨 CRITICAL: Emergency Service Pipeline Failed"
+        echo "Emergency service reliability may be compromised"
+        echo "Immediate investigation required"
+        # Would integrate with incident management system

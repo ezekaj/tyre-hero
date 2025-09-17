@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': "Let me continue scrolling to find any FAQ section about etyres' mobile tyre fitting service.\n\n<function_calls>\n<browser-scroll-down>\n500\n</browser-scroll-down>\n</function_calls>"}

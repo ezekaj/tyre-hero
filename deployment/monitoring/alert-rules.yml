@@ -1,0 +1,399 @@
+# TyreHero Emergency Service - Prometheus Alert Rules
+# Critical alerting for 99.9% uptime SLA
+
+groups:
+  # Critical Emergency Service Alerts
+  - name: emergency_service_critical
+    rules:
+      # Service Availability
+      - alert: EmergencyServiceDown
+        expr: up{job="tyrehero-emergency-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: emergency
+          team: ops
+          escalation: immediate
+        annotations:
+          summary: "Emergency service API is completely down"
+          description: "The emergency service API at {{ $labels.instance }} has been down for more than 1 minute. This is a P1 incident affecting customer safety."
+          runbook_url: "https://docs.tyrehero.com/runbooks/emergency-service-down"
+          dashboard_url: "https://grafana.tyrehero.com/d/emergency-overview"
+
+      - alert: EmergencyServicePartialOutage
+        expr: (count(up{job="tyrehero-emergency-api"} == 0) / count(up{job="tyrehero-emergency-api"})) > 0.3
+        for: 2m
+        labels:
+          severity: critical
+          service: emergency
+          team: ops
+          escalation: immediate
+        annotations:
+          summary: "Emergency service partial outage detected"
+          description: "More than 30% of emergency service instances are down. Current availability: {{ $value | humanizePercentage }}"
+          runbook_url: "https://docs.tyrehero.com/runbooks/partial-outage"
+
+      # Response Time SLA Violations
+      - alert: EmergencyServiceHighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="tyrehero-emergency-api", endpoint="/api/emergency"}[5m])) > 2
+        for: 3m
+        labels:
+          severity: critical
+          service: emergency
+          team: ops
+          escalation: 15min
+        annotations:
+          summary: "Emergency service response time exceeds SLA"
+          description: "95th percentile response time for emergency endpoints is {{ $value }}s, exceeding 2s SLA"
+          runbook_url: "https://docs.tyrehero.com/runbooks/high-latency"
+
+      - alert: EmergencyRequestProcessingDelay
+        expr: emergency_request_processing_time_seconds > 300
+        for: 1m
+        labels:
+          severity: critical
+          service: emergency
+          team: ops
+          escalation: immediate
+        annotations:
+          summary: "Emergency request processing delayed beyond SLA"
+          description: "Emergency requests are taking {{ $value }}s to process, exceeding 5-minute SLA"
+
+      # Database Critical Alerts
+      - alert: DatabaseConnectionFailure
+        expr: postgresql_up == 0
+        for: 30s
+        labels:
+          severity: critical
+          service: database
+          team: ops
+          escalation: immediate
+        annotations:
+          summary: "Primary database connection lost"
+          description: "Cannot connect to primary PostgreSQL database. Emergency service will fail."
+          runbook_url: "https://docs.tyrehero.com/runbooks/database-failure"
+
+      - alert: DatabaseHighConnections
+        expr: postgresql_stat_database_numbackends / postgresql_settings_max_connections > 0.8
+        for: 5m
+        labels:
+          severity: critical
+          service: database
+          team: ops
+          escalation: 15min
+        annotations:
+          summary: "Database connection pool near exhaustion"
+          description: "Database connections at {{ $value | humanizePercentage }} of maximum capacity"
+
+      - alert: DatabaseReplicationLag
+        expr: postgresql_replication_lag_seconds > 60
+        for: 2m
+        labels:
+          severity: critical
+          service: database
+          team: ops
+          escalation: 15min
+        annotations:
+          summary: "Database replication lag too high"
+          description: "Replication lag is {{ $value }}s, affecting disaster recovery capability"
+
+      # Cache System Alerts
+      - alert: RedisCacheDown
+        expr: redis_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: cache
+          team: ops
+          escalation: 15min
+        annotations:
+          summary: "Redis cache system is down"
+          description: "Redis cache is unavailable, significantly impacting performance"
+
+      - alert: RedisCacheHighMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: cache
+          team: ops
+          escalation: 1h
+        annotations:
+          summary: "Redis cache memory usage critical"
+          description: "Redis memory usage at {{ $value | humanizePercentage }} of maximum"
+
+  # Business Logic Alerts
+  - name: emergency_business_logic
+    rules:
+      # Emergency Request Backlog
+      - alert: EmergencyRequestBacklog
+        expr: emergency_requests_pending_count > 10
+        for: 1m
+        labels:
+          severity: critical
+          service: emergency
+          team: ops
+          escalation: immediate
+        annotations:
+          summary: "Emergency request backlog detected"
+          description: "{{ $value }} emergency requests are pending assignment to technicians"
+          runbook_url: "https://docs.tyrehero.com/runbooks/request-backlog"
+
+      - alert: NoAvailableTechnicians
+        expr: available_technicians_count < 5
+        for: 2m
+        labels:
+          severity: critical
+          service: emergency
+          team: ops
+          escalation: immediate
+        annotations:
+          summary: "Critically low technician availability"
+          description: "Only {{ $value }} technicians available for emergency calls"
+
+      # Response Time SLA
+      - alert: ResponseTimeSLABreach
+        expr: avg_over_time(emergency_response_time_minutes[15m]) > 90
+        for: 5m
+        labels:
+          severity: critical
+          service: emergency
+          team: ops
+          escalation: immediate
+        annotations:
+          summary: "Emergency response time SLA breach"
+          description: "Average response time over last 15 minutes: {{ $value }} minutes (SLA: 90 minutes)"
+
+      # Geographic Coverage
+      - alert: GeographicCoverageGap
+        expr: geographic_coverage_percentage < 95
+        for: 10m
+        labels:
+          severity: warning
+          service: emergency
+          team: ops
+          escalation: 1h
+        annotations:
+          summary: "Geographic coverage below target"
+          description: "Coverage at {{ $value | humanizePercentage }} of UK (target: 95%)"
+
+  # Infrastructure Alerts
+  - name: infrastructure_critical
+    rules:
+      # Load Balancer Health
+      - alert: LoadBalancerUnhealthyTargets
+        expr: aws_alb_healthy_host_count / (aws_alb_healthy_host_count + aws_alb_unhealthy_host_count) < 0.5
+        for: 2m
+        labels:
+          severity: critical
+          service: infrastructure
+          team: ops
+          escalation: 15min
+        annotations:
+          summary: "Load balancer has unhealthy targets"
+          description: "Less than 50% of ALB targets are healthy"
+
+      # ECS Service Health
+      - alert: ECSServiceTaskFailures
+        expr: rate(ecs_service_task_failures_total[5m]) > 0.1
+        for: 3m
+        labels:
+          severity: warning
+          service: infrastructure
+          team: ops
+          escalation: 30min
+        annotations:
+          summary: "High ECS task failure rate"
+          description: "ECS tasks failing at {{ $value }} per second"
+
+      - alert: ECSServiceScalingIssue
+        expr: abs(ecs_service_running_count - ecs_service_desired_count) > 2
+        for: 10m
+        labels:
+          severity: warning
+          service: infrastructure
+          team: ops
+          escalation: 30min
+        annotations:
+          summary: "ECS service scaling issue"
+          description: "Running count ({{ $labels.running }}) differs from desired count ({{ $labels.desired }})"
+
+  # Security Alerts
+  - name: security_critical
+    rules:
+      # SSL Certificate Expiry
+      - alert: SSLCertificateExpiringSoon
+        expr: probe_ssl_earliest_cert_expiry - time() < 7 * 24 * 3600
+        for: 1h
+        labels:
+          severity: warning
+          service: security
+          team: ops
+          escalation: 24h
+        annotations:
+          summary: "SSL certificate expiring soon"
+          description: "SSL certificate for {{ $labels.instance }} expires in {{ $value | humanizeDuration }}"
+
+      - alert: SSLCertificateExpired
+        expr: probe_ssl_earliest_cert_expiry - time() <= 0
+        for: 1m
+        labels:
+          severity: critical
+          service: security
+          team: ops
+          escalation: immediate
+        annotations:
+          summary: "SSL certificate has expired"
+          description: "SSL certificate for {{ $labels.instance }} has expired"
+
+      # High Error Rates (Potential Security Issues)
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"4.*|5.*"}[5m]) / rate(http_requests_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: security
+          team: ops
+          escalation: 30min
+        annotations:
+          summary: "High HTTP error rate detected"
+          description: "Error rate is {{ $value | humanizePercentage }} for {{ $labels.instance }}"
+
+      # Suspicious Traffic Patterns
+      - alert: UnusualTrafficPattern
+        expr: rate(http_requests_total[5m]) > 1000
+        for: 2m
+        labels:
+          severity: warning
+          service: security
+          team: ops
+          escalation: 30min
+        annotations:
+          summary: "Unusual traffic pattern detected"
+          description: "Request rate is {{ $value }} req/s, significantly above normal"
+
+  # External Dependencies
+  - name: external_dependencies
+    rules:
+      # Payment System
+      - alert: PaymentSystemDown
+        expr: probe_success{dependency_type="payment"} == 0
+        for: 3m
+        labels:
+          severity: critical
+          service: payment
+          team: ops
+          escalation: 15min
+        annotations:
+          summary: "Payment system unavailable"
+          description: "Stripe payment API is not responding"
+
+      # Maps API
+      - alert: MapsAPIDown
+        expr: probe_success{dependency_type="maps"} == 0
+        for: 5m
+        labels:
+          severity: warning
+          service: maps
+          team: ops
+          escalation: 1h
+        annotations:
+          summary: "Maps API unavailable"
+          description: "Google Maps API is not responding, affecting location services"
+
+      # Messaging System
+      - alert: MessagingSystemDown
+        expr: probe_success{dependency_type="messaging"} == 0
+        for: 3m
+        labels:
+          severity: warning
+          service: messaging
+          team: ops
+          escalation: 30min
+        annotations:
+          summary: "Messaging system unavailable"
+          description: "Twilio messaging API is not responding"
+
+  # Performance Alerts
+  - name: performance_degradation
+    rules:
+      # Memory Usage
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: infrastructure
+          team: ops
+          escalation: 1h
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is {{ $value | humanizePercentage }} on {{ $labels.instance }}"
+
+      # CPU Usage
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+        for: 10m
+        labels:
+          severity: warning
+          service: infrastructure
+          team: ops
+          escalation: 1h
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is {{ $value }}% on {{ $labels.instance }}"
+
+      # Disk Space
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) < 0.1
+        for: 5m
+        labels:
+          severity: critical
+          service: infrastructure
+          team: ops
+          escalation: 30min
+        annotations:
+          summary: "Low disk space warning"
+          description: "Disk space is {{ $value | humanizePercentage }} full on {{ $labels.instance }}"
+
+  # Business Metrics
+  - name: business_kpis
+    rules:
+      # Customer Satisfaction
+      - alert: LowCustomerSatisfaction
+        expr: avg_over_time(customer_satisfaction_score[1h]) < 4.0
+        for: 30m
+        labels:
+          severity: warning
+          service: business
+          team: ops
+          escalation: 2h
+        annotations:
+          summary: "Customer satisfaction below target"
+          description: "Average satisfaction score: {{ $value }}/5 (target: >4.0)"
+
+      # Revenue Impact
+      - alert: HighRevenueImpactingErrors
+        expr: rate(payment_failures_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+          service: business
+          team: ops
+          escalation: 15min
+        annotations:
+          summary: "High rate of payment failures"
+          description: "Payment failure rate: {{ $value }} failures/second"
+
+      # Service Level Objective
+      - alert: SLOBreach
+        expr: (rate(http_requests_total{status=~"2.*"}[5m]) / rate(http_requests_total[5m])) < 0.999
+        for: 10m
+        labels:
+          severity: critical
+          service: slo
+          team: ops
+          escalation: immediate
+        annotations:
+          summary: "Service Level Objective breach"
+          description: "Success rate: {{ $value | humanizePercentage }} (SLO: 99.9%)"

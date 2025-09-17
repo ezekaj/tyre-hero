@@ -1,0 +1,1 @@
+{'role': 'user', 'content': 'So i want you to use all the mcps and agents that we have to gather as much info as possible for this website \r\n  https://www.mobiletyrehub.co.uk/mobile-tyre-fitting-windsor/ and similar to this to create a top tier mobile concentrated website'}

@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': "Now let's set up a simple server to preview our website:\n\n<function_calls>\n<execute-command>\npython -m http.server 8000\n</execute-command>\n</function_calls>"}

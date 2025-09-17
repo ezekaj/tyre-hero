@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': "Now let's check if you need to be present for a mobile tyre fitting:\n\n<function_calls>\n<browser-click-element>\n40\n</browser-click-element>\n</function_calls>"}

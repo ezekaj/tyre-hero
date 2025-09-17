@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': 'Let\'s click on the "Tyre Fitting" dropdown to get more information about their mobile tyre fitting service.\n\n<function_calls>\n<browser-click-element>\n28\n</browser-click-element>\n</function_calls>'}

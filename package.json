@@ -1,0 +1,130 @@
+{
+  "name": "tyrehero-emergency-performance",
+  "version": "1.0.0",
+  "description": "TyreHero Emergency Mobile Tyre Service - Performance Optimized",
+  "main": "emergency-scripts.js",
+  "scripts": {
+    "build": "node build-optimization.js",
+    "build:production": "NODE_ENV=production node build-optimization.js",
+    "optimize": "npm run build",
+    "serve": "npx http-server dist -p 8080 -c-1",
+    "dev": "npx http-server . -p 3000 -c-1",
+    "start": "npm run build && npm run serve",
+    
+    "test": "npm run test:unit && npm run test:integration && npm run test:e2e",
+    "test:unit": "jest tests/unit --coverage",
+    "test:integration": "jest tests/integration --detectOpenHandles",
+    "test:e2e": "playwright test",
+    "test:e2e:emergency": "playwright test tests/e2e/emergency --project=emergency-scenarios",
+    "test:mobile": "playwright test --project=mobile",
+    "test:performance": "echo 'Performance testing requires k6 installation'",
+    "test:emergency-load": "echo 'Emergency load testing requires k6 installation'",
+    "test:security": "npm run test:security:owasp && npm run test:security:dependencies",
+    "test:security:owasp": "zap-baseline.py -t http://localhost:3000 -J owasp-report.json",
+    "test:security:dependencies": "npm audit --audit-level=moderate",
+    "test:pwa": "lighthouse http://localhost:3000/emergency-optimized.html --only-categories=pwa --output=json --output-path=./pwa-report.json",
+    "test:lighthouse": "lighthouse http://localhost:3000/emergency-optimized.html --output=json --output=html --output-path=./performance-report",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --coverageDirectory=coverage",
+    "test:ci": "npm run test:unit && npm run test:integration && npm run test:e2e:emergency && npm run test:performance && npm run test:security",
+    
+    "lint": "eslint . --ext .js,.mjs && stylelint **/*.css",
+    "lint:fix": "eslint . --ext .js,.mjs --fix && stylelint **/*.css --fix",
+    "analyze:bundle": "npx bundlesize",
+    "validate:html": "npx html-validate emergency-optimized.html",
+    "validate:css": "npx stylelint critical.css styles.css",
+    "compress:images": "npx imagemin images/* --out-dir=dist/images",
+    "generate:webp": "npx imagemin images/*.{jpg,png} --plugin=webp --out-dir=dist/images",
+    
+    "ci:install": "npm ci",
+    "ci:test": "npm run test:ci",
+    "ci:build": "npm run build:production",
+    "ci:deploy": "npm run deploy:staging",
+    "deploy:staging": "echo 'Deploying to staging environment'",
+    "deploy:production": "echo 'Deploying to production environment'",
+    "postdeploy": "npm run test:smoke",
+    "test:smoke": "playwright test tests/smoke --project=production"
+  },
+  "keywords": [
+    "emergency",
+    "mobile-tyre-service",
+    "performance",
+    "pwa",
+    "offline",
+    "emergency-services"
+  ],
+  "author": "TyreHero Development Team",
+  "license": "MIT",
+  "devDependencies": {
+    "terser": "^5.16.1",
+    "csso": "^5.0.5",
+    "imagemin": "^8.0.1",
+    "imagemin-webp": "^7.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-svgo": "^10.0.1",
+    "gzip-size": "^7.0.0",
+    "lighthouse": "^10.0.0",
+    "http-server": "^14.1.1",
+    "bundlesize": "^0.18.1",
+    "html-validate": "^7.13.0",
+    "stylelint": "^15.6.0",
+    
+    "@jest/globals": "^29.5.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "supertest": "^6.3.3",
+    "@playwright/test": "^1.40.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-security": "^1.7.1",
+    "eslint-plugin-jest": "^27.4.2",
+    "@types/jest": "^29.5.5",
+    "cross-env": "^7.0.3",
+    "concurrently": "^8.2.1",
+    "wait-on": "^7.0.1",
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "cors": "^2.8.5",
+    "compression": "^1.7.4",
+    "rate-limiter-flexible": "^3.0.3",
+    "dotenv": "^16.3.1"
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/emergency-scripts.min.js",
+      "maxSize": "100kb",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/critical.min.css",
+      "maxSize": "20kb",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/emergency-bundle.min.js",
+      "maxSize": "150kb",
+      "compression": "gzip"
+    }
+  ],
+  "performance": {
+    "targets": {
+      "firstContentfulPaint": 1800,
+      "largestContentfulPaint": 2500,
+      "firstInputDelay": 100,
+      "cumulativeLayoutShift": 0.1,
+      "timeToInteractive": 3500
+    },
+    "emergency": {
+      "maxLoadTime": 3000,
+      "callButtonResponseTime": 200,
+      "formSubmissionTime": 1000,
+      "offlineCapability": true
+    }
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': 'Let\'s also look at how to handle tire-related driving emergencies to better understand user needs during these situations:\n\n<function_calls>\n<scrape-webpage url="https://www.bauerbuilt.com/bauer-built-blog/know-how-to-handle-tire-related-driving-emergencies/">\n</scrape-webpage>\n</function_calls>'}

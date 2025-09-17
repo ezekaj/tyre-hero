@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': 'I see that Halfords offers mobile tyre fitting services. Let me scroll down to find more information about their mobile tyre fitting service.\n\n<function_calls>\n<browser-scroll-down>\n500\n</browser-scroll-down>\n</function_calls>'}

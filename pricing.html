@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | TyreHero</title>
+    <meta name="description" content="Transparent pricing for all TyreHero mobile tyre services. No hidden fees, competitive rates, and emergency service available 24/7.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
+    <style>
+        /* Pricing page specific styles */
+        .pricing-hero {
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/hero-bg.jpg') center/cover no-repeat;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .pricing-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+        
+        .pricing-section {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .pricing-section:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .pricing-tab {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-family: var(--heading-font);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+        
+        .pricing-tab:first-child {
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+        }
+        
+        .pricing-tab:last-child {
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+        
+        .pricing-tab.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .pricing-content {
+            display: none;
+        }
+        
+        .pricing-content.active {
+            display: block;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .pricing-card {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .pricing-card-header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .pricing-card-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .pricing-card-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .pricing-card-price {
+            padding: var(--spacing-lg);
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .price-amount {
+            font-family: var(--heading-font);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .price-description {
+            color: var(--medium);
+            font-size: 0.9rem;
+        }
+        
+        .pricing-card-features {
+            padding: var(--spacing-lg);
+            flex-grow: 1;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-md);
+            color: var(--medium);
+        }
+        
+        .feature-list li svg {
+            color: var(--primary);
+            width: 20px;
+            height: 20px;
+            margin-right: var(--spacing-sm);
+            flex-shrink: 0;
+        }
+        
+        .pricing-card-footer {
+            padding: 0 var(--spacing-lg) var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--spacing-xl);
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .pricing-table th,
+        .pricing-table td {
+            padding: var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-table th {
+            background-color: var(--accent);
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .pricing-table tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        .price-highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .faq-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--light);
+        }
+        
+        .faq-container {
+            margin-top: var(--spacing-xl);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .faq-item {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all var(--transition-normal);
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        .faq-question svg {
+            width: 20px;
+            height: 20px;
+            transition: transform var(--transition-normal);
+        }
+        
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 var(--spacing-md);
+            max-height: 0;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 var(--spacing-md) var(--spacing-md);
+            max-height: 500px;
+        }
+        
+        .payment-methods {
+            margin-top: var(--spacing-xl);
+            text-align: center;
+        }
+        
+        .payment-icons {
+            margin-top: var(--spacing-md);
+        }
+        
+        .payment-icons img {
+            height: 40px;
+            margin: 0 var(--spacing-sm);
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-tabs {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-sm);
+            }
+            
+            .pricing-tab {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+                border-radius: var(--radius-md) !important;
+            }
+            
+            .pricing-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <svg class="preloader-logo" width="100" height="100" viewBox="0 0 100 100">
+                <path d="M40,20 L60,20 L70,30 L60,80 L40,80 L30,30 Z" fill="#e53935" />
+                <path d="M47,35 L53,35 L50,45 L55,45 L45,65 L48,50 L43,50 Z" fill="#FFCC00" />
+            </svg>
+            <div class="preloader-text">TyreHero</div>
+            <div class="preloader-spinner"></div>
+        </div>
+    </div>
+
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/tyrehero-logo.svg" alt="TyreHero Logo" class="logo-image">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <button class="menu-toggle" aria-label="Toggle Menu">
+                        <span class="hamburger"></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="emergency.html" class="nav-emergency">Emergency</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html" class="active">Pricing</a></li>
+                        <li><a href="locations.html">Locations</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pricing Hero Section -->
+    <section class="pricing-hero">
+        <div class="container">
+            <div class="pricing-hero-content">
+                <h1 class="hero-title">Transparent Pricing</h1>
+                <p class="hero-description">At TyreHero, we believe in complete transparency. Our pricing is clear, competitive, and free from hidden fees. Whether you need emergency assistance or scheduled service, you'll know exactly what you're paying for.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Service Packages</h2>
+                <p class="section-subtitle">Choose the service that best fits your needs and budget.</p>
+            </div>
+            
+            <div class="pricing-tabs">
+                <div class="pricing-tab active" data-tab="standard">Standard Services</div>
+                <div class="pricing-tab" data-tab="emergency">Emergency Services</div>
+            </div>
+            
+            <!-- Standard Services Pricing -->
+            <div class="pricing-content active" id="standard-pricing">
+                <div class="pricing-grid">
+                    <!-- Basic Package -->
+                    <div class="pricing-card">
+                        <div class="pricing-card-header">
+                            <h3 class="pricing-card-title">Basic Tyre Service</h3>
+                            <p class="pricing-card-subtitle">For routine tyre maintenance</p>
+                        </div>
+                        <div class="pricing-card-price">
+                            <div class="price-amount">£45</div>
+                            <p class="price-description">Per tyre, fitted at your location</p>
+                        </div>
+                        <div class="pricing-card-features">
+                            <ul class="feature-list">
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Mobile fitting at your location
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Standard budget to mid-range tyres
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Wheel balancing included
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Old tyre disposal
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Scheduled appointment
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pricing-card-footer">
+                            <a href="booking.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Premium Package -->
+                    <div class="pricing-card">
+                        <div class="pricing-card-header" style="background-color: var(--accent);">
+                            <h3 class="pricing-card-title">Premium Tyre Service</h3>
+                            <p class="pricing-card-subtitle">For performance and luxury vehicles</p>
+                        </div>
+                        <div class="pricing-card-price">
+                            <div class="price-amount">£75</div>
+                            <p class="price-description">Per tyre, fitted at your location</p>
+                        </div>
+                        <div class="pricing-card-features">
+                            <ul class="feature-list">
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Mobile fitting at your location
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Premium brand tyres
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Advanced wheel balancing
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Old tyre disposal
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Priority scheduling
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Tyre pressure monitoring
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Extended warranty
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pricing-card-footer">
+                            <a href="booking.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Puncture Repair -->
+                    <div class="pricing-card">
+                        <div class="pricing-card-header">
+                            <h3 class="pricing-card-title">Puncture Repair</h3>
+                            <p class="pricing-card-subtitle">For repairable tyre damage</p>
+                        </div>
+                        <div class="pricing-card-price">
+                            <div class="price-amount">£25</div>
+                            <p class="price-description">Per tyre, repaired at your location</p>
+                        </div>
+                        <div class="pricing-card-features">
+                            <ul class="feature-list">
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Mobile repair at your location
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Professional assessment
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Industry-standard repair
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Tyre pressure check
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Repair warranty
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pricing-card-footer">
+                            <a href="booking.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Emergency Services Pricing -->
+            <div class="pricing-content" id="emergency-pricing">
+                <div class="pricing-grid">
+                    <!-- Emergency Standard -->
+                    <div class="pricing-card">
+                        <div class="pricing-card-header">
+                            <h3 class="pricing-card-title">Emergency Standard</h3>
+                            <p class="pricing-card-subtitle">For urgent tyre replacement</p>
+                        </div>
+                        <div class="pricing-card-price">
+                            <div class="price-amount">£65</div>
+                            <p class="price-description">Per tyre, fitted at your location</p>
+                        </div>
+                        <div class="pricing-card-features">
+                            <ul class="feature-list">
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    24/7 emergency service
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    90-minute average response time
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Standard budget to mid-range tyres
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Wheel balancing included
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Old tyre disposal
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    No callout fee
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pricing-card-footer">
+                            <a href="emergency.html" class="btn btn-primary">Emergency Service</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Emergency Premium -->
+                    <div class="pricing-card">
+                        <div class="pricing-card-header" style="background-color: var(--accent);">
+                            <h3 class="pricing-card-title">Emergency Premium</h3>
+                            <p class="pricing-card-subtitle">For performance and luxury vehicles</p>
+                        </div>
+                        <div class="pricing-card-price">
+                            <div class="price-amount">£95</div>
+                            <p class="price-description">Per tyre, fitted at your location</p>
+                        </div>
+                        <div class="pricing-card-features">
+                            <ul class="feature-list">
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    24/7 emergency service
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Priority response (60-minute target)
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Premium brand tyres
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Advanced wheel balancing
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Old tyre disposal
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    No callout fee
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Extended warranty
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pricing-card-footer">
+                            <a href="emergency.html" class="btn btn-primary">Emergency Service</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Emergency Puncture Repair -->
+                    <div class="pricing-card">
+                        <div class="pricing-card-header">
+                            <h3 class="pricing-card-title">Emergency Puncture Repair</h3>
+                            <p class="pricing-card-subtitle">For urgent repairable damage</p>
+                        </div>
+                        <div class="pricing-card-price">
+                            <div class="price-amount">£40</div>
+                            <p class="price-description">Per tyre, repaired at your location</p>
+                        </div>
+                        <div class="pricing-card-features">
+                            <ul class="feature-list">
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    24/7 emergency service
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    90-minute average response time
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Professional assessment
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Industry-standard repair
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    No callout fee
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" fill="currentColor"/></svg>
+                                    Repair warranty
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pricing-card-footer">
+                            <a href="emergency.html" class="btn btn-primary">Emergency Service</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tyre Pricing Table -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tyre Price Guide</h2>
+                <p class="section-subtitle">Below is a guide to our tyre prices by vehicle type and brand category. Actual prices may vary based on specific tyre size and model.</p>
+            </div>
+            
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Vehicle Type</th>
+                        <th>Budget Range</th>
+                        <th>Mid Range</th>
+                        <th>Premium Range</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Small Car</td>
+                        <td>£40 - £50</td>
+                        <td>£50 - £70</td>
+                        <td>£70 - £100</td>
+                    </tr>
+                    <tr>
+                        <td>Medium Car</td>
+                        <td>£45 - £60</td>
+                        <td>£60 - £80</td>
+                        <td>£80 - £120</td>
+                    </tr>
+                    <tr>
+                        <td>Large Car</td>
+                        <td>£50 - £70</td>
+                        <td>£70 - £90</td>
+                        <td>£90 - £140</td>
+                    </tr>
+                    <tr>
+                        <td>SUV / 4x4</td>
+                        <td>£60 - £80</td>
+                        <td>£80 - £110</td>
+                        <td>£110 - £180</td>
+                    </tr>
+                    <tr>
+                        <td>Performance Car</td>
+                        <td>£70 - £90</td>
+                        <td>£90 - £130</td>
+                        <td>£130 - £250+</td>
+                    </tr>
+                    <tr>
+                        <td>Van / Light Commercial</td>
+                        <td>£65 - £85</td>
+                        <td>£85 - £120</td>
+                        <td>£120 - £160</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="payment-methods">
+                <h3>Payment Methods</h3>
+                <p>We accept all major payment methods for your convenience.</p>
+                <div class="payment-icons">
+                    <img src="images/payment-icons.svg" alt="Payment Methods">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Find answers to common questions about our pricing and services.</p>
+            </div>
+            
+            <div class="faq-container">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are there any hidden fees?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 15.968l4.247-4.246a1 1 0 1 1 1.415 1.414l-4.955 4.955a1 1 0 0 1-1.414 0L6.338 13.13a1 1 0 0 1 1.414-1.414L12 15.968z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, we believe in complete transparency. The prices listed include the cost of the tyre, fitting, balancing, and disposal of your old tyre. There are no additional callout fees, even for emergency services.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if you don't have my tyre size in stock?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 15.968l4.247-4.246a1 1 0 1 1 1.415 1.414l-4.955 4.955a1 1 0 0 1-1.414 0L6.338 13.13a1 1 0 0 1 1.414-1.414L12 15.968z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our mobile units carry a wide range of common tyre sizes. If we don't have your specific size in stock, we can usually source it within a few hours. In emergency situations, we may be able to fit a temporary tyre to get you moving safely until we can return with your exact size.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you charge extra for weekend or evening services?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 15.968l4.247-4.246a1 1 0 1 1 1.415 1.414l-4.955 4.955a1 1 0 0 1-1.414 0L6.338 13.13a1 1 0 0 1 1.414-1.414L12 15.968z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, our pricing remains the same regardless of the day or time. We're available 24/7, including weekends and bank holidays, at no extra charge.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's the difference between budget, mid-range, and premium tyres?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 15.968l4.247-4.246a1 1 0 1 1 1.415 1.414l-4.955 4.955a1 1 0 0 1-1.414 0L6.338 13.13a1 1 0 0 1 1.414-1.414L12 15.968z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Budget tyres are cost-effective options suitable for everyday driving. Mid-range tyres offer a balance of performance and value. Premium tyres from top brands like Michelin, Continental, and Bridgestone provide superior performance, handling, and longevity. Our technicians can help you choose the right option based on your vehicle, driving habits, and budget.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can you repair any puncture?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 15.968l4.247-4.246a1 1 0 1 1 1.415 1.414l-4.955 4.955a1 1 0 0 1-1.414 0L6.338 13.13a1 1 0 0 1 1.414-1.414L12 15.968z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Not all punctures can be safely repaired. We follow British Standard BSAU159 guidelines, which specify that punctures can only be repaired if they're in the central three-quarters of the tread area and are no larger than 6mm in diameter. Punctures in the sidewall, shoulder area, or those that are too large cannot be safely repaired and will require tyre replacement.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 6 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer any discounts for multiple tyres?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 15.968l4.247-4.246a1 1 0 1 1 1.415 1.414l-4.955 4.955a1 1 0 0 1-1.414 0L6.338 13.13a1 1 0 0 1 1.414-1.414L12 15.968z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer discounts when you replace multiple tyres at the same time. For two tyres, you'll receive a 5% discount on the total cost. For three or more tyres, the discount increases to 10%. This applies to both scheduled and emergency services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Get Started?</h2>
+                <p class="cta-description">Whether you need emergency assistance or want to schedule a convenient tyre service, we're here to help. Our professional technicians are just a call away.</p>
+                <div class="cta-buttons">
+                    <a href="tel:08001234567" class="btn btn-primary btn-lg btn-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
+                        Call Now: 0800 123 4567
+                    </a>
+                    <a href="booking.html" class="btn btn-secondary btn-lg">Book Online</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer About -->
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="images/tyrehero-logo-white.svg" alt="TyreHero Logo">
+                    </div>
+                    <p>TyreHero provides 24/7 emergency mobile tyre fitting and replacement services across the UK. Our professional technicians come to you, whether you're at home, work, or stranded roadside.</p>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links-container">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="emergency.html">Emergency Service</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="locations.html">Coverage Areas</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Footer Contact -->
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <div class="footer-contact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
+                        <span>0800 123 4567 (24/7)</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm17 4.238l-7.928 7.1L4 7.216V19h16V7.238zM4.511 5l7.55 6.662L19.502 5H4.511z" fill="currentColor"/></svg>
+                        <span>info@tyrehero.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" fill="currentColor"/></svg>
+                        <span>123 Business Road<br>London, UK</span>
+                    </div>
+                    
+                    <div class="footer-social">
+                        <a href="#" class="social-icon" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22.162 5.656a8.384 8.384 0 0 1-2.402.658A4.196 4.196 0 0 0 21.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 0 0-7.126 3.814 11.874 11.874 0 0 1-8.62-4.37 4.168 4.168 0 0 0-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 0 1-1.894-.523v.052a4.185 4.185 0 0 0 3.355 4.101 4.21 4.21 0 0 1-1.89.072A4.185 4.185 0 0 0 7.97 16.65a8.394 8.394 0 0 1-6.191 1.732 11.83 11.83 0 0 0 6.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 0 0 2.087-2.165z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.986.01-4.04.059-.976.045-1.505.207-1.858.344-.466.182-.8.398-1.15.748-.35.35-.566.684-.748 1.15-.137.353-.3.882-.344 1.857-.048 1.055-.058 1.37-.058 4.041 0 2.67.01 2.986.058 4.04.045.977.207 1.505.344 1.858.182.466.398.8.748 1.15.35.35.684.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058 2.67 0 2.987-.01 4.04-.058.977-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.684.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041 0-2.67-.01-2.986-.058-4.04-.045-.977-.207-1.505-.344-1.858a3.097 3.097 0 0 0-.748-1.15 3.098 3.098 0 0 0-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.055-.048-1.37-.058-4.041-.058zm0 3.063a5.135 5.135 0 1 1 0 10.27 5.135 5.135 0 0 1 0-10.27zm0 8.468a3.333 3.333 0 1 0 0-6.666 3.333 3.333 0 0 0 0 6.666zm6.538-8.469a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z" fill="currentColor"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">© 2025 TyreHero. All rights reserved.</div>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pricing tabs functionality
+            const pricingTabs = document.querySelectorAll('.pricing-tab');
+            const pricingContents = document.querySelectorAll('.pricing-content');
+            
+            pricingTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    pricingTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all content sections
+                    pricingContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Show corresponding content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId + '-pricing').classList.add('active');
+                });
+            });
+            
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    // Toggle active class on clicked item
+                    item.classList.toggle('active');
+                    
+                    // Optional: Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

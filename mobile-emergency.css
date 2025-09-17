@@ -1,0 +1,663 @@
+/* 
+   TyreHero - Mobile Emergency Optimizations
+   Emergency-first design with touch-friendly interactions
+*/
+
+/* ===== Emergency-Specific Variables ===== */
+:root {
+    /* Touch target sizes (minimum 44px for accessibility) */
+    --touch-target-min: 44px;
+    --touch-target-large: 56px;
+    --touch-target-xl: 72px;
+    
+    /* Thumb zone optimization */
+    --thumb-zone-safe: 20px;
+    --thumb-zone-optimal: 40px;
+    
+    /* Emergency colors with high contrast */
+    --emergency-red: #E53935;
+    --emergency-red-dark: #C62828;
+    --emergency-yellow: #FFCC00;
+    --emergency-green: #2E7D32;
+    
+    /* High contrast mode colors */
+    --high-contrast-bg: #000000;
+    --high-contrast-text: #FFFFFF;
+    --high-contrast-accent: #FFFF00;
+    
+    /* Battery-saving dark mode */
+    --dark-bg: #121212;
+    --dark-surface: #1E1E1E;
+    --dark-text: #FFFFFF;
+    --dark-text-secondary: #AAAAAA;
+}
+
+/* ===== PWA Installation Styles ===== */
+.pwa-install-content {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    gap: 16px;
+}
+
+.pwa-install-icon {
+    color: var(--secondary);
+    flex-shrink: 0;
+}
+
+.pwa-install-text {
+    flex: 1;
+}
+
+.pwa-install-title {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.pwa-install-subtitle {
+    font-size: 0.875rem;
+    opacity: 0.9;
+    line-height: 1.2;
+}
+
+.pwa-install-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pwa-install-btn {
+    background: var(--secondary);
+    color: var(--dark);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    min-height: var(--touch-target-min);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.pwa-install-btn:hover {
+    background: var(--secondary-dark);
+}
+
+.pwa-install-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    padding: 8px;
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pwa-install-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Emergency Install Modal ===== */
+.emergency-install-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    padding: 20px;
+}
+
+.emergency-install-content {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 24px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.emergency-install-content h3 {
+    color: var(--emergency-red);
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    font-family: var(--heading-font);
+}
+
+.emergency-install-content p {
+    color: var(--medium);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.emergency-features {
+    text-align: left;
+    margin: 20px 0;
+    padding: 16px;
+    background: var(--light);
+    border-radius: 12px;
+}
+
+.emergency-features div {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--dark);
+}
+
+.emergency-install-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.emergency-install-yes {
+    flex: 1;
+    background: var(--emergency-red);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    min-height: var(--touch-target-min);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.emergency-install-yes:hover {
+    background: var(--emergency-red-dark);
+}
+
+.emergency-install-later {
+    flex: 1;
+    background: var(--light);
+    color: var(--dark);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    min-height: var(--touch-target-min);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.emergency-install-later:hover {
+    background: #E0E0E0;
+}
+
+/* ===== Update Banner ===== */
+.pwa-update-banner {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    background: var(--accent);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+.pwa-update-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.pwa-update-content button {
+    background: white;
+    color: var(--accent);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    min-height: 36px;
+    cursor: pointer;
+}
+
+/* ===== Emergency Floating Button ===== */
+#emergency-float {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 9998;
+}
+
+.emergency-float-btn {
+    background: var(--emergency-red);
+    color: white;
+    border: none;
+    width: var(--touch-target-xl);
+    height: var(--touch-target-xl);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(229, 57, 53, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: emergencyPulse 2s infinite;
+}
+
+.emergency-float-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(229, 57, 53, 0.6);
+}
+
+.emergency-float-btn svg {
+    width: 28px;
+    height: 28px;
+}
+
+@keyframes emergencyPulse {
+    0%, 100% { 
+        box-shadow: 0 4px 20px rgba(229, 57, 53, 0.4);
+    }
+    50% { 
+        box-shadow: 0 4px 20px rgba(229, 57, 53, 0.8), 0 0 0 10px rgba(229, 57, 53, 0.1);
+    }
+}
+
+/* ===== Touch Optimizations ===== */
+
+/* Ensure all interactive elements meet minimum touch target size */
+button, 
+.btn, 
+a[href], 
+input[type="submit"], 
+input[type="button"], 
+.touch-target {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+    position: relative;
+}
+
+/* Large emergency buttons */
+.btn-emergency,
+.emergency-float-btn {
+    min-height: var(--touch-target-large);
+    min-width: var(--touch-target-large);
+}
+
+/* Extra large emergency call button */
+.btn-emergency-xl {
+    min-height: var(--touch-target-xl);
+    min-width: var(--touch-target-xl);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Touch feedback */
+.touch-feedback {
+    position: relative;
+    overflow: hidden;
+}
+
+.touch-feedback::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.touch-feedback:active::before {
+    width: 120%;
+    height: 120%;
+}
+
+/* ===== One-Handed Operation Optimizations ===== */
+
+/* Thumb zone safe areas */
+@media (max-width: 768px) {
+    /* Move critical actions to thumb-friendly zones */
+        bottom: var(--thumb-zone-optimal);
+        right: var(--thumb-zone-safe);
+    }
+    
+    /* Emergency form optimization */
+    .emergency-form-container {
+        padding: var(--spacing-lg);
+        margin: var(--thumb-zone-safe);
+    }
+    
+    .emergency-form .form-submit {
+        position: sticky;
+        bottom: var(--thumb-zone-safe);
+        background: white;
+        padding-top: var(--spacing-md);
+        margin-top: var(--spacing-lg);
+        border-top: 1px solid #E0E0E0;
+    }
+    
+    /* Navigation optimization for one-handed use */
+    .main-nav .nav-menu {
+        bottom: 0;
+        top: auto;
+        transform: translateY(100%);
+    }
+    
+    .main-nav .nav-menu.active {
+        transform: translateY(0);
+    }
+    
+    /* Form inputs spacing for easier thumb access */
+    .form-group {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .form-input,
+    .form-select,
+    .form-textarea {
+        padding: 16px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        border-radius: 12px;
+    }
+}
+
+/* ===== Haptic Feedback Classes ===== */
+.haptic-light {
+    /* Light haptic feedback trigger */
+}
+
+.haptic-medium {
+    /* Medium haptic feedback trigger */
+}
+
+.haptic-heavy {
+    /* Heavy haptic feedback trigger */
+}
+
+/* Emergency actions get heavy haptic feedback */
+.emergency-float-btn,
+.btn-emergency {
+    @extend .haptic-heavy;
+}
+
+/* ===== High Contrast Mode ===== */
+@media (prefers-contrast: high) {
+    :root {
+        --primary: var(--high-contrast-accent);
+        --background: var(--high-contrast-bg);
+        --text: var(--high-contrast-text);
+    }
+    
+    .btn-primary {
+        background: var(--high-contrast-accent);
+        color: var(--high-contrast-bg);
+        border: 2px solid var(--high-contrast-text);
+    }
+    
+        background: var(--high-contrast-accent);
+        color: var(--high-contrast-bg);
+        border: 3px solid var(--high-contrast-text);
+    }
+}
+
+/* ===== Dark Mode for Battery Saving ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --white: var(--dark-bg);
+        --light: var(--dark-surface);
+        --dark: var(--dark-text);
+        --medium: var(--dark-text-secondary);
+    }
+    
+    body {
+        background-color: var(--dark-bg);
+        color: var(--dark-text);
+    }
+    
+    .emergency-form-container {
+        background: var(--dark-surface);
+        color: var(--dark-text);
+    }
+    
+    .form-input,
+    .form-select,
+    .form-textarea {
+        background: var(--dark-bg);
+        border-color: #333;
+        color: var(--dark-text);
+    }
+    
+    .form-input::placeholder {
+        color: var(--dark-text-secondary);
+    }
+}
+
+/* ===== Motion Preferences ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .emergency-float-btn {
+        animation: none;
+    }
+    
+    .touch-feedback::before {
+        transition: none;
+    }
+}
+
+/* ===== Emergency Accessibility Enhancements ===== */
+
+/* High visibility emergency elements */
+.emergency-priority {
+    outline: 3px solid var(--emergency-yellow);
+    outline-offset: 2px;
+}
+
+/* Screen reader optimizations */
+.sr-emergency {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus indicators for keyboard navigation */
+.emergency-form input:focus,
+.emergency-form select:focus,
+.emergency-form textarea:focus,
+.btn:focus {
+    outline: 3px solid var(--emergency-yellow);
+    outline-offset: 2px;
+}
+
+/* ===== Pull-to-Refresh Indicator ===== */
+.pull-to-refresh {
+    position: fixed;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 0 0 12px 12px;
+    font-weight: 500;
+    transition: top 0.3s ease;
+    z-index: 9999;
+}
+
+.pull-to-refresh.visible {
+    top: 0;
+}
+
+/* ===== Emergency Status Indicators ===== */
+.status-indicator {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-online {
+    background: var(--emergency-green);
+    color: white;
+}
+
+.status-offline {
+    background: var(--emergency-yellow);
+    color: var(--dark);
+}
+
+.status-emergency {
+    background: var(--emergency-red);
+    color: white;
+    animation: emergencyPulse 1s infinite;
+}
+
+/* ===== Swipe Gestures Support ===== */
+.swipe-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.swipe-action {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+}
+
+.swipe-action.left {
+    left: 0;
+    background: var(--emergency-green);
+}
+
+.swipe-action.right {
+    right: 0;
+    background: var(--emergency-red);
+}
+
+/* ===== Emergency Loading States ===== */
+.emergency-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.emergency-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(229, 57, 53, 0.3),
+        transparent
+    );
+    animation: emergencyLoading 1.5s infinite;
+}
+
+@keyframes emergencyLoading {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* ===== Responsive Emergency Optimizations ===== */
+
+/* Extra small devices (phones in portrait) */
+@media (max-width: 576px) {
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .emergency-form-container {
+        margin: 10px;
+        padding: 20px;
+    }
+    
+    .btn-emergency-xl {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+}
+
+/* Small devices (phones in landscape) */
+@media (max-width: 768px) and (orientation: landscape) {
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .emergency-float-btn {
+        bottom: 60px;
+        right: 10px;
+    }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) and (max-width: 992px) {
+    .emergency-form-container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+/* Animation utilities */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
