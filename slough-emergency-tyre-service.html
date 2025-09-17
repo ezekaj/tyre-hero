@@ -43,8 +43,375 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
+
+    <!-- Mobile-First Emergency Landing Page Styles -->
+    <style>
+        /* Emergency Contact Bar - Always Visible */
+        .emergency-contact-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+            color: white;
+            z-index: 9999;
+            padding: 12px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .emergency-contact-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100%;
+        }
+
+        .emergency-number {
+            font-size: 18px;
+            font-weight: 800;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .emergency-status {
+            font-size: 12px;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Floating Emergency Button */
+        .emergency-float-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            color: white;
+            border-radius: 50px;
+            padding: 16px 24px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: emergency-pulse 3s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .emergency-float-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(76, 175, 80, 0.6);
+        }
+
+        @keyframes emergency-pulse {
+            0% { box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(76, 175, 80, 0.8); }
+            100% { box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); }
+        }
+
+        /* Hero Section Mobile Optimization */
+        .page-hero {
+            margin-top: 60px;
+            background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            margin-bottom: 32px;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+
+        /* Emergency Contact Card in Hero */
+        .hero-emergency-card {
+            background: rgba(255,255,255,0.95);
+            color: #333;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 32px auto;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 2px solid #f44336;
+        }
+
+        .hero-emergency-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #d32f2f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .hero-call-btn {
+            display: block;
+            background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 24px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .hero-call-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+        }
+
+        .hero-response-time {
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Mobile Highlights */
+        .hero-highlights {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .highlight-item {
+            background: rgba(255,255,255,0.1);
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .highlight-icon {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5px;
+        }
+
+        /* Mobile Navigation Adjustments */
+        .site-header {
+            margin-top: 60px;
+            position: relative;
+            z-index: 100;
+        }
+
+        /* Local Areas Mobile Optimization */
+        .local-areas {
+            padding: 40px 20px;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .area-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid #1976d2;
+        }
+
+        .area-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1976d2;
+        }
+
+        .area-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 16px;
+        }
+
+        .area-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        /* CTA Section Mobile */
+        .cta-section {
+            background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .cta-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 16px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #d32f2f;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Tablet Responsive */
+        @media (min-width: 768px) {
+            .emergency-contact-content {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .hero-highlights {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .areas-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-buttons {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 600px;
+                margin: 24px auto 0;
+            }
+        }
+
+        /* Desktop Responsive */
+        @media (min-width: 1024px) {
+            .areas-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+        }
+
+        /* High DPI / Retina Optimization */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .emergency-contact-bar,
+            .emergency-float-btn,
+            .hero-emergency-card {
+                will-change: transform;
+            }
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            .emergency-float-btn,
+            .status-indicator {
+                animation: none;
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            .area-card {
+                background: #2d2d2d;
+                color: white;
+            }
+        }
+    </style>
 </head>
 <body class="location-page">
+    <!-- Emergency Contact Bar - Always Visible -->
+    <div class="emergency-contact-bar">
+        <div class="emergency-contact-content">
+            <a href="tel:08001234567" class="emergency-number">
+                📞 0800 123 4567
+            </a>
+            <div class="emergency-status">
+                <div class="status-indicator"></div>
+                Available Now
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Emergency Call Button -->
+    <a href="tel:08001234567" class="emergency-float-btn">
+        🚨 Emergency Call
+    </a>
+
     <!-- Emergency Call Button (Fixed) -->
     <div class="emergency-call-fixed">
         <a href="tel:08001234567" class="pulse-button">
@@ -84,6 +451,19 @@
                 <div class="hero-text">
                     <h1 class="hero-title">Emergency Tyre Service Slough - Lowest Prices Guaranteed</h1>
                     <p class="hero-subtitle">24/7 mobile tyre fitting in Slough SL1, SL2, SL3 - Trading Estate, Salt Hill, Chalvey & Cippenham areas</p>
+                    <!-- Emergency Contact Card in Hero -->
+                    <div class="hero-emergency-card">
+                        <div class="hero-emergency-title">
+                            🚨 Emergency Service Available
+                        </div>
+                        <a href="tel:08001234567" class="hero-call-btn">
+                            📞 Call Now: 0800 123 4567
+                        </a>
+                        <div class="hero-response-time">
+                            ⚡ Average Response Time: 45-60 Minutes
+                        </div>
+                    </div>
+
                     <div class="hero-highlights">
                         <div class="highlight-item">
                             <svg class="highlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">

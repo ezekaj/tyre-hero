@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Tyre Service - 24/7 Help Available</title>
+    <link rel="stylesheet" href="emergency-mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Emergency Contact Bar - Always Visible -->
+    <div class="emergency-bar">
+        <div class="emergency-content">
+            <span class="emergency-text">24/7 EMERGENCY</span>
+            <a href="tel:08001234567" class="emergency-number">0800 123 4567</a>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>TyreRescue</h1>
+            </div>
+            <div class="nav-emergency">
+                <a href="tel:08001234567" class="nav-call-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    CALL
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Emergency Contact -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Tyre Emergency?<br><span class="highlight">We're Here to Help</span></h1>
+            <p class="hero-subtitle">Professional mobile tyre service arrives within 30 minutes</p>
+
+            <!-- Primary Emergency Contact -->
+            <div class="emergency-contact-card">
+                <div class="contact-header">
+                    <span class="status-indicator"></span>
+                    <span class="status-text">Available Now</span>
+                </div>
+                <a href="tel:08001234567" class="primary-call-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    <div class="call-text">
+                        <span class="call-label">Call Emergency Line</span>
+                        <span class="phone-number">0800 123 4567</span>
+                    </div>
+                </a>
+                <p class="response-time">Average response: 25 minutes</p>
+            </div>
+
+            <!-- Quick Action Buttons -->
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="scrollToServices()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    Our Services
+                </button>
+                <button class="quick-btn" onclick="getLocation()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    Find Me
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Emergency Services</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">🚗</div>
+                    <h3>Flat Tyre Repair</h3>
+                    <p>On-site puncture repair and tyre replacement</p>
+                    <span class="service-time">15-30 mins</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Emergency Callout</h3>
+                    <p>24/7 emergency mobile tyre service</p>
+                    <span class="service-time">25 mins avg</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Roadside Assistance</h3>
+                    <p>Professional roadside tyre assistance</p>
+                    <span class="service-time">20-35 mins</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Call Button -->
+    <div class="floating-call-btn">
+        <a href="tel:08001234567" class="float-btn">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+        </a>
+        <div class="pulse-ring"></div>
+    </div>
+
+    <!-- Emergency Info Section -->
+    <section class="emergency-info">
+        <div class="container">
+            <div class="info-card">
+                <h3>In an Emergency?</h3>
+                <ol class="emergency-steps">
+                    <li>Stay calm and ensure you're in a safe location</li>
+                    <li>Call our emergency line: <strong>0800 123 4567</strong></li>
+                    <li>Share your location and describe the issue</li>
+                    <li>Wait in a safe place - we'll be there soon</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling
+        function scrollToServices() {
+            document.getElementById('services').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Get user location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    alert(`Location found! Lat: ${position.coords.latitude.toFixed(4)}, Lng: ${position.coords.longitude.toFixed(4)}\n\nCall 0800 123 4567 to report your emergency.`);
+                });
+            } else {
+                alert("Geolocation not supported. Please call 0800 123 4567 and describe your location.");
+            }
+        }
+
+        // Add click tracking for emergency calls
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Emergency call initiated');
+                // Add analytics tracking here if needed
+            });
+        });
+
+        // Add pulsing animation to floating button when page loads
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.querySelector('.floating-call-btn').classList.add('attention');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
