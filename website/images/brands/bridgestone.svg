@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60">
+  <g>
+    <ellipse cx="60" cy="30" rx="35" ry="15" fill="#1A1A1A"/>
+    <text x="30" y="34" font-family="Arial" font-weight="bold" font-size="10" fill="#FFFFFF">BRIDGESTONE</text>
+  </g>
+</svg>
