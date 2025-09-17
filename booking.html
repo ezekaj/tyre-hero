@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | TyreHero Mobile Tyre Service</title>
+    <meta name="description" content="Book your mobile tyre service appointment online. Choose your preferred time and location for professional tyre fitting at your convenience.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
+</head>
+<body class="booking-page">
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <svg class="preloader-logo" width="100" height="100" viewBox="0 0 100 100">
+                <path d="M40,20 L60,20 L70,30 L60,80 L40,80 L30,30 Z" fill="#e53935" />
+                <path d="M47,35 L53,35 L50,45 L55,45 L45,65 L48,50 L43,50 Z" fill="#FFCC00" />
+            </svg>
+            <div class="preloader-text">TyreHero</div>
+            <div class="preloader-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Emergency Call Button (Fixed) -->
+    <div class="emergency-call-fixed">
+        <a href="tel:08001234567" class="pulse-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
+            <span class="sr-only">Emergency Call</span>
+        </a>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/tyrehero-logo.svg" alt="TyreHero Logo" class="logo-image">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <button class="menu-toggle" aria-label="Toggle Menu">
+                        <span class="hamburger"></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="emergency.html" class="nav-emergency">Emergency</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="locations.html">Locations</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Booking Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Book Your Tyre Service</h1>
+                <p class="hero-description">Schedule your mobile tyre service at your convenience. Choose your preferred date, time, and location.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-container">
+                <div class="booking-form-wrapper">
+                    <form class="booking-form" id="bookingForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceType">Service Type *</label>
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">Select Service</option>
+                                <option value="mobile-fitting">Mobile Tyre Fitting</option>
+                                <option value="puncture-repair">Puncture Repair</option>
+                                <option value="tyre-replacement">Tyre Replacement</option>
+                                <option value="wheel-balancing">Wheel Balancing</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vehicleMake">Vehicle Make & Model *</label>
+                            <input type="text" id="vehicleMake" name="vehicleMake" placeholder="e.g., Ford Focus" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="preferredDate">Preferred Date *</label>
+                                <input type="date" id="preferredDate" name="preferredDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="preferredTime">Preferred Time *</label>
+                                <select id="preferredTime" name="preferredTime" required>
+                                    <option value="">Select Time</option>
+                                    <option value="8:00-10:00">8:00 AM - 10:00 AM</option>
+                                    <option value="10:00-12:00">10:00 AM - 12:00 PM</option>
+                                    <option value="12:00-14:00">12:00 PM - 2:00 PM</option>
+                                    <option value="14:00-16:00">2:00 PM - 4:00 PM</option>
+                                    <option value="16:00-18:00">4:00 PM - 6:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceAddress">Service Address *</label>
+                            <textarea id="serviceAddress" name="serviceAddress" rows="3" placeholder="Enter the full address where you'd like the service performed" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="additionalInfo">Additional Information</label>
+                            <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="Any specific requirements, tyre preferences, or other details..."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-lg">Book Appointment</button>
+                            <p class="form-note">* Required fields</p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="booking-info">
+                    <div class="info-card">
+                        <h3>What Happens Next?</h3>
+                        <ul class="booking-steps">
+                            <li>We'll confirm your booking within 2 hours</li>
+                            <li>Our technician will call you 30 minutes before arrival</li>
+                            <li>Professional service at your chosen location</li>
+                            <li>Secure payment after service completion</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Need Emergency Service?</h3>
+                        <p>Can't wait for a scheduled appointment? Our emergency service is available 24/7 with an average response time of 90 minutes.</p>
+                        <a href="emergency.html" class="btn btn-secondary">Emergency Service</a>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Contact Information</h3>
+                        <div class="contact-item">
+                            <strong>Phone:</strong> <a href="tel:08001234567">0800 123 4567</a>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Email:</strong> <a href="mailto:booking@tyrehero.com">booking@tyrehero.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Hours:</strong> 24/7 Service Available
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="images/tyrehero-logo-white.svg" alt="TyreHero Logo">
+                    </div>
+                    <p>TyreHero provides 24/7 emergency mobile tyre fitting and replacement services across the UK.</p>
+                </div>
+
+                <div class="footer-links-container">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="emergency.html">Emergency Service</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="locations.html">Coverage Areas</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <div class="footer-contact-item">
+                        <span>0800 123 4567 (24/7)</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span>booking@tyrehero.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">© 2025 TyreHero. All rights reserved.</div>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+</html>
