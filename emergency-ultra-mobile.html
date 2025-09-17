@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMERGENCY TYRE SERVICE</title>
+    <link rel="stylesheet" href="emergency-ultra-mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Ultra-Compact Emergency Interface -->
+    <div class="emergency-container">
+        <!-- Location Confirmation -->
+        <div class="location-line">
+            <span class="location-icon">📍</span>
+            <span class="location-text">Slough Emergency Service</span>
+        </div>
+
+        <!-- Availability Status -->
+        <div class="status-line">
+            <span class="status-dot"></span>
+            <span class="status-text">AVAILABLE NOW</span>
+            <span class="response-text">45-60 min response</span>
+        </div>
+
+        <!-- MASSIVE Call Button (30% of screen) -->
+        <a href="tel:08001234567" class="mega-call-button">
+            <div class="call-icon">📞</div>
+            <div class="call-content">
+                <div class="call-label">EMERGENCY CALL</div>
+                <div class="phone-number">0800 123 4567</div>
+            </div>
+        </a>
+
+        <!-- Secondary Actions (if space available) -->
+        <div class="quick-actions">
+            <button class="action-btn" onclick="shareLocation()">📍 SHARE LOCATION</button>
+            <button class="action-btn" onclick="showMoreInfo()">ℹ️ HELP INFO</button>
+        </div>
+    </div>
+
+    <!-- Hidden info panel (slides up when needed) -->
+    <div class="info-panel" id="infoPanel">
+        <div class="info-header">
+            <h3>Emergency Steps</h3>
+            <button onclick="hideInfo()" class="close-btn">✕</button>
+        </div>
+        <ol class="steps">
+            <li>Stay safe - move away from traffic</li>
+            <li>Call us: <strong>0800 123 4567</strong></li>
+            <li>Share your exact location</li>
+            <li>Wait in a safe place</li>
+        </ol>
+        <div class="emergency-number-repeat">
+            <a href="tel:08001234567" class="repeat-call-btn">📞 CALL NOW</a>
+        </div>
+    </div>
+
+    <!-- Overlay for info panel -->
+    <div class="overlay" id="overlay" onclick="hideInfo()"></div>
+
+    <script>
+        // Ultra-simple JavaScript for emergencies
+        function shareLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude.toFixed(6);
+                    const lng = position.coords.longitude.toFixed(6);
+                    
+                    // Try to share via native sharing if available
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'My Emergency Location',
+                            text: `Emergency tyre service needed at: ${lat}, ${lng}`,
+                            url: `https://maps.google.com/?q=${lat},${lng}`
+                        });
+                    } else {
+                        // Fallback - copy to clipboard and show alert
+                        const locationText = `Lat: ${lat}, Lng: ${lng}`;
+                        navigator.clipboard.writeText(locationText).then(() => {
+                            alert(`Location copied!\n${locationText}\n\nCall 0800 123 4567 now!`);
+                        });
+                    }
+                }, function() {
+                    alert("Can't access location.\nCall 0800 123 4567 and describe where you are.");
+                });
+            } else {
+                alert("Location not supported.\nCall 0800 123 4567 and describe your location.");
+            }
+        }
+
+        function showMoreInfo() {
+            document.getElementById('infoPanel').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('infoPanel').classList.add('show');
+                document.getElementById('overlay').classList.add('show');
+            }, 10);
+        }
+
+        function hideInfo() {
+            document.getElementById('infoPanel').classList.remove('show');
+            document.getElementById('overlay').classList.remove('show');
+            setTimeout(() => {
+                document.getElementById('infoPanel').style.display = 'none';
+                document.getElementById('overlay').style.display = 'none';
+            }, 300);
+        }
+
+        // Auto-hide info panel after 30 seconds to return focus to emergency call
+        let infoTimer;
+        function showMoreInfo() {
+            clearTimeout(infoTimer);
+            document.getElementById('infoPanel').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('infoPanel').classList.add('show');
+                document.getElementById('overlay').classList.add('show');
+            }, 10);
+            
+            // Auto-hide after 30 seconds
+            infoTimer = setTimeout(hideInfo, 30000);
+        }
+
+        // Track emergency calls for analytics
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Emergency call initiated');
+                // Add emergency call tracking here
+            });
+        });
+
+        // Prevent accidental zoom on double-tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
