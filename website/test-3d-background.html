@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Background Test Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .test-content {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(2px);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .status-card h3 {
+            margin: 0 0 8px 0;
+            color: #007bff;
+        }
+        
+        .status-card p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        #performance-info {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        
+        .tool-test {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .tool-btn {
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .tool-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Hero Background Container -->
+    <div id="hero-background"></div>
+    
+    <div class="test-content">
+        <h1>🔧 3D Workshop Background Test</h1>
+        <p>This page tests the 3D interactive hero background system for emergency tyre service pages.</p>
+        
+        <div class="status-grid">
+            <div class="status-card">
+                <h3>Background Status</h3>
+                <p id="background-status">Initializing...</p>
+            </div>
+            <div class="status-card">
+                <h3>Performance Tier</h3>
+                <p id="performance-tier">Detecting...</p>
+            </div>
+            <div class="status-card">
+                <h3>Device Type</h3>
+                <p id="device-type">Analyzing...</p>
+            </div>
+            <div class="status-card">
+                <h3>Connection Speed</h3>
+                <p id="connection-speed">Testing...</p>
+            </div>
+        </div>
+        
+        <div id="performance-info">
+            <h3>Performance Details</h3>
+            <ul id="performance-details">
+                <li>Loading performance data...</li>
+            </ul>
+        </div>
+        
+        <div class="tool-test">
+            <h3>Interactive Tools Test:</h3>
+            <button class="tool-btn" onclick="testToolInteraction('torque-wrench')">Torque Wrench</button>
+            <button class="tool-btn" onclick="testToolInteraction('pressure-gauge')">Pressure Gauge</button>
+            <button class="tool-btn" onclick="testToolInteraction('hydraulic-jack')">Hydraulic Jack</button>
+            <button class="tool-btn" onclick="testToolInteraction('wheel-balancer')">Wheel Balancer</button>
+        </div>
+        
+        <div style="margin-top: 40px; padding: 20px; background: #fff3cd; border-radius: 8px;">
+            <h3>🚨 Emergency Contact Test</h3>
+            <p>Emergency functionality should always work regardless of 3D features:</p>
+            <a href="tel:08001234567" style="display: block; background: #dc3545; color: white; padding: 16px; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 10px;">
+                📞 Test Emergency Call: 0800 123 4567
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // Test functionality
+        function testToolInteraction(toolName) {
+            const tool = document.querySelector(`[data-tool="${toolName}"]`);
+            if (tool) {
+                tool.style.transform += ' scale(1.2)';
+                setTimeout(() => {
+                    tool.style.transform = tool.style.transform.replace(' scale(1.2)', '');
+                }, 500);
+                console.log(`Tool interaction test: ${toolName}`);
+            } else {
+                console.log(`Tool not found: ${toolName}`);
+            }
+        }
+        
+        // Update status when 3D background loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                updateStatus();
+            }, 1000);
+        });
+        
+        function updateStatus() {
+            // Check if 3D background loaded
+            const bgElement = document.querySelector('.workshop-3d-scene');
+            document.getElementById('background-status').textContent = bgElement ? 
+                '✅ 3D Workshop Loaded' : '❌ Fallback Mode';
+            
+            // Get performance info if available
+            if (window.TyreHero3DBackground) {
+                document.getElementById('performance-tier').textContent = 
+                    window.TyreHero3DBackground.performanceTier || 'Unknown';
+            }
+            
+            // Device info
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            document.getElementById('device-type').textContent = isMobile ? 'Mobile Device' : 'Desktop Device';
+            
+            // Connection info
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            document.getElementById('connection-speed').textContent = connection ? 
+                `${connection.effectiveType || 'Unknown'} (${connection.downlink || 'Unknown'}Mbps)` : 'Unknown';
+            
+            // Performance details
+            const details = [
+                `Memory: ${navigator.deviceMemory || 'Unknown'}GB`,
+                `Cores: ${navigator.hardwareConcurrency || 'Unknown'}`,
+                `WebGL: ${checkWebGL() ? 'Supported' : 'Not Supported'}`,
+                `Screen: ${screen.width}x${screen.height}`,
+                `Viewport: ${window.innerWidth}x${window.innerHeight}`
+            ];
+            
+            document.getElementById('performance-details').innerHTML = 
+                details.map(detail => `<li>${detail}</li>`).join('');
+        }
+        
+        function checkWebGL() {
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                return !!gl;
+            } catch (e) {
+                return false;
+            }
+        }
+    </script>
+    
+    <!-- 3D Hero Background System -->
+    <script src="3d-hero-background.js" defer></script>
+</body>
+</html>

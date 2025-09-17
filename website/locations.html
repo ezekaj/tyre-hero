@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Locations | TyreHero</title>
-    <meta name="description" content="TyreHero provides mobile tyre fitting services across the UK. Find your nearest service area and check our coverage for emergency and scheduled appointments.">
+    <title>Emergency Tyre Service Areas - Slough Maidenhead Windsor | TyreHero</title>
+    <meta name="description" content="TyreHero emergency tyre service covers Slough SL1, Maidenhead SL6 & Windsor SL4 areas. 24/7 mobile fitting across Trading Estate, Windsor Castle, train stations. Lowest prices guaranteed!">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .locations-hero::before {
             content: '';
             position: absolute;
@@ -32,189 +32,218 @@
             opacity: 0.2;
             z-index: 0;
         }
-        
+
         .locations-hero-content {
             position: relative;
             z-index: 1;
             max-width: 700px;
         }
-        
-        .coverage-map-section {
+
+        .coverage-areas-section {
             padding: var(--spacing-xxl) 0;
         }
-        
-        .map-container {
-            height: 500px;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            margin-top: var(--spacing-xl);
-        }
-        
-        .map-placeholder {
-            width: 100%;
-            height: 100%;
-            background-color: #e9e9e9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--medium);
-            font-weight: 500;
-        }
-        
-        .location-search {
-            margin-top: var(--spacing-xl);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .search-form {
-            display: flex;
-            gap: var(--spacing-sm);
-        }
-        
-        .search-input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: var(--radius-md);
-            font-family: var(--body-font);
-            font-size: 1rem;
-        }
-        
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.2);
-            outline: none;
-        }
-        
-        .regions-section {
-            padding: var(--spacing-xxl) 0;
-            background-color: var(--light);
-        }
-        
-        .regions-grid {
+
+        .areas-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: var(--spacing-lg);
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-xl);
             margin-top: var(--spacing-xl);
         }
-        
-        .region-card {
+
+        .area-card {
             background-color: var(--white);
             border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             transition: all var(--transition-normal);
         }
-        
-        .region-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
+
+        .area-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
-        
-        .region-header {
+
+        .area-header {
             background-color: var(--primary);
             color: var(--white);
-            padding: var(--spacing-md);
+            padding: var(--spacing-lg);
             text-align: center;
+            position: relative;
         }
-        
-        .region-title {
-            font-size: 1.3rem;
-            margin-bottom: 0;
+
+        .area-header.slough {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
         }
-        
-        .region-content {
-            padding: var(--spacing-md);
+
+        .area-header.maidenhead {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
         }
-        
-        .region-cities {
+
+        .area-header.windsor {
+            background: linear-gradient(135deg, #FFD700 0%, var(--primary) 100%);
+        }
+
+        .area-title {
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 700;
+        }
+
+        .area-postcode {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .area-content {
+            padding: var(--spacing-lg);
+        }
+
+        .area-landmarks {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .landmarks-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            color: var(--dark);
+        }
+
+        .landmarks-list {
             list-style: none;
             padding: 0;
             margin: 0;
-            columns: 2;
         }
-        
-        .region-cities li {
+
+        .landmarks-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+            padding: var(--spacing-xs);
+            border-radius: var(--radius-sm);
+            transition: background-color var(--transition-normal);
+        }
+
+        .landmarks-list li:hover {
+            background-color: var(--light);
+        }
+
+        .landmarks-list li::before {
+            content: '📍';
+            margin-right: var(--spacing-sm);
+            font-size: 1.1rem;
+        }
+
+        .response-info {
+            background-color: var(--light);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+        }
+
+        .response-time {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
             margin-bottom: var(--spacing-xs);
-            padding-left: var(--spacing-sm);
-            position: relative;
         }
-        
-        .region-cities li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background-color: var(--primary);
+
+        .response-description {
+            color: var(--medium);
+            font-size: 0.9rem;
         }
-        
-        .response-time-section {
+
+        .coverage-stats-section {
             padding: var(--spacing-xxl) 0;
+            background-color: var(--primary);
+            color: var(--white);
         }
-        
-        .response-time-grid {
+
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: var(--spacing-lg);
             margin-top: var(--spacing-xl);
         }
-        
-        .response-time-card {
-            background-color: var(--white);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            padding: var(--spacing-lg);
+
+        .stat-card {
             text-align: center;
-            transition: all var(--transition-normal);
+            padding: var(--spacing-lg);
         }
-        
-        .response-time-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .response-time-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto var(--spacing-md);
-            color: var(--primary);
-        }
-        
-        .response-time-title {
-            font-size: 1.3rem;
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .response-time-value {
-            font-family: var(--heading-font);
-            font-size: 2.5rem;
-            font-weight: 700;
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
             color: var(--accent);
+            display: block;
             margin-bottom: var(--spacing-sm);
         }
-        
-        .response-time-description {
-            color: var(--medium);
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
-        
+
+        .postcode-section {
+            padding: var(--spacing-xxl) 0;
+            background-color: var(--light);
+        }
+
+        .postcode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .postcode-card {
+            background-color: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary);
+        }
+
+        .postcode-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .postcode-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .postcode-list li {
+            padding: var(--spacing-xs) 0;
+            border-bottom: 1px solid #eee;
+            font-family: monospace;
+            font-weight: 500;
+        }
+
+        .postcode-list li:last-child {
+            border-bottom: none;
+        }
+
         @media (max-width: 768px) {
-            .search-form {
-                flex-direction: column;
+            .areas-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .region-cities {
-                columns: 1;
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .postcode-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
-<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
     <!-- Preloader -->
@@ -232,7 +261,7 @@
     <!-- Emergency Call Button (Fixed) -->
     <div class="emergency-call-fixed">
         <a href="tel:08001234567" class="pulse-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a .462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a .5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
             <span class="sr-only">Emergency Call</span>
         </a>
     </div>
@@ -267,265 +296,206 @@
     <section class="locations-hero">
         <div class="container">
             <div class="locations-hero-content">
-                <h1 class="hero-title">Our Service Coverage</h1>
-                <p class="hero-description">TyreHero provides mobile tyre fitting services across the UK. With technicians stationed nationwide, we can reach you quickly whether you need emergency assistance or a scheduled appointment.</p>
+                <h1 class="hero-title">Our Service Areas - Slough, Maidenhead & Windsor</h1>
+                <p class="hero-description">TyreHero provides exclusive emergency tyre services across three prime Berkshire locations. From Slough Trading Estate to Windsor Castle, Maidenhead train station to Eton College - we cover all major landmarks with the fastest response times and lowest prices guaranteed.</p>
             </div>
         </div>
     </section>
 
-    <!-- Coverage Map Section -->
-    <section class="coverage-map-section">
+    <!-- Coverage Areas Section -->
+    <section class="coverage-areas-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Coverage Map</h2>
-                <p class="section-subtitle">Our mobile tyre fitting service covers most major cities and surrounding areas across the UK. Check if we service your area by exploring the map below or searching your postcode.</p>
+                <h2 class="section-title">Complete Coverage Across Three Strategic Areas</h2>
+                <p class="section-subtitle">Professional 24/7 emergency tyre service with local expertise in each area</p>
             </div>
-            
-            <div class="map-container">
-                <div class="map-placeholder">
-                    Interactive coverage map would be displayed here
+
+            <div class="areas-grid">
+                <!-- Slough Area -->
+                <div class="area-card">
+                    <div class="area-header slough">
+                        <h3 class="area-title">Slough</h3>
+                        <div class="area-postcode">SL1, SL2, SL3 Areas</div>
+                    </div>
+                    <div class="area-content">
+                        <div class="response-info">
+                            <div class="response-time">45-60 Min</div>
+                            <div class="response-description">Average emergency response time</div>
+                        </div>
+
+                        <div class="area-landmarks">
+                            <h4 class="landmarks-title">Key Locations We Serve</h4>
+                            <ul class="landmarks-list">
+                                <li>Slough Trading Estate</li>
+                                <li>Slough High Street & Town Centre</li>
+                                <li>Salt Hill Park Area</li>
+                                <li>Chalvey Residential District</li>
+                                <li>Cippenham Village</li>
+                                <li>Burnham Station Area</li>
+                                <li>Farnham Common</li>
+                                <li>Britwell Estate</li>
+                            </ul>
+                        </div>
+
+                        <div class="area-cta">
+                            <a href="slough-emergency-tyre-service.html" class="btn btn-primary">Slough Emergency Service</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="location-search">
-                <h3>Check Your Location</h3>
-                <p>Enter your postcode to check if we cover your area and see estimated response times.</p>
-                <form class="search-form">
-                    <input type="text" class="search-input" placeholder="Enter your postcode" aria-label="Enter your postcode">
-                    <button type="submit" class="btn btn-primary">Check Coverage</button>
-                </form>
+
+                <!-- Maidenhead Area -->
+                <div class="area-card">
+                    <div class="area-header maidenhead">
+                        <h3 class="area-title">Maidenhead</h3>
+                        <div class="area-postcode">SL6 Area</div>
+                    </div>
+                    <div class="area-content">
+                        <div class="response-info">
+                            <div class="response-time">30-45 Min</div>
+                            <div class="response-description">Average emergency response time</div>
+                        </div>
+
+                        <div class="area-landmarks">
+                            <h4 class="landmarks-title">Key Locations We Serve</h4>
+                            <ul class="landmarks-list">
+                                <li>Maidenhead Train Station</li>
+                                <li>Maidenhead High Street</li>
+                                <li>Bray Village</li>
+                                <li>Cookham Village</li>
+                                <li>Taplow Station Area</li>
+                                <li>Maidenhead Town Centre</li>
+                                <li>Ray Mill Island</li>
+                                <li>Holyport Village</li>
+                            </ul>
+                        </div>
+
+                        <div class="area-cta">
+                            <a href="maidenhead-emergency-tyre-service.html" class="btn btn-primary">Maidenhead Emergency Service</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Windsor Area -->
+                <div class="area-card">
+                    <div class="area-header windsor">
+                        <h3 class="area-title">Windsor</h3>
+                        <div class="area-postcode">SL4 Area</div>
+                    </div>
+                    <div class="area-content">
+                        <div class="response-info">
+                            <div class="response-time">30-40 Min</div>
+                            <div class="response-description">Royal treatment, fastest response</div>
+                        </div>
+
+                        <div class="area-landmarks">
+                            <h4 class="landmarks-title">Key Locations We Serve</h4>
+                            <ul class="landmarks-list">
+                                <li>Windsor Castle Area</li>
+                                <li>Eton College & High Street</li>
+                                <li>Windsor Great Park</li>
+                                <li>Old Windsor Village</li>
+                                <li>Clewer Residential Areas</li>
+                                <li>Peascod Street Shopping</li>
+                                <li>Datchet Village</li>
+                                <li>Windsor Bridge</li>
+                            </ul>
+                        </div>
+
+                        <div class="area-cta">
+                            <a href="windsor-emergency-tyre-service.html" class="btn btn-primary">Windsor Emergency Service</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Regions Section -->
-    <section class="regions-section">
+    <!-- Coverage Statistics -->
+    <section class="coverage-stats-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Regions We Cover</h2>
-                <p class="section-subtitle">TyreHero operates in the following regions and major cities across the UK.</p>
+                <h2 class="section-title">Why Choose TyreHero for These Areas?</h2>
+                <p class="section-subtitle">Local expertise with unbeatable service metrics</p>
             </div>
-            
-            <div class="regions-grid">
-                <!-- London & South East -->
-                <div class="region-card">
-                    <div class="region-header">
-                        <h3 class="region-title">London & South East</h3>
-                    </div>
-                    <div class="region-content">
-                        <ul class="region-cities">
-                            <li>London</li>
-                            <li>Brighton</li>
-                            <li>Canterbury</li>
-                            <li>Dover</li>
-                            <li>Guildford</li>
-                            <li>Maidstone</li>
-                            <li>Oxford</li>
-                            <li>Reading</li>
-                            <li>Southampton</li>
-                            <li>Portsmouth</li>
-                        </ul>
-                    </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Strategic Locations</span>
                 </div>
-                
-                <!-- Midlands -->
-                <div class="region-card">
-                    <div class="region-header">
-                        <h3 class="region-title">Midlands</h3>
-                    </div>
-                    <div class="region-content">
-                        <ul class="region-cities">
-                            <li>Birmingham</li>
-                            <li>Coventry</li>
-                            <li>Derby</li>
-                            <li>Leicester</li>
-                            <li>Nottingham</li>
-                            <li>Northampton</li>
-                            <li>Stoke-on-Trent</li>
-                            <li>Wolverhampton</li>
-                            <li>Worcester</li>
-                            <li>Telford</li>
-                        </ul>
-                    </div>
+                <div class="stat-card">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Emergency Service</span>
                 </div>
-                
-                <!-- North West -->
-                <div class="region-card">
-                    <div class="region-header">
-                        <h3 class="region-title">North West</h3>
-                    </div>
-                    <div class="region-content">
-                        <ul class="region-cities">
-                            <li>Manchester</li>
-                            <li>Liverpool</li>
-                            <li>Blackpool</li>
-                            <li>Bolton</li>
-                            <li>Chester</li>
-                            <li>Preston</li>
-                            <li>Warrington</li>
-                            <li>Wigan</li>
-                            <li>Blackburn</li>
-                            <li>Lancaster</li>
-                        </ul>
-                    </div>
+                <div class="stat-card">
+                    <span class="stat-number">45</span>
+                    <span class="stat-label">Min Avg Response</span>
                 </div>
-                
-                <!-- North East -->
-                <div class="region-card">
-                    <div class="region-header">
-                        <h3 class="region-title">North East</h3>
-                    </div>
-                    <div class="region-content">
-                        <ul class="region-cities">
-                            <li>Newcastle</li>
-                            <li>Sunderland</li>
-                            <li>Durham</li>
-                            <li>Middlesbrough</li>
-                            <li>Darlington</li>
-                            <li>Hartlepool</li>
-                            <li>Gateshead</li>
-                            <li>South Shields</li>
-                            <li>Stockton-on-Tees</li>
-                            <li>Washington</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Yorkshire & Humber -->
-                <div class="region-card">
-                    <div class="region-header">
-                        <h3 class="region-title">Yorkshire & Humber</h3>
-                    </div>
-                    <div class="region-content">
-                        <ul class="region-cities">
-                            <li>Leeds</li>
-                            <li>York</li>
-                            <li>Sheffield</li>
-                            <li>Hull</li>
-                            <li>Bradford</li>
-                            <li>Huddersfield</li>
-                            <li>Halifax</li>
-                            <li>Wakefield</li>
-                            <li>Doncaster</li>
-                            <li>Harrogate</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Scotland -->
-                <div class="region-card">
-                    <div class="region-header">
-                        <h3 class="region-title">Scotland</h3>
-                    </div>
-                    <div class="region-content">
-                        <ul class="region-cities">
-                            <li>Edinburgh</li>
-                            <li>Glasgow</li>
-                            <li>Aberdeen</li>
-                            <li>Dundee</li>
-                            <li>Inverness</li>
-                            <li>Perth</li>
-                            <li>Stirling</li>
-                            <li>Falkirk</li>
-                            <li>Paisley</li>
-                            <li>Livingston</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Wales -->
-                <div class="region-card">
-                    <div class="region-header">
-                        <h3 class="region-title">Wales</h3>
-                    </div>
-                    <div class="region-content">
-                        <ul class="region-cities">
-                            <li>Cardiff</li>
-                            <li>Swansea</li>
-                            <li>Newport</li>
-                            <li>Bangor</li>
-                            <li>Wrexham</li>
-                            <li>Aberystwyth</li>
-                            <li>Llandudno</li>
-                            <li>Bridgend</li>
-                            <li>Merthyr Tydfil</li>
-                            <li>Barry</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- South West -->
-                <div class="region-card">
-                    <div class="region-header">
-                        <h3 class="region-title">South West</h3>
-                    </div>
-                    <div class="region-content">
-                        <ul class="region-cities">
-                            <li>Bristol</li>
-                            <li>Exeter</li>
-                            <li>Plymouth</li>
-                            <li>Bath</li>
-                            <li>Bournemouth</li>
-                            <li>Cheltenham</li>
-                            <li>Gloucester</li>
-                            <li>Swindon</li>
-                            <li>Taunton</li>
-                            <li>Torquay</li>
-                        </ul>
-                    </div>
+                <div class="stat-card">
+                    <span class="stat-number">#1</span>
+                    <span class="stat-label">Lowest Prices</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Response Time Section -->
-    <section class="response-time-section">
+    <!-- Postcode Coverage -->
+    <section class="postcode-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Response Times By Area</h2>
-                <p class="section-subtitle">Our average response times vary by location. Here's what you can expect in different areas.</p>
+                <h2 class="section-title">Complete Postcode Coverage</h2>
+                <p class="section-subtitle">Every postcode area covered with professional emergency tyre service</p>
             </div>
-            
-            <div class="response-time-grid">
-                <!-- Urban Areas -->
-                <div class="response-time-card">
-                    <svg class="response-time-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.49a1 1 0 0 1 .386-.79l8-6.222a1 1 0 0 1 1.228 0l8 6.222a1 1 0 0 1 .386.79V20zm-2-1V9.978l-7-5.444-7 5.444V19h14z" fill="currentColor"/></svg>
-                    <h3 class="response-time-title">Urban Areas</h3>
-                    <div class="response-time-value">60 min</div>
-                    <p class="response-time-description">In major cities and urban centers, our average response time is 60 minutes or less.</p>
+
+            <div class="postcode-grid">
+                <div class="postcode-card">
+                    <h3 class="postcode-title">Slough Postcodes</h3>
+                    <ul class="postcode-list">
+                        <li>SL1 0** - SL1 9**</li>
+                        <li>SL2 1** - SL2 5**</li>
+                        <li>SL3 0** - SL3 9**</li>
+                        <li>Including all sub-areas</li>
+                        <li>Trading Estate coverage</li>
+                    </ul>
                 </div>
-                
-                <!-- Suburban Areas -->
-                <div class="response-time-card">
-                    <svg class="response-time-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 19V9.799l-7-5.522-7 5.522V19h14zm2 1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.314a1 1 0 0 1 .38-.785l8-6.311a1 1 0 0 1 1.24 0l8 6.31a1 1 0 0 1 .38.786V20zM7 12h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0z" fill="currentColor"/></svg>
-                    <h3 class="response-time-title">Suburban Areas</h3>
-                    <div class="response-time-value">90 min</div>
-                    <p class="response-time-description">In suburban areas and smaller towns, our average response time is 90 minutes.</p>
+
+                <div class="postcode-card">
+                    <h3 class="postcode-title">Maidenhead Postcodes</h3>
+                    <ul class="postcode-list">
+                        <li>SL6 0** - SL6 9**</li>
+                        <li>Including Bray</li>
+                        <li>Including Cookham</li>
+                        <li>Including Taplow</li>
+                        <li>Train station areas</li>
+                    </ul>
                 </div>
-                
-                <!-- Rural Areas -->
-                <div class="response-time-card">
-                    <svg class="response-time-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 21V11h8v10h-8zM3 13V3h8v10H3zm6-2V5H5v6h4zM3 21v-6h8v6H3zm2-2h4v-2H5v2zm10 0h4v-6h-4v6zM13 3h8v6h-8V3zm2 2v2h4V5h-4z" fill="currentColor"/></svg>
-                    <h3 class="response-time-title">Rural Areas</h3>
-                    <div class="response-time-value">120 min</div>
-                    <p class="response-time-description">In rural and remote areas, our average response time is 120 minutes.</p>
+
+                <div class="postcode-card">
+                    <h3 class="postcode-title">Windsor Postcodes</h3>
+                    <ul class="postcode-list">
+                        <li>SL4 1** - SL4 6**</li>
+                        <li>Windsor Castle vicinity</li>
+                        <li>Eton College area</li>
+                        <li>Old Windsor</li>
+                        <li>Datchet coverage</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Expanding Coverage Section -->
+    <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">We're Expanding!</h2>
-                <p class="cta-description">Don't see your area listed? We're constantly expanding our coverage. Contact us to check if we can service your location or to request service in your area.</p>
+                <h2 class="cta-title">Emergency Tyre Service in Your Area?</h2>
+                <p class="cta-description">Whether you're stranded at Slough Trading Estate, broken down near Windsor Castle, or need help at Maidenhead station - TyreHero provides the fastest emergency response with guaranteed lowest prices across all three areas.</p>
                 <div class="cta-buttons">
                     <a href="tel:08001234567" class="btn btn-primary btn-lg btn-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
-                        Call Now: 0800 123 4567
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a .5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a .462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a .5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
+                        Emergency Call: 0800 123 4567
                     </a>
-                    <a href="contact.html" class="btn btn-secondary btn-lg">Contact Us</a>
+                    <a href="contact.html" class="btn btn-secondary btn-lg">Get Quote Now</a>
                 </div>
             </div>
         </div>
@@ -540,54 +510,45 @@
                     <div class="footer-logo">
                         <img src="images/tyrehero-logo-white.svg" alt="TyreHero Logo">
                     </div>
-                    <p>TyreHero provides 24/7 emergency mobile tyre fitting and replacement services across the UK. Our professional technicians come to you, whether you're at home, work, or stranded roadside.</p>
+                    <p>TyreHero provides exclusive emergency mobile tyre fitting across Slough SL1-3, Maidenhead SL6, and Windsor SL4 areas. Professional service with guaranteed lowest prices in Berkshire.</p>
                 </div>
-                
+
                 <!-- Footer Links -->
                 <div class="footer-links-container">
-                    <h3 class="footer-heading">Quick Links</h3>
+                    <h3 class="footer-heading">Service Areas</h3>
                     <ul class="footer-links">
-                        <li><a href="emergency.html">Emergency Service</a></li>
-                        <li><a href="services.html">Our Services</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="locations.html">Coverage Areas</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="slough-emergency-tyre-service.html">Slough Emergency Service</a></li>
+                        <li><a href="maidenhead-emergency-tyre-service.html">Maidenhead Emergency Service</a></li>
+                        <li><a href="windsor-emergency-tyre-service.html">Windsor Emergency Service</a></li>
+                        <li><a href="emergency.html">24/7 Emergency Line</a></li>
+                        <li><a href="contact.html">Get Quote</a></li>
                     </ul>
                 </div>
-                
+
                 <!-- Footer Contact -->
                 <div class="footer-contact">
-                    <h3 class="footer-heading">Contact Us</h3>
+                    <h3 class="footer-heading">Coverage Areas</h3>
                     <div class="footer-contact-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a .5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a .462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a .5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
                         <span>0800 123 4567 (24/7)</span>
                     </div>
                     <div class="footer-contact-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm17 4.238l-7.928 7.1L4 7.216V19h16V7.238zM4.511 5l7.55 6.662L19.502 5H4.511z" fill="currentColor"/></svg>
-                        <span>info@tyrehero.com</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" fill="currentColor"/></svg>
+                        <span>Slough SL1-3</span>
                     </div>
                     <div class="footer-contact-item">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" fill="currentColor"/></svg>
-                        <span>123 Business Road<br>London, UK</span>
+                        <span>Maidenhead SL6</span>
                     </div>
-                    
-                    <div class="footer-social">
-                        <a href="#" class="social-icon" aria-label="Facebook">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z" fill="currentColor"/></svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Twitter">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22.162 5.656a8.384 8.384 0 0 1-2.402.658A4.196 4.196 0 0 0 21.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 0 0-7.126 3.814 11.874 11.874 0 0 1-8.62-4.37 4.168 4.168 0 0 0-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 0 1-1.894-.523v.052a4.185 4.185 0 0 0 3.355 4.101 4.21 4.21 0 0 1-1.89.072A4.185 4.185 0 0 0 7.97 16.65a8.394 8.394 0 0 1-6.191 1.732 11.83 11.83 0 0 0 6.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 0 0 2.087-2.165z" fill="currentColor"/></svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.986.01-4.04.059-.976.045-1.505.207-1.858.344-.466.182-.8.398-1.15.748-.35.35-.566.684-.748 1.15-.137.353-.3.882-.344 1.857-.048 1.055-.058 1.37-.058 4.041 0 2.67.01 2.986.058 4.04.045.977.207 1.505.344 1.858.182.466.398.8.748 1.15.35.35.684.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058 2.67 0 2.987-.01 4.04-.058.977-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.684.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041 0-2.67-.01-2.986-.058-4.04-.045-.977-.207-1.505-.344-1.858a3.097 3.097 0 0 0-.748-1.15 3.098 3.098 0 0 0-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.055-.048-1.37-.058-4.041-.058zm0 3.063a5.135 5.135 0 1 1 0 10.27 5.135 5.135 0 0 1 0-10.27zm0 8.468a3.333 3.333 0 1 0 0-6.666 3.333 3.333 0 0 0 0 6.666zm6.538-8.469a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z" fill="currentColor"/></svg>
-                        </a>
+                    <div class="footer-contact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" fill="currentColor"/></svg>
+                        <span>Windsor SL4</span>
                     </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                <div class="copyright">© 2025 TyreHero. All rights reserved.</div>
+                <div class="copyright">© 2025 TyreHero. Exclusive emergency service for Slough, Maidenhead & Windsor areas.</div>
                 <div class="footer-bottom-links">
                     <a href="privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
@@ -601,24 +562,55 @@
     <script src="scripts.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Location search form handling
-            const searchForm = document.querySelector('.search-form');
-            
-            if (searchForm) {
-                searchForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const postcodeInput = this.querySelector('.search-input');
-                    const postcode = postcodeInput.value.trim();
-                    
-                    if (postcode) {
-                        // In a real implementation, this would check the postcode against a database
-                        // For demo purposes, we'll just show an alert
-                        alert(`Thank you! We service ${postcode}. Our average response time in this area is 90 minutes.`);
-                    } else {
-                        alert('Please enter a valid postcode.');
+            // Area card hover effects
+            const areaCards = document.querySelectorAll('.area-card');
+
+            areaCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Stats counter animation
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const statsObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statNumbers = entry.target.querySelectorAll('.stat-number');
+                        statNumbers.forEach(stat => {
+                            const text = stat.textContent;
+                            if (text.includes('/') || text.includes('#') || isNaN(text)) return;
+
+                            const finalNumber = parseInt(text);
+                            let currentNumber = 0;
+                            const increment = finalNumber / 30;
+
+                            const counter = setInterval(() => {
+                                currentNumber += increment;
+                                if (currentNumber >= finalNumber) {
+                                    stat.textContent = finalNumber;
+                                    clearInterval(counter);
+                                } else {
+                                    stat.textContent = Math.floor(currentNumber);
+                                }
+                            }, 50);
+                        });
+                        statsObserver.unobserve(entry.target);
                     }
                 });
+            }, observerOptions);
+
+            const statsSection = document.querySelector('.coverage-stats-section');
+            if (statsSection) {
+                statsObserver.observe(statsSection);
             }
         });
     </script>
