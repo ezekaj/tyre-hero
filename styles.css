@@ -363,6 +363,105 @@ img {
     overflow: hidden;
 }
 
+/* Page Hero for new pages */
+.page-hero {
+    position: relative;
+    padding: 8rem 0 4rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    overflow: hidden;
+}
+
+.page-hero .hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-xxl);
+}
+
+.page-hero .hero-text {
+    flex: 1;
+}
+
+.page-hero .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+    color: var(--white);
+}
+
+.page-hero .hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.9;
+}
+
+.page-hero .hero-highlights {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.page-hero .highlight-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--white);
+    font-weight: 500;
+}
+
+.page-hero .highlight-icon {
+    width: 20px;
+    height: 20px;
+    stroke: var(--secondary);
+    stroke-width: 2;
+}
+
+.page-hero .hero-badges {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.page-hero .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(10px);
+}
+
+.page-hero .badge-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.page-hero .badge-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--secondary);
+    stroke-width: 2;
+    fill: none;
+}
+
+.page-hero .badge-text {
+    color: var(--white);
+}
+
+.page-hero .badge-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.page-hero .badge-subtitle {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
 .hero-bg {
     position: absolute;
     top: 0;
@@ -997,7 +1096,27 @@ img {
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
+    .page-hero .hero-title {
+        font-size: 2rem;
+    }
+
+    .page-hero .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-lg);
+    }
+
+    .page-hero .hero-highlights {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .page-hero .hero-badges {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
     .hero-stats {
         flex-wrap: wrap;
     }
