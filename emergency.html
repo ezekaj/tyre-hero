@@ -2,27 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emergency Tyre Service | TyreHero</title>
     <meta name="description" content="24/7 emergency mobile tyre fitting service with 90-minute response time. We come to you at home, work, or roadside.">
-    
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#E53935">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="TyreHero Emergency">
-    
-    <!-- Icons -->
-    <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/icon-192.png">
-    <link rel="manifest" href="/manifest.json">
-    
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="mobile-emergency.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
     <style>
         /* Emergency page specific styles */
         .emergency-hero {
@@ -214,7 +202,7 @@
             }
         }
     </style>
-
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
     <!-- Preloader -->
@@ -229,6 +217,13 @@
         </div>
     </div>
 
+    <!-- Emergency Call Button (Fixed) -->
+    <div class="emergency-call-fixed">
+        <a href="tel:08001234567" class="pulse-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
+            <span class="sr-only">Emergency Call</span>
+        </a>
+    </div>
 
     <!-- Header -->
     <header class="site-header">
@@ -507,28 +502,10 @@
 
     <!-- Scripts -->
     <script src="scripts.js"></script>
-    <script src="pwa.js"></script>
-    <script src="push-notifications.js"></script>
-    <script src="offline-features.js"></script>
-    <script src="emergency-battery-optimization.js"></script>
     <script>
-        // Emergency form handling with PWA features
+        // Emergency form handling
         document.addEventListener('DOMContentLoaded', function() {
             const emergencyForm = document.getElementById('emergencyForm');
-            
-            // Auto-fill location if available
-            const cachedLocation = localStorage.getItem('emergency-location');
-            if (cachedLocation) {
-                try {
-                    const location = JSON.parse(cachedLocation);
-                    const locationField = document.getElementById('location');
-                    if (locationField) {
-                        locationField.value = `Lat: ${location.latitude.toFixed(4)}, Lng: ${location.longitude.toFixed(4)}`;
-                    }
-                } catch (error) {
-                    console.log('[Emergency] Error loading cached location:', error);
-                }
-            }
             
             if (emergencyForm) {
                 emergencyForm.addEventListener('submit', function(e) {
@@ -541,22 +518,7 @@
                         formDataObj[key] = value;
                     });
                     
-                    // Add emergency metadata
-                    formDataObj.timestamp = new Date().toISOString();
-                    formDataObj.userAgent = navigator.userAgent;
-                    formDataObj.isOnline = navigator.onLine;
-                    formDataObj.requestId = Date.now().toString();
-                    
-                    // Trigger emergency event for PWA features
-                    document.dispatchEvent(new CustomEvent('emergency-request-submitted', {
-                        detail: formDataObj
-                    }));
-                    
-                    // Haptic feedback
-                    if ('vibrate' in navigator) {
-                        navigator.vibrate([200, 100, 200]);
-                    }
-                    
+                    // In a real implementation, this would send the data to a server
                     console.log('Emergency request submitted:', formDataObj);
                     
                     // Show success message
@@ -568,15 +530,8 @@
                             </svg>
                             <h3>Emergency Request Submitted</h3>
                             <p>Thank you, ${formDataObj.name}. Your emergency request has been received.</p>
-                            <p><strong>Request ID:</strong> ${formDataObj.requestId}</p>
                             <p>A technician will be dispatched to your location shortly. You will receive a confirmation text message with estimated arrival time.</p>
-                            <p style="margin-top: 1.5rem; padding: 1rem; background: #E8F5E8; border-radius: 8px;">
-                                <strong>For immediate assistance:</strong><br>
-                                <a href="tel:08001234567" style="color: #E53935; font-weight: 600; font-size: 1.2rem;">📞 0800 123 4567</a>
-                            </p>
-                            <div style="margin-top: 1rem; font-size: 0.9rem; color: #757575;">
-                                ${navigator.onLine ? '✅ Request sent successfully' : '📡 Request saved offline - will sync when connection restored'}
-                            </div>
+                            <p>For immediate assistance, please call: <a href="tel:08001234567">0800 123 4567</a></p>
                         </div>
                     `;
                 });
@@ -588,95 +543,15 @@
             const lng = urlParams.get('lng');
             
             if (lat && lng) {
-                console.log('User location from URL:', lat, lng);
+                // In a real implementation, this would use the coordinates to pre-fill the location field
+                // or display a map with the user's location
+                console.log('User location:', lat, lng);
+                
+                // For demo purposes, we'll just update the location field
                 const locationField = document.getElementById('location');
                 if (locationField) {
-                    locationField.value = `Lat: ${lat}, Lng: ${lng}`;
+                    locationField.value = 'Location detected (coordinates available)';
                 }
-            }
-            
-            // Auto-focus first field for quick emergency entry
-            const firstField = emergencyForm.querySelector('input[type="text"]');
-            if (firstField) {
-                setTimeout(() => firstField.focus(), 100);
-            }
-            
-            // Request push notification permission on emergency page
-            if ('Notification' in window && Notification.permission === 'default') {
-                setTimeout(() => {
-                    Notification.requestPermission().then(permission => {
-                        console.log('[Emergency] Notification permission:', permission);
-                    });
-                }, 2000);
-            }
-        });
-        
-        // Emergency-specific PWA features
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js');
-        }
-        
-        // Pull-to-refresh for emergency updates
-        let startY = 0;
-        let pullDistance = 0;
-        let isPulling = false;
-        
-        document.addEventListener('touchstart', (e) => {
-            if (window.scrollY === 0) {
-                startY = e.touches[0].clientY;
-                isPulling = true;
-            }
-        });
-        
-        document.addEventListener('touchmove', (e) => {
-            if (isPulling) {
-                pullDistance = e.touches[0].clientY - startY;
-                if (pullDistance > 0 && pullDistance < 100) {
-                    document.body.style.transform = `translateY(${pullDistance / 3}px)`;
-                    
-                    if (pullDistance > 60) {
-                        // Show refresh indicator
-                        let indicator = document.getElementById('pull-refresh-indicator');
-                        if (!indicator) {
-                            indicator = document.createElement('div');
-                            indicator.id = 'pull-refresh-indicator';
-                            indicator.textContent = '↓ Release to refresh emergency data';
-                            indicator.style.cssText = `
-                                position: fixed;
-                                top: -40px;
-                                left: 50%;
-                                transform: translateX(-50%);
-                                background: #E53935;
-                                color: white;
-                                padding: 8px 16px;
-                                border-radius: 0 0 8px 8px;
-                                font-size: 0.9rem;
-                                z-index: 10000;
-                                transition: top 0.2s ease;
-                            `;
-                            document.body.appendChild(indicator);
-                        }
-                        indicator.style.top = '0px';
-                    }
-                }
-            }
-        });
-        
-        document.addEventListener('touchend', () => {
-            if (isPulling) {
-                document.body.style.transform = '';
-                const indicator = document.getElementById('pull-refresh-indicator');
-                
-                if (pullDistance > 60) {
-                    // Trigger refresh
-                    location.reload();
-                } else if (indicator) {
-                    indicator.style.top = '-40px';
-                    setTimeout(() => indicator.remove(), 300);
-                }
-                
-                isPulling = false;
-                pullDistance = 0;
             }
         });
     </script>

@@ -2,35 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TyreHero | 24/7 Emergency Mobile Tyre Fitting Service</title>
     <meta name="description" content="Your roadside savior. 24/7 emergency mobile tyre fitting service with 90-minute response time. We come to you at home, work, or roadside.">
-    
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#E53935">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="TyreHero">
-    <meta name="msapplication-TileColor" content="#E53935">
-    <meta name="msapplication-config" content="/browserconfig.xml">
-    
-    <!-- Icons -->
-    <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/icon-192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/icon-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/icon-16.png">
-    <link rel="mask-icon" href="/images/icon-maskable-192.png" color="#E53935">
-    
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json">
-    
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="mobile-emergency.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body class="home-page">
     <!-- Preloader -->
@@ -45,6 +26,13 @@
         </div>
     </div>
 
+    <!-- Emergency Call Button (Fixed) -->
+    <div class="emergency-call-fixed">
+        <a href="tel:08001234567" class="pulse-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
+            <span class="sr-only">Emergency Call</span>
+        </a>
+    </div>
 
     <!-- Header -->
     <header class="site-header">
@@ -376,68 +364,7 @@
         </div>
     </footer>
 
-    <!-- Security Scripts - Load First -->
-    <script src="error-handler.js"></script>
-    <script src="secure-cookies.js"></script>
-    <script src="security-utils.js"></script>
-    
-    <!-- Main Scripts -->
+    <!-- Scripts -->
     <script src="scripts.js"></script>
-    
-    <!-- PWA Scripts -->
-    <script src="pwa.js"></script>
-    <script src="push-notifications.js"></script>
-    <script src="offline-features.js"></script>
-    <script src="emergency-battery-optimization.js"></script>
-    
-    <!-- PWA Installation Script -->
-    <script>
-        // Register service worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', async () => {
-                try {
-                    const registration = await navigator.serviceWorker.register('/sw.js');
-                    console.log('[PWA] Service Worker registered:', registration);
-                } catch (error) {
-                    console.error('[PWA] Service Worker registration failed:', error);
-                }
-            });
-        }
-        
-        // Emergency keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            // E key for emergency
-            if (e.key === 'e' || e.key === 'E') {
-                if (e.ctrlKey || e.metaKey || e.altKey) {
-                    e.preventDefault();
-                    window.location.href = '/emergency.html';
-                }
-            }
-            
-            // C key for call
-            if (e.key === 'c' || e.key === 'C') {
-                if (e.ctrlKey || e.metaKey || e.altKey) {
-                    e.preventDefault();
-                    window.location.href = 'tel:08001234567';
-                }
-            }
-        });
-        
-        // Auto-request location for emergency scenarios
-        if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    console.log('[PWA] Location available for emergency use');
-                    localStorage.setItem('emergency-location', JSON.stringify({
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        timestamp: Date.now()
-                    }));
-                },
-                (error) => console.log('[PWA] Location access denied'),
-                { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 }
-            );
-        }
-    </script>
 </body>
 </html>

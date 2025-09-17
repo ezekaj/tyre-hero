@@ -70,5 +70,14 @@ local-deployment-info.md
 # Outputs directory
 outputs/
 
-# Backup files
-*.backup
+# Development server
+server.js
+
+# Documentation and planning files (not needed for deployment)
+*.md
+!README.md
+planning/
+research/
+design/
+content/
+summarized_conversations/

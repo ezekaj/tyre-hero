@@ -270,37 +270,42 @@ function initTestimonialSlider() {
 }
 
 /**
- * GDPR-compliant location detection for emergency services
+ * Location detection for emergency services
  */
 function initLocationDetection() {
     const emergencyButtons = document.querySelectorAll('.btn-primary[href="emergency.html"]');
     
     if (emergencyButtons.length > 0) {
         emergencyButtons.forEach(button => {
-            button.addEventListener('click', async function(event) {
-                // Only intercept if geolocation is available and security utils loaded
-                if (navigator.geolocation && window.tyreHeroSecurity) {
+            button.addEventListener('click', function(event) {
+                // Only intercept if geolocation is available
+                if (navigator.geolocation) {
                     event.preventDefault();
                     
-                    try {
-                        // Show loading state
-                        const originalText = this.innerHTML;
-                        this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="animation: spin 1s linear infinite;"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3a9 9 0 0 1 9 9h-2a7 7 0 0 0-7-7V3z" fill="currentColor"/></svg> Requesting location...';
-                        
-                        // Use secure geolocation with GDPR compliance
-                        const location = await window.tyreHeroSecurity.getSecureLocation();
-                        
-                        // Success - redirect with coordinates
-                        window.location.href = `emergency.html?lat=${location.latitude}&lng=${location.longitude}`;
-                        
-                    } catch (error) {
-                        // Error or user denied - redirect without coordinates
-                        this.innerHTML = originalText;
-                        window.location.href = 'emergency.html';
-                    }
-                } else {
-                    // Fallback for when security utils not loaded or geolocation unavailable
-                    // Proceed to emergency page without location
+                    // Show loading state
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="animation: spin 1s linear infinite;"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3a9 9 0 0 1 9 9h-2a7 7 0 0 0-7-7V3z" fill="currentColor"/></svg> Detecting location...';
+                    
+                    // Get user's location
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            // Success - redirect with coordinates
+                            const lat = position.coords.latitude;
+                            const lng = position.coords.longitude;
+                            window.location.href = `emergency.html?lat=${lat}&lng=${lng}`;
+                        },
+                        (error) => {
+                            // Error - redirect without coordinates
+                            console.error('Geolocation error:', error);
+                            this.innerHTML = originalText;
+                            window.location.href = 'emergency.html';
+                        },
+                        { 
+                            enableHighAccuracy: true,
+                            timeout: 5000,
+                            maximumAge: 0
+                        }
+                    );
                 }
             });
         });
@@ -316,8 +321,8 @@ function initEmergencyCallTracking() {
     if (emergencyCallButtons.length > 0) {
         emergencyCallButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Track emergency call (analytics would be implemented here in production)
-                // Emergency call initiated
+                // Track emergency call (would connect to analytics in production)
+                console.log('Emergency call tracked:', this.href);
                 
                 // Add visual feedback
                 this.classList.add('call-active');

@@ -312,7 +312,7 @@
             }
         }
     </style>
-
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
     <!-- Preloader -->
@@ -327,6 +327,13 @@
         </div>
     </div>
 
+    <!-- Emergency Call Button (Fixed) -->
+    <div class="emergency-call-fixed">
+        <a href="tel:08001234567" class="pulse-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.901 13.901 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.901 13.901 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498z" fill="currentColor"/></svg>
+            <span class="sr-only">Emergency Call</span>
+        </a>
+    </div>
 
     <!-- Header -->
     <header class="site-header">
@@ -419,50 +426,41 @@
             
             <div class="contact-form-container">
                 <div class="contact-form">
-                    <form id="contactForm" novalidate>
+                    <form id="contactForm">
                         <div class="form-group">
-                            <label for="name" class="form-label">Your Name *</label>
-                            <input type="text" id="name" name="name" class="form-input" required maxlength="50" pattern="[a-zA-Z\s\-\'\.]{ 2,50}" autocomplete="name">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email" class="form-label">Email Address *</label>
-                            <input type="email" id="email" name="email" class="form-input" required maxlength="100" autocomplete="email">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="phone" class="form-label">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="form-input" maxlength="15" pattern="[\d\+\-\(\)\s]{10,15}" autocomplete="tel">
+                            <input type="tel" id="phone" name="phone" class="form-input">
                         </div>
                         
                         <div class="form-group">
-                            <label for="subject" class="form-label">Subject *</label>
+                            <label for="subject" class="form-label">Subject</label>
                             <select id="subject" name="subject" class="form-select" required>
                                 <option value="">Select a subject</option>
                                 <option value="general">General Inquiry</option>
                                 <option value="booking">Booking Question</option>
                                 <option value="feedback">Feedback</option>
                                 <option value="complaint">Complaint</option>
-                                <option value="emergency">Emergency Support</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="message" class="form-label">Your Message *</label>
-                            <textarea id="message" name="message" class="form-textarea" required minlength="10" maxlength="1000" placeholder="Please describe your inquiry (10-1000 characters)"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-checkbox">
-                                <input type="checkbox" id="privacy" name="privacy" required>
-                                <span class="checkmark"></span>
-                                I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a> and consent to the processing of my personal data for the purpose of responding to my inquiry. *
-                            </label>
+                            <label for="message" class="form-label">Your Message</label>
+                            <textarea id="message" name="message" class="form-textarea" required></textarea>
                         </div>
                         
                         <div class="form-submit">
-                            <button type="submit" class="btn btn-primary btn-lg">Send Secure Message</button>
+                            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -652,67 +650,38 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="security-utils.js"></script>
     <script src="scripts.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Enhanced contact form handling is now managed by security-utils.js
+            // Contact form handling
+            const contactForm = document.getElementById('contactForm');
             
-            // Add additional form styling for validation
-            const style = document.createElement('style');
-            style.textContent = `
-                .form-checkbox {
-                    display: flex;
-                    align-items: flex-start;
-                    font-size: 0.9rem;
-                    line-height: 1.4;
-                    cursor: pointer;
-                }
-                
-                .form-checkbox input[type="checkbox"] {
-                    margin-right: 0.5rem;
-                    margin-top: 0.2rem;
-                    flex-shrink: 0;
-                }
-                
-                .form-checkbox a {
-                    color: var(--primary);
-                    text-decoration: underline;
-                }
-                
-                .form-input[aria-invalid="true"],
-                .form-textarea[aria-invalid="true"],
-                .form-select[aria-invalid="true"] {
-                    border-color: #e53935;
-                    box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.2);
-                }
-                
-                .form-group.has-error .form-label {
-                    color: #e53935;
-                }
-                
-                .security-info {
-                    background: #e3f2fd;
-                    border: 1px solid #2196f3;
-                    border-radius: 0.25rem;
-                    padding: 0.75rem;
-                    margin-bottom: 1rem;
-                    font-size: 0.875rem;
-                    color: #1976d2;
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Add security notice
-            const form = document.getElementById('contactForm');
-            if (form) {
-                const securityInfo = document.createElement('div');
-                securityInfo.className = 'security-info';
-                securityInfo.innerHTML = `
-                    <strong>🔒 Secure Form:</strong> This form is protected with CSRF tokens, input validation, and rate limiting. 
-                    Your data is sanitized and transmitted securely.
-                `;
-                form.insertBefore(securityInfo, form.firstChild);
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(contactForm);
+                    const formDataObj = {};
+                    formData.forEach((value, key) => {
+                        formDataObj[key] = value;
+                    });
+                    
+                    // In a real implementation, this would send the data to a server
+                    console.log('Contact form submitted:', formDataObj);
+                    
+                    // Show success message
+                    contactForm.innerHTML = `
+                        <div style="text-align: center; padding: 2rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64" style="color: var(--success); margin-bottom: 1rem;">
+                                <path fill="none" d="M0 0h24v24H0z"/>
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" fill="currentColor"/>
+                            </svg>
+                            <h3>Message Sent Successfully</h3>
+                            <p>Thank you for contacting TyreHero. We've received your message and will get back to you as soon as possible.</p>
+                        </div>
+                    `;
+                });
             }
             
             // FAQ accordion functionality

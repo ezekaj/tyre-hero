@@ -455,12 +455,14 @@ img {
 }
 
 /* ===== Emergency Call Button ===== */
+.emergency-call-fixed {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
     z-index: 99;
 }
 
+.pulse-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -474,10 +476,12 @@ img {
     animation: pulse 2s infinite;
 }
 
+.pulse-button svg {
     width: 28px;
     height: 28px;
 }
 
+.pulse-button:hover {
     background-color: var(--primary-dark);
     transform: scale(1.05);
 }
@@ -1062,14 +1066,17 @@ img {
         gap: var(--spacing-lg);
     }
     
+    .emergency-call-fixed {
         bottom: 1rem;
         right: 1rem;
     }
     
+    .pulse-button {
         width: 56px;
         height: 56px;
     }
     
+    .pulse-button svg {
         width: 24px;
         height: 24px;
     }
