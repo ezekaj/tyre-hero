@@ -11,6 +11,168 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
+
+    <!-- LocalBusiness Schema for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://tyrehero.com/#organization",
+      "name": "TyreHero Emergency Mobile Tyre Service",
+      "alternateName": ["TyreHero", "Tyre Hero"],
+      "description": "24/7 Emergency mobile tyre fitting service in Slough, Maidenhead and Windsor. Lowest prices guaranteed with fastest response times.",
+      "url": "https://tyrehero.com",
+      "telephone": "08001234567",
+      "email": "info@tyrehero.com",
+      "priceRange": "£",
+      "currenciesAccepted": "GBP",
+      "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Contactless"],
+      "openingHours": "Mo-Su 00:00-23:59",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Slough",
+          "addressRegion": "Berkshire",
+          "addressCountry": "GB"
+        },
+        {
+          "@type": "City",
+          "name": "Maidenhead",
+          "addressRegion": "Berkshire",
+          "addressCountry": "GB"
+        },
+        {
+          "@type": "City",
+          "name": "Windsor",
+          "addressRegion": "Berkshire",
+          "addressCountry": "GB"
+        }
+      ],
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 51.5074,
+        "longitude": -0.6503
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Slough",
+        "addressRegion": "Berkshire",
+        "postalCode": "SL1",
+        "addressCountry": "GB",
+        "streetAddress": "Mobile Service - Slough, Maidenhead & Windsor"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Emergency Tyre Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "24/7 Emergency Tyre Fitting",
+              "description": "Emergency mobile tyre replacement and fitting service available 24 hours a day"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Mobile Puncture Repair",
+              "description": "Professional mobile puncture repair service at your location"
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "247",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+
+    <!-- Emergency Service Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EmergencyService",
+      "@id": "https://tyrehero.com/#emergency-service",
+      "name": "TyreHero 24/7 Emergency Tyre Service",
+      "description": "24/7 Emergency mobile tyre fitting and breakdown assistance across Slough, Maidenhead & Windsor areas. Fastest response times guaranteed.",
+      "url": "https://tyrehero.com/emergency.html",
+      "telephone": "08001234567",
+      "email": "emergency@tyrehero.com",
+      "serviceType": "Emergency Vehicle Repair",
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Slough",
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": "Berkshire"
+          }
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Maidenhead",
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": "Berkshire"
+          }
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Windsor",
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": "Berkshire"
+          }
+        }
+      ],
+      "availableService": [
+        {
+          "@type": "Service",
+          "name": "Emergency Tyre Replacement",
+          "description": "24/7 emergency tyre replacement service at breakdown location",
+          "serviceType": "Emergency Repair",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "Service",
+          "name": "Emergency Puncture Repair",
+          "description": "Mobile puncture repair for emergency roadside assistance",
+          "serviceType": "Emergency Repair",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "Service",
+          "name": "24/7 Roadside Tyre Fitting",
+          "description": "Professional emergency tyre fitting service available 24 hours",
+          "serviceType": "Emergency Repair",
+          "availableLanguage": "English"
+        }
+      ],
+      "openingHours": "Mo-Su 00:00-23:59",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "08001234567",
+        "contactType": "emergency",
+        "availableLanguage": "English",
+        "hoursAvailable": "Mo-Su 00:00-23:59"
+      }
+    }
+    </script>
+
 <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body class="home-page">
