@@ -81,3 +81,11 @@ research/
 design/
 content/
 summarized_conversations/
+
+# Archive and cleanup files
+archive/
+*-test.html
+*-debug.*
+*-demo.*
+*-ultra.*
+*-enhanced.html

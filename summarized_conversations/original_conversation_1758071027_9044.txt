@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': "I'll first accept the cookies so we can explore the etyres website more effectively.\n\n<function_calls>\n<browser-click-element>\n63\n</browser-click-element>\n</function_calls>"}

@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': 'Let me click on the "Continue with Recommended Settings" button to proceed with viewing the website.\n\n<function_calls>\n<browser-click-element>\n2\n</browser-click-element>\n</function_calls>'}

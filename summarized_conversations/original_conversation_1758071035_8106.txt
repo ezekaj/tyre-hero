@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': "Finally, let's check if mobile tyre fitters can do wheel balancing:\n\n<function_calls>\n<browser-click-element>\n41\n</browser-click-element>\n</function_calls>"}

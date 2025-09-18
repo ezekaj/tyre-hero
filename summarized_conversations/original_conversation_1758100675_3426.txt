@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': 'Let\'s look at the psychology of vehicle breakdowns to better understand how users behave during tyre emergencies:\n\n<function_calls>\n<scrape-webpage url="https://citytowtruck.com/the-psychology-of-vehicle-breakdowns-coping-strategies-for-drivers/">\n</scrape-webpage>\n</function_calls>'}

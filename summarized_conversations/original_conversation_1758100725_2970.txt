@@ -1,1 +1,0 @@
-{'role': 'user', 'content': "Now let's create a completely redesigned and innovative homepage for TyreHero with a more modern, engaging design:... Continue with this one i pressed deploy the website to production.\n"}

@@ -1,1 +1,0 @@
-{'role': 'user', 'content': 'ok so i would like a better name and logo please find something unique and that will catch the attention of the people who need it... Also this is a very basic website i want you to think out of the box and make an outstanding work...\n'}

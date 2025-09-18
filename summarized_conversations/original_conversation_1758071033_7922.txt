@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': "Now let's check the second FAQ about how long it takes for a mobile fitter to fit tyres:\n\n<function_calls>\n<browser-click-element>\n38\n</browser-click-element>\n</function_calls>"}

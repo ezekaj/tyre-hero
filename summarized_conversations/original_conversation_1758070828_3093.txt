@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': "I see that TyresOnTheDrive has been acquired by Halfords Group and their mobile fitting services are now only available through Halfords.com. Let's scroll down to see more information about their tyre services.\n\n<function_calls>\n<browser-scroll-down>\n500\n</browser-scroll-down>\n</function_calls>"}

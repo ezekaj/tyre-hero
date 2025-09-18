@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': 'Let\'s also look at information about emergency tire repair solutions:\n\n<function_calls>\n<scrape-webpage url="https://www.bauerbuilt.com/bauer-built-blog/types-of-emergency-tire-repair-solutions-and-prevention-tips/">\n</scrape-webpage>\n</function_calls>'}
