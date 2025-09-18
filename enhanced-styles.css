@@ -3,47 +3,50 @@
    Next-Generation Mobile Tyre Service Design
 */
 
-/* ===== Enhanced Variables ===== */
+/* ===== AUTOMOTIVE EMERGENCY SERVICE VARIABLES ===== */
 :root {
-    /* High Contrast AI & Technology Colors */
-    --ai-primary: #00E5FF;
-    --ai-secondary: #8E24AA;
-    --ai-gradient: linear-gradient(135deg, #00E5FF 0%, #8E24AA 100%);
-    --neon-glow: 0 0 20px rgba(0, 229, 255, 0.6);
+    /* EMERGENCY & AUTOMOTIVE COLORS */
+    --emergency-red: #DC2626;
+    --safety-orange: #EA580C;
+    --warning-yellow: #F59E0B;
+    --professional-blue: #1E40AF;
+    --automotive-dark: #1F2937;
+    --service-green: #059669;
 
-    /* Emergency Enhancement - High Contrast */
-    --emergency-glow: 0 0 30px rgba(244, 67, 54, 0.9);
-    --panic-red: #F44336;
+    /* PRIMARY BRAND COLORS */
+    --primary: var(--emergency-red);
+    --secondary: var(--safety-orange);
+    --accent: var(--warning-yellow);
+
+    /* AUTOMOTIVE GRADIENTS */
+    --emergency-gradient: linear-gradient(135deg, #DC2626 0%, #EA580C 100%);
+    --professional-gradient: linear-gradient(135deg, #1E40AF 0%, #1F2937 100%);
+    --emergency-glow: 0 0 20px rgba(220, 38, 38, 0.4);
+    --safety-glow: 0 0 15px rgba(234, 88, 12, 0.3);
+
+    /* EMERGENCY PULSE ANIMATION */
     --emergency-pulse: pulse-emergency 2s infinite;
 
-    /* Trust & Verification - Enhanced Contrast */
-    --trust-green: #4CAF50;
-    --blockchain-blue: #2196F3;
-    --verification-gold: #FFC107;
-
-    /* AR & Scanner Colors - Improved Visibility */
-    --ar-purple: #9C27B0;
-    --scanner-cyan: #00E5FF;
-
-    /* Text Colors for Maximum Readability */
+    /* AUTOMOTIVE TEXT COLORS */
     --text-primary: #FFFFFF;
-    --text-secondary: #E0E0E0;
-    --text-muted: #BDBDBD;
-    --text-dark: #212121;
+    --text-secondary: #F3F4F6;
+    --text-muted: #D1D5DB;
+    --text-dark: #111827;
     --text-contrast: #000000;
 
-    /* Background Colors - Enhanced Contrast */
+    /* AUTOMOTIVE BACKGROUNDS */
     --bg-primary: rgba(255, 255, 255, 0.15);
     --bg-secondary: rgba(255, 255, 255, 0.25);
-    --bg-dark: rgba(0, 0, 0, 0.8);
-    --bg-glass: rgba(255, 255, 255, 0.1);
+    --bg-dark: rgba(31, 41, 55, 0.95);
+    --bg-emergency: rgba(220, 38, 38, 0.1);
+    --bg-professional: rgba(30, 64, 175, 0.1);
 
-    /* Mobile-First Responsive Breakpoints */
+    /* MOBILE-FIRST RESPONSIVE BREAKPOINTS */
     --mobile-max: 480px;
     --tablet-max: 768px;
     --desktop-min: 1024px;
 
-    /* Mobile-First Spacing */
+    /* SPACING SYSTEM */
     --mobile-padding: 15px;
     --mobile-margin: 10px;
     --mobile-gap: 15px;
@@ -55,7 +58,7 @@
 .enhanced-hero {
     position: relative;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: linear-gradient(135deg, #1F2937 0%, #374151 50%, #111827 100%);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -94,10 +97,9 @@
     font-weight: 700;
 }
 
-/* Mobile Typing Effect - Prevent Layout Shifts */
+/* Mobile Typing Effect - Natural cursor following */
 @media (max-width: 768px) {
-    .typing-effect {
-        width: 200px;
+    .hero-title::after {
         font-size: 0.9em;
     }
 }
@@ -227,10 +229,10 @@
 }
 
 .tab-btn.active {
-    background: var(--ai-primary);
-    color: var(--text-contrast);
+    background: var(--emergency-red);
+    color: var(--text-primary);
     font-weight: 700;
-    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    box-shadow: var(--emergency-glow);
 }
 
 /* Mobile Navigation Enhancements */
@@ -315,7 +317,7 @@
 .coverage-indicator,
 .response-indicator {
     background: rgba(0, 212, 255, 0.2);
-    border: 1px solid var(--ai-primary);
+    border: 1px solid var(--emergency-red);
     padding: 6px 10px;
     border-radius: 15px;
     font-size: 0.75rem;
@@ -605,7 +607,7 @@
     .coverage-indicator,
     .response-indicator {
         background: rgba(0, 212, 255, 0.2);
-        border: 1px solid var(--ai-primary);
+        border: 1px solid var(--emergency-red);
         padding: 10px 20px;
         border-radius: 25px;
         font-size: 0.9rem;
@@ -656,7 +658,7 @@
     }
 
     .tab-btn.active {
-        background: var(--ai-primary);
+        background: var(--emergency-red);
         color: #000;
         font-weight: 700;
         box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
@@ -933,7 +935,7 @@
     position: absolute;
     top: -8px;
     right: -8px;
-    background: var(--ai-gradient);
+    background: var(--emergency-gradient);
     color: white;
     font-size: 0.7rem;
     font-weight: bold;
@@ -953,7 +955,7 @@
 }
 
 .voice-button {
-    background: var(--ai-gradient);
+    background: var(--emergency-gradient);
     border: none;
     color: white;
     padding: 8px 16px;
@@ -1096,27 +1098,38 @@
 }
 
 .gradient-text {
-    background: var(--ai-gradient);
+    background: var(--emergency-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.typing-effect {
-    border-right: 2px solid var(--ai-primary);
-    animation: typing-cursor 1s infinite;
-    display: inline-block;
-    width: 280px;
-    text-align: left;
-    vertical-align: top;
-    white-space: nowrap;
-    overflow: hidden;
-    height: 1.2em;
+/* Typing Effect Container - Prevents Layout Shifts */
+.hero-title {
     position: relative;
 }
 
+.typing-effect {
+    border-right: 2px solid var(--safety-orange);
+    animation: typing-cursor 1s infinite;
+    display: inline-block;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+/* Reserve space for longest phrase to prevent layout shifts */
+.hero-title::after {
+    content: " When Emergency Strikes";
+    visibility: hidden;
+    position: absolute;
+    white-space: nowrap;
+    pointer-events: none;
+    font-weight: inherit;
+    font-size: inherit;
+}
+
 @keyframes typing-cursor {
-    0%, 50% { border-color: var(--ai-primary); }
+    0%, 50% { border-color: var(--safety-orange); }
     51%, 100% { border-color: transparent; }
 }
 
@@ -1210,7 +1223,7 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: var(--ai-gradient);
+    background: var(--emergency-gradient);
     animation: loading-bar 4s infinite;
 }
 
@@ -1255,7 +1268,7 @@
 }
 
 .tab-btn.active {
-    background: var(--ai-gradient);
+    background: var(--emergency-gradient);
     color: white;
 }
 

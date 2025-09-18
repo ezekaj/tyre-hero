@@ -95,10 +95,10 @@ class TyreHeroEnhanced {
 
         const phrases = [
             ' When Emergency Strikes',
-            ' With AI Intelligence',
+            ' Professional Service',
             ' 24/7 Availability',
             ' In 60 Minutes or Less',
-            ' With AR Technology'
+            ' Fully Insured & Licensed'
         ];
 
         let phraseIndex = 0;
