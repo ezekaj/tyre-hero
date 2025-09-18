@@ -1855,3 +1855,115 @@
 .animate-bounceIn {
     animation: bounceIn 0.8s ease-out;
 }
+
+/* ===== UK LICENSE PLATE STYLING ===== */
+.reg-input {
+    background: #FFFFFF;
+    border: 3px solid #003366;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Charles Wright', 'Courier New', monospace;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000000;
+    width: 100%;
+    max-width: 200px;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    position: relative;
+}
+
+.reg-input::placeholder {
+    color: #666666;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.reg-input:focus {
+    outline: none;
+    border-color: #0066CC;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5),
+        0 0 8px rgba(0, 102, 204, 0.4);
+}
+
+/* UK Flag accent for license plate */
+.reg-input-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.reg-input-group::before {
+    content: "🇬🇧";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+/* Blue strip on left side like real UK plates */
+.reg-input-group::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 25px;
+    background: linear-gradient(to bottom, #003366 0%, #0066CC 50%, #003366 100%);
+    border-radius: 8px 0 0 8px;
+    z-index: 1;
+}
+
+.reg-input {
+    padding-left: 35px; /* Account for blue strip */
+}
+
+/* Registration search button styling */
+.btn-reg-search {
+    background: var(--emergency-gradient);
+    color: var(--text-primary);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-reg-search:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--emergency-glow);
+}
+
+.reg-help {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Desktop adjustments */
+@media (min-width: 769px) {
+    .reg-input {
+        font-size: 2rem;
+        padding: 15px 20px;
+        padding-left: 40px;
+        max-width: 220px;
+    }
+
+    .reg-input-group::after {
+        width: 30px;
+    }
+}
