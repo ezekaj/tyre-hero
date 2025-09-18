@@ -58,8 +58,8 @@ class TyreHeroEnhanced {
                 this.hideVoiceIndicator();
             };
 
-            // Start listening for wake phrase
-            this.startWakeWordDetection();
+            // Start listening for wake phrase - DISABLED per client request
+            // this.startWakeWordDetection();
         } else {
             console.warn('Speech recognition not supported');
         }
@@ -106,10 +106,10 @@ class TyreHeroEnhanced {
         // Switch to voice tab if not already active
         this.switchTab('voice');
 
-        // Start listening for commands
-        setTimeout(() => {
-            this.voiceRecognition.start();
-        }, 2000);
+        // Start listening for commands - DISABLED per client request
+        // setTimeout(() => {
+        //     this.voiceRecognition.start();
+        // }, 2000);
     }
 
     speakResponse(text) {
