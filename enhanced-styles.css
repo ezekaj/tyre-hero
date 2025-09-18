@@ -1107,25 +1107,31 @@
 /* Typing Effect Container - Prevents Layout Shifts */
 .hero-title {
     position: relative;
+    overflow: hidden;
 }
 
+/* Create a container that reserves space for the typing text */
 .typing-effect {
     border-right: 2px solid var(--safety-orange);
     animation: typing-cursor 1s infinite;
     display: inline-block;
     white-space: nowrap;
-    min-width: 0;
+    min-width: 300px; /* Reserve minimum space for longest phrase */
+    text-align: left;
 }
 
-/* Reserve space for longest phrase to prevent layout shifts */
+/* Invisible spacer to prevent layout shifts */
 .hero-title::after {
     content: " When Emergency Strikes";
     visibility: hidden;
     position: absolute;
+    top: 0;
+    left: 0;
     white-space: nowrap;
     pointer-events: none;
     font-weight: inherit;
     font-size: inherit;
+    z-index: -1;
 }
 
 @keyframes typing-cursor {
