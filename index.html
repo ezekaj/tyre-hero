@@ -265,6 +265,68 @@
                         </div>
                     </div>
 
+                    <!-- Interactive Service Finder - Mobile First -->
+                    <div class="hero-widget mobile-widget">
+                        <div class="service-finder enhanced-finder mobile-finder">
+                            <h3 class="mobile-finder-title">🔍 Find Your Service</h3>
+
+                            <!-- Multi-Modal Search Tabs -->
+                            <div class="search-tabs">
+                                <button class="tab-btn active" data-tab="reg">🚗 Reg Number</button>
+                                <button class="tab-btn" data-tab="manual">⚙️ Manual</button>
+                            </div>
+
+                            <!-- Registration Search Tab -->
+                            <div class="search-content active" data-content="reg">
+                                <div class="reg-search-widget">
+                                    <label>Enter Vehicle Registration</label>
+                                    <div class="reg-input-group">
+                                        <input type="text" id="reg-input" placeholder="e.g. AB12 CDE" class="reg-input">
+                                        <button class="btn btn-reg-search" onclick="searchByReg()">
+                                            🔍 Search
+                                        </button>
+                                    </div>
+                                    <p class="reg-help">We'll automatically find your vehicle details</p>
+                                </div>
+                            </div>
+
+                            <!-- Manual Search Tab -->
+                            <div class="search-content" data-content="manual">
+                                <div class="manual-search-widget">
+                                    <div class="tyre-specs">
+                                        <select class="spec-select" id="width">
+                                            <option value="">Width</option>
+                                            <option value="175">175</option>
+                                            <option value="185">185</option>
+                                            <option value="195">195</option>
+                                            <option value="205">205</option>
+                                            <option value="215">215</option>
+                                            <option value="225">225</option>
+                                        </select>
+                                        <select class="spec-select" id="profile">
+                                            <option value="">Profile</option>
+                                            <option value="45">45</option>
+                                            <option value="50">50</option>
+                                            <option value="55">55</option>
+                                            <option value="60">60</option>
+                                            <option value="65">65</option>
+                                        </select>
+                                        <select class="spec-select" id="diameter">
+                                            <option value="">Diameter</option>
+                                            <option value="15">15"</option>
+                                            <option value="16">16"</option>
+                                            <option value="17">17"</option>
+                                            <option value="18">18"</option>
+                                            <option value="19">19"</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-manual-search" onclick="searchManual()">
+                                        🔍 Search Tyres
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
