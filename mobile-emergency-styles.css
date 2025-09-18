@@ -1,0 +1,601 @@
+/**
+ * Mobile Emergency Styles for Hero Background
+ * Comprehensive mobile optimizations for emergency tyre service
+ * Designed for stressed users on various mobile devices
+ */
+
+/* =================================
+   CSS CUSTOM PROPERTIES (Mobile-First)
+   ================================= */
+:root {
+    /* Viewport units that work across all mobile browsers */
+    --vh: 1vh;
+    --vw: 1vw;
+    --dynamic-vh: 1vh; /* Updated by JavaScript */
+
+    /* Safe area insets for notched devices */
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
+
+    /* Touch-friendly measurements */
+    --touch-target-min: 44px; /* Apple HIG minimum */
+    --touch-target-comfortable: 48px; /* Google Material minimum */
+    --touch-target-large: 56px; /* Large target for emergency actions */
+
+    /* Emergency color system */
+    --emergency-primary: #DC2626; /* Red for urgent actions */
+    --emergency-secondary: #16A34A; /* Green for positive actions */
+    --emergency-warning: #F59E0B; /* Amber for warnings */
+    --emergency-safe: #059669; /* Teal for safe status */
+
+    /* Mobile-optimized spacing scale */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+
+    /* Typography scale for mobile readability */
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 18px;
+    --text-xl: 20px;
+    --text-2xl: 24px;
+    --text-3xl: 30px;
+    --text-4xl: 36px;
+
+    /* Mobile device breakpoints */
+    --mobile-xs: 320px; /* iPhone 5/SE */
+    --mobile-sm: 375px; /* iPhone 6/7/8 */
+    --mobile-md: 390px; /* iPhone 12/13 */
+    --mobile-lg: 414px; /* iPhone 11/XR */
+    --mobile-xl: 428px; /* iPhone 14 Pro Max */
+
+    /* Performance tiers */
+    --hero-opacity-low: 0.3;
+    --hero-opacity-medium: 0.6;
+    --hero-opacity-high: 0.9;
+
+    /* Battery-aware settings */
+    --animation-duration-normal: 0.3s;
+    --animation-duration-reduced: 0.1s;
+    --animation-duration-disabled: 0s;
+}
+
+/* =================================
+   GLOBAL MOBILE RESET & BASE
+   ================================= */
+
+* {
+    box-sizing: border-box;
+    /* Improve touch responsiveness */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Allow text selection for important content */
+p, span, div[class*="text"], .emergency-number, .location-text {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+html {
+    /* Prevent zoom on input focus */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+
+    /* Smooth scrolling for anchor links */
+    scroll-behavior: smooth;
+
+    /* Improve touch performance */
+    touch-action: manipulation;
+
+    /* Full height handling */
+    height: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+body {
+    /* Full height with safe areas */
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+
+    /* Prevent overscroll bounce on iOS */
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+
+    /* Mobile-optimized font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+
+    /* Emergency-friendly font stack */
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        'Roboto',
+        'Helvetica Neue',
+        Arial,
+        sans-serif;
+
+    /* Base font size for mobile readability */
+    font-size: var(--text-base);
+    line-height: 1.4;
+
+    /* Safe area padding */
+    padding-top: var(--safe-area-inset-top);
+    padding-bottom: var(--safe-area-inset-bottom);
+    padding-left: var(--safe-area-inset-left);
+    padding-right: var(--safe-area-inset-right);
+}
+
+/* =================================
+   MOBILE HERO BACKGROUND CONTAINER
+   ================================= */
+
+.mobile-hero-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+    z-index: -1;
+    pointer-events: none;
+
+    /* GPU acceleration for smooth performance */
+    transform: translateZ(0);
+    will-change: opacity;
+
+    /* Default professional background */
+    background: linear-gradient(
+        135deg,
+        #1a1a2e 0%,
+        #16213e 50%,
+        #0f3460 100%
+    );
+
+    /* Prevent flicker during transitions */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* =================================
+   RESPONSIVE MOBILE BREAKPOINTS
+   ================================= */
+
+/* Extra small mobile devices (iPhone 5/SE) */
+@media (max-width: 320px) {
+    :root {
+        --text-base: 14px;
+        --space-md: 12px;
+        --touch-target-min: 40px;
+    }
+
+    .mobile-hero-background {
+        opacity: var(--hero-opacity-low);
+    }
+}
+
+/* Small mobile devices (iPhone 6/7/8) */
+@media (min-width: 321px) and (max-width: 375px) {
+    :root {
+        --text-base: 15px;
+        --space-md: 14px;
+    }
+
+    .mobile-hero-background {
+        opacity: var(--hero-opacity-medium);
+    }
+}
+
+/* Medium mobile devices (iPhone 12/13) */
+@media (min-width: 376px) and (max-width: 390px) {
+    :root {
+        --text-base: 16px;
+        --space-md: 16px;
+    }
+
+    .mobile-hero-background {
+        opacity: var(--hero-opacity-medium);
+    }
+}
+
+/* Large mobile devices (iPhone 11/XR) */
+@media (min-width: 391px) and (max-width: 414px) {
+    :root {
+        --text-base: 17px;
+        --space-md: 18px;
+    }
+
+    .mobile-hero-background {
+        opacity: var(--hero-opacity-high);
+    }
+}
+
+/* Extra large mobile devices (iPhone 14 Pro Max) */
+@media (min-width: 415px) and (max-width: 428px) {
+    :root {
+        --text-base: 18px;
+        --space-md: 20px;
+    }
+
+    .mobile-hero-background {
+        opacity: var(--hero-opacity-high);
+    }
+}
+
+/* =================================
+   ORIENTATION HANDLING
+   ================================= */
+
+/* Portrait orientation (default mobile usage) */
+@media (orientation: portrait) {
+    .mobile-hero-background {
+        /* Full portrait optimization */
+        background-size: cover;
+        background-position: center top;
+    }
+
+    .mobile-tool {
+        transform: scale(1);
+    }
+}
+
+/* Landscape orientation (less common but important) */
+@media (orientation: landscape) and (max-height: 500px) {
+    .mobile-hero-background {
+        /* Adjust for short landscape screens */
+        background-position: center center;
+    }
+
+    .mobile-tool {
+        transform: scale(0.8);
+    }
+
+    /* Reduce complexity in landscape to maintain performance */
+    .mobile-ambient-glow {
+        display: none;
+    }
+}
+
+/* =================================
+   DEVICE-SPECIFIC OPTIMIZATIONS
+   ================================= */
+
+/* iOS Safari specific fixes */
+@supports (-webkit-appearance: none) {
+    .mobile-hero-background {
+        /* Fix for iOS viewport height issues */
+        height: -webkit-fill-available;
+    }
+
+    /* Prevent zoom on input focus */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Android Chrome specific optimizations */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
+    .mobile-hero-background {
+        /* Android performance optimization */
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Samsung Internet browser fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .mobile-hero-background {
+        /* Samsung Internet performance fix */
+        contain: layout style paint;
+    }
+}
+
+/* =================================
+   ACCESSIBILITY & USER PREFERENCES
+   ================================= */
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .mobile-hero-background *,
+    .mobile-tool,
+    .mobile-ambient-glow {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .mobile-hero-background {
+        /* Static gradient for reduced motion */
+        background-attachment: fixed;
+    }
+}
+
+/* High contrast preference */
+@media (prefers-contrast: high) {
+    .mobile-hero-background {
+        background: #000 !important;
+        border: 2px solid #fff;
+    }
+
+    .mobile-tool {
+        border: 2px solid #fff !important;
+        opacity: 0.9 !important;
+    }
+}
+
+/* Dark mode preference (system-level) */
+@media (prefers-color-scheme: dark) {
+    .mobile-hero-background {
+        background: linear-gradient(
+            135deg,
+            #0a0a1a 0%,
+            #12182e 50%,
+            #0f2f50 100%
+        );
+    }
+}
+
+/* Light mode preference */
+@media (prefers-color-scheme: light) {
+    .mobile-hero-background {
+        background: linear-gradient(
+            135deg,
+            #f8fafc 0%,
+            #e2e8f0 50%,
+            #cbd5e1 100%
+        );
+        opacity: 0.3;
+    }
+}
+
+/* =================================
+   PERFORMANCE & BATTERY OPTIMIZATIONS
+   ================================= */
+
+/* Low battery mode (triggered by JavaScript) */
+.low-battery .mobile-hero-background,
+.low-battery .mobile-tool,
+.low-battery .mobile-ambient-glow {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0.2;
+}
+
+.low-battery .mobile-hero-background {
+    background: #1a1a2e; /* Solid color, no gradients */
+}
+
+/* Slow connection mode */
+.slow-connection .mobile-hero-background {
+    background: #1a1a2e; /* Solid color for faster rendering */
+}
+
+.slow-connection .mobile-tool {
+    display: none; /* Remove non-essential elements */
+}
+
+/* Emergency mode (absolute priority on emergency functions) */
+.emergency-mode .mobile-hero-background {
+    display: none !important;
+}
+
+.emergency-mode body {
+    background: #ffffff !important;
+}
+
+/* =================================
+   TOUCH OPTIMIZATION CLASSES
+   ================================= */
+
+.touch-target {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.touch-target-large {
+    min-height: var(--touch-target-large);
+    min-width: var(--touch-target-large);
+}
+
+.touch-feedback {
+    transition: transform 0.1s ease;
+}
+
+.touch-feedback:active {
+    transform: scale(0.98);
+}
+
+/* =================================
+   MOBILE HERO COMPONENTS
+   ================================= */
+
+.mobile-workshop-scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 800px;
+    perspective-origin: center center;
+    overflow: hidden;
+}
+
+.mobile-gradient-base {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center bottom,
+        rgba(74, 144, 226, 0.15) 0%,
+        transparent 60%
+    );
+}
+
+.mobile-floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    contain: layout style paint;
+}
+
+.mobile-tool {
+    position: absolute;
+    opacity: 0.4;
+    transition: transform var(--animation-duration-normal) ease;
+    will-change: transform;
+    contain: layout style paint;
+}
+
+.mobile-tool:hover,
+.mobile-tool:focus {
+    opacity: 0.6;
+    transform: scale(1.05);
+}
+
+.mobile-ambient-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at 30% 20%,
+        rgba(255, 255, 255, 0.05) 0%,
+        transparent 50%
+    );
+    opacity: 0.6;
+    animation: mobileGlow 10s ease-in-out infinite alternate;
+}
+
+/* =================================
+   ANIMATIONS (Mobile-Optimized)
+   ================================= */
+
+@keyframes mobileFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-8px) rotate(3deg);
+    }
+    66% {
+        transform: translateY(4px) rotate(-2deg);
+    }
+}
+
+@keyframes mobileGlow {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.6; }
+}
+
+@keyframes mobilePulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+}
+
+/* =================================
+   EMERGENCY BUTTON PROTECTION
+   ================================= */
+
+/* Ensure emergency buttons always work */
+.emergency-call-btn,
+.mega-call-button,
+[href^="tel:"],
+.emergency-contact {
+    position: relative !important;
+    z-index: 99999 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+
+    /* Minimum touch target */
+    min-height: var(--touch-target-large) !important;
+    min-width: var(--touch-target-large) !important;
+
+    /* Visual emphasis */
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.emergency-call-btn:focus,
+.mega-call-button:focus,
+[href^="tel:"]:focus {
+    outline: 3px solid var(--emergency-primary);
+    outline-offset: 2px;
+}
+
+/* =================================
+   FALLBACK STYLES
+   ================================= */
+
+/* When JavaScript fails, ensure basic usability */
+.no-js .mobile-hero-background {
+    background: #1a1a2e;
+    opacity: 0.3;
+}
+
+.no-js .mobile-tool {
+    display: none;
+}
+
+/* =================================
+   DEBUGGING UTILITIES (Development)
+   ================================= */
+
+.debug-mobile-info {
+    position: fixed;
+    top: var(--safe-area-inset-top, 10px);
+    right: var(--safe-area-inset-right, 10px);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: var(--space-sm);
+    font-size: var(--text-xs);
+    border-radius: 4px;
+    z-index: 99998;
+    font-family: monospace;
+    max-width: 200px;
+    word-break: break-all;
+}
+
+.debug-mobile-info.hidden {
+    display: none;
+}
+
+/* Show debug info only when explicitly enabled */
+body:not(.debug-mode) .debug-mobile-info {
+    display: none;
+}
+
+/* =================================
+   PRINT STYLES (Emergency Situations)
+   ================================= */
+
+@media print {
+    .mobile-hero-background {
+        display: none !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .emergency-call-btn,
+    .mega-call-button {
+        border: 2px solid black !important;
+        page-break-inside: avoid;
+    }
+}
