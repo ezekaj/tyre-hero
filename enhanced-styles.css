@@ -90,6 +90,16 @@
     line-height: 1.2;
     margin-bottom: 15px;
     text-align: center;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Mobile Typing Effect - Prevent Layout Shifts */
+@media (max-width: 768px) {
+    .typing-effect {
+        width: 200px;
+        font-size: 0.9em;
+    }
 }
 
 .hero-subtitle.mobile-subtitle {
@@ -104,6 +114,8 @@
     line-height: 1.5;
     margin-bottom: 20px;
     max-width: 100%;
+    color: var(--text-secondary);
+    font-weight: 400;
 }
 
 /* Mobile Buttons */
@@ -316,12 +328,16 @@
 @media (min-width: 481px) and (max-width: 768px) {
     .hero-title.mobile-title {
         font-size: 2.8rem;
+        color: var(--text-primary);
+        font-weight: 700;
     }
 
     .hero-description.mobile-description {
         font-size: 1.1rem;
         max-width: 90%;
         margin: 0 auto 25px;
+        color: var(--text-secondary);
+        font-weight: 400;
     }
 
     .hero-cta.mobile-cta .primary-actions.mobile-primary {
@@ -405,6 +421,7 @@
         font-size: 4.5rem;
         line-height: 1.1;
         font-weight: 900;
+        color: var(--text-primary);
         margin-bottom: 30px;
         text-align: left;
     }
@@ -413,8 +430,9 @@
         font-size: 1.3rem;
         line-height: 1.6;
         margin-bottom: 40px;
+        color: var(--text-secondary);
+        font-weight: 400;
         text-align: left;
-        opacity: 0.9;
         max-width: 90%;
     }
 
@@ -501,8 +519,9 @@
     }
 
     .stat-item.mobile-stat {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--bg-secondary);
         backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 15px;
         padding: 25px 20px;
         text-align: center;
@@ -511,8 +530,9 @@
     }
 
     .stat-item.mobile-stat:hover {
-        background: rgba(255, 255, 255, 0.15);
+        background: var(--bg-primary);
         transform: translateY(-5px);
+        border-color: rgba(255, 255, 255, 0.4);
     }
 
     .stat-number.mobile-stat-number {
@@ -527,7 +547,7 @@
 
     .stat-label.mobile-stat-label {
         font-size: 0.95rem;
-        opacity: 0.9;
+        color: var(--text-secondary);
         font-weight: 500;
     }
 
@@ -595,11 +615,11 @@
 
     /* Desktop Service Finder */
     .service-finder.mobile-finder {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--bg-secondary);
         backdrop-filter: blur(20px);
         border-radius: 25px;
         padding: 35px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.4);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     }
 
@@ -623,9 +643,9 @@
         font-size: 1rem;
         font-weight: 600;
         border-radius: 12px;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: white;
+        background: var(--bg-primary);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: var(--text-primary);
         cursor: pointer;
         transition: all 0.3s ease;
     }
@@ -720,19 +740,20 @@
     }
 
     .trust-item {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--bg-secondary);
         backdrop-filter: blur(20px);
         border-radius: 20px;
         padding: 40px 30px;
         text-align: center;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         transition: all 0.3s ease;
     }
 
     .trust-item:hover {
-        background: rgba(255, 255, 255, 0.15);
+        background: var(--bg-primary);
         transform: translateY(-10px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.5);
     }
 
     .trust-icon {
@@ -1056,13 +1077,14 @@
 .ai-indicator,
 .coverage-indicator,
 .response-indicator {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: var(--bg-secondary);
+    backdrop-filter: blur(15px);
     padding: 8px 16px;
     border-radius: 20px;
-    color: white;
+    color: var(--text-primary);
     font-size: 0.9rem;
-    border: 1px solid rgba(0, 212, 255, 0.3);
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    font-weight: 500;
 }
 
 .hero-main {
@@ -1084,11 +1106,13 @@
     border-right: 2px solid var(--ai-primary);
     animation: typing-cursor 1s infinite;
     display: inline-block;
-    min-width: 200px;
+    width: 280px;
     text-align: left;
     vertical-align: top;
     white-space: nowrap;
     overflow: hidden;
+    height: 1.2em;
+    position: relative;
 }
 
 @keyframes typing-cursor {
@@ -1168,8 +1192,9 @@
 }
 
 .live-stat {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: var(--bg-secondary);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(0, 212, 255, 0.3);
     border-radius: 15px;
     padding: 25px;
