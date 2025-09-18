@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Background Debug</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* 3D Hero Background Container */
+        #hero-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .debug-info {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Hero Background Container -->
+    <div id="hero-background"></div>
+
+    <div class="content">
+        <h1>🚨 3D Background Debug Test</h1>
+        <p>This page tests if the 3D background system is working.</p>
+
+        <div class="debug-info">
+            <h3>Debug Information:</h3>
+            <div id="debug-output">Initializing...</div>
+        </div>
+
+        <button onclick="testBackground()">Manual Test 3D Background</button>
+    </div>
+
+    <script>
+        console.log('Debug page loaded');
+
+        function logDebug(message) {
+            console.log(message);
+            const debugEl = document.getElementById('debug-output');
+            debugEl.innerHTML += '<br>' + message;
+        }
+
+        function testBackground() {
+            logDebug('Testing 3D background manually...');
+            const container = document.getElementById('hero-background');
+            if (container) {
+                logDebug('✅ Container found');
+                // Add visible test content
+                container.innerHTML = `
+                    <div style="
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        color: #00ff00;
+                        font-size: 24px;
+                        text-shadow: 0 0 10px #00ff00;
+                        animation: pulse 2s infinite;
+                    ">
+                        🔧 3D WORKSHOP ACTIVE 🔧
+                    </div>
+                    <style>
+                        @keyframes pulse {
+                            0%, 100% { opacity: 0.5; }
+                            50% { opacity: 1; }
+                        }
+                    </style>
+                `;
+                logDebug('✅ Test content added to container');
+            } else {
+                logDebug('❌ Container not found');
+            }
+        }
+
+        // Auto-run test
+        document.addEventListener('DOMContentLoaded', () => {
+            logDebug('DOM loaded, testing...');
+            setTimeout(() => {
+                testBackground();
+            }, 1000);
+        });
+    </script>
+
+    <!-- Load 3D Background Scripts -->
+    <script src="3d-hero-background.js" defer></script>
+    <script src="3d-background-performance-monitor.js" defer></script>
+</body>
+</html>

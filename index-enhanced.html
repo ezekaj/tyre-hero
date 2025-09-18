@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TyreHero - Next-Generation Emergency Mobile Tyre Service | AI-Powered 24/7 Response</title>
+    <meta name="description" content="Revolutionary AI-powered emergency mobile tyre service. AR tyre scanning, 60-minute response guarantee, real-time tracking. Slough, Maidenhead & Windsor. Call 0800 123 4567.">
+
+    <!-- Enhanced Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="emergency tyre service, mobile tyre fitting, AI tyre scanner, 24/7 roadside assistance, puncture repair, Slough, Maidenhead, Windsor">
+    <meta property="og:title" content="TyreHero - AI-Powered Emergency Mobile Tyre Service">
+    <meta property="og:description" content="Revolutionary mobile tyre service with AR scanning, AI emergency detection, and 60-minute response guarantee">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tyrehero.com">
+    <meta property="og:image" content="https://tyrehero.com/images/tyrehero-og-image.jpg">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="enhanced-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
+
+    <!-- Voice Recognition API -->
+    <script src="https://unpkg.com/speech-recognition-polyfill@1.0.1/speech-recognition-polyfill.js"></script>
+
+    <!-- Enhanced LocalBusiness Schema for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["LocalBusiness", "AutoRepair", "EmergencyService"],
+      "@id": "https://tyrehero.com/#organization",
+      "name": "TyreHero AI-Powered Emergency Mobile Tyre Service",
+      "alternateName": ["TyreHero", "Tyre Hero", "TyreHero AI"],
+      "description": "Revolutionary AI-powered 24/7 emergency mobile tyre service with AR scanning, real-time tracking, and 60-minute response guarantee in Slough, Maidenhead & Windsor.",
+      "url": "https://tyrehero.com",
+      "telephone": "08001234567",
+      "email": "emergency@tyrehero.com",
+      "priceRange": "££",
+      "currenciesAccepted": ["GBP", "BTC", "ETH"],
+      "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Contactless", "Apple Pay", "Google Pay", "Cryptocurrency"],
+      "openingHours": "Mo-Su 00:00-23:59",
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 51.5074,
+          "longitude": -0.6503
+        },
+        "geoRadius": "50000"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Emergency & Professional Tyre Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Emergency Tyre Response",
+              "description": "AI-powered emergency tyre service with 60-minute response guarantee and real-time tracking"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AR Tyre Condition Scanning",
+              "description": "Advanced AR technology for instant tyre condition assessment and sizing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Voice-Activated Emergency Response",
+              "description": "Voice command activation: 'Hey TyreHero, I need help' for instant emergency support"
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "1247",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+</head>
+<body class="enhanced-homepage">
+    <!-- Voice Activation Indicator -->
+    <div id="voice-indicator" class="voice-indicator hidden">
+        <div class="voice-animation">
+            <span class="voice-wave"></span>
+            <span class="voice-wave"></span>
+            <span class="voice-wave"></span>
+        </div>
+        <p>Listening... Say "Hey TyreHero, I need help"</p>
+    </div>
+
+    <!-- Emergency Panic Mode Overlay -->
+    <div id="panic-mode" class="panic-mode-overlay hidden">
+        <div class="panic-content">
+            <h1 class="panic-title">🚨 EMERGENCY MODE ACTIVATED</h1>
+            <p class="panic-subtitle">Help is on the way. Stay calm and safe.</p>
+
+            <a href="tel:08001234567" class="panic-call-btn">
+                📞 CALL NOW: 0800 123 4567
+            </a>
+
+            <div class="panic-actions">
+                <button class="panic-btn" onclick="shareLocation()">📍 Share My Location</button>
+                <button class="panic-btn" onclick="emergencyChecklist()">✅ Safety Checklist</button>
+                <button class="panic-btn" onclick="contactFamily()">👨‍👩‍👧‍👦 Alert Family</button>
+            </div>
+
+            <button class="panic-close" onclick="closePanicMode()">✕ Exit Emergency Mode</button>
+        </div>
+    </div>
+
+    <!-- Enhanced Navigation -->
+    <header class="site-header enhanced-header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo with AI Badge -->
+                <div class="logo enhanced-logo">
+                    <a href="index-enhanced.html">
+                        <img src="images/tyrehero-logo.svg" alt="TyreHero AI Logo" class="logo-image">
+                        <span class="ai-badge">AI</span>
+                    </a>
+                </div>
+
+                <!-- Voice Activation Button -->
+                <div class="voice-activation">
+                    <button id="voice-btn" class="voice-button" onclick="activateVoice()">
+                        🎤 Say "Hey TyreHero"
+                    </button>
+                </div>
+
+                <!-- Enhanced Navigation -->
+                <nav class="main-nav enhanced-nav">
+                    <button class="menu-toggle" aria-label="Toggle Menu">
+                        <span class="hamburger"></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li class="nav-emergency">
+                            <a href="#emergency" class="nav-emergency-link">
+                                🚨 Emergency
+                                <span class="emergency-badge">60min</span>
+                            </a>
+                        </li>
+                        <li class="nav-dropdown">
+                            <a href="#services">Services ▼</a>
+                            <div class="mega-menu">
+                                <div class="mega-column">
+                                    <h4>🚨 Emergency Services</h4>
+                                    <ul>
+                                        <li><a href="emergency-tyre-replacement.html">Emergency Tyre Replacement</a></li>
+                                        <li><a href="roadside-recovery.html">Roadside Recovery</a></li>
+                                        <li><a href="emergency-callout.html">24/7 Emergency Callout</a></li>
+                                        <li><a href="insurance-claims.html">Insurance Claim Support</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <h4>🔧 Professional Technical</h4>
+                                    <ul>
+                                        <li><a href="mobile-tyre-fitting.html">Mobile Tyre Fitting</a></li>
+                                        <li><a href="puncture-repair.html">Professional Puncture Repair</a></li>
+                                        <li><a href="wheel-balancing.html">Wheel Balancing & Alignment</a></li>
+                                        <li><a href="battery-service.html">Car Battery Service</a></li>
+                                        <li><a href="wheel-nut-removal.html">Locking Wheel Nut Removal</a></li>
+                                        <li><a href="tyre-pressure.html">Tyre Pressure Monitoring</a></li>
+                                        <li><a href="nitrogen-inflation.html">Nitrogen Inflation</a></li>
+                                        <li><a href="tyre-rotation.html">Tyre Rotation & Maintenance</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <h4>🚛 Extended Automotive</h4>
+                                    <ul>
+                                        <li><a href="fleet-management.html">Fleet Management</a></li>
+                                        <li><a href="seasonal-storage.html">Seasonal Tyre Storage</a></li>
+                                        <li><a href="company-inspections.html">Company Tyre Inspections</a></li>
+                                        <li><a href="environmental-disposal.html">Environmental Disposal</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <h4>🤖 AI Technology</h4>
+                                    <ul>
+                                        <li><a href="ar-scanner.html">AR Tyre Scanner</a></li>
+                                        <li><a href="ai-diagnostics.html">AI Condition Assessment</a></li>
+                                        <li><a href="predictive-maintenance.html">Predictive Maintenance</a></li>
+                                        <li><a href="smart-monitoring.html">Smart Monitoring Systems</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="technology.html">🤖 Technology</a></li>
+                        <li><a href="coverage.html">📍 Coverage</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Emergency Contact Widget -->
+                <div class="emergency-contact-widget">
+                    <a href="tel:08001234567" class="emergency-phone">
+                        📞 0800 123 4567
+                        <span class="emergency-status">🟢 Available Now</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Enhanced Hero Section with 3D Background -->
+    <section class="hero-section enhanced-hero">
+        <!-- Advanced 3D Hero Background Container -->
+        <div id="hero-background" class="enhanced-3d-background"></div>
+
+        <div class="container">
+            <div class="hero-content enhanced-hero-content">
+                <!-- AI Status Indicator -->
+                <div class="ai-status-bar">
+                    <span class="ai-indicator">🤖 AI Assistant Active</span>
+                    <span class="coverage-indicator">📍 Covering Your Area</span>
+                    <span class="response-indicator">⚡ 60min Response Guarantee</span>
+                </div>
+
+                <div class="hero-main">
+                    <div class="hero-text">
+                        <div class="hero-subtitle">Revolutionary AI-Powered Emergency Service</div>
+                        <h1 class="hero-title">
+                            Your <span class="gradient-text">Intelligent</span> Roadside Hero
+                            <span class="typing-effect" id="typing-text"></span>
+                        </h1>
+                        <p class="hero-description">
+                            World's first AI-powered mobile tyre service with AR scanning, voice activation,
+                            and 60-minute emergency response guarantee. Available 24/7 in Slough, Maidenhead & Windsor.
+                        </p>
+
+                        <!-- Enhanced CTA Section -->
+                        <div class="hero-cta enhanced-cta">
+                            <div class="primary-actions">
+                                <a href="tel:08001234567" class="btn btn-emergency btn-lg btn-icon">
+                                    🚨 EMERGENCY CALL
+                                    <span class="btn-subtitle">60min Guarantee</span>
+                                </a>
+                                <button class="btn btn-ar btn-lg" onclick="openARScanner()">
+                                    📱 AR Scan Tyre
+                                    <span class="btn-subtitle">Instant Assessment</span>
+                                </button>
+                            </div>
+
+                            <div class="secondary-actions">
+                                <button class="btn btn-voice btn-md" onclick="activateVoice()">
+                                    🎤 Voice Booking
+                                </button>
+                                <a href="#services" class="btn btn-outline btn-md">View All Services</a>
+                            </div>
+                        </div>
+
+                        <!-- Live Stats Dashboard -->
+                        <div class="hero-stats enhanced-stats">
+                            <div class="stat-item live-stat" data-stat="response">
+                                <div class="stat-number">
+                                    <span id="avg-response">47</span><small>min</small>
+                                    <div class="stat-trend">📈 -12min</div>
+                                </div>
+                                <div class="stat-label">Current Response Time</div>
+                            </div>
+                            <div class="stat-item live-stat" data-stat="active">
+                                <div class="stat-number">
+                                    <span id="active-technicians">8</span><small>/12</small>
+                                    <div class="stat-trend">🟢 Online</div>
+                                </div>
+                                <div class="stat-label">Technicians Available</div>
+                            </div>
+                            <div class="stat-item live-stat" data-stat="rating">
+                                <div class="stat-number">
+                                    4.9<small>/5</small>
+                                    <div class="stat-trend">⭐ +0.1</div>
+                                </div>
+                                <div class="stat-label">AI Satisfaction Score</div>
+                            </div>
+                            <div class="stat-item live-stat" data-stat="completed">
+                                <div class="stat-number">
+                                    <span id="jobs-today">23</span>
+                                    <div class="stat-trend">📊 Today</div>
+                                </div>
+                                <div class="stat-label">Jobs Completed</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Service Finder -->
+                    <div class="hero-widget">
+                        <div class="service-finder enhanced-finder">
+                            <h3>🔍 Find Your Service</h3>
+
+                            <!-- Multi-Modal Search Tabs -->
+                            <div class="search-tabs">
+                                <button class="tab-btn active" data-tab="ar">📱 AR Scan</button>
+                                <button class="tab-btn" data-tab="voice">🎤 Voice</button>
+                                <button class="tab-btn" data-tab="reg">🚗 Reg Number</button>
+                                <button class="tab-btn" data-tab="manual">⚙️ Manual</button>
+                            </div>
+
+                            <!-- AR Scanner Tab -->
+                            <div class="search-content active" data-content="ar">
+                                <div class="ar-scanner-widget">
+                                    <div class="ar-camera-preview">
+                                        <div class="ar-overlay">
+                                            <div class="ar-crosshair"></div>
+                                            <p>Point camera at tyre sidewall</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-ar-start" onclick="startARScanner()">
+                                        📱 Start AR Scanner
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Voice Search Tab -->
+                            <div class="search-content" data-content="voice">
+                                <div class="voice-search-widget">
+                                    <div class="voice-animation-large">
+                                        <div class="voice-ripple"></div>
+                                        <div class="voice-icon">🎤</div>
+                                    </div>
+                                    <p>Say: "I need new tyres for my Honda Civic"</p>
+                                    <button class="btn btn-voice-start" onclick="startVoiceSearch()">
+                                        🎤 Start Voice Search
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Registration Search Tab -->
+                            <div class="search-content" data-content="reg">
+                                <div class="reg-search-widget">
+                                    <label>Enter Vehicle Registration</label>
+                                    <div class="reg-input-group">
+                                        <input type="text" id="reg-input" placeholder="e.g. AB12 CDE" class="reg-input">
+                                        <button class="btn btn-reg-search" onclick="searchByReg()">
+                                            🔍 Search
+                                        </button>
+                                    </div>
+                                    <p class="reg-help">We'll automatically find your vehicle details</p>
+                                </div>
+                            </div>
+
+                            <!-- Manual Search Tab -->
+                            <div class="search-content" data-content="manual">
+                                <div class="manual-search-widget">
+                                    <div class="tyre-specs">
+                                        <select class="spec-select" id="width">
+                                            <option value="">Width</option>
+                                            <option value="175">175</option>
+                                            <option value="185">185</option>
+                                            <option value="195">195</option>
+                                            <option value="205">205</option>
+                                            <option value="215">215</option>
+                                            <option value="225">225</option>
+                                        </select>
+                                        <select class="spec-select" id="profile">
+                                            <option value="">Profile</option>
+                                            <option value="45">45</option>
+                                            <option value="50">50</option>
+                                            <option value="55">55</option>
+                                            <option value="60">60</option>
+                                            <option value="65">65</option>
+                                        </select>
+                                        <select class="spec-select" id="diameter">
+                                            <option value="">Diameter</option>
+                                            <option value="15">15"</option>
+                                            <option value="16">16"</option>
+                                            <option value="17">17"</option>
+                                            <option value="18">18"</option>
+                                            <option value="19">19"</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-manual-search" onclick="searchManual()">
+                                        🔍 Search Tyres
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Emergency Panel -->
+        <div class="floating-emergency-panel">
+            <button class="emergency-toggle" onclick="toggleEmergencyPanel()">
+                🚨 EMERGENCY
+            </button>
+            <div class="emergency-panel-content">
+                <h4>Emergency Assistance</h4>
+                <a href="tel:08001234567" class="emergency-call">📞 Call Now</a>
+                <button onclick="activatePanicMode()" class="panic-btn-small">🚨 Panic Mode</button>
+                <button onclick="shareLocation()" class="location-btn">📍 Share Location</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Revolution Section -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-header">
+                <h2>🛡️ Revolutionary Trust System</h2>
+                <p>World's first blockchain-verified mobile tyre service</p>
+            </div>
+
+            <div class="trust-features">
+                <div class="trust-item">
+                    <div class="trust-icon">🔗</div>
+                    <h3>Blockchain Verification</h3>
+                    <p>Immutable service records and technician credentials</p>
+                    <div class="trust-live">
+                        <span class="live-indicator">🟢</span>
+                        <span>Live verification active</span>
+                    </div>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">📸</div>
+                    <h3>Real-Time Photo Updates</h3>
+                    <p>Live service documentation with timestamp verification</p>
+                    <div class="trust-live">
+                        <span class="live-indicator">🟢</span>
+                        <span>Photo stream active</span>
+                    </div>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">🎯</div>
+                    <h3>GPS Precision Tracking</h3>
+                    <p>Real-time technician location with ETA accuracy</p>
+                    <div class="trust-live">
+                        <span class="live-indicator">🟢</span>
+                        <span>8 technicians tracked</span>
+                    </div>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">🤖</div>
+                    <h3>AI Quality Monitoring</h3>
+                    <p>Automated service quality assessment and feedback</p>
+                    <div class="trust-live">
+                        <span class="live-indicator">🟢</span>
+                        <span>AI monitoring 24/7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+    <script src="enhanced-functionality.js"></script>
+
+    <!-- 3D Hero Background System -->
+    <script src="3d-hero-background.js" defer></script>
+    <script src="3d-background-performance-monitor.js" defer></script>
+
+    <!-- Voice Recognition -->
+    <script src="voice-recognition.js" defer></script>
+
+    <!-- AR Scanner -->
+    <script src="ar-scanner.js" defer></script>
+
+    <!-- Live Stats -->
+    <script src="live-stats.js" defer></script>
+</body>
+</html>

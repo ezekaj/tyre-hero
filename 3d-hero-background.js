@@ -198,6 +198,20 @@ class TyreHero3DBackground {
         const workshopScene = document.createElement('div');
         workshopScene.className = 'workshop-3d-scene';
         workshopScene.innerHTML = `
+            <div class="debug-indicator" style="
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                color: #00ff00;
+                font-size: 14px;
+                font-weight: bold;
+                text-shadow: 0 0 5px #00ff00;
+                z-index: 10;
+                background: rgba(0,0,0,0.5);
+                padding: 5px 10px;
+                border-radius: 5px;
+                pointer-events: none;
+            ">🔧 3D WORKSHOP ACTIVE</div>
             <div class="workshop-floor"></div>
             <div class="workshop-walls">
                 <div class="wall wall-back"></div>
