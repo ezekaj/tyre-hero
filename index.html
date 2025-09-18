@@ -265,64 +265,172 @@
                         </div>
                     </div>
 
-                    <!-- Interactive Service Finder - Mobile First -->
+                    <!-- Tyre Search Interface -->
                     <div class="hero-widget mobile-widget">
-                        <div class="service-finder enhanced-finder mobile-finder">
-                            <h3 class="mobile-finder-title">🔍 Find Your Service</h3>
+                        <div class="tyre-search-container">
+                            <!-- Quick Registration Search -->
+                            <div class="quick-search-section">
+                                <h3 class="search-title">Find Your Tyres</h3>
 
-                            <!-- Multi-Modal Search Tabs -->
-                            <div class="search-tabs">
-                                <button class="tab-btn active" data-tab="reg">🚗 Reg Number</button>
-                                <button class="tab-btn" data-tab="manual">⚙️ Manual</button>
-                            </div>
-
-                            <!-- Registration Search Tab -->
-                            <div class="search-content active" data-content="reg">
-                                <div class="reg-search-widget">
-                                    <label>Enter Vehicle Registration</label>
-                                    <div class="reg-input-group">
-                                        <input type="text" id="reg-input" placeholder="e.g. AB12 CDE" class="reg-input">
-                                        <button class="btn btn-reg-search" onclick="searchByReg()">
-                                            🔍 Search
-                                        </button>
+                                <!-- License Plate Input -->
+                                <div class="license-plate-container">
+                                    <div class="license-plate">
+                                        <div class="plate-blue-strip"></div>
+                                        <input type="text"
+                                               id="license-input"
+                                               class="license-input"
+                                               placeholder="AB12 CDE"
+                                               maxlength="8">
+                                        <div class="plate-flag">🇬🇧</div>
                                     </div>
-                                    <p class="reg-help">We'll automatically find your vehicle details</p>
                                 </div>
+
+                                <!-- Mobile Fitted Option -->
+                                <div class="mobile-fitted-option">
+                                    <label class="radio-container">
+                                        <input type="radio" name="fitting" value="mobile" checked>
+                                        <span class="radio-checkmark"></span>
+                                        Mobile Fitted
+                                    </label>
+                                </div>
+
+                                <!-- Search Button -->
+                                <button class="search-btn search-btn-large" onclick="searchByRegistration()">
+                                    SEARCH
+                                </button>
                             </div>
 
-                            <!-- Manual Search Tab -->
-                            <div class="search-content" data-content="manual">
-                                <div class="manual-search-widget">
-                                    <div class="tyre-specs">
-                                        <select class="spec-select" id="width">
-                                            <option value="">Width</option>
+                            <!-- Manual Tyre Search -->
+                            <div class="manual-search-section">
+                                <h4 class="manual-title">Search Your Tyre</h4>
+
+                                <div class="tyre-selectors">
+                                    <div class="selector-group">
+                                        <label for="tyre-width">Width</label>
+                                        <select id="tyre-width" class="tyre-select">
+                                            <option value="">Select Width</option>
+                                            <option value="155">155</option>
+                                            <option value="165">165</option>
                                             <option value="175">175</option>
                                             <option value="185">185</option>
                                             <option value="195">195</option>
                                             <option value="205">205</option>
                                             <option value="215">215</option>
                                             <option value="225">225</option>
+                                            <option value="235">235</option>
+                                            <option value="245">245</option>
+                                            <option value="255">255</option>
+                                            <option value="265">265</option>
+                                            <option value="275">275</option>
+                                            <option value="285">285</option>
+                                            <option value="295">295</option>
                                         </select>
-                                        <select class="spec-select" id="profile">
-                                            <option value="">Profile</option>
+                                    </div>
+
+                                    <div class="selector-group">
+                                        <label for="tyre-profile">Profile</label>
+                                        <select id="tyre-profile" class="tyre-select">
+                                            <option value="">Select Profile</option>
+                                            <option value="30">30</option>
+                                            <option value="35">35</option>
+                                            <option value="40">40</option>
                                             <option value="45">45</option>
                                             <option value="50">50</option>
                                             <option value="55">55</option>
                                             <option value="60">60</option>
                                             <option value="65">65</option>
+                                            <option value="70">70</option>
+                                            <option value="75">75</option>
+                                            <option value="80">80</option>
                                         </select>
-                                        <select class="spec-select" id="diameter">
-                                            <option value="">Diameter</option>
+                                    </div>
+
+                                    <div class="selector-group">
+                                        <label for="rim-size">Rim Size</label>
+                                        <select id="rim-size" class="tyre-select">
+                                            <option value="">Select Rim</option>
+                                            <option value="13">13"</option>
+                                            <option value="14">14"</option>
                                             <option value="15">15"</option>
                                             <option value="16">16"</option>
                                             <option value="17">17"</option>
                                             <option value="18">18"</option>
                                             <option value="19">19"</option>
+                                            <option value="20">20"</option>
+                                            <option value="21">21"</option>
+                                            <option value="22">22"</option>
                                         </select>
                                     </div>
-                                    <button class="btn btn-manual-search" onclick="searchManual()">
-                                        🔍 Search Tyres
-                                    </button>
+
+                                    <div class="selector-group">
+                                        <label for="speed-rating">Speed</label>
+                                        <select id="speed-rating" class="tyre-select">
+                                            <option value="">Select Speed</option>
+                                            <option value="H">H (130mph)</option>
+                                            <option value="V">V (149mph)</option>
+                                            <option value="W">W (168mph)</option>
+                                            <option value="Y">Y (186mph)</option>
+                                            <option value="ZR">ZR (186mph+)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Manual Search Button -->
+                                <button class="search-btn search-btn-large" onclick="searchBySpecs()">
+                                    SEARCH
+                                </button>
+                            </div>
+
+                            <!-- Tyre Information Diagram -->
+                            <div class="tyre-info-section">
+                                <h4 class="info-title">Understanding Your Tyre</h4>
+                                <div class="tyre-diagram">
+                                    <svg viewBox="0 0 300 300" class="tyre-svg">
+                                        <!-- Tyre Outer Circle -->
+                                        <circle cx="150" cy="150" r="140" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+                                        <!-- Tyre Inner Circle (Rim) -->
+                                        <circle cx="150" cy="150" r="70" fill="#c0c0c0" stroke="#999" stroke-width="2"/>
+                                        <!-- Tread Pattern -->
+                                        <g stroke="#666" stroke-width="1" fill="none">
+                                            <path d="M 150 10 Q 200 50 230 100 Q 250 150 230 200 Q 200 250 150 290 Q 100 250 70 200 Q 50 150 70 100 Q 100 50 150 10"/>
+                                            <path d="M 150 30 Q 180 60 200 100 Q 210 150 200 200 Q 180 240 150 270 Q 120 240 100 200 Q 90 150 100 100 Q 120 60 150 30"/>
+                                        </g>
+                                        <!-- Width Arrow -->
+                                        <g stroke="#FF0000" stroke-width="2" fill="#FF0000">
+                                            <line x1="50" y1="150" x2="250" y2="150" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
+                                            <text x="150" y="140" text-anchor="middle" fill="#FF0000" font-size="12" font-weight="bold">WIDTH</text>
+                                        </g>
+                                        <!-- Profile Arrow -->
+                                        <g stroke="#00AA00" stroke-width="2" fill="#00AA00">
+                                            <line x1="75" y1="80" x2="75" y2="140" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
+                                            <text x="45" y="115" text-anchor="middle" fill="#00AA00" font-size="10" font-weight="bold">PROFILE</text>
+                                        </g>
+                                        <!-- Rim Diameter Arrow -->
+                                        <g stroke="#0066FF" stroke-width="2" fill="#0066FF">
+                                            <line x1="80" y1="150" x2="220" y2="150" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
+                                            <text x="150" y="165" text-anchor="middle" fill="#0066FF" font-size="10" font-weight="bold">RIM DIAMETER</text>
+                                        </g>
+                                        <!-- Speed Rating -->
+                                        <text x="150" y="40" text-anchor="middle" fill="#FF6600" font-size="12" font-weight="bold">SPEED RATING</text>
+
+                                        <!-- Arrow markers -->
+                                        <defs>
+                                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                                <polygon points="0 0, 10 3.5, 0 7" />
+                                            </marker>
+                                        </defs>
+                                    </svg>
+                                </div>
+
+                                <!-- Tyre Size Examples -->
+                                <div class="tyre-examples">
+                                    <p class="example-text">Example: <strong>205/55R16 H</strong></p>
+                                    <div class="example-breakdown">
+                                        <span class="width-example">205 = Width (mm)</span>
+                                        <span class="profile-example">55 = Profile (%)</span>
+                                        <span class="rim-example">16 = Rim (inches)</span>
+                                        <span class="speed-example">H = Speed Rating</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -448,5 +556,111 @@
 
     <!-- Live Stats & Real-Time Data -->
     <script src="live-stats.js" defer></script>
+
+    <!-- Fixed Call Button -->
+    <a href="tel:08001234567" class="fixed-call-btn">
+        📞 CALL US
+    </a>
+
+    <!-- Tyre Search JavaScript -->
+    <script>
+        // License plate input formatting
+        function formatLicensePlate(input) {
+            let value = input.value.replace(/[^A-Z0-9]/g, '');
+
+            // UK license plate format: AB12 CDE or A123 BCD
+            if (value.length > 4) {
+                value = value.substring(0, 4) + ' ' + value.substring(4, 7);
+            }
+
+            input.value = value;
+        }
+
+        // Initialize license plate formatting
+        document.addEventListener('DOMContentLoaded', function() {
+            const licenseInput = document.getElementById('license-input');
+
+            if (licenseInput) {
+                licenseInput.addEventListener('input', function() {
+                    formatLicensePlate(this);
+                });
+
+                licenseInput.addEventListener('keyup', function() {
+                    formatLicensePlate(this);
+                });
+            }
+        });
+
+        // Search by registration function
+        function searchByRegistration() {
+            const registration = document.getElementById('license-input').value.trim();
+            const mobileSelected = document.querySelector('input[name="fitting"]:checked');
+
+            if (!registration) {
+                alert('Please enter a vehicle registration number');
+                return;
+            }
+
+            // Simulate search loading
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'SEARCHING...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+
+                // Simulate found results
+                alert(`Found tyres for ${registration}!\n${mobileSelected.value === 'mobile' ? 'Mobile fitting selected' : 'Collection selected'}`);
+            }, 2000);
+        }
+
+        // Search by specifications function
+        function searchBySpecs() {
+            const width = document.getElementById('tyre-width').value;
+            const profile = document.getElementById('tyre-profile').value;
+            const rimSize = document.getElementById('rim-size').value;
+            const speed = document.getElementById('speed-rating').value;
+
+            if (!width || !profile || !rimSize) {
+                alert('Please select Width, Profile, and Rim Size');
+                return;
+            }
+
+            // Simulate search loading
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'SEARCHING...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+
+                // Generate tyre size string
+                const tyreSize = `${width}/${profile}R${rimSize}${speed ? ' ' + speed : ''}`;
+                alert(`Searching for tyres: ${tyreSize}`);
+            }, 2000);
+        }
+
+        // Add interactive highlight to tyre diagram sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const tyreSelects = document.querySelectorAll('.tyre-select');
+
+            tyreSelects.forEach(select => {
+                select.addEventListener('change', function() {
+                    // Visual feedback for selection
+                    if (this.value) {
+                        this.style.borderColor = '#00AA00';
+                        this.style.backgroundColor = 'rgba(0, 170, 0, 0.1)';
+                    } else {
+                        this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                        this.style.backgroundColor = 'var(--bg-primary)';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

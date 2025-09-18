@@ -1967,3 +1967,368 @@
         width: 30px;
     }
 }
+
+/* ===== TYRE SEARCH INTERFACE ===== */
+.tyre-search-container {
+    background: var(--bg-secondary);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Quick Search Section */
+.quick-search-section {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.search-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Yellow License Plate Styling */
+.license-plate-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.license-plate {
+    position: relative;
+    background: #FFD700;
+    border: 3px solid #000000;
+    border-radius: 8px;
+    padding: 12px 15px;
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    max-width: 200px;
+    width: 100%;
+}
+
+.plate-blue-strip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to bottom, #003366 0%, #0066CC 50%, #003366 100%);
+    border-radius: 5px 0 0 5px;
+}
+
+.license-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Arial Black', 'Helvetica', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000000;
+    margin-left: 25px;
+    margin-right: 20px;
+}
+
+.license-input::placeholder {
+    color: #333333;
+    opacity: 0.7;
+}
+
+.plate-flag {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 1rem;
+}
+
+/* Mobile Fitted Option */
+.mobile-fitted-option {
+    margin-bottom: 25px;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.radio-container input[type="radio"] {
+    display: none;
+}
+
+.radio-checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--emergency-red);
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.radio-container input[type="radio"]:checked + .radio-checkmark {
+    background: var(--emergency-red);
+}
+
+.radio-container input[type="radio"]:checked + .radio-checkmark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* Large Search Button */
+.search-btn-large {
+    background: var(--emergency-gradient);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 12px;
+    font-family: 'Arial Black', 'Helvetica', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+    width: 100%;
+    max-width: 200px;
+    text-transform: uppercase;
+}
+
+.search-btn-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.6);
+}
+
+.search-btn-large:active {
+    transform: translateY(-1px);
+}
+
+/* Manual Search Section */
+.manual-search-section {
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+    margin-bottom: 35px;
+}
+
+.manual-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.tyre-selectors {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.selector-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.selector-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.tyre-select {
+    background: var(--bg-primary);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tyre-select:focus {
+    outline: none;
+    border-color: var(--emergency-red);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.tyre-select option {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    padding: 8px;
+}
+
+/* Tyre Information Section */
+.tyre-info-section {
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+    text-align: center;
+}
+
+.info-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.tyre-diagram {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tyre-svg {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+}
+
+.tyre-examples {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.example-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.example-breakdown {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    font-size: 0.85rem;
+}
+
+.width-example { color: #FF0000; }
+.profile-example { color: #00AA00; }
+.rim-example { color: #0066FF; }
+.speed-example { color: #FF6600; }
+
+/* Fixed Call Button */
+.fixed-call-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00AA00;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 170, 0, 0.4);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fixed-call-btn:hover {
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 170, 0, 0.6);
+}
+
+/* Desktop Responsive Design */
+@media (min-width: 769px) {
+    .tyre-search-container {
+        padding: 40px;
+    }
+
+    .search-title {
+        font-size: 1.8rem;
+    }
+
+    .manual-title {
+        font-size: 1.5rem;
+    }
+
+    .info-title {
+        font-size: 1.5rem;
+    }
+
+    .license-plate {
+        max-width: 240px;
+        padding: 15px 20px;
+    }
+
+    .license-input {
+        font-size: 1.6rem;
+        margin-left: 30px;
+        margin-right: 25px;
+    }
+
+    .plate-blue-strip {
+        width: 25px;
+    }
+
+    .search-btn-large {
+        font-size: 1.5rem;
+        padding: 20px 50px;
+        max-width: 250px;
+    }
+
+    .tyre-selectors {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .tyre-svg {
+        max-width: 300px;
+    }
+
+    .example-breakdown {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .fixed-call-btn {
+        bottom: 30px;
+        font-size: 1.2rem;
+        padding: 18px 30px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .tyre-selectors {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .example-breakdown {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
