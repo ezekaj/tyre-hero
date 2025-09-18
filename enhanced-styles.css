@@ -5,26 +5,38 @@
 
 /* ===== Enhanced Variables ===== */
 :root {
-    /* AI & Technology Colors */
-    --ai-primary: #00D4FF;
-    --ai-secondary: #7B68EE;
-    --ai-gradient: linear-gradient(135deg, #00D4FF 0%, #7B68EE 100%);
-    --neon-glow: 0 0 20px rgba(0, 212, 255, 0.5);
+    /* High Contrast AI & Technology Colors */
+    --ai-primary: #00E5FF;
+    --ai-secondary: #8E24AA;
+    --ai-gradient: linear-gradient(135deg, #00E5FF 0%, #8E24AA 100%);
+    --neon-glow: 0 0 20px rgba(0, 229, 255, 0.6);
 
-    /* Emergency Enhancement */
-    --emergency-glow: 0 0 30px rgba(229, 57, 53, 0.8);
-    --panic-red: #FF1744;
+    /* Emergency Enhancement - High Contrast */
+    --emergency-glow: 0 0 30px rgba(244, 67, 54, 0.9);
+    --panic-red: #F44336;
     --emergency-pulse: pulse-emergency 2s infinite;
 
-    /* Trust & Verification */
-    --trust-green: #00E676;
+    /* Trust & Verification - Enhanced Contrast */
+    --trust-green: #4CAF50;
     --blockchain-blue: #2196F3;
-    --verification-gold: #FFD700;
+    --verification-gold: #FFC107;
 
-    /* AR & Voice */
+    /* AR & Scanner Colors - Improved Visibility */
     --ar-purple: #9C27B0;
-    --voice-orange: #FF6D00;
     --scanner-cyan: #00E5FF;
+
+    /* Text Colors for Maximum Readability */
+    --text-primary: #FFFFFF;
+    --text-secondary: #E0E0E0;
+    --text-muted: #BDBDBD;
+    --text-dark: #212121;
+    --text-contrast: #000000;
+
+    /* Background Colors - Enhanced Contrast */
+    --bg-primary: rgba(255, 255, 255, 0.15);
+    --bg-secondary: rgba(255, 255, 255, 0.25);
+    --bg-dark: rgba(0, 0, 0, 0.8);
+    --bg-glass: rgba(255, 255, 255, 0.1);
 
     /* Mobile-First Responsive Breakpoints */
     --mobile-max: 480px;
@@ -83,7 +95,8 @@
 .hero-subtitle.mobile-subtitle {
     font-size: 0.9rem;
     margin-bottom: 10px;
-    opacity: 0.9;
+    color: var(--text-secondary);
+    font-weight: 500;
 }
 
 .hero-description.mobile-description {
@@ -138,8 +151,9 @@
 }
 
 .stat-item.mobile-stat {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: var(--bg-secondary);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 15px 10px;
     text-align: center;
@@ -154,7 +168,8 @@
 
 .stat-label.mobile-stat-label {
     font-size: 0.8rem;
-    opacity: 0.9;
+    color: var(--text-secondary);
+    font-weight: 500;
 }
 
 .stat-trend.mobile-trend {
@@ -164,8 +179,9 @@
 
 /* Mobile Service Finder */
 .service-finder.mobile-finder {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
+    background: var(--bg-secondary);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
     padding: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -175,7 +191,8 @@
     font-size: 1.3rem;
     margin-bottom: 15px;
     text-align: center;
-    color: white;
+    color: var(--text-primary);
+    font-weight: 600;
 }
 
 .search-tabs {
@@ -189,17 +206,19 @@
     padding: 10px 8px;
     font-size: 0.8rem;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--text-primary);
     cursor: pointer;
     transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 .tab-btn.active {
     background: var(--ai-primary);
-    color: #000;
-    font-weight: 600;
+    color: var(--text-contrast);
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
 }
 
 /* Mobile Navigation Enhancements */
@@ -453,9 +472,10 @@
 
     .mobile-voice-btn,
     .mobile-services-btn {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        font-weight: 500;
         padding: 15px 25px;
         border-radius: 10px;
         font-size: 1rem;
@@ -689,7 +709,7 @@
 
     .trust-header p {
         font-size: 1.4rem;
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--text-secondary);
         font-weight: 500;
     }
 
@@ -730,8 +750,9 @@
 
     .trust-item p {
         font-size: 1rem;
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--text-secondary);
         line-height: 1.6;
+        font-weight: 400;
         margin-bottom: 20px;
     }
 
@@ -765,11 +786,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.9);
+    background: var(--bg-dark);
     padding: 30px;
     border-radius: 20px;
-    color: white;
+    color: var(--text-primary);
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     z-index: 9999;
     backdrop-filter: blur(10px);
     border: 2px solid var(--ai-primary);
@@ -1061,6 +1083,12 @@
 .typing-effect {
     border-right: 2px solid var(--ai-primary);
     animation: typing-cursor 1s infinite;
+    display: inline-block;
+    min-width: 200px;
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @keyframes typing-cursor {

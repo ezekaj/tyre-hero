@@ -5,7 +5,6 @@
 
 class TyreHeroEnhanced {
     constructor() {
-        this.voiceRecognition = null;
         this.arScanner = null;
         this.panicModeActive = false;
         this.emergencyPanelOpen = false;
@@ -15,7 +14,6 @@ class TyreHeroEnhanced {
     }
 
     init() {
-        this.initVoiceRecognition();
         this.initTabSwitching();
         this.initLiveStats();
         this.initTypingEffect();
@@ -23,119 +21,12 @@ class TyreHeroEnhanced {
         this.initEmergencyFeatures();
     }
 
-    // ===== Voice Recognition System =====
-    initVoiceRecognition() {
-        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            this.voiceRecognition = new SpeechRecognition();
 
-            this.voiceRecognition.continuous = true;
-            this.voiceRecognition.interimResults = true;
-            this.voiceRecognition.lang = 'en-GB';
 
-            this.voiceRecognition.onstart = () => {
-                console.log('Voice recognition started');
-                this.showVoiceIndicator();
-            };
 
-            this.voiceRecognition.onresult = (event) => {
-                const transcript = Array.from(event.results)
-                    .map(result => result[0])
-                    .map(result => result.transcript)
-                    .join('');
 
-                console.log('Voice input:', transcript);
-                this.processVoiceCommand(transcript);
-            };
 
-            this.voiceRecognition.onerror = (event) => {
-                console.error('Voice recognition error:', event.error);
-                this.hideVoiceIndicator();
-            };
 
-            this.voiceRecognition.onend = () => {
-                console.log('Voice recognition ended');
-                this.hideVoiceIndicator();
-            };
-
-            // Start listening for wake phrase - DISABLED per client request
-            // this.startWakeWordDetection();
-        } else {
-            console.warn('Speech recognition not supported');
-        }
-    }
-
-    startWakeWordDetection() {
-        if (this.voiceRecognition) {
-            this.voiceRecognition.start();
-        }
-    }
-
-    processVoiceCommand(transcript) {
-        const lowerTranscript = transcript.toLowerCase();
-
-        // Wake phrase detection
-        if (lowerTranscript.includes('hey tyrehero') || lowerTranscript.includes('hey tyre hero')) {
-            this.activateVoiceAssistant();
-            return;
-        }
-
-        // Emergency commands
-        if (lowerTranscript.includes('emergency') || lowerTranscript.includes('help') || lowerTranscript.includes('urgent')) {
-            this.activatePanicMode();
-            return;
-        }
-
-        // Service commands
-        if (lowerTranscript.includes('book') || lowerTranscript.includes('appointment')) {
-            this.startVoiceBooking(transcript);
-            return;
-        }
-
-        // Location sharing
-        if (lowerTranscript.includes('location') || lowerTranscript.includes('where am i')) {
-            this.shareLocation();
-            return;
-        }
-    }
-
-    activateVoiceAssistant() {
-        // Auto-indicator disabled per client request
-        // this.showVoiceIndicator();
-        this.speakResponse("Hello! I'm TyreHero AI. How can I help you today?");
-
-        // Switch to voice tab if not already active
-        this.switchTab('voice');
-
-        // Start listening for commands - DISABLED per client request
-        // setTimeout(() => {
-        //     this.voiceRecognition.start();
-        // }, 2000);
-    }
-
-    speakResponse(text) {
-        if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = 0.9;
-            utterance.pitch = 1;
-            utterance.voice = speechSynthesis.getVoices().find(voice => voice.lang === 'en-GB') || null;
-            speechSynthesis.speak(utterance);
-        }
-    }
-
-    showVoiceIndicator() {
-        const indicator = document.getElementById('voice-indicator');
-        if (indicator) {
-            indicator.classList.remove('hidden');
-        }
-    }
-
-    hideVoiceIndicator() {
-        const indicator = document.getElementById('voice-indicator');
-        if (indicator) {
-            indicator.classList.add('hidden');
-        }
-    }
 
     // ===== Tab Switching System =====
     initTabSwitching() {
@@ -330,8 +221,6 @@ class TyreHeroEnhanced {
                 }
             }, 30000);
 
-            // Speak emergency message
-            this.speakResponse("Emergency mode activated. Help is on the way. Please stay calm and safe.");
         }
     }
 
@@ -520,9 +409,6 @@ class TyreHeroEnhanced {
 }
 
 // Global Functions for HTML onclick handlers
-function activateVoice() {
-    tyreHero.activateVoiceAssistant();
-}
 
 function openARScanner() {
     tyreHero.startARScanner();
@@ -560,9 +446,6 @@ function startARScanner() {
     tyreHero.startARScanner();
 }
 
-function startVoiceSearch() {
-    tyreHero.activateVoiceAssistant();
-}
 
 function searchManual() {
     const width = document.getElementById('width').value;

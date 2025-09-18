@@ -27,8 +27,6 @@
     <!-- ULTRA-FAST DEVICE DETECTION (Runs First!) -->
     <script src="device-detector.js"></script>
 
-    <!-- Voice Recognition API -->
-    <script src="https://unpkg.com/speech-recognition-polyfill@1.0.1/speech-recognition-polyfill.js"></script>
 
     <!-- Enhanced LocalBusiness Schema for SEO -->
     <script type="application/ld+json">
@@ -75,14 +73,6 @@
               "description": "Advanced AR technology for instant tyre condition assessment and sizing"
             }
           },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Voice-Activated Emergency Response",
-              "description": "Voice command activation: 'Hey TyreHero, I need help' for instant emergency support"
-            }
-          }
         ]
       },
       "aggregateRating": {
@@ -96,15 +86,6 @@
     </script>
 </head>
 <body class="enhanced-homepage">
-    <!-- Voice Activation Indicator -->
-    <div id="voice-indicator" class="voice-indicator hidden">
-        <div class="voice-animation">
-            <span class="voice-wave"></span>
-            <span class="voice-wave"></span>
-            <span class="voice-wave"></span>
-        </div>
-        <p>Listening... Say "Hey TyreHero, I need help"</p>
-    </div>
 
     <!-- Emergency Panic Mode Overlay -->
     <div id="panic-mode" class="panic-mode-overlay hidden">
@@ -138,12 +119,6 @@
                     </a>
                 </div>
 
-                <!-- Voice Activation Button -->
-                <div class="voice-activation">
-                    <button id="voice-btn" class="voice-button" onclick="activateVoice()">
-                        🎤 Say "Hey TyreHero"
-                    </button>
-                </div>
 
                 <!-- Enhanced Navigation -->
                 <nav class="main-nav enhanced-nav">
@@ -236,7 +211,7 @@
                             Roadside Hero<span class="typing-effect" id="typing-text"></span>
                         </h1>
                         <p class="hero-description mobile-description">
-                            World's first AI-powered mobile tyre service with AR scanning, voice activation,
+                            World's first AI-powered mobile tyre service with AR scanning
                             and 60-minute emergency response guarantee. Available 24/7 in Slough, Maidenhead & Windsor.
                         </p>
 
@@ -255,9 +230,6 @@
                             </div>
 
                             <div class="secondary-actions mobile-secondary">
-                                <button class="btn btn-voice btn-md mobile-voice-btn" onclick="activateVoice()">
-                                    🎤 Voice Booking
-                                </button>
                                 <a href="#services" class="btn btn-outline btn-md mobile-services-btn">View All Services</a>
                             </div>
                         </div>
@@ -303,7 +275,6 @@
                             <!-- Multi-Modal Search Tabs -->
                             <div class="search-tabs">
                                 <button class="tab-btn active" data-tab="ar">📱 AR Scan</button>
-                                <button class="tab-btn" data-tab="voice">🎤 Voice</button>
                                 <button class="tab-btn" data-tab="reg">🚗 Reg Number</button>
                                 <button class="tab-btn" data-tab="manual">⚙️ Manual</button>
                             </div>
@@ -323,19 +294,6 @@
                                 </div>
                             </div>
 
-                            <!-- Voice Search Tab -->
-                            <div class="search-content" data-content="voice">
-                                <div class="voice-search-widget">
-                                    <div class="voice-animation-large">
-                                        <div class="voice-ripple"></div>
-                                        <div class="voice-icon">🎤</div>
-                                    </div>
-                                    <p>Say: "I need new tyres for my Honda Civic"</p>
-                                    <button class="btn btn-voice-start" onclick="startVoiceSearch()">
-                                        🎤 Start Voice Search
-                                    </button>
-                                </div>
-                            </div>
 
                             <!-- Registration Search Tab -->
                             <div class="search-content" data-content="reg">
@@ -460,8 +418,6 @@
     <!-- Premium Hero Background System -->
     <script src="premium-hero-background.js" defer></script>
 
-    <!-- Voice Recognition -->
-    <script src="voice-recognition.js" defer></script>
 
     <!-- AR Scanner -->
     <script src="ar-scanner.js" defer></script>
