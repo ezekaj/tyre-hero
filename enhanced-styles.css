@@ -776,6 +776,10 @@
     box-shadow: var(--neon-glow);
 }
 
+.voice-indicator.hidden {
+    display: none !important; /* Force hidden when has hidden class */
+}
+
 .voice-animation {
     display: flex;
     justify-content: center;

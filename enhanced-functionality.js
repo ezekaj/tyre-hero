@@ -100,7 +100,8 @@ class TyreHeroEnhanced {
     }
 
     activateVoiceAssistant() {
-        this.showVoiceIndicator();
+        // Auto-indicator disabled per client request
+        // this.showVoiceIndicator();
         this.speakResponse("Hello! I'm TyreHero AI. How can I help you today?");
 
         // Switch to voice tab if not already active
