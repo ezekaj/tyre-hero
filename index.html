@@ -265,173 +265,125 @@
                         </div>
                     </div>
 
-                    <!-- Tyre Search Interface -->
+                    <!-- Compact Tyre Search Interface -->
                     <div class="hero-widget mobile-widget">
-                        <div class="tyre-search-container">
-                            <!-- Quick Registration Search -->
-                            <div class="quick-search-section">
-                                <h3 class="search-title">Find Your Tyres</h3>
+                        <div class="compact-search-container">
+                            <!-- Search Tyres by Reg. No. -->
+                            <div class="reg-search-section">
+                                <h4 class="section-title">Search Tyres by Reg. No.</h4>
 
-                                <!-- License Plate Input -->
-                                <div class="license-plate-container">
-                                    <div class="license-plate">
-                                        <div class="plate-blue-strip"></div>
-                                        <input type="text"
-                                               id="license-input"
-                                               class="license-input"
-                                               placeholder="AB12 CDE"
-                                               maxlength="8">
-                                        <div class="plate-flag">🇬🇧</div>
-                                    </div>
+                                <!-- Compact License Plate -->
+                                <div class="compact-license-plate">
+                                    <input type="text"
+                                           id="license-input"
+                                           class="compact-license-input"
+                                           placeholder="ABC 123"
+                                           maxlength="8">
                                 </div>
 
-                                <!-- Mobile Fitted Option -->
-                                <div class="mobile-fitted-option">
-                                    <label class="radio-container">
-                                        <input type="radio" name="fitting" value="mobile" checked>
-                                        <span class="radio-checkmark"></span>
+                                <!-- Mobile Fitted -->
+                                <div class="mobile-fitted-compact">
+                                    <label class="fitted-option">
+                                        <span class="fitted-dot"></span>
                                         Mobile Fitted
                                     </label>
                                 </div>
 
-                                <!-- Search Button -->
-                                <button class="search-btn search-btn-large" onclick="searchByRegistration()">
-                                    SEARCH
+                                <!-- Red Search Button -->
+                                <button class="compact-search-btn" onclick="searchByRegistration()">
+                                    🔍 SEARCH
                                 </button>
                             </div>
 
-                            <!-- Manual Tyre Search -->
-                            <div class="manual-search-section">
-                                <h4 class="manual-title">Search Your Tyre</h4>
+                            <!-- Search Your Tyre -->
+                            <div class="manual-search-compact">
+                                <h4 class="section-title">Search Your Tyre</h4>
 
-                                <div class="tyre-selectors">
-                                    <div class="selector-group">
-                                        <label for="tyre-width">Width</label>
-                                        <select id="tyre-width" class="tyre-select">
-                                            <option value="">Select Width</option>
+                                <!-- Compact Selectors Grid -->
+                                <div class="compact-selectors">
+                                    <div class="compact-selector">
+                                        <label>WIDTH</label>
+                                        <select id="tyre-width" class="compact-select">
+                                            <option value="205">205</option>
                                             <option value="155">155</option>
                                             <option value="165">165</option>
                                             <option value="175">175</option>
                                             <option value="185">185</option>
                                             <option value="195">195</option>
-                                            <option value="205">205</option>
                                             <option value="215">215</option>
                                             <option value="225">225</option>
                                             <option value="235">235</option>
-                                            <option value="245">245</option>
-                                            <option value="255">255</option>
-                                            <option value="265">265</option>
-                                            <option value="275">275</option>
-                                            <option value="285">285</option>
-                                            <option value="295">295</option>
                                         </select>
                                     </div>
 
-                                    <div class="selector-group">
-                                        <label for="tyre-profile">Profile</label>
-                                        <select id="tyre-profile" class="tyre-select">
-                                            <option value="">Select Profile</option>
+                                    <div class="compact-selector">
+                                        <label>PROFILE</label>
+                                        <select id="tyre-profile" class="compact-select">
+                                            <option value="55">55</option>
                                             <option value="30">30</option>
                                             <option value="35">35</option>
                                             <option value="40">40</option>
                                             <option value="45">45</option>
                                             <option value="50">50</option>
-                                            <option value="55">55</option>
                                             <option value="60">60</option>
                                             <option value="65">65</option>
                                             <option value="70">70</option>
-                                            <option value="75">75</option>
-                                            <option value="80">80</option>
                                         </select>
                                     </div>
 
-                                    <div class="selector-group">
-                                        <label for="rim-size">Rim Size</label>
-                                        <select id="rim-size" class="tyre-select">
-                                            <option value="">Select Rim</option>
-                                            <option value="13">13"</option>
-                                            <option value="14">14"</option>
-                                            <option value="15">15"</option>
-                                            <option value="16">16"</option>
-                                            <option value="17">17"</option>
-                                            <option value="18">18"</option>
-                                            <option value="19">19"</option>
-                                            <option value="20">20"</option>
-                                            <option value="21">21"</option>
-                                            <option value="22">22"</option>
+                                    <div class="compact-selector">
+                                        <label>RIM SIZE</label>
+                                        <select id="rim-size" class="compact-select">
+                                            <option value="16">16</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
                                         </select>
                                     </div>
 
-                                    <div class="selector-group">
-                                        <label for="speed-rating">Speed</label>
-                                        <select id="speed-rating" class="tyre-select">
-                                            <option value="">Select Speed</option>
-                                            <option value="H">H (130mph)</option>
-                                            <option value="V">V (149mph)</option>
-                                            <option value="W">W (168mph)</option>
-                                            <option value="Y">Y (186mph)</option>
-                                            <option value="ZR">ZR (186mph+)</option>
+                                    <div class="compact-selector">
+                                        <label>SPEED</label>
+                                        <select id="speed-rating" class="compact-select">
+                                            <option value="">Any</option>
+                                            <option value="H">H</option>
+                                            <option value="V">V</option>
+                                            <option value="W">W</option>
+                                            <option value="Y">Y</option>
+                                            <option value="ZR">ZR</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <!-- Manual Search Button -->
-                                <button class="search-btn search-btn-large" onclick="searchBySpecs()">
-                                    SEARCH
+                                <button class="compact-search-btn" onclick="searchBySpecs()">
+                                    🔍 SEARCH
                                 </button>
+
+                                <!-- Help Text -->
+                                <p class="help-text">Click here for help finding your tyre size</p>
                             </div>
 
-                            <!-- Tyre Information Diagram -->
-                            <div class="tyre-info-section">
-                                <h4 class="info-title">Understanding Your Tyre</h4>
-                                <div class="tyre-diagram">
-                                    <svg viewBox="0 0 300 300" class="tyre-svg">
-                                        <!-- Tyre Outer Circle -->
-                                        <circle cx="150" cy="150" r="140" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
-                                        <!-- Tyre Inner Circle (Rim) -->
-                                        <circle cx="150" cy="150" r="70" fill="#c0c0c0" stroke="#999" stroke-width="2"/>
-                                        <!-- Tread Pattern -->
-                                        <g stroke="#666" stroke-width="1" fill="none">
-                                            <path d="M 150 10 Q 200 50 230 100 Q 250 150 230 200 Q 200 250 150 290 Q 100 250 70 200 Q 50 150 70 100 Q 100 50 150 10"/>
-                                            <path d="M 150 30 Q 180 60 200 100 Q 210 150 200 200 Q 180 240 150 270 Q 120 240 100 200 Q 90 150 100 100 Q 120 60 150 30"/>
-                                        </g>
-                                        <!-- Width Arrow -->
-                                        <g stroke="#FF0000" stroke-width="2" fill="#FF0000">
-                                            <line x1="50" y1="150" x2="250" y2="150" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
-                                            <text x="150" y="140" text-anchor="middle" fill="#FF0000" font-size="12" font-weight="bold">WIDTH</text>
-                                        </g>
-                                        <!-- Profile Arrow -->
-                                        <g stroke="#00AA00" stroke-width="2" fill="#00AA00">
-                                            <line x1="75" y1="80" x2="75" y2="140" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
-                                            <text x="45" y="115" text-anchor="middle" fill="#00AA00" font-size="10" font-weight="bold">PROFILE</text>
-                                        </g>
-                                        <!-- Rim Diameter Arrow -->
-                                        <g stroke="#0066FF" stroke-width="2" fill="#0066FF">
-                                            <line x1="80" y1="150" x2="220" y2="150" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
-                                            <text x="150" y="165" text-anchor="middle" fill="#0066FF" font-size="10" font-weight="bold">RIM DIAMETER</text>
-                                        </g>
-                                        <!-- Speed Rating -->
-                                        <text x="150" y="40" text-anchor="middle" fill="#FF6600" font-size="12" font-weight="bold">SPEED RATING</text>
+                            <!-- Compact Tyre Diagram -->
+                            <div class="compact-diagram">
+                                <svg viewBox="0 0 200 100" class="compact-tyre-svg">
+                                    <!-- Simplified Tyre -->
+                                    <ellipse cx="100" cy="50" rx="90" ry="45" fill="#2a2a2a" stroke="#333" stroke-width="2"/>
+                                    <ellipse cx="100" cy="50" rx="40" ry="20" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
 
-                                        <!-- Arrow markers -->
-                                        <defs>
-                                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                                <polygon points="0 0, 10 3.5, 0 7" />
-                                            </marker>
-                                        </defs>
-                                    </svg>
-                                </div>
+                                    <!-- Tyre Size Text -->
+                                    <text x="100" y="35" text-anchor="middle" fill="white" font-size="10" font-weight="bold">155 R 16</text>
 
-                                <!-- Tyre Size Examples -->
-                                <div class="tyre-examples">
-                                    <p class="example-text">Example: <strong>205/55R16 H</strong></p>
-                                    <div class="example-breakdown">
-                                        <span class="width-example">205 = Width (mm)</span>
-                                        <span class="profile-example">55 = Profile (%)</span>
-                                        <span class="rim-example">16 = Rim (inches)</span>
-                                        <span class="speed-example">H = Speed Rating</span>
-                                    </div>
-                                </div>
+                                    <!-- Labels with Leaders -->
+                                    <g stroke="#666" stroke-width="1" fill="#666" font-size="8">
+                                        <text x="20" y="15">TYRE WIDTH</text>
+                                        <text x="75" y="15">RIM DIAMETER</text>
+                                        <text x="140" y="15">SPEED RATING</text>
+                                    </g>
+                                </svg>
                             </div>
                         </div>
                     </div>
