@@ -107,6 +107,12 @@
     padding: 18px 24px;
     font-size: 1.1rem;
     border-radius: 12px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    text-align: center;
 }
 
 .hero-cta.mobile-cta .secondary-actions.mobile-secondary {
@@ -1073,6 +1079,11 @@
     position: relative;
     overflow: hidden;
     animation: emergency-pulse 2s infinite;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-emergency::before {
