@@ -30,6 +30,8 @@ class TyreHeroVoiceSystem {
         this.setupRecognition();
         this.bindEvents();
         console.log('🎤 TyreHero Voice System initialized');
+        // Auto-start disabled per client request
+        // this.startListening();
     }
 
     checkSupport() {

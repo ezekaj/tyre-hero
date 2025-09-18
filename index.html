@@ -394,15 +394,10 @@
 
         <!-- Floating Emergency Panel -->
         <div class="floating-emergency-panel">
-            <button class="emergency-toggle" onclick="toggleEmergencyPanel()">
+            <a href="tel:08001234567" class="emergency-toggle" role="button"
+               ontouchstart="" onclick="this.blur();">
                 🚨 EMERGENCY
-            </button>
-            <div class="emergency-panel-content">
-                <h4>Emergency Assistance</h4>
-                <a href="tel:08001234567" class="emergency-call">📞 Call Now</a>
-                <button onclick="activatePanicMode()" class="panic-btn-small">🚨 Panic Mode</button>
-                <button onclick="shareLocation()" class="location-btn">📍 Share Location</button>
-            </div>
+            </a>
         </div>
     </section>
 

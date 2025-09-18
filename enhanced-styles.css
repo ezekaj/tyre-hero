@@ -263,6 +263,10 @@
     cursor: pointer;
     box-shadow: var(--emergency-glow);
     animation: var(--emergency-pulse);
+    text-decoration: none;
+    display: inline-block;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* AI Status Bar Mobile */
@@ -643,6 +647,10 @@
         box-shadow: 0 10px 30px rgba(229, 57, 53, 0.4);
         animation: pulse-emergency 2s infinite;
         transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .emergency-toggle:hover {
@@ -1008,7 +1016,7 @@
 .enhanced-hero-content {
     position: relative;
     z-index: 2;
-    padding: 120px 0 60px;
+    padding: 140px 0 60px;
 }
 
 .ai-status-bar {
@@ -1435,7 +1443,7 @@
 
 @media (max-width: 480px) {
     .enhanced-hero-content {
-        padding: 100px 0 40px;
+        padding: 130px 0 40px;
     }
 
     .hero-title {
