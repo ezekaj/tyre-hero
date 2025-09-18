@@ -262,10 +262,12 @@
 /* AI Status Bar Mobile */
 .ai-status-bar {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: row;
+    gap: 8px;
     margin-bottom: 20px;
     text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .ai-indicator,
@@ -273,10 +275,12 @@
 .response-indicator {
     background: rgba(0, 212, 255, 0.2);
     border: 1px solid var(--ai-primary);
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
     color: white;
+    white-space: nowrap;
+    font-weight: 500;
 }
 
 /* ===== TABLET RESPONSIVE (481px - 768px) ===== */
@@ -1383,8 +1387,10 @@
 
 @media (max-width: 768px) {
     .ai-status-bar {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .primary-actions {
