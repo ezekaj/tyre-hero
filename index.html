@@ -25,6 +25,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
 
+    <!-- Three.js for 3D GLB Model -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.js"></script>
+
     <!-- ULTRA-FAST DEVICE DETECTION (Runs First!) -->
     <script src="assets/js/boot/device-detector.js"></script>
 
@@ -164,6 +168,15 @@
             <div class="tyrehero-van">
                 <div class="van-windows"></div>
                 <div class="emergency-lights"></div>
+            </div>
+        </div>
+
+        <!-- 3D Tyre Model Viewer -->
+        <div id="tyre-3d-viewer" class="tyre-3d-container">
+            <canvas id="tyre-canvas"></canvas>
+            <div class="tyre-info-overlay">
+                <h3>Professional Tyre Specifications</h3>
+                <p>Expert fitting • All brands • 24/7 service</p>
             </div>
         </div>
 
@@ -412,6 +425,240 @@
 
     <!-- Core Application Scripts -->
     <script type="module" src="assets/js/main.js"></script>
+
+    <!-- 3D Tyre Model Viewer Script -->
+    <script>
+        // 3D Tyre GLB Model Viewer
+        class TyreModelViewer {
+            constructor() {
+                this.scene = null;
+                this.camera = null;
+                this.renderer = null;
+                this.model = null;
+                this.canvas = document.getElementById('tyre-canvas');
+                this.container = document.getElementById('tyre-3d-viewer');
+
+                // Check if browser supports WebGL
+                if (this.webglSupported()) {
+                    this.init();
+                    this.loadModel();
+                } else {
+                    this.showFallback();
+                }
+            }
+
+            webglSupported() {
+                try {
+                    const canvas = document.createElement('canvas');
+                    return !!(window.WebGLRenderingContext &&
+                             (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            init() {
+                // Scene setup
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0x1a1a2e);
+
+                // Camera setup
+                const aspect = 1; // Square aspect ratio
+                this.camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
+                this.camera.position.set(2, 1, 3);
+
+                // Renderer setup
+                this.renderer = new THREE.WebGLRenderer({
+                    canvas: this.canvas,
+                    antialias: true,
+                    alpha: true
+                });
+                this.renderer.setSize(400, 400);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+                // Lighting setup
+                this.setupLighting();
+
+                // Controls for rotation
+                this.setupControls();
+
+                // Handle resize
+                this.handleResize();
+            }
+
+            setupLighting() {
+                // Ambient light
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+                this.scene.add(ambientLight);
+
+                // Main directional light
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+                directionalLight.position.set(5, 5, 5);
+                directionalLight.castShadow = true;
+                directionalLight.shadow.mapSize.width = 2048;
+                directionalLight.shadow.mapSize.height = 2048;
+                this.scene.add(directionalLight);
+
+                // Fill light
+                const fillLight = new THREE.DirectionalLight(0x87CEEB, 0.3);
+                fillLight.position.set(-5, 0, -5);
+                this.scene.add(fillLight);
+
+                // Rim light for dramatic effect
+                const rimLight = new THREE.DirectionalLight(0xf1c40f, 0.5);
+                rimLight.position.set(0, 5, -5);
+                this.scene.add(rimLight);
+            }
+
+            setupControls() {
+                // Simple auto-rotation
+                this.autoRotate = true;
+                this.rotationSpeed = 0.005;
+
+                // Mouse interaction for manual control
+                let isMouseDown = false;
+                let mouseX = 0;
+
+                this.canvas.addEventListener('mousedown', (e) => {
+                    isMouseDown = true;
+                    mouseX = e.clientX;
+                    this.autoRotate = false;
+                });
+
+                this.canvas.addEventListener('mousemove', (e) => {
+                    if (isMouseDown && this.model) {
+                        const deltaX = e.clientX - mouseX;
+                        this.model.rotation.y += deltaX * 0.01;
+                        mouseX = e.clientX;
+                    }
+                });
+
+                this.canvas.addEventListener('mouseup', () => {
+                    isMouseDown = false;
+                    setTimeout(() => {
+                        this.autoRotate = true;
+                    }, 3000); // Resume auto-rotation after 3 seconds
+                });
+
+                // Touch support for mobile
+                this.canvas.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    isMouseDown = true;
+                    mouseX = e.touches[0].clientX;
+                    this.autoRotate = false;
+                });
+
+                this.canvas.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    if (isMouseDown && this.model) {
+                        const deltaX = e.touches[0].clientX - mouseX;
+                        this.model.rotation.y += deltaX * 0.01;
+                        mouseX = e.touches[0].clientX;
+                    }
+                });
+
+                this.canvas.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    isMouseDown = false;
+                    setTimeout(() => {
+                        this.autoRotate = true;
+                    }, 3000);
+                });
+            }
+
+            loadModel() {
+                this.container.classList.add('loading');
+
+                const loader = new THREE.GLTFLoader();
+                loader.load(
+                    'assets/models/tyre-specifications.glb',
+                    (gltf) => {
+                        this.model = gltf.scene;
+
+                        // Scale and position the model
+                        this.model.scale.setScalar(1);
+                        this.model.position.set(0, -0.5, 0);
+
+                        // Enable shadows
+                        this.model.traverse((child) => {
+                            if (child.isMesh) {
+                                child.castShadow = true;
+                                child.receiveShadow = true;
+
+                                // Enhance materials if needed
+                                if (child.material) {
+                                    child.material.metalness = 0.2;
+                                    child.material.roughness = 0.8;
+                                }
+                            }
+                        });
+
+                        this.scene.add(this.model);
+                        this.container.classList.remove('loading');
+
+                        // Start animation loop
+                        this.animate();
+                    },
+                    (progress) => {
+                        // Loading progress (optional)
+                        console.log('Loading progress:', (progress.loaded / progress.total * 100) + '%');
+                    },
+                    (error) => {
+                        console.error('Error loading GLB model:', error);
+                        this.container.classList.remove('loading');
+                        this.showFallback();
+                    }
+                );
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+
+                // Auto-rotation
+                if (this.autoRotate && this.model) {
+                    this.model.rotation.y += this.rotationSpeed;
+                }
+
+                // Render the scene
+                this.renderer.render(this.scene, this.camera);
+            }
+
+            handleResize() {
+                window.addEventListener('resize', () => {
+                    const size = Math.min(400, window.innerWidth * 0.8);
+                    this.renderer.setSize(size, size);
+                });
+            }
+
+            showFallback() {
+                // Show static tyre image for unsupported browsers
+                this.canvas.style.display = 'none';
+                this.container.style.background = `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="%23333" stroke="%23666" stroke-width="4"/><circle cx="100" cy="100" r="40" fill="%23444"/><text x="100" y="105" text-anchor="middle" fill="white" font-size="12">TYRE</text></svg>') center/contain no-repeat`;
+            }
+        }
+
+        // Initialize 3D viewer when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if it's a mobile device with limited performance
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isLowEnd = navigator.hardwareConcurrency < 4 || navigator.deviceMemory < 4;
+
+            // Only load 3D model on capable devices
+            if (!isMobile || !isLowEnd) {
+                new TyreModelViewer();
+            } else {
+                // Show fallback for low-end devices
+                const container = document.getElementById('tyre-3d-viewer');
+                const canvas = document.getElementById('tyre-canvas');
+                if (container && canvas) {
+                    canvas.style.display = 'none';
+                    container.style.background = `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="%23333" stroke="%23666" stroke-width="4"/><circle cx="100" cy="100" r="40" fill="%23444"/><text x="100" y="105" text-anchor="middle" fill="white" font-size="12">TYRE</text></svg>') center/contain no-repeat`;
+                }
+            }
+        });
+    </script>
 
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/447000000000" target="_blank" class="floating-whatsapp-btn">
