@@ -2121,11 +2121,60 @@
     color: #0056b3;
 }
 
-/* Compact Diagram */
+/* Realistic Tyre Specification Diagram */
 .compact-diagram {
     border-top: 1px solid #dee2e6;
     padding-top: 15px;
     text-align: center;
+}
+
+.tyre-specification-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.specification-diagram {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.specification-diagram:hover {
+    transform: scale(1.05);
+}
+
+.diagram-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.diagram-subtitle {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Mobile responsiveness for diagram */
+@media (max-width: 768px) {
+    .specification-diagram {
+        max-width: 240px;
+    }
+
+    .diagram-title {
+        font-size: 1rem;
+    }
+
+    .diagram-subtitle {
+        font-size: 0.8rem;
+    }
 }
 
 .compact-tyre-svg {
