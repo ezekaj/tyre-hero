@@ -2,7 +2,7 @@
   "name": "tyre-hero-emergency-service",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://xhezair.github.io/tyre-hero-emergency-service",
+  "homepage": "https://ezekaj.github.io/tyre-hero",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
