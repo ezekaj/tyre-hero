@@ -97,34 +97,38 @@ const App = () => {
     {
       title: "Emergency Tyre Replacement",
       description: "Immediate roadside tyre replacement service. We come to you anywhere, anytime with premium quality tyres in stock.",
-      icon: "🚗",
+      image: "/images/tyre-replacement.jpg",
       stats: "5000+ Served",
       color: "from-red-500 to-red-600",
-      delay: 200
+      delay: 200,
+      action: () => window.location.href = 'tel:08000000000'
     },
     {
       title: "Professional Puncture Repair",
       description: "Expert puncture repair using industry-standard techniques. Get back on the road quickly and safely with our certified technicians.",
-      icon: "🔧",
+      image: "/images/puncture-repair.jpg",
       stats: "98% Success Rate",
       color: "from-blue-500 to-blue-600",
-      delay: 400
+      delay: 400,
+      action: () => window.location.href = 'tel:08000000000'
     },
     {
-      title: "Wheel Balancing & Alignment",
-      description: "Precision wheel balancing and alignment service to ensure smooth driving, better fuel efficiency, and extended tyre life.",
-      icon: "⚖️",
+      title: "Mobile Tyre Fitting",
+      description: "Professional mobile tyre fitting service using state-of-the-art equipment. We bring the workshop to you.",
+      image: "/images/tyre-fitting-machine.jpg",
       stats: "15+ Years Expertise",
       color: "from-purple-500 to-purple-600",
-      delay: 600
+      delay: 600,
+      action: () => window.location.href = 'tel:08000000000'
     },
     {
-      title: "Fleet & Commercial Service",
-      description: "Comprehensive tyre solutions for commercial vehicles and fleets with competitive rates and priority 24/7 response.",
-      icon: "🚚",
-      stats: "200+ Fleet Clients",
+      title: "24/7 Emergency Callout",
+      description: "Round-the-clock emergency tyre service. No matter the time or location, we're here to help when you need us most.",
+      image: "/images/emergency-callout.jpeg",
+      stats: "24/7 Available",
       color: "from-green-500 to-green-600",
-      delay: 800
+      delay: 800,
+      action: () => window.location.href = 'tel:08000000000'
     }
   ];
 
@@ -296,12 +300,19 @@ const App = () => {
                 </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse border-2 border-black"></div>
               </div>
-              <div>
-                <div className="text-white font-bold text-xl">Tyre Hero</div>
-                <div className={`text-sm transition-colors duration-300 ${
-                  emergencyMode ? 'text-red-400 animate-pulse' : 'text-red-400'
-                }`}>
-                  {emergencyMode ? '🚨 EMERGENCY MODE ACTIVE' : '24/7 Emergency Service'}
+              <div className="flex items-center">
+                <img
+                  src="/images/tyrehero-logo-white.svg"
+                  alt="Tyre Hero Logo"
+                  className="h-12 w-auto mr-3"
+                />
+                <div>
+                  <div className="text-white font-bold text-xl">Tyre Hero</div>
+                  <div className={`text-sm transition-colors duration-300 ${
+                    emergencyMode ? 'text-red-400 animate-pulse' : 'text-red-400'
+                  }`}>
+                    {emergencyMode ? 'EMERGENCY MODE ACTIVE' : '24/7 Emergency Service'}
+                  </div>
                 </div>
               </div>
             </div>
@@ -380,7 +391,7 @@ const App = () => {
             <div className="mb-8 inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 animate-pulse">
               <div className="flex items-center space-x-3">
                 <div className="w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
-                <span className="text-red-300 font-bold text-lg">⚡ 60-MINUTE RESPONSE GUARANTEE</span>
+                <span className="text-red-300 font-bold text-lg">60-MINUTE RESPONSE GUARANTEE</span>
                 <div className="w-3 h-3 bg-red-400 rounded-full animate-ping animation-delay-1000"></div>
               </div>
             </div>
@@ -400,7 +411,7 @@ const App = () => {
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-16">
               <button
-                onClick={toggleEmergencyMode}
+                onClick={() => window.location.href = 'tel:08000000000'}
                 className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-6 px-12 rounded-3xl text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-300 hover:rotate-2 animate-pulse border-4 border-red-400/50 group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center">
@@ -413,7 +424,10 @@ const App = () => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
               </button>
 
-              <button className="border-4 border-gray-600 text-gray-300 font-black py-6 px-12 rounded-3xl text-2xl hover:bg-gray-800 hover:border-red-500 hover:text-red-400 transition-all duration-300 transform hover:scale-105 relative group backdrop-blur-sm">
+              <button
+                onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                className="border-4 border-gray-600 text-gray-300 font-black py-6 px-12 rounded-3xl text-2xl hover:bg-gray-800 hover:border-red-500 hover:text-red-400 transition-all duration-300 transform hover:scale-105 relative group backdrop-blur-sm"
+              >
                 <span className="relative z-10 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -427,17 +441,17 @@ const App = () => {
             {/* Trust indicators with icons */}
             <div className="flex flex-wrap justify-center gap-12 text-gray-400">
               {[
-                { icon: "⏱️", label: "60-Minute Guarantee", delay: 0 },
-                { icon: "🌙", label: "24/7 Service", delay: 200 },
-                { icon: "🛡️", label: "Licensed & Insured", delay: 400 },
-                { icon: "⭐", label: "5-Star Rated", delay: 600 }
+                { label: "60-Minute Guarantee", delay: 0 },
+                { label: "24/7 Service", delay: 200 },
+                { label: "Licensed & Insured", delay: 400 },
+                { label: "5-Star Rated", delay: 600 }
               ].map((item, index) => (
                 <div
                   key={index}
                   className="flex items-center animate-fade-in"
                   style={{ animationDelay: `${item.delay}ms` }}
                 >
-                  <div className="text-2xl mr-3">{item.icon}</div>
+                  <div className="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
                   <span className="text-lg font-medium">{item.label}</span>
                 </div>
               ))}
@@ -479,6 +493,7 @@ const App = () => {
                   isVisible.services ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
                 }`}
                 style={{ transitionDelay: `${service.delay}ms` }}
+                onClick={service.action}
               >
                 <div className="bg-gray-900/90 backdrop-blur-xl rounded-4xl p-10 shadow-3xl hover:shadow-red-500/20 transform hover:-translate-y-6 transition-all duration-700 border border-gray-700/50 h-full flex flex-col hover:border-red-500/50 relative overflow-hidden hover:scale-105">
                   {/* Animated gradient border on hover */}
@@ -488,8 +503,12 @@ const App = () => {
                   <div className="absolute top-4 right-4 w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
 
                   <div className="relative z-10">
-                    <div className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500 text-red-400 drop-shadow-lg">
-                      {service.icon}
+                    <div className="w-28 h-28 mb-8 rounded-3xl overflow-hidden group-hover:scale-110 transition-transform duration-500 shadow-2xl border-2 border-red-500/30 group-hover:border-red-500/60">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                     </div>
                     <h3 className="text-3xl font-black text-white mb-6 group-hover:text-red-400 transition-colors duration-300">
                       {service.title}
@@ -603,16 +622,16 @@ const App = () => {
 
                   <div className="space-y-6">
                     {[
-                      { icon: "✅", title: "Certified Technicians", desc: "All our technicians are fully certified and trained to the highest standards.", delay: 0 },
-                      { icon: "⚙️", title: "Premium Equipment", desc: "We use state-of-the-art equipment to ensure perfect tyre fitting every time.", delay: 300 },
-                      { icon: "🛡️", title: "Fully Insured", desc: "Complete peace of mind with our comprehensive insurance coverage.", delay: 600 }
+                      { title: "Certified Technicians", desc: "All our technicians are fully certified and trained to the highest standards.", delay: 0 },
+                      { title: "Premium Equipment", desc: "We use state-of-the-art equipment to ensure perfect tyre fitting every time.", delay: 300 },
+                      { title: "Fully Insured", desc: "Complete peace of mind with our comprehensive insurance coverage.", delay: 600 }
                     ].map((item, index) => (
                       <div
                         key={index}
                         className="flex items-start p-6 bg-black/40 backdrop-blur-sm rounded-3xl border border-gray-700/50 hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-500 group transform hover:scale-105"
                         style={{ animationDelay: `${item.delay}ms` }}
                       >
-                        <div className="text-3xl mr-5 flex-shrink-0">{item.icon}</div>
+                        <div className="w-4 h-4 bg-red-400 rounded-full mr-5 flex-shrink-0 mt-2"></div>
                         <div>
                           <h5 className="text-white font-black text-xl mb-3">{item.title}</h5>
                           <p className="text-gray-300 text-lg">{item.desc}</p>
@@ -690,7 +709,10 @@ const App = () => {
           </div>
 
           <div className="mt-20 text-center">
-            <button className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-6 px-12 rounded-3xl text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-500 border-4 border-red-400/50 group relative overflow-hidden">
+            <button
+              onClick={() => document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' })}
+              className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-6 px-12 rounded-3xl text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-500 border-4 border-red-400/50 group relative overflow-hidden"
+            >
               <span className="relative z-10">Read More Hero Stories</span>
               <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
             </button>
@@ -722,7 +744,7 @@ const App = () => {
                 <div className="space-y-8">
                   {[
                     {
-                      icon: "📞",
+                      icon: "phone",
                       title: "EMERGENCY HOTLINE",
                       value: "0800 000 0000",
                       desc: "24/7 Response • 60-Minute Guarantee",
@@ -730,7 +752,7 @@ const App = () => {
                       size: "4xl"
                     },
                     {
-                      icon: "✉️",
+                      icon: "email",
                       title: "EMAIL SUPPORT",
                       value: "rescue@tyrehero.co.uk",
                       desc: "Response within 1 hour",
@@ -748,9 +770,27 @@ const App = () => {
                   ].map((contact, index) => (
                     <div
                       key={index}
-                      className="flex items-start p-8 bg-black/40 backdrop-blur-xl rounded-3xl border border-gray-700/50 hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-500 group transform hover:scale-105 hover:rotate-1"
+                      className="flex items-start p-8 bg-black/40 backdrop-blur-xl rounded-3xl border border-gray-700/50 hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-500 group transform hover:scale-105 hover:rotate-1 cursor-pointer"
+                      onClick={() => {
+                        if (contact.icon === 'phone') {
+                          window.location.href = 'tel:08000000000';
+                        } else {
+                          window.location.href = 'mailto:rescue@tyrehero.co.uk';
+                        }
+                      }}
                     >
-                      <div className="text-5xl mr-6 flex-shrink-0 animate-pulse">{contact.icon}</div>
+                      <div className="w-12 h-12 mr-6 flex-shrink-0 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
+                        {contact.icon === 'phone' ? (
+                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                          </svg>
+                        ) : (
+                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                          </svg>
+                        )}
+                      </div>
                       <div>
                         <h4 className="text-white font-black text-xl mb-2">{contact.title}</h4>
                         <p className={`text-${contact.color}-400 font-black text-${contact.size} mb-3`}>{contact.value}</p>
@@ -897,13 +937,13 @@ const App = () => {
               <div className="border-t border-gray-700/50 pt-10">
                 <div className="flex flex-wrap justify-center gap-16 text-gray-400">
                   {[
-                    { icon: "⏱️", text: "60-Minute Response Guarantee" },
-                    { icon: "🌙", text: "24/7 Availability • 365 Days" },
-                    { icon: "🛡️", text: "Fully Licensed & Insured" },
-                    { icon: "⭐", text: "5-Star Rated Service" }
+                    { text: "60-Minute Response Guarantee" },
+                    { text: "24/7 Availability • 365 Days" },
+                    { text: "Fully Licensed & Insured" },
+                    { text: "5-Star Rated Service" }
                   ].map((item, index) => (
                     <div key={index} className="flex items-center space-x-4">
-                      <div className="text-3xl">{item.icon}</div>
+                      <div className="w-2 h-2 bg-red-400 rounded-full"></div>
                       <span className="text-xl font-medium">{item.text}</span>
                     </div>
                   ))}
