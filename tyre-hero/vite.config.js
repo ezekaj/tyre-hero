@@ -70,7 +70,7 @@ export default defineConfig({
     strictPort: true,
   },
   // Base URL for deployment
-  base: process.env.VITE_BASE_URL || '/',
+  base: '/',
   // Enable experimental features for better performance
   esbuild: {
     target: 'esnext',

@@ -6,7 +6,7 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
   const [scrollY, setScrollY] = useState(0);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [, setCurrentTime] = useState(new Date());
   const [isNight, setIsNight] = useState(true);
   const [emergencyMode, setEmergencyMode] = useState(false);
 

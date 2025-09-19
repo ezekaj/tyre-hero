@@ -2,12 +2,163 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- Viewport and Mobile Optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- SEO Meta Tags -->
+    <title>Tyre Hero - 24/7 Emergency Mobile Tyre Service | Slough, Maidenhead, Windsor</title>
+    <meta name="description" content="Professional 24/7 emergency mobile tyre service with 60-minute response guarantee. Serving Slough, Maidenhead & Windsor. Call 0800 000 0000 for immediate roadside assistance.">
+    <meta name="keywords" content="emergency tyre service, mobile tyre fitting, roadside assistance, puncture repair, Slough, Maidenhead, Windsor, 24/7 tyre service, wheel balancing">
+    <meta name="author" content="Tyre Hero">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tyrehero.co.uk/">
+    <meta property="og:title" content="Tyre Hero - 24/7 Emergency Mobile Tyre Service">
+    <meta property="og:description" content="Professional emergency mobile tyre service with 60-minute response guarantee. Available 24/7 in Slough, Maidenhead & Windsor.">
+    <meta property="og:image" content="https://tyrehero.co.uk/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Tyre Hero">
+    <meta property="og:locale" content="en_GB">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://tyrehero.co.uk/">
+    <meta name="twitter:title" content="Tyre Hero - 24/7 Emergency Mobile Tyre Service">
+    <meta name="twitter:description" content="Professional emergency mobile tyre service with 60-minute response guarantee. Available 24/7 in Slough, Maidenhead & Windsor.">
+    <meta name="twitter:image" content="https://tyrehero.co.uk/twitter-image.jpg">
+
+    <!-- Business/Local SEO -->
+    <meta name="geo.region" content="GB-SLG">
+    <meta name="geo.placename" content="Slough">
+    <meta name="geo.position" content="51.5105;-0.5950">
+    <meta name="ICBM" content="51.5105, -0.5950">
+
+    <!-- Theme and Display -->
+    <meta name="theme-color" content="#DC2626">
+    <meta name="msapplication-TileColor" content="#DC2626">
+    <meta name="msapplication-navbutton-color" content="#DC2626">
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+
+    <!-- Structured Data for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Tyre Hero",
+      "description": "Professional 24/7 emergency mobile tyre service with 60-minute response guarantee",
+      "url": "https://tyrehero.co.uk",
+      "telephone": "+44-800-000-0000",
+      "email": "rescue@tyrehero.co.uk",
+      "priceRange": "££",
+      "areaServed": [
+        "Slough",
+        "Maidenhead",
+        "Windsor"
+      ],
+      "serviceType": [
+        "Emergency Tyre Replacement",
+        "Mobile Tyre Fitting",
+        "Puncture Repair",
+        "Wheel Balancing",
+        "Roadside Assistance"
+      ],
+      "openingHours": "Mo-Su 00:00-23:59",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 51.5105,
+        "longitude": -0.5950
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Slough",
+        "addressRegion": "Berkshire",
+        "addressCountry": "GB"
+      },
+      "sameAs": [
+        "https://facebook.com/tyrehero",
+        "https://twitter.com/tyrehero"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Emergency Tyre Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Emergency Tyre Replacement",
+            "description": "Immediate roadside tyre replacement service with 60-minute response guarantee"
+          },
+          {
+            "@type": "Offer",
+            "name": "Professional Puncture Repair",
+            "description": "Expert puncture repair using industry-standard techniques"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Critical CSS Inline (will be replaced by build process) -->
+    <style>
+      /* Critical above-the-fold styles */
+      body { margin: 0; background: #111827; color: #fff; font-family: system-ui; }
+      #root { min-height: 100vh; }
+      .loading-placeholder {
+        display: flex; align-items: center; justify-content: center;
+        min-height: 100vh; background: linear-gradient(135deg, #111827, #000);
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <noscript>
+      <div style="text-align: center; padding: 50px; background: #111827; color: #fff;">
+        <h1>🚨 Emergency Tyre Service</h1>
+        <p>JavaScript is required for our emergency portal.</p>
+        <p>For immediate assistance, call: <strong>0800 000 0000</strong></p>
+      </div>
+    </noscript>
+
+    <div id="root">
+      <!-- Loading placeholder -->
+      <div class="loading-placeholder">
+        <div style="text-align: center;">
+          <div style="width: 60px; height: 60px; border: 4px solid #DC2626; border-radius: 50%; border-top: 4px solid transparent; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+          <p style="color: #DC2626; font-weight: bold;">Loading Emergency Portal...</p>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/src/main.jsx"></script>
+
+    <style>
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
   </body>
 </html>
