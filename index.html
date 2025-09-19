@@ -15,8 +15,8 @@
     <meta property="og:url" content="https://tyrehero.com">
     <meta property="og:image" content="https://tyrehero.com/images/tyrehero-og-image.jpg">
 
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="enhanced-styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/enhanced-styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
     <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
 
     <!-- ULTRA-FAST DEVICE DETECTION (Runs First!) -->
-    <script src="device-detector.js"></script>
+    <script src="assets/js/boot/device-detector.js"></script>
 
 
     <!-- Enhanced LocalBusiness Schema for SEO -->
@@ -98,12 +98,12 @@
             </a>
 
             <div class="panic-actions">
-                <button class="panic-btn" onclick="shareLocation()">📍 Share My Location</button>
-                <button class="panic-btn" onclick="emergencyChecklist()">✅ Safety Checklist</button>
-                <button class="panic-btn" onclick="contactFamily()">👨‍👩‍👧‍👦 Alert Family</button>
+                <button class="panic-btn" data-action="share-location">📍 Share My Location</button>
+                <button class="panic-btn" data-action="emergency-checklist">✅ Safety Checklist</button>
+                <button class="panic-btn" data-action="contact-family">👨‍👩‍👧‍👦 Alert Family</button>
             </div>
 
-            <button class="panic-close" onclick="closePanicMode()">✕ Exit Emergency Mode</button>
+            <button class="panic-close" data-action="panic-close">✕ Exit Emergency Mode</button>
         </div>
     </div>
 
@@ -218,7 +218,7 @@
                         <div class="hero-cta enhanced-cta mobile-cta">
                             <div class="primary-actions mobile-primary">
                                 <a href="tel:08001234567" class="btn btn-emergency btn-lg btn-icon mobile-emergency-btn" role="button"
-                                   ontouchstart="" onclick="this.blur();">
+                                  >
                                     🚨 EMERGENCY CALL
                                     <span class="btn-subtitle">60min Guarantee</span>
                                 </a>
@@ -290,7 +290,7 @@
                                 </div>
 
                                 <!-- Red Search Button -->
-                                <button class="compact-search-btn" onclick="searchByRegistration()">
+                                <button class="compact-search-btn" data-action="search-registration">
                                     🔍 SEARCH
                                 </button>
                             </div>
@@ -359,7 +359,7 @@
                                 </div>
 
                                 <!-- Manual Search Button -->
-                                <button class="compact-search-btn" onclick="searchBySpecs()">
+                                <button class="compact-search-btn" data-action="search-specs">
                                     🔍 SEARCH
                                 </button>
 
@@ -394,7 +394,7 @@
         <!-- Floating Emergency Panel -->
         <div class="floating-emergency-panel">
             <a href="tel:08001234567" class="emergency-toggle" role="button"
-               ontouchstart="" onclick="this.blur();">
+              >
                 🚨 EMERGENCY
             </a>
         </div>
@@ -495,19 +495,8 @@
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script src="scripts.js"></script>
-    <script src="enhanced-functionality.js"></script>
-
-    <!-- Premium Hero Background System -->
-    <script src="premium-hero-background.js" defer></script>
-
-
-    <!-- AR Scanner -->
-    <script src="ar-scanner.js" defer></script>
-
-    <!-- Live Stats & Real-Time Data -->
-    <script src="live-stats.js" defer></script>
+    <!-- Core Application Scripts -->
+    <script type="module" src="assets/js/main.js"></script>
 
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/447000000000" target="_blank" class="floating-whatsapp-btn">

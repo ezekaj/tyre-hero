@@ -36,8 +36,12 @@ const server = http.createServer((req, res) => {
         pathname = '/index.html';
     }
 
-    // Serve files from the website directory
-    let filePath = path.join(__dirname, 'website', pathname);
+    // Resolve path safely within the project root
+    const sanitizedPath = path
+        .normalize(pathname)
+        .replace(/^(\.\.[\/])+/, '')
+        .replace(/^[\/]/, '');
+    const filePath = path.join(__dirname, sanitizedPath);
 
     // Check if file exists
     fs.access(filePath, fs.constants.F_OK, (err) => {
