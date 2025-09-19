@@ -70,7 +70,7 @@ export default defineConfig({
     strictPort: true,
   },
   // Base URL for deployment
-  base: '/',
+  base: './',
   // Enable experimental features for better performance
   esbuild: {
     target: 'esnext',
