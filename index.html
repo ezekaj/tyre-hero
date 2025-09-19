@@ -26,8 +26,8 @@
     <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
 
     <!-- Three.js for 3D GLB Model -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 
     <!-- ULTRA-FAST DEVICE DETECTION (Runs First!) -->
     <script src="assets/js/boot/device-detector.js"></script>
@@ -419,6 +419,8 @@
         // 3D Tyre GLB Model Viewer
         class TyreModelViewer {
             constructor() {
+                console.log('🏗️ TyreModelViewer constructor called');
+
                 this.scene = null;
                 this.camera = null;
                 this.renderer = null;
@@ -426,11 +428,21 @@
                 this.canvas = document.getElementById('tyre-canvas');
                 this.container = document.getElementById('tyre-3d-viewer');
 
+                console.log('🎯 Canvas element:', this.canvas);
+                console.log('📦 Container element:', this.container);
+
+                if (!this.canvas || !this.container) {
+                    console.error('❌ Missing required DOM elements');
+                    return;
+                }
+
                 // Check if browser supports WebGL
                 if (this.webglSupported()) {
+                    console.log('✅ WebGL supported');
                     this.init();
                     this.loadModel();
                 } else {
+                    console.warn('⚠️ WebGL not supported, showing fallback');
                     this.showFallback();
                 }
             }
@@ -629,20 +641,34 @@
 
         // Initialize 3D viewer when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            // Check if it's a mobile device with limited performance
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            const isLowEnd = navigator.hardwareConcurrency < 4 || navigator.deviceMemory < 4;
+            console.log('🔧 Initializing 3D Tyre Model Viewer...');
 
-            // Only load 3D model on capable devices
-            if (!isMobile || !isLowEnd) {
+            // Check Three.js availability
+            if (typeof THREE === 'undefined') {
+                console.error('❌ Three.js not loaded!');
+                return;
+            }
+
+            if (typeof THREE.GLTFLoader === 'undefined') {
+                console.error('❌ GLTFLoader not available!');
+                return;
+            }
+
+            console.log('✅ Three.js and GLTFLoader loaded successfully');
+
+            try {
                 new TyreModelViewer();
-            } else {
-                // Show fallback for low-end devices
+                console.log('✅ TyreModelViewer initialized');
+            } catch (error) {
+                console.error('❌ Failed to initialize TyreModelViewer:', error);
+
+                // Show fallback on error
                 const container = document.getElementById('tyre-3d-viewer');
                 const canvas = document.getElementById('tyre-canvas');
                 if (container && canvas) {
                     canvas.style.display = 'none';
                     container.style.background = `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="%23333" stroke="%23666" stroke-width="4"/><circle cx="100" cy="100" r="40" fill="%23444"/><text x="100" y="105" text-anchor="middle" fill="white" font-size="12">TYRE</text></svg>') center/contain no-repeat`;
+                    console.log('🎨 Fallback static image displayed');
                 }
             }
         });
