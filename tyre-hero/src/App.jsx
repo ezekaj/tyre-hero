@@ -884,13 +884,11 @@ const App = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center mb-12">
             <div className="flex items-center space-x-4 mb-8 md:mb-0">
-              <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-2xl">
-                T
-              </div>
-              <div>
-                <div className="text-white font-black text-3xl">Tyre Hero</div>
-                <div className="text-red-400 text-xl">24/7 Emergency Rescue Service</div>
-              </div>
+              <img
+                src="/images/tyrehero-logo-white.svg"
+                alt="Tyre Hero Logo"
+                className="h-16 w-auto"
+              />
             </div>
 
             <div className="flex space-x-8">
@@ -927,8 +925,8 @@ const App = () => {
           </div>
 
           <p className="text-gray-400 text-xl mb-8">
-            © 2023 Tyre Hero. Professional mobile tyre fitting and emergency roadside assistance service.
-            Serving Slough, Maidenhead & Windsor.
+            © 2025 Tyre Hero. Professional mobile tyre fitting and emergency roadside assistance service.
+            Serving Slough, Maidenhead & Windsor. Developed by ELO Group.
           </p>
 
           <div className="flex flex-wrap justify-center space-x-12 text-lg text-gray-500">
