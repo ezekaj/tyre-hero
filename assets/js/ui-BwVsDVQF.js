@@ -1,0 +1,2 @@
+import"./performance-DXg-j1an.js";var r,e,o={exports:{}},t={},n=(e||(e=1,o.exports=function(){if(r)return t;r=1;var e=Symbol.for("react.transitional.element"),o=Symbol.for("react.fragment");function n(r,o,t){var n=null;if(void 0!==t&&(n=""+t),void 0!==o.key&&(n=""+o.key),"key"in o)for(var a in t={},o)"key"!==a&&(t[a]=o[a]);else t=o;return o=t.ref,{$$typeof:e,type:r,key:n,ref:void 0!==o?o:null,props:t}}return t.Fragment=o,t.jsx=n,t.jsxs=n,t}()),o.exports);export{n as j};
+//# sourceMappingURL=ui-BwVsDVQF.js.map
