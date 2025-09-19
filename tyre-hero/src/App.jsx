@@ -1,5 +1,71 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+// Enhanced Conversion Tracking for Google Ads & Analytics
+const trackConversion = (conversionType, details = {}) => {
+  try {
+    // Google Ads Conversion Tracking
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+        'transaction_id': `${conversionType}_${Date.now()}`,
+        'value': details.value || 0,
+        'currency': 'GBP',
+        'event_category': 'Emergency Service',
+        'event_label': conversionType,
+        'custom_parameter_1': details.location || 'Slough,Maidenhead,Windsor',
+        'custom_parameter_2': 'Emergency Mobile Tyre Service'
+      });
+    }
+
+    // Google Analytics Enhanced Event Tracking
+    if (window.gtag) {
+      window.gtag('event', conversionType, {
+        'event_category': 'Emergency Service Conversion',
+        'event_label': details.label || conversionType,
+        'value': details.value || 0,
+        'currency': 'GBP',
+        'service_type': details.serviceType || 'Emergency Tyre Service',
+        'location': details.location || 'Slough,Maidenhead,Windsor',
+        'response_time_guarantee': '60 minutes'
+      });
+    }
+
+    // Facebook Pixel Conversion Tracking
+    if (window.fbq) {
+      window.fbq('track', 'Lead', {
+        content_name: details.serviceName || 'Emergency Tyre Service',
+        content_category: 'Automotive Emergency Services',
+        value: details.value || 0,
+        currency: 'GBP'
+      });
+    }
+
+    console.log(`Conversion tracked: ${conversionType}`, details);
+  } catch (error) {
+    console.error('Conversion tracking error:', error);
+  }
+};
+
+// Phone Call Conversion Tracking
+const trackPhoneCall = (source = 'unknown') => {
+  trackConversion('phone_call', {
+    label: `Phone Call - ${source}`,
+    serviceType: 'Emergency Call',
+    value: 150, // Average call value
+    source: source
+  });
+};
+
+// Emergency Button Click Tracking
+const trackEmergencyClick = (buttonType, location) => {
+  trackConversion('emergency_click', {
+    label: `Emergency Button - ${buttonType}`,
+    serviceType: buttonType,
+    location: location,
+    value: 200 // High intent value
+  });
+};
+
 const App = () => {
   const [isVisible, setIsVisible] = useState({});
   const [activeSection, setActiveSection] = useState('home');
@@ -101,7 +167,11 @@ const App = () => {
       stats: "5000+ Served",
       color: "from-red-500 to-red-600",
       delay: 200,
-      action: () => window.location.href = 'tel:08000000000'
+      action: () => {
+        trackPhoneCall('Service Card - Emergency Tyre Replacement');
+        trackEmergencyClick('Emergency Tyre Replacement', 'Service Card');
+        window.location.href = 'tel:08000000000';
+      }
     },
     {
       title: "Professional Puncture Repair",
@@ -110,7 +180,11 @@ const App = () => {
       stats: "98% Success Rate",
       color: "from-blue-500 to-blue-600",
       delay: 400,
-      action: () => window.location.href = 'tel:08000000000'
+      action: () => {
+        trackPhoneCall('Service Card - Professional Puncture Repair');
+        trackEmergencyClick('Professional Puncture Repair', 'Service Card');
+        window.location.href = 'tel:08000000000';
+      }
     },
     {
       title: "Mobile Tyre Fitting",
@@ -119,7 +193,11 @@ const App = () => {
       stats: "15+ Years Expertise",
       color: "from-purple-500 to-purple-600",
       delay: 600,
-      action: () => window.location.href = 'tel:08000000000'
+      action: () => {
+        trackPhoneCall('Service Card - Mobile Tyre Fitting');
+        trackEmergencyClick('Mobile Tyre Fitting', 'Service Card');
+        window.location.href = 'tel:08000000000';
+      }
     },
     {
       title: "24/7 Emergency Callout",
@@ -128,7 +206,11 @@ const App = () => {
       stats: "24/7 Available",
       color: "from-green-500 to-green-600",
       delay: 800,
-      action: () => window.location.href = 'tel:08000000000'
+      action: () => {
+        trackPhoneCall('Service Card - 24/7 Emergency Callout');
+        trackEmergencyClick('24/7 Emergency Callout', 'Service Card');
+        window.location.href = 'tel:08000000000';
+      }
     }
   ];
 
@@ -395,7 +477,11 @@ const App = () => {
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-16">
               <button
-                onClick={() => window.location.href = 'tel:08000000000'}
+                onClick={() => {
+                  trackPhoneCall('Hero Section CTA');
+                  trackEmergencyClick('Emergency Call', 'Hero CTA');
+                  window.location.href = 'tel:08000000000';
+                }}
                 className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-6 px-12 rounded-3xl text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-300 hover:rotate-2 animate-pulse border-4 border-red-400/50 group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center">
