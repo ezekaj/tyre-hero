@@ -42,7 +42,11 @@ FeatureItem.displayName = 'FeatureItem';
 const TrustBadge = memo(() => (
   <div className="md:w-1/2 relative">
     <div className="bg-gradient-to-br from-red-600/20 to-red-800/20 rounded-xl p-8 h-full flex flex-col items-center justify-center border border-red-500/30">
-      <div className="text-6xl mb-4" role="img" aria-label="Tools icon">🛠️</div>
+      <div className="text-red-400 mb-4" role="img" aria-label="Tools icon">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M22.7 19L13.6 9.9c.9-2.2.4-4.8-1.5-6.7C10.7 1.8 8.6 1.3 6.7 2l3.8 3.8-2.8 2.8L3.9 4.8c-.7 1.9-.2 4 1.2 5.4 1.9 1.9 4.5 2.4 6.7 1.5l9.1 9.1c.4.4 1 .4 1.4 0l.4-.4c.4-.4.4-1 0-1.4z"/>
+        </svg>
+      </div>
       <h4 className="text-xl font-bold text-white mb-2">Trusted by Local Drivers</h4>
       <p className="text-gray-300 text-center">
         Over 5,000 satisfied customers across Slough, Maidenhead and Windsor have chosen us for their tyre needs.

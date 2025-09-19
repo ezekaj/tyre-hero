@@ -7,7 +7,7 @@ const CallButton = memo(({ onClick }) => (
     className="bg-gradient-to-r from-red-600 to-red-800 text-white font-bold py-5 px-10 rounded-full text-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 animate-pulse border-2 border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/50"
     aria-label={`Call now ${PHONE_NUMBER}`}
   >
-    📞 Call Now: {PHONE_NUMBER}
+    Call Now: {PHONE_NUMBER}
   </button>
 ));
 

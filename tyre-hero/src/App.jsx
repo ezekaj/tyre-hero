@@ -292,28 +292,12 @@ const App = () => {
               className="flex items-center space-x-3 cursor-pointer group"
               onClick={() => scrollToSection('home')}
             >
-              <div className="relative">
-                <div className={`w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-2xl group-hover:scale-110 transition-transform duration-300 ${
-                  emergencyMode ? 'animate-pulse bg-gradient-to-r from-red-600 to-pink-600 shadow-red-500/50' : ''
-                }`}>
-                  T
-                </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse border-2 border-black"></div>
-              </div>
               <div className="flex items-center">
                 <img
                   src="/images/tyrehero-logo-white.svg"
                   alt="Tyre Hero Logo"
                   className="h-12 w-auto mr-3"
                 />
-                <div>
-                  <div className="text-white font-bold text-xl">Tyre Hero</div>
-                  <div className={`text-sm transition-colors duration-300 ${
-                    emergencyMode ? 'text-red-400 animate-pulse' : 'text-red-400'
-                  }`}>
-                    {emergencyMode ? 'EMERGENCY MODE ACTIVE' : '24/7 Emergency Service'}
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -576,7 +560,11 @@ const App = () => {
 
                 <div className="relative z-10">
                   <h3 className="text-4xl font-black text-white mb-8 flex items-center">
-                    <span className="w-16 h-16 bg-red-500/30 rounded-2xl flex items-center justify-center mr-6 text-red-400 text-2xl">🏆</span>
+                    <span className="w-16 h-16 bg-red-500/30 rounded-2xl flex items-center justify-center mr-6">
+                      <svg className="w-8 h-8 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    </span>
                     Our Mission
                   </h3>
                   <p className="text-gray-300 mb-8 text-xl leading-relaxed">
@@ -613,7 +601,11 @@ const App = () => {
 
                 <div className="relative z-10 space-y-8">
                   <div className="text-center">
-                    <div className="text-9xl mb-6 animate-bounce">🔧</div>
+                    <div className="w-32 h-32 mb-6 bg-red-500 rounded-full flex items-center justify-center animate-bounce shadow-2xl">
+                      <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm4 14a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                      </svg>
+                    </div>
                     <h4 className="text-4xl font-black text-white mb-6">Trusted by Local Drivers</h4>
                     <p className="text-gray-300 text-center text-xl">
                       Over 5,000 satisfied customers across Slough, Maidenhead and Windsor have chosen us for their tyre needs.
@@ -760,7 +752,7 @@ const App = () => {
                       size: "2xl"
                     },
                     {
-                      icon: "📍",
+                      icon: "location",
                       title: "SERVICE AREA",
                       value: "Slough, Maidenhead, Windsor",
                       desc: "And all surrounding areas",
@@ -774,8 +766,11 @@ const App = () => {
                       onClick={() => {
                         if (contact.icon === 'phone') {
                           window.location.href = 'tel:08000000000';
-                        } else {
+                        } else if (contact.icon === 'email') {
                           window.location.href = 'mailto:rescue@tyrehero.co.uk';
+                        } else {
+                          // location - just scroll to top or show alert
+                          window.scrollTo({top: 0, behavior: 'smooth'});
                         }
                       }}
                     >
@@ -784,10 +779,14 @@ const App = () => {
                           <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                           </svg>
-                        ) : (
+                        ) : contact.icon === 'email' ? (
                           <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                          </svg>
+                        ) : (
+                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                           </svg>
                         )}
                       </div>
@@ -817,80 +816,6 @@ const App = () => {
               </div>
             </div>
 
-            {/* Contact Form */}
-            <div className="bg-gradient-to-br from-gray-900/70 to-black/70 backdrop-blur-3xl rounded-4xl p-10 border border-gray-700/50">
-              <h3 className="text-4xl font-black text-white mb-10">Request Rescue</h3>
-              <form className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="group">
-                    <label htmlFor="name" className="block text-gray-300 mb-4 font-black text-lg">Your Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="w-full bg-gray-800/60 border border-gray-700 rounded-2xl px-6 py-5 text-white placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/50 focus:border-transparent transition-all duration-500 text-lg"
-                      placeholder="Full name"
-                    />
-                  </div>
-                  <div className="group">
-                    <label htmlFor="phone" className="block text-gray-300 mb-4 font-black text-lg">Phone Number</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      className="w-full bg-gray-800/60 border border-gray-700 rounded-2xl px-6 py-5 text-white placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/50 focus:border-transparent transition-all duration-500 text-lg"
-                      placeholder="+44 123 456 7890"
-                    />
-                  </div>
-                </div>
-
-                <div className="group">
-                  <label htmlFor="email" className="block text-gray-300 mb-4 font-black text-lg">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full bg-gray-800/60 border border-gray-700 rounded-2xl px-6 py-5 text-white placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/50 focus:border-transparent transition-all duration-500 text-lg"
-                    placeholder="your@email.com"
-                  />
-                </div>
-
-                <div className="group">
-                  <label htmlFor="location" className="block text-gray-300 mb-4 font-black text-lg">Your Location</label>
-                  <input
-                    type="text"
-                    id="location"
-                    className="w-full bg-gray-800/60 border border-gray-700 rounded-2xl px-6 py-5 text-white placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/50 focus:border-transparent transition-all duration-500 text-lg"
-                    placeholder="Street, City, Postcode"
-                  />
-                </div>
-
-                <div className="group">
-                  <label htmlFor="message" className="block text-gray-300 mb-4 font-black text-lg">Describe Your Emergency</label>
-                  <textarea
-                    id="message"
-                    rows="6"
-                    className="w-full bg-gray-800/60 border border-gray-700 rounded-2xl px-6 py-5 text-white placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/50 focus:border-transparent transition-all duration-500 text-lg resize-none"
-                    placeholder="What's wrong with your tyre? What's your vehicle type? Any safety concerns? We'll dispatch the right rescue team immediately..."
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-6 px-8 rounded-3xl text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-500 border-4 border-red-400/50 group relative overflow-hidden"
-                >
-                  <span className="relative z-10 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                    DISPATCH RESCUE TEAM NOW
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-500"></div>
-                </button>
-
-                <div className="text-center text-gray-400 text-lg">
-                  <p>By submitting, you agree to our <a href="#" className="text-red-400 hover:underline font-bold">Emergency Service Terms</a></p>
-                </div>
-              </form>
-            </div>
           </div>
         </div>
       </section>
@@ -904,7 +829,7 @@ const App = () => {
 
             <div className="relative z-10">
               <div className="inline-block bg-red-500/40 rounded-full px-10 py-4 mb-10 border border-red-500/50 animate-pulse">
-                <span className="text-red-300 font-black text-2xl animate-pulse">🚨 FINAL EMERGENCY ALERT</span>
+                <span className="text-red-300 font-black text-2xl animate-pulse">FINAL EMERGENCY ALERT</span>
               </div>
 
               <h2 className="text-6xl md:text-8xl font-black text-white mb-10 leading-tight">
@@ -920,7 +845,7 @@ const App = () => {
 
               <div className="flex flex-col sm:flex-row gap-10 justify-center items-center mb-14">
                 <button
-                  onClick={toggleEmergencyMode}
+                  onClick={() => window.location.href = 'tel:08000000000'}
                   className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-8 px-16 rounded-4xl text-3xl shadow-4xl hover:shadow-red-500/50 transform hover:scale-105 transition-all duration-500 hover:rotate-3 animate-pulse border-4 border-red-400/50 group relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center">
@@ -1002,7 +927,7 @@ const App = () => {
           </div>
 
           <p className="text-gray-400 text-xl mb-8">
-            ©️ 2023 Tyre Hero. Professional mobile tyre fitting and emergency roadside assistance service.
+            © 2023 Tyre Hero. Professional mobile tyre fitting and emergency roadside assistance service.
             Serving Slough, Maidenhead & Windsor.
           </p>
 
@@ -1027,7 +952,7 @@ const App = () => {
 
       {/* Floating Emergency Button */}
       <button
-        onClick={toggleEmergencyMode}
+        onClick={() => window.location.href = 'tel:08000000000'}
         className="fixed bottom-10 right-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-6 rounded-3xl shadow-4xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-500 z-50 animate-bounce border-4 border-red-400/50 group"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
