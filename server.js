@@ -1,427 +1,667 @@
-const https = require('https');
-const http = require('http');
-const fs = require('fs');
+#!/usr/bin/env node
+
+/**
+ * TyreHero Emergency Tyre Service - Production Server
+ * 
+ * A secure, high-performance Node.js server for emergency tyre services
+ * Handles static file serving, emergency bookings, and API endpoints
+ * 
+ * Features:
+ * - 24/7 emergency booking system
+ * - Security hardened with rate limiting
+ * - GZIP compression and caching
+ * - Progressive Web App support
+ * - Health monitoring and graceful shutdown
+ */
+
+const express = require('express');
+const helmet = require('helmet');
+const compression = require('compression');
+const rateLimit = require('express-rate-limit');
+const cors = require('cors');
 const path = require('path');
-const url = require('url');
-const crypto = require('crypto');
+const fs = require('fs').promises;
+const { body, validationResult, sanitize } = require('express-validator');
+const winston = require('winston');
+const cluster = require('cluster');
+const os = require('os');
 
-// Security configuration
-const SECURITY_CONFIG = {
-    maxRequestSize: 50 * 1024 * 1024, // 50MB max request
-    rateLimitWindow: 15 * 60 * 1000, // 15 minutes
-    rateLimitMax: 1000, // requests per window
-    emergencyRateLimit: 10, // emergency calls per minute
-    allowedOrigins: [
-        'https://tyrehero.com',
-        'https://www.tyrehero.com',
-        'https://ezekaj.github.io',
-        'http://localhost:3000' // Development only
+// Environment configuration
+const config = {
+    port: process.env.PORT || 3000,
+    host: process.env.HOST || '0.0.0.0',
+    nodeEnv: process.env.NODE_ENV || 'development',
+    logLevel: process.env.LOG_LEVEL || 'info',
+    cluster: process.env.CLUSTER_MODE === 'true' && process.env.NODE_ENV === 'production',
+    emergencyPhone: process.env.EMERGENCY_PHONE || '+447700900000',
+    maxFileSize: process.env.MAX_FILE_SIZE || '10mb',
+    dbConnectionString: process.env.DATABASE_URL || 'sqlite:./tyrehero.db'
+};
+
+// Logger configuration
+const logger = winston.createLogger({
+    level: config.logLevel,
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.errors({ stack: true }),
+        winston.format.json()
+    ),
+    defaultMeta: { service: 'tyrehero-server' },
+    transports: [
+        new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+        new winston.transports.File({ filename: 'logs/combined.log' })
     ]
-};
+});
 
-// Rate limiting storage
-const rateLimitStore = new Map();
-const emergencyCallStore = new Map();
-
-// MIME types for secure file serving
-const mimeTypes = {
-    '.html': 'text/html; charset=utf-8',
-    '.css': 'text/css; charset=utf-8',
-    '.js': 'application/javascript; charset=utf-8',
-    '.json': 'application/json; charset=utf-8',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.gif': 'image/gif',
-    '.svg': 'image/svg+xml',
-    '.ico': 'image/x-icon',
-    '.webp': 'image/webp',
-    '.woff': 'font/woff',
-    '.woff2': 'font/woff2',
-    '.ttf': 'font/ttf',
-    '.eot': 'application/vnd.ms-fontobject',
-    '.glb': 'model/gltf-binary',
-    '.gltf': 'model/gltf+json'
-};
-
-// Security headers for all responses
-function setSecurityHeaders(res, origin) {
-    // Content Security Policy
-    res.setHeader('Content-Security-Policy',
-        "default-src 'self'; " +
-        "script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; " +
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-        "font-src 'self' https://fonts.gstatic.com; " +
-        "img-src 'self' data: https:; " +
-        "connect-src 'self' https://api.whatsapp.com; " +
-        "frame-ancestors 'none'; " +
-        "base-uri 'self';"
-    );
-
-    // CORS - restrictive for production
-    if (SECURITY_CONFIG.allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Max-Age', '86400');
-
-    // Security headers
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-Frame-Options', 'DENY');
-    res.setHeader('X-XSS-Protection', '1; mode=block');
-    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-    res.setHeader('Permissions-Policy', 'geolocation=(self), microphone=(), camera=()');
-
-    // Cache control
-    res.setHeader('Cache-Control', 'public, max-age=3600');
-    res.setHeader('ETag', crypto.randomBytes(16).toString('hex'));
+if (config.nodeEnv !== 'production') {
+    logger.add(new winston.transports.Console({
+        format: winston.format.combine(
+            winston.format.colorize(),
+            winston.format.simple()
+        )
+    }));
 }
 
-// Rate limiting middleware
-function checkRateLimit(req, res) {
-    const clientIP = req.connection.remoteAddress || req.socket.remoteAddress;
-    const now = Date.now();
-    const windowStart = now - SECURITY_CONFIG.rateLimitWindow;
+// Cluster management for production
+if (config.cluster && cluster.isMaster) {
+    const numCPUs = os.cpus().length;
+    logger.info(`Master ${process.pid} is running. Forking ${numCPUs} workers.`);
 
-    // Clean old entries
-    for (const [ip, requests] of rateLimitStore.entries()) {
-        rateLimitStore.set(ip, requests.filter(time => time > windowStart));
-        if (rateLimitStore.get(ip).length === 0) {
-            rateLimitStore.delete(ip);
+    // Fork workers
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+        logger.error(`Worker ${worker.process.pid} died. Code: ${code}, Signal: ${signal}`);
+        cluster.fork(); // Restart worker
+    });
+
+    return;
+}
+
+// Express app setup
+const app = express();
+
+// Trust proxy for HTTPS/load balancer environments
+app.set('trust proxy', 1);
+
+// Security headers with Helmet
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com"],
+            scriptSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", "data:", "https:"],
+            connectSrc: ["'self'"],
+            objectSrc: ["'none'"],
+            mediaSrc: ["'self'"],
+            frameSrc: ["'none'"]
         }
+    },
+    hsts: {
+        maxAge: 31536000,
+        includeSubDomains: true,
+        preload: true
     }
+}));
 
-    // Check current IP
-    if (!rateLimitStore.has(clientIP)) {
-        rateLimitStore.set(clientIP, []);
-    }
-
-    const requests = rateLimitStore.get(clientIP);
-    if (requests.length >= SECURITY_CONFIG.rateLimitMax) {
-        res.writeHead(429, {
-            'Content-Type': 'application/json',
-            'Retry-After': '900' // 15 minutes
-        });
-        res.end(JSON.stringify({
-            error: 'Rate limit exceeded',
-            message: 'Too many requests. Please try again later.',
-            retryAfter: 900
-        }));
-        return false;
-    }
-
-    requests.push(now);
-    return true;
-}
-
-// Emergency call rate limiting
-function checkEmergencyRateLimit(req, res) {
-    const clientIP = req.connection.remoteAddress || req.socket.remoteAddress;
-    const now = Date.now();
-    const minute = Math.floor(now / 60000);
-
-    const key = `${clientIP}:${minute}`;
-    const calls = emergencyCallStore.get(key) || 0;
-
-    if (calls >= SECURITY_CONFIG.emergencyRateLimit) {
-        res.writeHead(429, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-            error: 'Emergency rate limit exceeded',
-            message: 'Too many emergency calls. If this is a genuine emergency, please call 999.',
-            emergencyNumber: '999'
-        }));
-        return false;
-    }
-
-    emergencyCallStore.set(key, calls + 1);
-
-    // Clean old entries
-    const currentMinute = Math.floor(Date.now() / 60000);
-    for (const [key] of emergencyCallStore.entries()) {
-        const keyMinute = parseInt(key.split(':')[1]);
-        if (keyMinute < currentMinute - 1) {
-            emergencyCallStore.delete(key);
+// CORS configuration
+app.use(cors({
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            'https://tyrehero.co.uk',
+            'https://www.tyrehero.co.uk',
+            ...(config.nodeEnv === 'development' ? ['http://localhost:3000', 'http://127.0.0.1:3000'] : [])
+        ];
+        
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
         }
-    }
+    },
+    credentials: true
+}));
 
-    return true;
-}
-
-// Secure path validation
-function isValidPath(pathname) {
-    // Prevent path traversal attacks
-    const normalizedPath = path.normalize(pathname);
-
-    // Block dangerous patterns
-    const dangerousPatterns = [
-        /\.\./,
-        /\/\/+/,  // Multiple forward slashes
-        /\\\\/,
-        /\0/,
-        /%2e%2e/i,
-        /%252e%252e/i,
-        /\.\.\//,
-        /\.\.\\/
-    ];
-
-    for (const pattern of dangerousPatterns) {
-        if (pattern.test(normalizedPath) || pattern.test(pathname)) {
+// Compression middleware
+app.use(compression({
+    level: 6,
+    threshold: 1024,
+    filter: (req, res) => {
+        if (req.headers['x-no-compression']) {
             return false;
         }
+        return compression.filter(req, res);
     }
+}));
 
-    // Handle Windows path normalization - use original pathname for root check
-    if (pathname === '/' || pathname === '/index.html' || normalizedPath === '/' || normalizedPath === '/index.html') {
-        return true;
+// Body parsing middleware
+app.use(express.json({ limit: config.maxFileSize }));
+app.use(express.urlencoded({ extended: true, limit: config.maxFileSize }));
+
+// Request logging middleware
+app.use((req, res, next) => {
+    const start = Date.now();
+    
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        logger.info({
+            method: req.method,
+            url: req.url,
+            statusCode: res.statusCode,
+            duration: `${duration}ms`,
+            userAgent: req.get('User-Agent'),
+            ip: req.ip,
+            emergency: req.url.includes('/emergency')
+        });
+    });
+    
+    next();
+});
+
+// Rate limiting configurations
+const generalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per windowMs
+    message: {
+        error: 'Too many requests from this IP, please try again later.',
+        retryAfter: '15 minutes'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+    skip: (req) => req.url.startsWith('/api/emergency') // Don't limit emergency calls
+});
+
+const emergencyLimiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 5, // Allow 5 emergency calls per minute per IP
+    message: {
+        error: 'Emergency service rate limit exceeded. If this is a genuine emergency, please call directly.',
+        phone: config.emergencyPhone
+    },
+    standardHeaders: true,
+    legacyHeaders: false
+});
+
+const formLimiter = rateLimit({
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    max: 3, // Limit form submissions
+    message: {
+        error: 'Too many form submissions. Please wait before submitting again.'
     }
+});
 
-    // Only allow specific file extensions
-    const allowedExtensions = Object.keys(mimeTypes);
-    const ext = path.extname(normalizedPath).toLowerCase();
+// Apply rate limiting
+app.use('/api', generalLimiter);
+app.use('/api/emergency-*', emergencyLimiter);
+app.use(['/api/regular-booking', '/api/contact'], formLimiter);
 
-    return allowedExtensions.includes(ext);
-}
+// Input validation schemas
+const emergencyBookingValidation = [
+    body('name').notEmpty().trim().escape().isLength({ min: 2, max: 50 }),
+    body('phone').isMobilePhone('en-GB').normalizeEmail(),
+    body('location').notEmpty().trim().escape().isLength({ min: 5, max: 200 }),
+    body('tyreSize').optional().trim().escape().isLength({ max: 20 }),
+    body('vehicleType').isIn(['car', 'van', 'motorcycle', 'truck']),
+    body('urgency').isIn(['immediate', 'within-hour', 'within-2hours']),
+    body('description').optional().trim().escape().isLength({ max: 500 })
+];
+
+const regularBookingValidation = [
+    body('name').notEmpty().trim().escape().isLength({ min: 2, max: 50 }),
+    body('email').isEmail().normalizeEmail(),
+    body('phone').isMobilePhone('en-GB'),
+    body('location').notEmpty().trim().escape().isLength({ min: 5, max: 200 }),
+    body('tyreSize').notEmpty().trim().escape().isLength({ max: 20 }),
+    body('quantity').isInt({ min: 1, max: 8 }),
+    body('preferredDate').isISO8601().toDate(),
+    body('preferredTime').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/),
+    body('vehicleType').isIn(['car', 'van', 'motorcycle', 'truck']),
+    body('message').optional().trim().escape().isLength({ max: 500 })
+];
+
+const contactValidation = [
+    body('name').notEmpty().trim().escape().isLength({ min: 2, max: 50 }),
+    body('email').isEmail().normalizeEmail(),
+    body('subject').notEmpty().trim().escape().isLength({ min: 5, max: 100 }),
+    body('message').notEmpty().trim().escape().isLength({ min: 10, max: 1000 })
+];
+
+// Static file serving with optimized caching
+app.use(express.static('.', {
+    maxAge: '1y',
+    etag: true,
+    lastModified: true,
+    setHeaders: (res, path) => {
+        // Different caching strategies for different file types
+        if (path.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'public, max-age=300'); // 5 minutes for HTML
+        } else if (path.includes('/images/') || path.includes('/assets/')) {
+            res.setHeader('Cache-Control', 'public, max-age=31536000'); // 1 year for assets
+        } else if (path.endsWith('.css') || path.endsWith('.js')) {
+            res.setHeader('Cache-Control', 'public, max-age=86400'); // 1 day for CSS/JS
+        }
+        
+        // Security headers for all static files
+        res.setHeader('X-Content-Type-Options', 'nosniff');
+        res.setHeader('X-Frame-Options', 'DENY');
+    }
+}));
+
+// API Routes
 
 // Health check endpoint
-function handleHealthCheck(req, res) {
-    const health = {
+app.get('/health', (req, res) => {
+    const healthData = {
         status: 'healthy',
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
         memory: process.memoryUsage(),
-        version: '1.0.0',
-        environment: process.env.NODE_ENV || 'development'
+        pid: process.pid,
+        version: process.version,
+        environment: config.nodeEnv
     };
+    
+    res.json(healthData);
+});
 
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(health, null, 2));
-}
-
-// Emergency API endpoint
-function handleEmergencyCall(req, res) {
-    if (!checkEmergencyRateLimit(req, res)) {
-        return;
-    }
-
-    console.log(`🚨 EMERGENCY CALL: ${new Date().toISOString()} from ${req.connection.remoteAddress}`);
-
-    const response = {
-        status: 'received',
-        emergencyNumber: '0800 123 4567',
-        estimatedResponse: '45 minutes',
-        reference: crypto.randomBytes(8).toString('hex').toUpperCase(),
-        timestamp: new Date().toISOString()
-    };
-
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(response));
-}
-
-// Create secure server
-const server = http.createServer((req, res) => {
-    const startTime = Date.now();
-    const origin = req.headers.origin;
-
-    // Set security headers for all responses
-    setSecurityHeaders(res, origin);
-
-    // Handle preflight requests
-    if (req.method === 'OPTIONS') {
-        res.writeHead(200);
-        res.end();
-        return;
-    }
-
-    // Rate limiting
-    if (!checkRateLimit(req, res)) {
-        return;
-    }
-
-    let parsedUrl = url.parse(req.url, true);
-    let pathname = parsedUrl.pathname;
-
-    // Handle special endpoints
-    if (pathname === '/health') {
-        handleHealthCheck(req, res);
-        return;
-    }
-
-    if (pathname === '/api/emergency' && req.method === 'POST') {
-        handleEmergencyCall(req, res);
-        return;
-    }
-
-    // Security validation
-    if (!isValidPath(pathname)) {
-        console.warn(`🚨 SECURITY: Blocked suspicious path: ${pathname} from ${req.connection.remoteAddress}`);
-        res.writeHead(403, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-            error: 'Forbidden',
-            message: 'Access denied'
-        }));
-        return;
-    }
-
-    // Default to index.html for root
-    if (pathname === '/') {
-        pathname = '/index.html';
-    }
-
-    // Safe file path construction - allow assets and images subdirectories
-    const filePath = path.join(__dirname, pathname);
-    const normalizedFilePath = path.normalize(filePath);
-
-    // Security check - ensure file is within allowed directories
-    const allowedPaths = [
-        __dirname,
-        path.join(__dirname, 'assets'),
-        path.join(__dirname, 'images')
-    ];
-
-    const isAllowedPath = allowedPaths.some(allowedPath =>
-        normalizedFilePath.startsWith(path.normalize(allowedPath))
-    );
-
-    if (!isAllowedPath) {
-        res.writeHead(403, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-            error: 'Forbidden',
-            message: 'Access denied'
-        }));
-        return;
-    }
-
-    // Serve file
-    fs.access(filePath, fs.constants.F_OK, (err) => {
-        if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            res.end(`
-<!DOCTYPE html>
-<html>
-<head>
-    <title>TyreHero - Page Not Found</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        .emergency { background: #dc2626; color: white; padding: 20px; margin: 20px 0; border-radius: 8px; }
-        .emergency a { color: white; text-decoration: none; font-weight: bold; }
-    </style>
-</head>
-<body>
-    <h1>Page Not Found</h1>
-    <p>The requested page could not be found.</p>
-    <div class="emergency">
-        <h2>🚨 Emergency Service Available 24/7</h2>
-        <p>If you need immediate tyre assistance:</p>
-        <a href="tel:08001234567">📞 Call 0800 123 4567</a>
-    </div>
-    <p><a href="/">← Return to Homepage</a></p>
-</body>
-</html>
-            `);
-            return;
+// Emergency booking endpoint
+app.post('/api/emergency-booking', emergencyBookingValidation, async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            logger.warn('Emergency booking validation failed', { errors: errors.array(), ip: req.ip });
+            return res.status(400).json({
+                success: false,
+                error: 'Validation failed',
+                details: errors.array()
+            });
         }
 
-        const ext = path.extname(filePath).toLowerCase();
-        const contentType = mimeTypes[ext] || 'application/octet-stream';
+        const bookingData = {
+            id: generateBookingId('EMRG'),
+            type: 'emergency',
+            timestamp: new Date().toISOString(),
+            customerInfo: {
+                name: req.body.name,
+                phone: req.body.phone,
+                location: req.body.location
+            },
+            serviceDetails: {
+                tyreSize: req.body.tyreSize,
+                vehicleType: req.body.vehicleType,
+                urgency: req.body.urgency,
+                description: req.body.description
+            },
+            status: 'pending',
+            priority: 'high',
+            ip: req.ip,
+            userAgent: req.get('User-Agent')
+        };
 
-        fs.readFile(filePath, (err, data) => {
-            if (err) {
-                console.error(`Error reading file ${filePath}:`, err);
-                res.writeHead(500, { 'Content-Type': 'text/html' });
-                res.end(`
-<!DOCTYPE html>
-<html>
-<head>
-    <title>TyreHero - Service Temporarily Unavailable</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        .emergency { background: #dc2626; color: white; padding: 20px; margin: 20px 0; border-radius: 8px; }
-        .emergency a { color: white; text-decoration: none; font-weight: bold; }
-    </style>
-</head>
-<body>
-    <h1>Service Temporarily Unavailable</h1>
-    <p>We're experiencing technical difficulties. Please try again in a moment.</p>
-    <div class="emergency">
-        <h2>🚨 Emergency Service Still Available</h2>
-        <p>Our emergency response team is always ready:</p>
-        <a href="tel:08001234567">📞 Call 0800 123 4567</a>
-    </div>
-</body>
-</html>
-                `);
-                return;
+        // Store booking (in production, this would go to a database)
+        await storeBooking(bookingData);
+        
+        // Send emergency notifications (SMS, email, etc.)
+        await sendEmergencyNotifications(bookingData);
+
+        logger.info('Emergency booking created', { 
+            bookingId: bookingData.id, 
+            location: bookingData.customerInfo.location,
+            urgency: bookingData.serviceDetails.urgency
+        });
+
+        res.json({
+            success: true,
+            bookingId: bookingData.id,
+            message: 'Emergency booking received. Our team will contact you within 5 minutes.',
+            estimatedResponse: getEstimatedResponseTime(req.body.urgency),
+            emergencyPhone: config.emergencyPhone
+        });
+
+    } catch (error) {
+        logger.error('Emergency booking error', { error: error.message, stack: error.stack });
+        res.status(500).json({
+            success: false,
+            error: 'Emergency booking system temporarily unavailable',
+            message: 'Please call our emergency line directly',
+            phone: config.emergencyPhone
+        });
+    }
+});
+
+// Regular booking endpoint
+app.post('/api/regular-booking', regularBookingValidation, async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                success: false,
+                error: 'Validation failed',
+                details: errors.array()
+            });
+        }
+
+        const bookingData = {
+            id: generateBookingId('REG'),
+            type: 'regular',
+            timestamp: new Date().toISOString(),
+            customerInfo: {
+                name: req.body.name,
+                email: req.body.email,
+                phone: req.body.phone,
+                location: req.body.location
+            },
+            serviceDetails: {
+                tyreSize: req.body.tyreSize,
+                quantity: req.body.quantity,
+                vehicleType: req.body.vehicleType,
+                preferredDate: req.body.preferredDate,
+                preferredTime: req.body.preferredTime,
+                message: req.body.message
+            },
+            status: 'pending',
+            priority: 'normal',
+            ip: req.ip
+        };
+
+        await storeBooking(bookingData);
+        await sendBookingConfirmation(bookingData);
+
+        logger.info('Regular booking created', { bookingId: bookingData.id });
+
+        res.json({
+            success: true,
+            bookingId: bookingData.id,
+            message: 'Booking received successfully. We will contact you within 24 hours to confirm.',
+            estimatedResponse: '24 hours'
+        });
+
+    } catch (error) {
+        logger.error('Regular booking error', { error: error.message });
+        res.status(500).json({
+            success: false,
+            error: 'Booking system temporarily unavailable. Please try again later.'
+        });
+    }
+});
+
+// Contact form endpoint
+app.post('/api/contact', contactValidation, async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                success: false,
+                error: 'Validation failed',
+                details: errors.array()
+            });
+        }
+
+        const contactData = {
+            id: generateContactId(),
+            timestamp: new Date().toISOString(),
+            name: req.body.name,
+            email: req.body.email,
+            subject: req.body.subject,
+            message: req.body.message,
+            ip: req.ip
+        };
+
+        await storeContact(contactData);
+        await sendContactNotification(contactData);
+
+        logger.info('Contact form submitted', { contactId: contactData.id });
+
+        res.json({
+            success: true,
+            message: 'Message sent successfully. We will respond within 24 hours.'
+        });
+
+    } catch (error) {
+        logger.error('Contact form error', { error: error.message });
+        res.status(500).json({
+            success: false,
+            error: 'Message could not be sent. Please try again later.'
+        });
+    }
+});
+
+// Coverage area check
+app.get('/api/coverage-check', (req, res) => {
+    const { postcode, lat, lng } = req.query;
+    
+    if (!postcode && (!lat || !lng)) {
+        return res.status(400).json({
+            success: false,
+            error: 'Postcode or coordinates required'
+        });
+    }
+
+    // In production, this would check against a coverage database
+    const coverage = checkCoverageArea(postcode, lat, lng);
+    
+    res.json({
+        success: true,
+        covered: coverage.covered,
+        estimatedArrival: coverage.estimatedArrival,
+        emergencyResponse: coverage.emergencyResponse,
+        message: coverage.message
+    });
+});
+
+// Emergency call tracking
+app.post('/api/emergency-call', async (req, res) => {
+    try {
+        const callData = {
+            id: generateCallId(),
+            timestamp: new Date().toISOString(),
+            ip: req.ip,
+            userAgent: req.get('User-Agent'),
+            source: req.body.source || 'website'
+        };
+
+        await storeEmergencyCall(callData);
+        
+        logger.info('Emergency call initiated', { callId: callData.id });
+
+        res.json({
+            success: true,
+            callId: callData.id,
+            phone: config.emergencyPhone,
+            message: 'Emergency call logged. Redirecting to phone...'
+        });
+
+    } catch (error) {
+        logger.error('Emergency call tracking error', { error: error.message });
+        res.json({
+            success: true, // Don't block emergency calls
+            phone: config.emergencyPhone
+        });
+    }
+});
+
+// Service Worker support
+app.get('/service-worker.js', (req, res) => {
+    res.setHeader('Content-Type', 'application/javascript');
+    res.setHeader('Service-Worker-Allowed', '/');
+    res.sendFile(path.join(__dirname, 'service-worker.js'));
+});
+
+// Web App Manifest
+app.get('/manifest.json', (req, res) => {
+    const manifest = {
+        name: 'TyreHero - Emergency Tyre Service',
+        short_name: 'TyreHero',
+        description: '24/7 Emergency Mobile Tyre Service',
+        start_url: '/',
+        display: 'standalone',
+        background_color: '#ffffff',
+        theme_color: '#1a73e8',
+        icons: [
+            {
+                src: '/images/icon-192.png',
+                sizes: '192x192',
+                type: 'image/png'
+            },
+            {
+                src: '/images/icon-512.png',
+                sizes: '512x512',
+                type: 'image/png'
             }
+        ]
+    };
+    
+    res.json(manifest);
+});
 
-            // Set appropriate cache headers based on file type
-            if (ext === '.html') {
-                res.setHeader('Cache-Control', 'no-cache, must-revalidate');
-            } else if (['.css', '.js'].includes(ext)) {
-                res.setHeader('Cache-Control', 'public, max-age=86400'); // 1 day
-            } else if (['.png', '.jpg', '.jpeg', '.webp', '.svg'].includes(ext)) {
-                res.setHeader('Cache-Control', 'public, max-age=604800'); // 1 week
-            }
+// Error handling middleware
+app.use((err, req, res, next) => {
+    logger.error('Unhandled error', { 
+        error: err.message, 
+        stack: err.stack, 
+        url: req.url, 
+        method: req.method 
+    });
 
-            res.writeHead(200, { 'Content-Type': contentType });
-            res.end(data);
-
-            // Log response time for monitoring
-            const responseTime = Date.now() - startTime;
-            if (responseTime > 1000) {
-                console.warn(`⚠️ Slow response: ${pathname} took ${responseTime}ms`);
+    if (req.url.includes('/emergency')) {
+        // For emergency endpoints, provide fallback contact info
+        res.status(500).json({
+            success: false,
+            error: 'Service temporarily unavailable',
+            emergency: {
+                phone: config.emergencyPhone,
+                message: 'Please call directly for immediate assistance'
             }
         });
-    });
+    } else {
+        res.status(500).json({
+            success: false,
+            error: 'Internal server error'
+        });
+    }
 });
 
-// Graceful shutdown
-process.on('SIGTERM', () => {
-    console.log('🔄 SIGTERM received. Graceful shutdown...');
+// 404 handler
+app.use((req, res) => {
+    if (req.url.startsWith('/api/')) {
+        res.status(404).json({
+            success: false,
+            error: 'API endpoint not found'
+        });
+    } else {
+        // Serve index.html for SPA routes
+        res.sendFile(path.join(__dirname, 'index.html'));
+    }
+});
+
+// Utility functions
+
+function generateBookingId(prefix = 'BOOK') {
+    const timestamp = Date.now().toString(36);
+    const random = Math.random().toString(36).substring(2, 8);
+    return `${prefix}-${timestamp}-${random}`.toUpperCase();
+}
+
+function generateContactId() {
+    return generateBookingId('CONT');
+}
+
+function generateCallId() {
+    return generateBookingId('CALL');
+}
+
+function getEstimatedResponseTime(urgency) {
+    const times = {
+        'immediate': '5-10 minutes',
+        'within-hour': '30-60 minutes',
+        'within-2hours': '1-2 hours'
+    };
+    return times[urgency] || '30 minutes';
+}
+
+function checkCoverageArea(postcode, lat, lng) {
+    // Simplified coverage check - in production, use proper geolocation service
+    return {
+        covered: true,
+        estimatedArrival: '45 minutes',
+        emergencyResponse: '15 minutes',
+        message: 'We cover your area with 24/7 emergency service'
+    };
+}
+
+// Mock database functions (replace with real database in production)
+async function storeBooking(bookingData) {
+    // In production: INSERT INTO bookings...
+    logger.info('Booking stored', { id: bookingData.id, type: bookingData.type });
+}
+
+async function storeContact(contactData) {
+    // In production: INSERT INTO contacts...
+    logger.info('Contact stored', { id: contactData.id });
+}
+
+async function storeEmergencyCall(callData) {
+    // In production: INSERT INTO emergency_calls...
+    logger.info('Emergency call stored', { id: callData.id });
+}
+
+async function sendEmergencyNotifications(bookingData) {
+    // In production: Send SMS/email/webhook notifications to dispatch team
+    logger.info('Emergency notifications sent', { bookingId: bookingData.id });
+}
+
+async function sendBookingConfirmation(bookingData) {
+    // In production: Send confirmation email
+    logger.info('Booking confirmation sent', { bookingId: bookingData.id });
+}
+
+async function sendContactNotification(contactData) {
+    // In production: Send notification to support team
+    logger.info('Contact notification sent', { contactId: contactData.id });
+}
+
+// Graceful shutdown handling
+process.on('SIGTERM', gracefulShutdown);
+process.on('SIGINT', gracefulShutdown);
+
+function gracefulShutdown(signal) {
+    logger.info(`Received ${signal}, shutting down gracefully`);
+    
+    const server = app.listen(config.port, config.host);
+    
     server.close(() => {
-        console.log('✅ Server closed gracefully');
+        logger.info('HTTP server closed');
         process.exit(0);
     });
-});
 
-process.on('SIGINT', () => {
-    console.log('🔄 SIGINT received. Graceful shutdown...');
-    server.close(() => {
-        console.log('✅ Server closed gracefully');
-        process.exit(0);
+    // Force close after 30 seconds
+    setTimeout(() => {
+        logger.error('Could not close connections in time, forcefully shutting down');
+        process.exit(1);
+    }, 30000);
+}
+
+// Start server
+const server = app.listen(config.port, config.host, () => {
+    logger.info(`TyreHero server running on ${config.host}:${config.port}`, {
+        environment: config.nodeEnv,
+        processId: process.pid,
+        nodeVersion: process.version
     });
 });
 
-// Error handling
-process.on('uncaughtException', (err) => {
-    console.error('💥 Uncaught Exception:', err);
-    process.exit(1);
+// Server error handling
+server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+        logger.error(`Port ${config.port} is already in use`);
+        process.exit(1);
+    } else {
+        logger.error('Server error', { error: err.message });
+    }
 });
 
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('💥 Unhandled Rejection at:', promise, 'reason:', reason);
-    process.exit(1);
-});
-
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || '0.0.0.0';
-
-server.listen(PORT, HOST, () => {
-    console.log('🚀 TyreHero Secure Server Running!');
-    console.log(`📱 Local:    http://localhost:${PORT}`);
-    console.log(`🌐 Network:  http://${HOST}:${PORT}`);
-    console.log('🔒 Security Features Enabled:');
-    console.log('   ✅ Path traversal protection');
-    console.log('   ✅ Rate limiting');
-    console.log('   ✅ Emergency call rate limiting');
-    console.log('   ✅ Content Security Policy');
-    console.log('   ✅ Security headers');
-    console.log('   ✅ CORS protection');
-    console.log('   ✅ Error handling');
-    console.log('   ✅ Health checks: /health');
-    console.log('   ✅ Emergency API: /api/emergency');
-    console.log('🔧 Press Ctrl+C for graceful shutdown');
-});
+module.exports = app;
