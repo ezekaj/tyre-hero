@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tyre-hero-emergency-service/static/css/main.cf890fdb.css",
+    "main.js": "/tyre-hero-emergency-service/static/js/main.64d060dc.js",
+    "index.html": "/tyre-hero-emergency-service/index.html",
+    "main.cf890fdb.css.map": "/tyre-hero-emergency-service/static/css/main.cf890fdb.css.map",
+    "main.64d060dc.js.map": "/tyre-hero-emergency-service/static/js/main.64d060dc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cf890fdb.css",
+    "static/js/main.64d060dc.js"
+  ]
+}
