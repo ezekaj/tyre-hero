@@ -1114,3 +1114,102 @@
         animation: none;
     }
 }
+
+/* ===== SUBTLE DOTTED PATTERN BACKGROUNDS ===== */
+
+/* Main dotted pattern for sections */
+.dotted-pattern-bg {
+    background-color: #0f3460; /* TyreHero dark blue brand color */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 0);
+    background-size: 30px 30px;
+    position: relative;
+}
+
+/* Alternative lighter dotted pattern for content sections */
+.dotted-pattern-light {
+    background-color: #f8f9fa;
+    background-image: radial-gradient(rgba(15, 52, 96, 0.1) 2px, transparent 0);
+    background-size: 35px 35px;
+}
+
+/* Subtle dotted overlay for hero content */
+.hero-content-dotted {
+    background: rgba(0, 0, 0, 0.4);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0);
+    background-size: 25px 25px;
+    backdrop-filter: blur(2px);
+    border-radius: 15px;
+}
+
+/* Emergency service sections with dotted pattern */
+.emergency-section-dotted {
+    background-color: #e53935; /* TyreHero emergency red */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 0);
+    background-size: 40px 40px;
+    color: white;
+}
+
+/* Services grid with subtle texture */
+.services-dotted {
+    background-color: #16213e;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1.5px, transparent 0);
+    background-size: 28px 28px;
+}
+
+/* Responsive dotted patterns */
+@media (min-width: 768px) {
+    .dotted-pattern-bg {
+        background-size: 40px 40px; /* Larger dots on desktop */
+    }
+
+    .dotted-pattern-light {
+        background-size: 45px 45px;
+    }
+
+    .emergency-section-dotted {
+        background-size: 50px 50px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .dotted-pattern-bg {
+        background-size: 50px 50px; /* Even larger on wide screens */
+    }
+
+    .dotted-pattern-light {
+        background-size: 55px 55px;
+    }
+
+    .emergency-section-dotted {
+        background-size: 60px 60px;
+    }
+}
+
+/* Mobile optimizations - smaller, less dense dots */
+@media (max-width: 480px) {
+    .dotted-pattern-bg {
+        background-size: 25px 25px;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 0);
+    }
+
+    .dotted-pattern-light {
+        background-size: 30px 30px;
+        background-image: radial-gradient(rgba(15, 52, 96, 0.08) 1.5px, transparent 0);
+    }
+
+    .emergency-section-dotted {
+        background-size: 35px 35px;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 0);
+    }
+}
+
+/* Alternative hero with dotted pattern (for reduced motion users) */
+.hero-section.dotted-alternative {
+    background-color: #1a1a2e;
+    background-image:
+        linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%),
+        radial-gradient(rgba(255, 255, 255, 0.1) 2px, transparent 0);
+    background-size: 100% 100%, 45px 45px;
+    min-height: 100vh;
+    position: relative;
+}
