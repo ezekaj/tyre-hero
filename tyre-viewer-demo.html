@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TyreHero - Interactive 3D Tyre Specification Viewer</title>
+    
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="assets/css/tyre-viewer.css">
+    
+    <!-- Three.js Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <style>
+        /* Demo page styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #ff6b35 0%, #f39c12 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3em;
+            font-weight: 700;
+            margin: 0 0 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section-title {
+            font-size: 2.5em;
+            color: #212529;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        .controls-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .controls-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #495057;
+        }
+        
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .control-btn {
+            padding: 12px 20px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .control-btn:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.primary {
+            background: #ff6b35;
+        }
+        
+        .control-btn.primary:hover {
+            background: #e55a2b;
+        }
+        
+        .performance-display {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #495057;
+            margin-top: 15px;
+        }
+        
+        .cta-section {
+            background: #212529;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .cta-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.1em;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #ff6b35;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        .cta-button:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2em;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="hero-title">3D Tyre Specifications</h1>
+        <p class="hero-subtitle">
+            Explore tyre features in stunning 3D detail. Interactive hotspots reveal professional-grade specifications and educational content to help you make informed decisions.
+        </p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2 class="section-title">Interactive 3D Tyre Viewer</h2>
+        
+        <!-- Controls Panel -->
+        <div class="controls-panel">
+            <h3 class="controls-title">Viewer Controls</h3>
+            <div class="controls-grid">
+                <button class="control-btn primary" onclick="initializeViewer()">Initialize 3D Viewer</button>
+                <button class="control-btn" onclick="toggleAutoRotate()">Toggle Auto Rotate</button>
+                <button class="control-btn" onclick="resetView()">Reset View</button>
+                <button class="control-btn" onclick="switchToSidewallView()">Sidewall View</button>
+                <button class="control-btn" onclick="switchToTreadView()">Tread View</button>
+                <button class="control-btn" onclick="showPerformanceMetrics()">Performance Metrics</button>
+            </div>
+            <div id="performance-display" class="performance-display" style="display: none;">
+                <div>FPS: <span id="fps-counter">--</span></div>
+                <div>Frame Time: <span id="frame-time">--</span>ms</div>
+                <div>Device: <span id="device-type">--</span></div>
+            </div>
+        </div>
+
+        <!-- 3D Viewer Container -->
+        <div id="tyre-viewer-container" class="tyre-viewer-container">
+            <div class="tyre-viewer-overlay">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Click "Initialize 3D Viewer" to start</div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3 class="feature-title">Interactive Hotspots</h3>
+                <p class="feature-description">
+                    Click on highlighted areas to explore detailed tyre specifications, performance characteristics, and technical information.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">Mobile Optimized</h3>
+                <p class="feature-description">
+                    Touch controls, performance optimization, and responsive design ensure smooth operation on all devices.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3 class="feature-title">Educational Content</h3>
+                <p class="feature-description">
+                    Learn about tyre technology, construction, and performance features through interactive educational modals.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">High Performance</h3>
+                <p class="feature-description">
+                    WebGL acceleration with dynamic quality adjustment ensures smooth 60fps performance across devices.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <h2 class="cta-title">Ready for Professional Service?</h2>
+        <p class="cta-subtitle">
+            Get expert advice on tyre selection and professional installation from TyreHero's certified technicians.
+        </p>
+        <a href="#contact" class="cta-button" onclick="requestQuote('demo')">Get Professional Quote</a>
+    </section>
+
+    <!-- TyreViewer Script -->
+    <script src="assets/js/tyre-viewer.js"></script>
+    
+    <!-- Demo Integration Script -->
+    <script>
+        let tyreViewer = null;
+        let performanceInterval = null;
+
+        // Integration with booking flow (placeholder)
+        window.openBookingFlow = function(options) {
+            alert(`Booking flow triggered!\nSource: ${options.source}\nSpecification: ${options.specification}\nCategory: ${options.category}`);
+        };
+
+        // Analytics integration (placeholder)
+        window.tyreHeroAnalytics = {
+            track: function(event, data) {
+                console.log('Analytics Event:', event, data);
+            }
+        };
+
+        function initializeViewer() {
+            if (tyreViewer) {
+                console.log('Viewer already initialized');
+                return;
+            }
+
+            // Clear the placeholder content
+            document.getElementById('tyre-viewer-container').innerHTML = '';
+
+            try {
+                tyreViewer = new TyreViewer('tyre-viewer-container', {
+                    modelPath: 'assets/models/tyre-specs.glb',
+                    autoRotate: true,
+                    enableHotspots: true,
+                    enableControls: true
+                });
+
+                // Listen for viewer ready event
+                document.addEventListener('tyreViewerReady', function(event) {
+                    console.log('TyreViewer is ready!', event.detail);
+                    updateControlButtons(true);
+                });
+
+            } catch (error) {
+                console.error('Failed to initialize TyreViewer:', error);
+                showError('Failed to initialize 3D viewer. Please check that all dependencies are loaded.');
+            }
+        }
+
+        function toggleAutoRotate() {
+            if (tyreViewer) {
+                tyreViewer.toggleAutoRotate();
+                console.log('Auto-rotate toggled');
+            } else {
+                alert('Please initialize the viewer first');
+            }
+        }
+
+        function resetView() {
+            if (tyreViewer) {
+                tyreViewer.resetView();
+                console.log('View reset');
+            } else {
+                alert('Please initialize the viewer first');
+            }
+        }
+
+        function switchToSidewallView() {
+            if (tyreViewer) {
+                tyreViewer.setSpecificationView('sidewall');
+                console.log('Switched to sidewall view');
+            } else {
+                alert('Please initialize the viewer first');
+            }
+        }
+
+        function switchToTreadView() {
+            if (tyreViewer) {
+                tyreViewer.setSpecificationView('tread');
+                console.log('Switched to tread view');
+            } else {
+                alert('Please initialize the viewer first');
+            }
+        }
+
+        function showPerformanceMetrics() {
+            const display = document.getElementById('performance-display');
+            
+            if (display.style.display === 'none') {
+                display.style.display = 'block';
+                
+                if (tyreViewer) {
+                    performanceInterval = setInterval(() => {
+                        const metrics = tyreViewer.getPerformanceMetrics();
+                        document.getElementById('fps-counter').textContent = metrics.fps || '--';
+                        document.getElementById('frame-time').textContent = metrics.frameTime ? metrics.frameTime.toFixed(2) : '--';
+                        document.getElementById('device-type').textContent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+                    }, 1000);
+                }
+            } else {
+                display.style.display = 'none';
+                if (performanceInterval) {
+                    clearInterval(performanceInterval);
+                    performanceInterval = null;
+                }
+            }
+        }
+
+        function updateControlButtons(enabled) {
+            const buttons = document.querySelectorAll('.control-btn:not(.primary)');
+            buttons.forEach(btn => {
+                btn.disabled = !enabled;
+                btn.style.opacity = enabled ? '1' : '0.5';
+            });
+        }
+
+        function showError(message) {
+            const container = document.getElementById('tyre-viewer-container');
+            container.innerHTML = `
+                <div class="tyre-viewer-overlay">
+                    <div class="error-icon">⚠️</div>
+                    <div class="error-title">Viewer Error</div>
+                    <div class="error-message">${message}</div>
+                    <button class="retry-button" onclick="location.reload()">Reload Page</button>
+                </div>
+            `;
+        }
+
+        function requestQuote(source) {
+            // Integration with TyreHero's booking system
+            if (window.openBookingFlow) {
+                window.openBookingFlow({
+                    source: source,
+                    specification: 'demo',
+                    category: '3d_viewer'
+                });
+            } else {
+                // Fallback action
+                window.open('tel:+441234567890', '_self');
+            }
+        }
+
+        // Initialize control button states
+        updateControlButtons(false);
+
+        // Auto-initialize if supported (optional)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for WebGL support
+            if (window.WebGLRenderingContext) {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                
+                if (gl) {
+                    console.log('WebGL is supported');
+                    // Uncomment to auto-initialize:
+                    // setTimeout(initializeViewer, 1000);
+                } else {
+                    showError('Your browser does not support WebGL, which is required for the 3D viewer.');
+                }
+            } else {
+                showError('Your browser does not support WebGL, which is required for the 3D viewer.');
+            }
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', function() {
+            if (tyreViewer) {
+                tyreViewer.destroy();
+            }
+            if (performanceInterval) {
+                clearInterval(performanceInterval);
+            }
+        });
+    </script>
+</body>
+</html>

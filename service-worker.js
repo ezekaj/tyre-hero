@@ -1,380 +1,339 @@
 /**
  * TyreHero Emergency Service - Service Worker
- * 
- * Provides offline functionality and emergency features for PWA
- * Caches critical resources and enables offline emergency calls
+ * Provides offline emergency contact capabilities
  */
 
-const CACHE_NAME = 'tyrehero-v1.0.0';
-const EMERGENCY_CACHE = 'tyrehero-emergency-v1.0.0';
+const CACHE_NAME = 'tyrehero-v1';
+const EMERGENCY_CACHE = 'tyrehero-emergency-v1';
+const EMERGENCY_PHONE = '+447700900000';
 
-// Critical resources to cache immediately
-const CRITICAL_ASSETS = [
-    '/',
-    '/index.html',
-    '/assets/css/styles.css',
-    '/assets/js/main.js',
-    '/images/favicon.ico',
-    '/manifest.json'
+// Critical files to cache for offline emergency access
+const CRITICAL_CACHE = [
+  '/',
+  '/index.html',
+  '/assets/css/styles.css',
+  '/assets/js/main.js',
+  '/images/tyrehero-logo.svg'
 ];
 
-// Emergency-specific resources
-const EMERGENCY_ASSETS = [
-    '/images/emergency-icon.png',
-    '/assets/sounds/emergency-alert.mp3'
-];
-
-// API endpoints to cache for offline functionality
-const API_CACHE_URLS = [
-    '/api/coverage-check',
-    '/health'
-];
+// Emergency contact page for offline access
+const EMERGENCY_OFFLINE_PAGE = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TyreHero Emergency Contact - Offline</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #dc2626;
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .emergency-card {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .emergency-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .phone-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #fff;
+        }
+        .call-button {
+            background: #fff;
+            color: #dc2626;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        .offline-notice {
+            margin-top: 30px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="emergency-card">
+        <h1 class="emergency-title">🚨 Emergency Contact</h1>
+        <p>TyreHero Emergency Service</p>
+        <div class="phone-number">${EMERGENCY_PHONE}</div>
+        <a href="tel:${EMERGENCY_PHONE}" class="call-button">
+            📞 CALL NOW
+        </a>
+        <div class="offline-notice">
+            <p><strong>You're currently offline</strong></p>
+            <p>This emergency contact is always available</p>
+        </div>
+    </div>
+</body>
+</html>
+`;
 
 // Install event - cache critical resources
-self.addEventListener('install', (event) => {
-    console.log('Service Worker: Installing...');
-    
-    event.waitUntil(
-        Promise.all([
-            // Cache critical assets
-            caches.open(CACHE_NAME).then((cache) => {
-                console.log('Service Worker: Caching critical assets');
-                return cache.addAll(CRITICAL_ASSETS);
-            }),
-            // Cache emergency assets
-            caches.open(EMERGENCY_CACHE).then((cache) => {
-                console.log('Service Worker: Caching emergency assets');
-                return cache.addAll(EMERGENCY_ASSETS);
-            })
-        ]).then(() => {
-            console.log('Service Worker: Installation complete');
-            self.skipWaiting();
-        })
-    );
+self.addEventListener('install', event => {
+  console.log('TyreHero Service Worker installing...');
+  
+  event.waitUntil(
+    Promise.all([
+      // Cache critical files
+      caches.open(CACHE_NAME).then(cache => {
+        return cache.addAll(CRITICAL_CACHE);
+      }),
+      // Cache emergency offline page
+      caches.open(EMERGENCY_CACHE).then(cache => {
+        return cache.put('/emergency-offline', new Response(EMERGENCY_OFFLINE_PAGE, {
+          headers: { 'Content-Type': 'text/html' }
+        }));
+      })
+    ]).then(() => {
+      console.log('TyreHero Service Worker installed successfully');
+      self.skipWaiting();
+    })
+  );
 });
 
 // Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
-    console.log('Service Worker: Activating...');
-    
-    event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (cacheName !== CACHE_NAME && cacheName !== EMERGENCY_CACHE) {
-                        console.log('Service Worker: Deleting old cache:', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        }).then(() => {
-            console.log('Service Worker: Activation complete');
-            return self.clients.claim();
+self.addEventListener('activate', event => {
+  console.log('TyreHero Service Worker activating...');
+  
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME && cacheName !== EMERGENCY_CACHE) {
+            console.log('Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
         })
-    );
+      );
+    }).then(() => {
+      console.log('TyreHero Service Worker activated');
+      return self.clients.claim();
+    })
+  );
 });
 
-// Fetch event - handle requests with caching strategy
-self.addEventListener('fetch', (event) => {
-    const { request } = event;
-    const url = new URL(request.url);
+// Fetch event - serve from cache, fallback to network
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const url = new URL(request.url);
 
-    // Handle API requests
-    if (url.pathname.startsWith('/api/')) {
-        event.respondWith(handleApiRequest(request));
-        return;
-    }
+  // Handle emergency requests with priority
+  if (url.pathname.includes('emergency')) {
+    event.respondWith(handleEmergencyRequest(request));
+    return;
+  }
 
-    // Handle emergency calls
-    if (url.pathname === '/api/emergency-call') {
-        event.respondWith(handleEmergencyCall(request));
-        return;
-    }
+  // Handle API requests
+  if (url.pathname.startsWith('/api/')) {
+    event.respondWith(handleApiRequest(request));
+    return;
+  }
 
-    // Handle static assets
-    event.respondWith(handleStaticAssets(request));
+  // Handle static assets
+  event.respondWith(handleStaticRequest(request));
 });
 
-// Handle API requests with network-first strategy
+// Emergency request handler - always provide fallback
+async function handleEmergencyRequest(request) {
+  try {
+    // Try network first for emergency requests
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      return networkResponse;
+    }
+  } catch (error) {
+    console.log('Emergency request failed, using offline fallback');
+  }
+
+  // Return cached emergency page if network fails
+  const cache = await caches.open(EMERGENCY_CACHE);
+  return cache.match('/emergency-offline');
+}
+
+// API request handler
 async function handleApiRequest(request) {
-    const url = new URL(request.url);
+  try {
+    // Try network first for API calls
+    const networkResponse = await fetch(request);
     
-    try {
-        // Try network first
-        const networkResponse = await fetch(request);
-        
-        // Cache successful responses for specific endpoints
-        if (networkResponse.ok && API_CACHE_URLS.includes(url.pathname)) {
-            const cache = await caches.open(CACHE_NAME);
-            cache.put(request, networkResponse.clone());
-        }
-        
-        return networkResponse;
-    } catch (error) {
-        console.log('Service Worker: Network failed, trying cache for:', url.pathname);
-        
-        // For emergency booking, provide offline fallback
-        if (url.pathname === '/api/emergency-booking') {
-            return handleOfflineEmergencyBooking(request);
-        }
-        
-        // Try cache for other API requests
-        const cachedResponse = await caches.match(request);
-        if (cachedResponse) {
-            return cachedResponse;
-        }
-        
-        // Return offline response
-        return new Response(
-            JSON.stringify({
-                success: false,
-                error: 'Service unavailable offline',
-                offline: true,
-                message: 'Please try again when online or call our emergency number directly',
-                emergencyPhone: '+447700900000'
-            }),
-            {
-                status: 503,
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
+    // Cache successful GET requests
+    if (networkResponse.ok && request.method === 'GET') {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, networkResponse.clone());
     }
+    
+    return networkResponse;
+  } catch (error) {
+    // For offline API requests, return helpful error
+    return new Response(JSON.stringify({
+      success: false,
+      error: 'Service temporarily unavailable',
+      offline: true,
+      emergency: {
+        phone: EMERGENCY_PHONE,
+        message: 'Please call directly for immediate assistance'
+      }
+    }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 }
 
-// Handle emergency calls with special offline support
-async function handleEmergencyCall(request) {
-    try {
-        // Try to make the call online first
-        const networkResponse = await fetch(request);
-        return networkResponse;
-    } catch (error) {
-        // If offline, store the emergency call attempt locally
-        const callData = {
-            id: generateOfflineId(),
-            timestamp: new Date().toISOString(),
-            offline: true,
-            userAgent: navigator.userAgent
-        };
-        
-        // Store in IndexedDB for later sync
-        await storeOfflineEmergencyCall(callData);
-        
-        // Return immediate response
-        return new Response(
-            JSON.stringify({
-                success: true,
-                offline: true,
-                callId: callData.id,
-                phone: '+447700900000',
-                message: 'Emergency call logged offline. Please call directly now.',
-                urgent: true
-            }),
-            {
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
+// Static asset handler - cache first strategy
+async function handleStaticRequest(request) {
+  // Try cache first
+  const cache = await caches.open(CACHE_NAME);
+  const cachedResponse = await cache.match(request);
+  
+  if (cachedResponse) {
+    // Update cache in background if needed
+    updateCacheInBackground(request, cache);
+    return cachedResponse;
+  }
+
+  // Fallback to network
+  try {
+    const networkResponse = await fetch(request);
+    
+    // Cache successful responses
+    if (networkResponse.ok) {
+      cache.put(request, networkResponse.clone());
     }
+    
+    return networkResponse;
+  } catch (error) {
+    // Return offline page for navigation requests
+    if (request.mode === 'navigate') {
+      return cache.match('/emergency-offline');
+    }
+    
+    // Return error for other requests
+    return new Response('Offline', { status: 503 });
+  }
 }
 
-// Handle offline emergency booking
-async function handleOfflineEmergencyBooking(request) {
-    try {
-        const formData = await request.clone().json();
-        
-        // Generate offline booking
-        const offlineBooking = {
-            id: generateOfflineId(),
-            type: 'emergency',
-            timestamp: new Date().toISOString(),
-            offline: true,
-            data: formData,
-            status: 'pending_sync'
-        };
-        
-        // Store offline booking
-        await storeOfflineBooking(offlineBooking);
-        
-        // Show notification to user
-        self.registration.showNotification('Emergency Booking Saved', {
-            body: 'Your emergency booking has been saved offline. Please call our emergency number for immediate assistance.',
-            icon: '/images/emergency-icon.png',
-            badge: '/images/badge-icon.png',
-            vibrate: [200, 100, 200],
-            requireInteraction: true,
-            actions: [
-                {
-                    action: 'call',
-                    title: 'Call Now',
-                    icon: '/images/phone-icon.png'
-                }
-            ]
+// Background cache update
+async function updateCacheInBackground(request, cache) {
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      cache.put(request, networkResponse);
+    }
+  } catch (error) {
+    // Silent fail for background updates
+  }
+}
+
+// Handle sync events for offline form submissions
+self.addEventListener('sync', event => {
+  if (event.tag === 'emergency-booking') {
+    event.waitUntil(syncEmergencyBookings());
+  }
+});
+
+// Sync offline emergency bookings when back online
+async function syncEmergencyBookings() {
+  try {
+    // Get stored offline bookings from IndexedDB
+    const offlineBookings = await getOfflineBookings();
+    
+    for (const booking of offlineBookings) {
+      try {
+        await fetch('/api/emergency-booking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(booking.data)
         });
         
-        return new Response(
-            JSON.stringify({
-                success: true,
-                offline: true,
-                bookingId: offlineBooking.id,
-                message: 'Emergency booking saved offline. Please call our emergency line immediately.',
-                phone: '+447700900000',
-                urgent: true
-            }),
-            {
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
-        
-    } catch (error) {
-        return new Response(
-            JSON.stringify({
-                success: false,
-                error: 'Could not process offline emergency booking',
-                phone: '+447700900000',
-                message: 'Please call our emergency line directly'
-            }),
-            {
-                status: 500,
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
+        // Remove from offline storage after successful sync
+        await removeOfflineBooking(booking.id);
+      } catch (error) {
+        console.log('Failed to sync booking:', booking.id);
+      }
     }
+  } catch (error) {
+    console.log('Sync failed:', error);
+  }
 }
 
-// Handle static assets with cache-first strategy
-async function handleStaticAssets(request) {
-    // Try cache first
-    const cachedResponse = await caches.match(request);
-    if (cachedResponse) {
-        return cachedResponse;
-    }
-    
-    try {
-        // Try network
-        const networkResponse = await fetch(request);
-        
-        // Cache successful responses
-        if (networkResponse.ok) {
-            const cache = await caches.open(CACHE_NAME);
-            cache.put(request, networkResponse.clone());
-        }
-        
-        return networkResponse;
-    } catch (error) {
-        // Return offline page for navigation requests
-        if (request.mode === 'navigate') {
-            const offlineResponse = await caches.match('/index.html');
-            return offlineResponse || new Response('Offline', { status: 503 });
-        }
-        
-        throw error;
-    }
+// Placeholder functions for IndexedDB operations
+async function getOfflineBookings() {
+  // In production, implement IndexedDB storage
+  return [];
 }
 
-// Notification click handler
-self.addEventListener('notificationclick', (event) => {
-    event.notification.close();
+async function removeOfflineBooking(id) {
+  // In production, implement IndexedDB removal
+}
+
+// Push notification handler for emergency updates
+self.addEventListener('push', event => {
+  if (event.data) {
+    const data = event.data.json();
     
-    if (event.action === 'call') {
-        // Open phone app
-        event.waitUntil(
-            clients.openWindow('tel:+447700900000')
-        );
-    } else {
-        // Open the app
-        event.waitUntil(
-            clients.openWindow('/')
-        );
+    if (data.type === 'emergency-response') {
+      event.waitUntil(
+        self.registration.showNotification('TyreHero Emergency Update', {
+          body: data.message,
+          icon: '/images/icon-192.png',
+          badge: '/images/badge-72.png',
+          tag: 'emergency-update',
+          requireInteraction: true,
+          actions: [
+            {
+              action: 'call',
+              title: 'Call Now'
+            },
+            {
+              action: 'view',
+              title: 'View Details'
+            }
+          ]
+        })
+      );
     }
+  }
 });
 
-// Background sync for offline data
-self.addEventListener('sync', (event) => {
-    if (event.tag === 'emergency-sync') {
-        event.waitUntil(syncOfflineEmergencyData());
-    } else if (event.tag === 'booking-sync') {
-        event.waitUntil(syncOfflineBookings());
-    }
-});
-
-// Push notification handler for emergency alerts
-self.addEventListener('push', (event) => {
-    const options = {
-        body: 'Emergency service update',
-        icon: '/images/emergency-icon.png',
-        badge: '/images/badge-icon.png',
-        vibrate: [200, 100, 200, 100, 200],
-        requireInteraction: true
-    };
-    
-    if (event.data) {
-        const data = event.data.json();
-        options.body = data.message || options.body;
-        options.title = data.title || 'TyreHero Emergency';
-    }
-    
+// Handle notification clicks
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  
+  if (event.action === 'call') {
+    // Open phone dialer
     event.waitUntil(
-        self.registration.showNotification('TyreHero Emergency', options)
+      clients.openWindow(`tel:${EMERGENCY_PHONE}`)
     );
+  } else {
+    // Open app
+    event.waitUntil(
+      clients.openWindow('/')
+    );
+  }
 });
 
-// Utility functions
-function generateOfflineId() {
-    return 'OFFLINE-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-}
-
-// IndexedDB operations for offline storage
-async function storeOfflineEmergencyCall(callData) {
-    return new Promise((resolve, reject) => {
-        const request = indexedDB.open('TyreHeroOffline', 1);
-        
-        request.onerror = () => reject(request.error);
-        request.onsuccess = () => {
-            const db = request.result;
-            const transaction = db.transaction(['emergencyCalls'], 'readwrite');
-            const store = transaction.objectStore('emergencyCalls');
-            store.add(callData);
-            transaction.oncomplete = () => resolve();
-        };
-        
-        request.onupgradeneeded = (event) => {
-            const db = event.target.result;
-            if (!db.objectStoreNames.contains('emergencyCalls')) {
-                db.createObjectStore('emergencyCalls', { keyPath: 'id' });
-            }
-            if (!db.objectStoreNames.contains('bookings')) {
-                db.createObjectStore('bookings', { keyPath: 'id' });
-            }
-        };
-    });
-}
-
-async function storeOfflineBooking(bookingData) {
-    return new Promise((resolve, reject) => {
-        const request = indexedDB.open('TyreHeroOffline', 1);
-        
-        request.onerror = () => reject(request.error);
-        request.onsuccess = () => {
-            const db = request.result;
-            const transaction = db.transaction(['bookings'], 'readwrite');
-            const store = transaction.objectStore('bookings');
-            store.add(bookingData);
-            transaction.oncomplete = () => resolve();
-        };
-    });
-}
-
-async function syncOfflineEmergencyData() {
-    // Sync offline emergency calls when online
-    console.log('Service Worker: Syncing offline emergency data...');
-    // Implementation would sync with server
-}
-
-async function syncOfflineBookings() {
-    // Sync offline bookings when online
-    console.log('Service Worker: Syncing offline bookings...');
-    // Implementation would sync with server
-}
-
-console.log('Service Worker: Loaded and ready for emergency service');
+console.log('TyreHero Emergency Service Worker loaded');

@@ -3,920 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TyreHero - Professional 24/7 Emergency Mobile Tyre Service | 60min Response</title>
-    <meta name="description" content="Professional 24/7 emergency mobile tyre service. 60-minute response guarantee, established service, real-time tracking. Slough, Maidenhead & Windsor. Call 0800 123 4567.">
-
-    <!-- Enhanced Meta Tags -->
-    <meta name="robots" content="index, follow">
-    <meta name="keywords" content="emergency tyre service, mobile tyre fitting, professional tyre service, 24/7 roadside assistance, puncture repair, Slough, Maidenhead, Windsor">
-    <meta property="og:title" content="TyreHero - Professional 24/7 Emergency Mobile Tyre Service">
-    <meta property="og:description" content="Professional mobile tyre service with 60-minute response guarantee and established emergency coverage across Slough, Maidenhead & Windsor">
+    <meta name="description" content="24/7 Emergency Tyre Service | Professional mobile tyre fitting across the UK. Fast response, quality tyres, expert technicians.">
+    <meta name="keywords" content="emergency tyre service, mobile tyre fitting, 24/7 tyre repair, roadside assistance, tyre replacement">
+    <meta name="author" content="TyreHero">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1a73e8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="TyreHero">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="TyreHero - 24/7 Emergency Tyre Service">
+    <meta property="og:description" content="Professional mobile tyre fitting service available 24/7 across the UK. Quick response, quality tyres, expert technicians.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tyrehero.com">
-    <meta property="og:image" content="https://tyrehero.com/images/tyrehero-og-image.jpg">
-
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/enhanced-styles.css">
-    <link rel="stylesheet" href="assets/css/emergency-first.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <meta property="og:url" content="https://tyrehero.co.uk">
+    <meta property="og:image" content="./images/og-image.jpg">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="./assets/css/styles.css" as="style">
+    <link rel="preload" href="./assets/js/main.js" as="script">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="images/tyrehero-logo.svg">
-
-    <!-- Three.js for 3D GLB Model -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-
-    <!-- ULTRA-FAST DEVICE DETECTION (Runs First!) -->
-    <script src="assets/js/boot/device-detector.js"></script>
-
-
-    <!-- Enhanced LocalBusiness Schema for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": ["LocalBusiness", "AutoRepair", "EmergencyService"],
-      "@id": "https://tyrehero.com/#organization",
-      "name": "TyreHero AI-Powered Emergency Mobile Tyre Service",
-      "alternateName": ["TyreHero", "Tyre Hero", "TyreHero AI"],
-      "description": "Revolutionary AI-powered 24/7 emergency mobile tyre service with AR scanning, real-time tracking, and 60-minute response guarantee in Slough, Maidenhead & Windsor.",
-      "url": "https://tyrehero.com",
-      "telephone": "08001234567",
-      "email": "emergency@tyrehero.com",
-      "priceRange": "££",
-      "currenciesAccepted": ["GBP", "BTC", "ETH"],
-      "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Contactless", "Apple Pay", "Google Pay", "Cryptocurrency"],
-      "openingHours": "Mo-Su 00:00-23:59",
-      "serviceArea": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": 51.5074,
-          "longitude": -0.6503
-        },
-        "geoRadius": "50000"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Emergency & Professional Tyre Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "AI Emergency Tyre Response",
-              "description": "AI-powered emergency tyre service with 60-minute response guarantee and real-time tracking"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "AR Tyre Condition Scanning",
-              "description": "Advanced AR technology for instant tyre condition assessment and sizing"
-            }
-          },
-        ]
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "1247",
-        "bestRating": "5",
-        "worstRating": "1"
-      }
-    }
-    </script>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    
+    <title>TyreHero - 24/7 Emergency Tyre Service | Mobile Tyre Fitting UK</title>
 </head>
-<body class="enhanced-homepage">
-
-    <!-- Emergency Panic Mode Overlay -->
-    <div id="panic-mode" class="panic-mode-overlay hidden">
-        <div class="panic-content">
-            <h1 class="panic-title">🚨 EMERGENCY MODE ACTIVATED</h1>
-            <p class="panic-subtitle">Help is on the way. Stay calm and safe.</p>
-
-            <a href="tel:08001234567" class="panic-call-btn">
-                📞 CALL NOW: 0800 123 4567
-            </a>
-
-            <div class="panic-actions">
-                <button class="panic-btn" data-action="share-location">📍 Share My Location</button>
-                <button class="panic-btn" data-action="emergency-checklist">✅ Safety Checklist</button>
-                <button class="panic-btn" data-action="contact-family">👨‍👩‍👧‍👦 Alert Family</button>
-            </div>
-
-            <button class="panic-close" data-action="panic-close">✕ Exit Emergency Mode</button>
-        </div>
-    </div>
-
-    <!-- Enhanced Navigation -->
-    <header class="site-header enhanced-header">
+<body>
+    <!-- Emergency Banner (Sticky) -->
+    <div id="emergency-banner" class="emergency-banner" role="banner" aria-label="Emergency tyre service available">
         <div class="container">
-            <div class="header-content">
-                <!-- TyreHero Logo -->
-                <div class="logo enhanced-logo">
-                    <a href="https://ezekaj.github.io/tyre-hero/">
-                        <img src="images/tyrehero-logo.svg" alt="TyreHero Emergency Tyre Service Logo" class="logo-image">
-                    </a>
-                </div>
-
-
-                <!-- Emergency-First Navigation -->
-                <nav class="main-nav emergency-nav">
-                    <button class="menu-toggle" aria-label="Toggle Menu">
-                        <span class="hamburger"></span>
-                    </button>
-                    <ul class="nav-menu emergency-menu">
-                        <li class="nav-emergency-primary">
-                            <a href="tel:08001234567" class="nav-emergency-call">
-                                🚨 EMERGENCY CALL
-                                <span class="emergency-badge">60min response</span>
-                            </a>
-                        </li>
-                        <li><a href="services.html" class="nav-link">Services</a></li>
-                        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-                        <li><a href="locations.html" class="nav-link">
-                            📍 Coverage
-                            <span class="coverage-badge">Slough, Maidenhead, Windsor</span>
-                        </a></li>
-                        <li><a href="contact.html" class="nav-link">Contact</a></li>
-                    </ul>
-                </nav>
-
-                <!-- Emergency Contact Widget -->
-                <div class="emergency-contact-widget">
-                    <a href="tel:08001234567" class="emergency-phone">
-                        📞 0800 123 4567
-                        <span class="emergency-status">🟢 Available Now</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Enhanced Hero Section with 3D Tyre Model -->
-    <section class="hero-section enhanced-hero tyre-hero">
-        <!-- 3D Tyre Model Viewer - Main Hero Animation -->
-        <div id="tyre-3d-viewer" class="tyre-3d-container main-hero-animation">
-            <canvas id="tyre-canvas"></canvas>
-            <div class="tyre-info-overlay">
-                <h3>Professional Tyre Specifications</h3>
-                <p>Expert fitting • All brands • 24/7 service</p>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="hero-content enhanced-hero-content">
-
-                <div class="hero-main mobile-centered">
-                    <div class="hero-text mobile-text">
-                        <div class="hero-subtitle mobile-subtitle">Professional 24/7 Emergency Tyre Service</div>
-                        <h1 class="hero-title mobile-title">
-                            Your <span class="gradient-text">Trusted</span><br>
-                            Roadside Hero<span class="typing-effect" id="typing-text"></span>
-                        </h1>
-                        <p class="hero-description mobile-description">
-                            Professional mobile tyre fitting and emergency roadside assistance service
-                            with 60-minute response guarantee. Available 24/7 in Slough, Maidenhead & Windsor.
-                        </p>
-
-                        <!-- EMERGENCY-FIRST CTA Section -->
-                        <div class="hero-cta emergency-priority-cta">
-                            <!-- MASSIVE Emergency Call Button -->
-                            <div class="emergency-primary-action">
-                                <a href="tel:08001234567" class="btn-mega-emergency" role="button">
-                                    <div class="emergency-icon">🚨</div>
-                                    <div class="emergency-text">
-                                        <div class="emergency-title">EMERGENCY CALL</div>
-                                        <div class="emergency-subtitle">0800 123 4567</div>
-                                        <div class="emergency-guarantee">60min Response Guaranteed</div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <!-- Coverage Info - Prominent -->
-                            <div class="coverage-info">
-                                <span class="coverage-text">🚗 Covering: Slough, Maidenhead & Windsor</span>
-                                <span class="pricing-text">💷 From £89 • No Hidden Fees</span>
-                            </div>
-
-                            <!-- Secondary Actions - Much Smaller -->
-                            <div class="secondary-actions-small">
-                                <a href="#services" class="btn-secondary-small">
-                                    View Services
-                                </a>
-                                <a href="pricing.html" class="btn-secondary-small">
-                                    Pricing
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Live Stats Dashboard - Mobile Optimized -->
-                        <div class="hero-stats enhanced-stats mobile-stats">
-                            <div class="stat-item live-stat mobile-stat" data-stat="response">
-                                <div class="stat-number mobile-stat-number">
-                                    <span id="avg-response">47</span><small>min</small>
-                                    <div class="stat-trend mobile-trend">📈 -12min</div>
-                                </div>
-                                <div class="stat-label mobile-stat-label">Response Time</div>
-                            </div>
-                            <div class="stat-item live-stat mobile-stat" data-stat="active">
-                                <div class="stat-number mobile-stat-number">
-                                    <span id="active-technicians">8</span><small>/12</small>
-                                    <div class="stat-trend mobile-trend">🟢 Online</div>
-                                </div>
-                                <div class="stat-label mobile-stat-label">Technicians</div>
-                            </div>
-                            <div class="stat-item live-stat mobile-stat" data-stat="rating">
-                                <div class="stat-number mobile-stat-number">
-                                    4.9<small>/5</small>
-                                    <div class="stat-trend mobile-trend">⭐ +0.1</div>
-                                </div>
-                                <div class="stat-label mobile-stat-label">AI Rating</div>
-                            </div>
-                            <div class="stat-item live-stat mobile-stat" data-stat="completed">
-                                <div class="stat-number mobile-stat-number">
-                                    <span id="jobs-today">23</span>
-                                    <div class="stat-trend mobile-trend">📊 Today</div>
-                                </div>
-                                <div class="stat-label mobile-stat-label">Jobs Done</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Emergency-First Service Widget -->
-                    <div class="hero-widget emergency-widget">
-                        <div class="emergency-service-container">
-                            <!-- Emergency Quick Actions -->
-                            <div class="emergency-quick-actions">
-                                <h4 class="service-title">🚨 Emergency Services</h4>
-
-                                <div class="quick-service-grid">
-                                    <button class="service-quick-btn" data-service="emergency">
-                                        <span class="service-icon">🚨</span>
-                                        <span class="service-text">Emergency Call</span>
-                                        <span class="service-time">60min</span>
-                                    </button>
-
-                                    <button class="service-quick-btn" data-service="puncture">
-                                        <span class="service-icon">🔧</span>
-                                        <span class="service-text">Puncture Repair</span>
-                                        <span class="service-time">45min</span>
-                                    </button>
-
-                                    <button class="service-quick-btn" data-service="replacement">
-                                        <span class="service-icon">🛞</span>
-                                        <span class="service-text">Tyre Replacement</span>
-                                        <span class="service-time">60min</span>
-                                    </button>
-
-                                    <button class="service-quick-btn" data-service="roadside">
-                                        <span class="service-icon">🚗</span>
-                                        <span class="service-text">Roadside Help</span>
-                                        <span class="service-time">30min</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Non-Emergency Services -->
-                            <div class="regular-services-compact">
-                                <h5 class="regular-title">Regular Services</h5>
-                                <div class="regular-actions">
-                                    <a href="services.html" class="regular-btn">Browse All Services</a>
-                                    <a href="pricing.html" class="regular-btn">View Pricing</a>
-                                </div>
-                            </div>
-
-                            <!-- Contact Methods -->
-                            <div class="contact-methods-compact">
-                                <div class="contact-method">
-                                    <span class="contact-icon">📞</span>
-                                    <span class="contact-text">Call: 0800 123 4567</span>
-                                </div>
-                                <div class="contact-method">
-                                    <span class="contact-icon">💬</span>
-                                    <span class="contact-text">WhatsApp Available</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Floating Emergency Panel -->
-        <div class="floating-emergency-panel">
-            <a href="tel:08001234567" class="emergency-toggle" role="button"
-              >
-                🚨 EMERGENCY
-            </a>
-        </div>
-    </section>
-
-    <!-- Emergency Tyre Services Section -->
-    <section class="services-section services-dotted">
-        <div class="container">
-            <div class="services-header">
-                <h2>🚨 Emergency Tyre Services</h2>
-                <p>Professional mobile tyre fitting and roadside assistance across Slough, Maidenhead & Windsor</p>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="images/emergency-tyre-replacement.jpg" alt="Emergency Tyre Replacement" loading="lazy">
-                        <div class="service-badge">24/7</div>
-                    </div>
-                    <div class="service-content">
-                        <h3>🚨 Emergency Tyre Replacement</h3>
-                        <p>Immediate roadside tyre replacement service. We come to you anywhere, anytime with high-quality tyres in stock.</p>
-                        <ul class="service-features">
-                            <li>✓ 60-minute response guarantee</li>
-                            <li>✓ All tyre brands available</li>
-                            <li>✓ Professional mobile fitting</li>
-                        </ul>
-                        <div class="service-price">From £89</div>
-                        <a href="tel:08001234567" class="service-btn">Call Now</a>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="images/puncture-repair.jpg" alt="Puncture Repair Service" loading="lazy">
-                        <div class="service-badge">FAST</div>
-                    </div>
-                    <div class="service-content">
-                        <h3>🔧 Professional Puncture Repair</h3>
-                        <p>Expert puncture repair service using industry-standard techniques. Get back on the road quickly and safely.</p>
-                        <ul class="service-features">
-                            <li>✓ Permanent repairs only</li>
-                            <li>✓ Safety inspection included</li>
-                            <li>✓ 12-month guarantee</li>
-                        </ul>
-                        <div class="service-price">From £25</div>
-                        <a href="tel:08001234567" class="service-btn">Call Now</a>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="images/wheel-balancing.jpg" alt="Wheel Balancing Service" loading="lazy">
-                        <div class="service-badge">PRO</div>
-                    </div>
-                    <div class="service-content">
-                        <h3>⚖️ Wheel Balancing & Alignment</h3>
-                        <p>Professional wheel balancing and alignment service to ensure smooth driving and extended tyre life.</p>
-                        <ul class="service-features">
-                            <li>✓ Computerized balancing</li>
-                            <li>✓ 4-wheel alignment</li>
-                            <li>✓ Vibration diagnosis</li>
-                        </ul>
-                        <div class="service-price">From £45</div>
-                        <a href="tel:08001234567" class="service-btn">Call Now</a>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="images/fleet-service.jpg" alt="Fleet Tyre Service" loading="lazy">
-                        <div class="service-badge">FLEET</div>
-                    </div>
-                    <div class="service-content">
-                        <h3>🚛 Fleet & Commercial Service</h3>
-                        <p>Comprehensive tyre service for commercial vehicles and fleets with competitive rates and priority response.</p>
-                        <ul class="service-features">
-                            <li>✓ Priority emergency response</li>
-                            <li>✓ Volume discounts available</li>
-                            <li>✓ Maintenance contracts</li>
-                        </ul>
-                        <div class="service-price">Quote on request</div>
-                        <a href="tel:08001234567" class="service-btn">Call Now</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Emergency Contact Bar -->
-            <div class="emergency-contact-bar">
-                <div class="emergency-info">
-                    <h3>🚨 Emergency Service Available 24/7</h3>
-                    <p>Stranded? Don't panic. Our emergency response team is ready to help.</p>
-                </div>
-                <a href="tel:08001234567" class="emergency-call-btn">
-                    📞 Call Emergency: 0800 123 4567
+            <div class="emergency-content">
+                <span class="emergency-icon" aria-hidden="true">🚨</span>
+                <span class="emergency-text">EMERGENCY TYRE SERVICE AVAILABLE 24/7</span>
+                <a href="tel:+447700900000" class="emergency-call-btn" aria-label="Call emergency tyre service">
+                    <span class="phone-icon" aria-hidden="true">📞</span>
+                    CALL NOW
                 </a>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Core Application Scripts -->
-    <script type="module" src="assets/js/main.js"></script>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <img src="./images/logo.svg" alt="TyreHero Logo" class="logo" width="120" height="40">
+                </div>
+                
+                <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <div class="nav-menu">
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                    <a href="#coverage" class="nav-link">Coverage</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <a href="#book-now" class="nav-link nav-cta">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <!-- 3D Tyre Model Viewer Script -->
-    <script>
-        // 3D Tyre GLB Model Viewer
-        class TyreModelViewer {
-            constructor() {
-                console.log('🏗️ TyreModelViewer constructor called');
-
-                this.scene = null;
-                this.camera = null;
-                this.renderer = null;
-                this.model = null;
-                this.canvas = document.getElementById('tyre-canvas');
-                this.container = document.getElementById('tyre-3d-viewer');
-
-                console.log('🎯 Canvas element:', this.canvas);
-                console.log('📦 Container element:', this.container);
-
-                if (!this.canvas || !this.container) {
-                    console.error('❌ Missing required DOM elements');
-                    return;
-                }
-
-                // Check if browser supports WebGL
-                if (this.webglSupported()) {
-                    console.log('✅ WebGL supported');
-                    this.init();
-                    this.loadModel();
-                } else {
-                    console.warn('⚠️ WebGL not supported, showing fallback');
-                    this.showFallback();
-                }
-            }
-
-            webglSupported() {
-                try {
-                    const canvas = document.createElement('canvas');
-                    return !!(window.WebGLRenderingContext &&
-                             (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
-                } catch (e) {
-                    return false;
-                }
-            }
-
-            init() {
-                // Scene setup
-                this.scene = new THREE.Scene();
-                this.scene.background = new THREE.Color(0x1a1a2e);
-
-                // Camera setup
-                const aspect = 1; // Square aspect ratio
-                this.camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
-                this.camera.position.set(2, 1, 3);
-
-                // Renderer setup
-                this.renderer = new THREE.WebGLRenderer({
-                    canvas: this.canvas,
-                    antialias: true,
-                    alpha: true
-                });
-                this.renderer.setSize(400, 400);
-                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                this.renderer.shadowMap.enabled = true;
-                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-                // Lighting setup
-                this.setupLighting();
-
-                // Controls for rotation
-                this.setupControls();
-
-                // Handle resize
-                this.handleResize();
-            }
-
-            setupLighting() {
-                // Ambient light
-                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
-                this.scene.add(ambientLight);
-
-                // Main directional light
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-                directionalLight.position.set(5, 5, 5);
-                directionalLight.castShadow = true;
-                directionalLight.shadow.mapSize.width = 2048;
-                directionalLight.shadow.mapSize.height = 2048;
-                this.scene.add(directionalLight);
-
-                // Fill light
-                const fillLight = new THREE.DirectionalLight(0x87CEEB, 0.3);
-                fillLight.position.set(-5, 0, -5);
-                this.scene.add(fillLight);
-
-                // Rim light for dramatic effect
-                const rimLight = new THREE.DirectionalLight(0xf1c40f, 0.5);
-                rimLight.position.set(0, 5, -5);
-                this.scene.add(rimLight);
-            }
-
-            setupControls() {
-                // Simple auto-rotation
-                this.autoRotate = true;
-                this.rotationSpeed = 0.005;
-
-                // Mouse interaction for manual control
-                let isMouseDown = false;
-                let mouseX = 0;
-
-                this.canvas.addEventListener('mousedown', (e) => {
-                    isMouseDown = true;
-                    mouseX = e.clientX;
-                    this.autoRotate = false;
-                });
-
-                this.canvas.addEventListener('mousemove', (e) => {
-                    if (isMouseDown && this.model) {
-                        const deltaX = e.clientX - mouseX;
-                        this.model.rotation.y += deltaX * 0.01;
-                        mouseX = e.clientX;
-                    }
-                });
-
-                this.canvas.addEventListener('mouseup', () => {
-                    isMouseDown = false;
-                    setTimeout(() => {
-                        this.autoRotate = true;
-                    }, 3000); // Resume auto-rotation after 3 seconds
-                });
-
-                // Touch support for mobile
-                this.canvas.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    isMouseDown = true;
-                    mouseX = e.touches[0].clientX;
-                    this.autoRotate = false;
-                });
-
-                this.canvas.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
-                    if (isMouseDown && this.model) {
-                        const deltaX = e.touches[0].clientX - mouseX;
-                        this.model.rotation.y += deltaX * 0.01;
-                        mouseX = e.touches[0].clientX;
-                    }
-                });
-
-                this.canvas.addEventListener('touchend', (e) => {
-                    e.preventDefault();
-                    isMouseDown = false;
-                    setTimeout(() => {
-                        this.autoRotate = true;
-                    }, 3000);
-                });
-            }
-
-            loadModel() {
-                this.container.classList.add('loading');
-
-                const loader = new THREE.GLTFLoader();
-                loader.load(
-                    'assets/models/tyre-specifications.glb',
-                    (gltf) => {
-                        this.model = gltf.scene;
-
-                        // Scale and position the model
-                        this.model.scale.setScalar(1);
-                        this.model.position.set(0, -0.5, 0);
-
-                        // Enable shadows
-                        this.model.traverse((child) => {
-                            if (child.isMesh) {
-                                child.castShadow = true;
-                                child.receiveShadow = true;
-
-                                // Enhance materials if needed
-                                if (child.material) {
-                                    child.material.metalness = 0.2;
-                                    child.material.roughness = 0.8;
-                                }
-                            }
-                        });
-
-                        this.scene.add(this.model);
-                        this.container.classList.remove('loading');
-
-                        // Start animation loop
-                        this.animate();
-                    },
-                    (progress) => {
-                        // Loading progress (optional)
-                        console.log('Loading progress:', (progress.loaded / progress.total * 100) + '%');
-                    },
-                    (error) => {
-                        console.error('Error loading GLB model:', error);
-                        this.container.classList.remove('loading');
-                        this.showFallback();
-                    }
-                );
-            }
-
-            animate() {
-                requestAnimationFrame(() => this.animate());
-
-                // Auto-rotation
-                if (this.autoRotate && this.model) {
-                    this.model.rotation.y += this.rotationSpeed;
-                }
-
-                // Render the scene
-                this.renderer.render(this.scene, this.camera);
-            }
-
-            handleResize() {
-                window.addEventListener('resize', () => {
-                    const size = Math.min(400, window.innerWidth * 0.8);
-                    this.renderer.setSize(size, size);
-                });
-            }
-
-            showFallback() {
-                // Show static tyre image for unsupported browsers
-                this.canvas.style.display = 'none';
-                this.container.style.background = `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="%23333" stroke="%23666" stroke-width="4"/><circle cx="100" cy="100" r="40" fill="%23444"/><text x="100" y="105" text-anchor="middle" fill="white" font-size="12">TYRE</text></svg>') center/contain no-repeat`;
-            }
-        }
-
-        // Initialize 3D viewer when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('🔧 Initializing 3D Tyre Model Viewer...');
-
-            // Check Three.js availability
-            if (typeof THREE === 'undefined') {
-                console.error('❌ Three.js not loaded!');
-                return;
-            }
-
-            if (typeof THREE.GLTFLoader === 'undefined') {
-                console.error('❌ GLTFLoader not available!');
-                return;
-            }
-
-            console.log('✅ Three.js and GLTFLoader loaded successfully');
-
-            try {
-                new TyreModelViewer();
-                console.log('✅ TyreModelViewer initialized');
-            } catch (error) {
-                console.error('❌ Failed to initialize TyreModelViewer:', error);
-
-                // Show fallback on error
-                const container = document.getElementById('tyre-3d-viewer');
-                const canvas = document.getElementById('tyre-canvas');
-                if (container && canvas) {
-                    canvas.style.display = 'none';
-                    container.style.background = `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="%23333" stroke="%23666" stroke-width="4"/><circle cx="100" cy="100" r="40" fill="%23444"/><text x="100" y="105" text-anchor="middle" fill="white" font-size="12">TYRE</text></svg>') center/contain no-repeat`;
-                    console.log('🎨 Fallback static image displayed');
-                }
-            }
-        });
-    </script>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/447000000000" target="_blank" class="floating-whatsapp-btn">
-        <svg viewBox="0 0 24 24" class="whatsapp-icon">
-            <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.515z"/>
-        </svg>
-    </a>
-
-    <!-- Emergency Service JavaScript -->
-    <script>
-        // Emergency Service Handler
-        document.addEventListener('DOMContentLoaded', function() {
-            // Handle service quick buttons
-            const serviceButtons = document.querySelectorAll('.service-quick-btn');
-
-            serviceButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const service = this.dataset.service;
-
-                    // Immediate call for emergency service
-                    if (service === 'emergency') {
-                        // Track emergency call attempt
-                        console.log('🚨 EMERGENCY: User clicked emergency call');
-
-                        // Vibrate device if supported (mobile emergency feedback)
-                        if (navigator.vibrate) {
-                            navigator.vibrate([200, 100, 200]);
-                        }
-
-                        // Direct to phone call
-                        window.location.href = 'tel:08001234567';
-                        return;
-                    }
-
-                    // Other services - show modal or call
-                    showServiceModal(service);
-                });
-            });
-
-            // Track emergency interaction patterns
-            const emergencyButtons = document.querySelectorAll('.btn-mega-emergency, .nav-emergency-call');
-            emergencyButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    console.log('🚨 EMERGENCY: Emergency call initiated');
-
-                    // Log for analytics (emergency pattern analysis)
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'emergency_call_click', {
-                            'event_category': 'emergency',
-                            'event_label': 'hero_cta',
-                            'value': 1
-                        });
-                    }
-                });
-            });
-        });
-
-        // Service Modal for non-emergency services
-        function showServiceModal(serviceType) {
-            const services = {
-                'puncture': {
-                    title: '🔧 Puncture Repair Service',
-                    description: 'Professional puncture repair with 12-month guarantee.',
-                    price: 'From £25',
-                    response: '45 minutes'
-                },
-                'replacement': {
-                    title: '🛞 Tyre Replacement Service',
-                    description: 'Complete mobile tyre replacement service.',
-                    price: 'From £89',
-                    response: '60 minutes'
-                },
-                'roadside': {
-                    title: '🚗 Roadside Assistance',
-                    description: 'Quick roadside help and assessment.',
-                    price: 'From £45',
-                    response: '30 minutes'
-                }
-            };
-
-            const service = services[serviceType];
-            if (!service) return;
-
-            const modal = `
-                <div class="service-modal-overlay" onclick="closeServiceModal()">
-                    <div class="service-modal" onclick="event.stopPropagation()">
-                        <button class="modal-close" onclick="closeServiceModal()">✕</button>
-                        <h3>${service.title}</h3>
-                        <p>${service.description}</p>
-                        <div class="modal-details">
-                            <div class="detail-item">
-                                <span class="detail-label">Price:</span>
-                                <span class="detail-value">${service.price}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Response:</span>
-                                <span class="detail-value">${service.response}</span>
-                            </div>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" role="banner">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            Professional Tyre Service
+                            <span class="highlight">When You Need It Most</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            24/7 emergency mobile tyre fitting across the UK. Expert technicians, quality tyres, rapid response.
+                        </p>
+                        
+                        <!-- Mode Toggle -->
+                        <div class="service-mode-toggle" role="tablist" aria-label="Service type selection">
+                            <button class="mode-btn active" role="tab" aria-selected="true" aria-controls="emergency-form" id="emergency-tab">
+                                🚨 Emergency Service
+                            </button>
+                            <button class="mode-btn" role="tab" aria-selected="false" aria-controls="regular-form" id="regular-tab">
+                                📅 Schedule Service
+                            </button>
                         </div>
-                        <div class="modal-actions">
-                            <a href="tel:08001234567" class="btn-modal-call">📞 Call Now</a>
-                            <button onclick="closeServiceModal()" class="btn-modal-cancel">Later</button>
+                    </div>
+                    
+                    <div class="hero-form">
+                        <!-- Emergency Form -->
+                        <form class="booking-form emergency-form active" id="emergency-form" role="tabpanel" aria-labelledby="emergency-tab">
+                            <h2 class="form-title">Emergency Assistance</h2>
+                            <p class="form-subtitle">Get help within 30 minutes</p>
+                            
+                            <div class="form-group">
+                                <label for="emergency-location" class="form-label">Your Location</label>
+                                <input type="text" id="emergency-location" name="location" class="form-input" placeholder="Enter postcode or current location" required aria-describedby="location-help">
+                                <small id="location-help" class="form-help">We'll find you using GPS if needed</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="emergency-phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="emergency-phone" name="phone" class="form-input" placeholder="+44 7XXX XXXXXX" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="emergency-issue" class="form-label">Issue Description</label>
+                                <select id="emergency-issue" name="issue" class="form-select" required>
+                                    <option value="">Select your issue</option>
+                                    <option value="puncture">Puncture/Flat Tyre</option>
+                                    <option value="blowout">Tyre Blowout</option>
+                                    <option value="damage">Tyre Damage</option>
+                                    <option value="unsafe">Unsafe to Drive</option>
+                                    <option value="other">Other Emergency</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="form-submit emergency-submit">
+                                REQUEST EMERGENCY HELP
+                                <span class="submit-icon" aria-hidden="true">⚡</span>
+                            </button>
+                            
+                            <p class="form-note">
+                                <span class="check-icon" aria-hidden="true">✓</span>
+                                Average response time: 25 minutes
+                            </p>
+                        </form>
+                        
+                        <!-- Regular Form -->
+                        <form class="booking-form regular-form" id="regular-form" role="tabpanel" aria-labelledby="regular-tab">
+                            <h2 class="form-title">Schedule Service</h2>
+                            <p class="form-subtitle">Book at your convenience</p>
+                            
+                            <div class="form-group">
+                                <label for="regular-postcode" class="form-label">Postcode</label>
+                                <input type="text" id="regular-postcode" name="postcode" class="form-input" placeholder="Enter your postcode" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="regular-service" class="form-label">Service Type</label>
+                                <select id="regular-service" name="service" class="form-select" required>
+                                    <option value="">Select service</option>
+                                    <option value="fitting">Tyre Fitting</option>
+                                    <option value="replacement">Tyre Replacement</option>
+                                    <option value="repair">Tyre Repair</option>
+                                    <option value="health-check">Tyre Health Check</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="regular-date" class="form-label">Preferred Date</label>
+                                <input type="date" id="regular-date" name="date" class="form-input" required>
+                            </div>
+                            
+                            <button type="submit" class="form-submit regular-submit">
+                                GET QUOTE & BOOK
+                                <span class="submit-icon" aria-hidden="true">📅</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Signals -->
+        <section class="trust-signals" aria-label="Trust and certification information">
+            <div class="container">
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <div class="trust-icon" aria-hidden="true">⏱️</div>
+                        <div class="trust-content">
+                            <strong>25 Min</strong>
+                            <span>Average Response</span>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon" aria-hidden="true">🛡️</div>
+                        <div class="trust-content">
+                            <strong>Certified</strong>
+                            <span>Technicians</span>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon" aria-hidden="true">🔧</div>
+                        <div class="trust-content">
+                            <strong>Mobile</strong>
+                            <span>Workshop</span>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon" aria-hidden="true">✅</div>
+                        <div class="trust-content">
+                            <strong>Guarantee</strong>
+                            <span>All Work</span>
                         </div>
                     </div>
                 </div>
-            `;
+            </div>
+        </section>
 
-            document.body.insertAdjacentHTML('beforeend', modal);
-        }
+        <!-- Services Overview -->
+        <section id="services" class="services" aria-labelledby="services-title">
+            <div class="container">
+                <header class="section-header">
+                    <h2 id="services-title" class="section-title">Our Services</h2>
+                    <p class="section-subtitle">Complete tyre solutions delivered to your location</p>
+                </header>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">🚨</div>
+                        <h3 class="service-title">Emergency Response</h3>
+                        <p class="service-description">24/7 emergency callout service for punctures, blowouts, and roadside assistance.</p>
+                        <ul class="service-features">
+                            <li>Within 30 minutes response</li>
+                            <li>Roadside assistance</li>
+                            <li>Emergency replacement tyres</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">🏠</div>
+                        <h3 class="service-title">Mobile Fitting</h3>
+                        <p class="service-description">Professional tyre fitting at your home, office, or any convenient location.</p>
+                        <ul class="service-features">
+                            <li>At your location</li>
+                            <li>All tyre brands available</li>
+                            <li>Professional installation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">🔍</div>
+                        <h3 class="service-title">Health Checks</h3>
+                        <p class="service-description">Comprehensive tyre inspections to ensure safety and optimal performance.</p>
+                        <ul class="service-features">
+                            <li>Tread depth analysis</li>
+                            <li>Pressure monitoring</li>
+                            <li>Damage assessment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        // Close service modal
-        function closeServiceModal() {
-            const modal = document.querySelector('.service-modal-overlay');
-            if (modal) {
-                modal.remove();
-            }
-        }
+        <!-- 3D Tyre Specification Preview -->
+        <section class="tyre-preview" aria-labelledby="preview-title">
+            <div class="container">
+                <header class="section-header">
+                    <h2 id="preview-title" class="section-title">Interactive Tyre Explorer</h2>
+                    <p class="section-subtitle">Explore tyre specifications in detailed 3D</p>
+                </header>
+                
+                <div class="preview-content">
+                    <div class="preview-3d">
+                        <!-- Three.js 3D Model Container -->
+                        <div id="tyre-3d-container" class="tyre-3d-container" aria-label="3D tyre model viewer">
+                            <div class="loading-placeholder">
+                                <div class="loading-spinner" aria-hidden="true"></div>
+                                <p>Loading 3D Model...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-controls">
+                            <button class="control-btn" data-view="front" aria-label="Front view">Front</button>
+                            <button class="control-btn" data-view="side" aria-label="Side view">Side</button>
+                            <button class="control-btn" data-view="tread" aria-label="Tread view">Tread</button>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-specs">
+                        <h3 class="specs-title">Tyre Specifications</h3>
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <label class="spec-label">Size</label>
+                                <span class="spec-value">225/45R17 94W</span>
+                            </div>
+                            <div class="spec-item">
+                                <label class="spec-label">Brand</label>
+                                <span class="spec-value">Premium Selection</span>
+                            </div>
+                            <div class="spec-item">
+                                <label class="spec-label">Load Index</label>
+                                <span class="spec-value">94 (670kg)</span>
+                            </div>
+                            <div class="spec-item">
+                                <label class="spec-label">Speed Rating</label>
+                                <span class="spec-value">W (168mph)</span>
+                            </div>
+                            <div class="spec-item">
+                                <label class="spec-label">Fuel Efficiency</label>
+                                <span class="spec-value">A</span>
+                            </div>
+                            <div class="spec-item">
+                                <label class="spec-label">Wet Grip</label>
+                                <span class="spec-value">A</span>
+                            </div>
+                        </div>
+                        
+                        <button class="specs-cta">Find My Tyres</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        // Emergency panic mode (for extreme stress situations)
-        let panicModeEnabled = false;
+        <!-- How It Works -->
+        <section id="how-it-works" class="how-it-works" aria-labelledby="how-it-works-title">
+            <div class="container">
+                <header class="section-header">
+                    <h2 id="how-it-works-title" class="section-title">How It Works</h2>
+                    <p class="section-subtitle">Simple, fast, and reliable service in 3 easy steps</p>
+                </header>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number" aria-hidden="true">1</div>
+                        <h3 class="step-title">Book Online or Call</h3>
+                        <p class="step-description">Use our quick booking form or call our 24/7 helpline for immediate assistance.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number" aria-hidden="true">2</div>
+                        <h3 class="step-title">We Come to You</h3>
+                        <p class="step-description">Our certified technician arrives at your location with all necessary equipment and tyres.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number" aria-hidden="true">3</div>
+                        <h3 class="step-title">Professional Fitting</h3>
+                        <p class="step-description">Expert installation with full safety check and guarantee on all work completed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        // Triple-tap emergency activation
-        let tapCount = 0;
-        let tapTimer = null;
+        <!-- Coverage Area -->
+        <section id="coverage" class="coverage" aria-labelledby="coverage-title">
+            <div class="container">
+                <header class="section-header">
+                    <h2 id="coverage-title" class="section-title">Service Coverage</h2>
+                    <p class="section-subtitle">Available across major UK cities and motorways</p>
+                </header>
+                
+                <div class="coverage-content">
+                    <div class="coverage-map">
+                        <img src="./images/uk-coverage-map.svg" alt="UK service coverage map" class="map-image">
+                    </div>
+                    
+                    <div class="coverage-info">
+                        <h3 class="coverage-subtitle">Major Areas Covered</h3>
+                        <div class="coverage-list">
+                            <div class="coverage-column">
+                                <ul>
+                                    <li>London & M25</li>
+                                    <li>Birmingham</li>
+                                    <li>Manchester</li>
+                                    <li>Liverpool</li>
+                                    <li>Leeds</li>
+                                </ul>
+                            </div>
+                            <div class="coverage-column">
+                                <ul>
+                                    <li>Sheffield</li>
+                                    <li>Bristol</li>
+                                    <li>Newcastle</li>
+                                    <li>Nottingham</li>
+                                    <li>Cardiff</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="coverage-note">
+                            <p><strong>Emergency Service:</strong> Available 24/7 in all coverage areas</p>
+                            <p><strong>Scheduled Service:</strong> 7 days a week, flexible timing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        document.addEventListener('click', function(e) {
-            // Only on emergency buttons
-            if (!e.target.closest('.btn-mega-emergency')) return;
+        <!-- Contact Section -->
+        <section id="contact" class="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <header class="section-header">
+                    <h2 id="contact-title" class="section-title">Contact Us</h2>
+                    <p class="section-subtitle">Multiple ways to get in touch with our expert team</p>
+                </header>
+                
+                <div class="contact-grid">
+                    <div class="contact-card emergency-contact">
+                        <div class="contact-icon" aria-hidden="true">🚨</div>
+                        <h3 class="contact-title">Emergency Hotline</h3>
+                        <p class="contact-detail">
+                            <a href="tel:+447700900000" class="contact-link">+44 7700 900 000</a>
+                        </p>
+                        <p class="contact-note">24/7 Emergency Response</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon" aria-hidden="true">📞</div>
+                        <h3 class="contact-title">General Enquiries</h3>
+                        <p class="contact-detail">
+                            <a href="tel:+441234567890" class="contact-link">+44 1234 567 890</a>
+                        </p>
+                        <p class="contact-note">Mon-Fri 8AM-6PM</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon" aria-hidden="true">✉️</div>
+                        <h3 class="contact-title">Email Support</h3>
+                        <p class="contact-detail">
+                            <a href="mailto:help@tyrehero.co.uk" class="contact-link">help@tyrehero.co.uk</a>
+                        </p>
+                        <p class="contact-note">Response within 2 hours</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon" aria-hidden="true">💬</div>
+                        <h3 class="contact-title">Live Chat</h3>
+                        <p class="contact-detail">
+                            <button class="chat-btn" aria-label="Start live chat">Start Chat</button>
+                        </p>
+                        <p class="contact-note">Instant assistance available</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            tapCount++;
+        <!-- Final CTA -->
+        <section id="book-now" class="final-cta" aria-labelledby="final-cta-title">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 id="final-cta-title" class="cta-title">Need Tyres? We're Here to Help</h2>
+                    <p class="cta-subtitle">Professional service, competitive prices, guaranteed satisfaction</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="tel:+447700900000" class="cta-btn emergency" aria-label="Call for emergency service">
+                            🚨 Emergency Call
+                        </a>
+                        <button class="cta-btn primary" onclick="scrollToBooking()" aria-label="Book service online">
+                            📅 Book Service
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-            if (tapCount === 1) {
-                tapTimer = setTimeout(() => {
-                    tapCount = 0;
-                }, 2000);
-            } else if (tapCount === 3) {
-                clearTimeout(tapTimer);
-                tapCount = 0;
-                activatePanicMode();
-            }
-        });
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">TyreHero</h3>
+                    <p class="footer-description">Professional mobile tyre service across the UK. Quality tyres, expert fitting, emergency response.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+                        <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#emergency">Emergency Tyres</a></li>
+                        <li><a href="#mobile-fitting">Mobile Fitting</a></li>
+                        <li><a href="#health-check">Health Checks</a></li>
+                        <li><a href="#repair">Tyre Repair</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#help">Help Centre</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#warranty">Warranty</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Emergency Contact</h4>
+                    <p class="footer-contact">
+                        <strong>24/7 Hotline:</strong><br>
+                        <a href="tel:+447700900000">+44 7700 900 000</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>&copy; 2024 TyreHero. All rights reserved.</p>
+                    <div class="legal-links">
+                        <a href="#privacy">Privacy Policy</a>
+                        <a href="#terms">Terms of Service</a>
+                        <a href="#cookies">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        function activatePanicMode() {
-            if (panicModeEnabled) return;
-
-            panicModeEnabled = true;
-            console.log('🚨 PANIC MODE ACTIVATED');
-
-            // Show panic overlay
-            const panicOverlay = document.getElementById('panic-mode');
-            if (panicOverlay) {
-                panicOverlay.classList.remove('hidden');
-            }
-
-            // Vibrate aggressively
-            if (navigator.vibrate) {
-                navigator.vibrate([500, 200, 500, 200, 500]);
-            }
-
-            // Auto-call after 5 seconds if no action
-            setTimeout(() => {
-                if (panicModeEnabled) {
-                    window.location.href = 'tel:08001234567';
-                }
-            }, 5000);
-        }
-
-        // Panic mode controls
-        document.addEventListener('DOMContentLoaded', function() {
-            const panicActions = document.querySelectorAll('[data-action]');
-
-            panicActions.forEach(action => {
-                action.addEventListener('click', function() {
-                    const actionType = this.dataset.action;
-
-                    switch(actionType) {
-                        case 'share-location':
-                            shareLocation();
-                            break;
-                        case 'emergency-checklist':
-                            showEmergencyChecklist();
-                            break;
-                        case 'contact-family':
-                            contactFamily();
-                            break;
-                        case 'panic-close':
-                            panicModeEnabled = false;
-                            document.getElementById('panic-mode').classList.add('hidden');
-                            break;
-                    }
-                });
+    <!-- Scripts -->
+    <script src="./assets/js/main.js" defer></script>
+    <script src="./assets/js/three.min.js" defer></script>
+    <script src="./assets/js/tyre-3d.js" defer></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(error => console.log('SW registration failed'));
             });
-        });
-
-        // Location sharing for emergencies
-        function shareLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    const locationUrl = `https://maps.google.com/maps?q=${lat},${lng}`;
-
-                    // Copy to clipboard
-                    navigator.clipboard.writeText(locationUrl).then(() => {
-                        alert('📍 Location copied to clipboard! Share this with emergency services.');
-                    });
-                }, function(error) {
-                    alert('❌ Could not get location. Please tell emergency services your location manually.');
-                });
-            } else {
-                alert('❌ Location sharing not supported. Please tell emergency services your location manually.');
-            }
-        }
-
-        function showEmergencyChecklist() {
-            alert(`
-🚨 EMERGENCY SAFETY CHECKLIST:
-
-✅ Stay in your vehicle if safe
-✅ Turn on hazard lights
-✅ Move to hard shoulder if possible
-✅ Call 0800 123 4567 for help
-✅ Stay visible to other drivers
-✅ Don't attempt repairs on busy roads
-
-TyreHero is on the way!
-            `);
-        }
-
-        function contactFamily() {
-            // Simple family contact helper
-            const message = `I'm having tyre trouble and have called TyreHero emergency service (0800 123 4567). I'm safe and help is on the way.`;
-
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Emergency Update',
-                    text: message
-                });
-            } else {
-                // Fallback - copy to clipboard
-                navigator.clipboard.writeText(message).then(() => {
-                    alert('📱 Emergency message copied to clipboard. Paste and send to family.');
-                });
-            }
         }
     </script>
 </body>
