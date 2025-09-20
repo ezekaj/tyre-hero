@@ -260,32 +260,58 @@ const App = () => {
   return (
     <div
       ref={containerRef}
-      className={`min-h-screen transition-colors duration-1000 ${
-        isNight
-          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black'
-          : 'bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100'
-      } overflow-x-hidden relative`}
+      className="min-h-screen bg-black overflow-x-hidden relative"
       style={{
         '--mouse-x': `${mousePosition.x}px`,
         '--mouse-y': `${mousePosition.y}px`,
         '--scroll-y': `${scrollY}px`
       }}
     >
-      {/* Cinematic Background System */}
+      {/* Phone Number at Top */}
+      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+        <a
+          href="tel:08000000000"
+          onClick={() => {
+            trackPhoneCall('Top Phone Number');
+            trackEmergencyClick('Phone Call', 'Top Phone Number');
+          }}
+          className="relative inline-block text-2xl md:text-3xl font-black text-white hover:text-red-400 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-6 py-3 border border-red-500/50 group"
+        >
+          <span className="flex items-center space-x-3">
+            <div className="w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
+            <span className="text-red-300 font-bold">0800 000 0000</span>
+            <div className="w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
+          </span>
+          <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
+        </a>
+      </div>
+
+      {/* Video Background System */}
       <div className="fixed inset-0 pointer-events-none z-0">
+        {/* Video Background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: 'brightness(0.7) contrast(1.1)' }}
+        >
+          <source src="/videos/tire-showcase.mp4" type="video/mp4" />
+        </video>
+
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/40"></div>
+
         {/* Dynamic ambient orb */}
         <div
-          className="absolute w-[400px] h-[400px] bg-red-500 rounded-full opacity-5 blur-[120px] transition-all duration-1000 ease-out mix-blend-screen"
+          className="absolute w-[400px] h-[400px] bg-red-500 rounded-full opacity-10 blur-[120px] transition-all duration-1000 ease-out mix-blend-screen"
           style={{
             left: `calc(var(--mouse-x) - 200px)`,
             top: `calc(var(--mouse-y) - 200px)`,
             transform: 'translate3d(0, 0, 0)'
           }}
         ></div>
-
-
-
-
       </div>
 
       {/* Navigation Menu */}
