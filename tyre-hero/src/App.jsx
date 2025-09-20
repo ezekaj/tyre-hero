@@ -426,25 +426,6 @@ const App = () => {
               Serving Slough, Maidenhead & Windsor 24/7 — because tyre emergencies wait for no one.
             </p>
 
-            {/* Prominent clickable phone number */}
-            <div className="mb-12">
-              <a
-                href="tel:08000000000"
-                onClick={() => {
-                  trackPhoneCall('Prominent Phone Number');
-                  trackEmergencyClick('Phone Call', 'Middle Phone Number');
-                }}
-                className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white hover:text-red-400 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-red-500/20 to-red-600/20 backdrop-blur-sm rounded-2xl px-8 py-4 border-2 border-red-500/50 hover:border-red-400 hover:shadow-2xl hover:shadow-red-500/50 group"
-              >
-                <span className="flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 md:h-16 md:w-16 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  0800 000 0000
-                </span>
-                <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
-              </a>
-            </div>
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-16">
               <button
