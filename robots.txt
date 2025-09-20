@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Prioritize important pages for search engines
+Allow: /images/
+Allow: /*.css
+Allow: /*.js
+
+# Block unnecessary files
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /*.map
+
+# Special instructions for search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# Sitemap location
+Sitemap: https://tyrehero.co.uk/sitemap.xml
+
+# Emergency service priority for local search
+# Primary service areas: Slough, Maidenhead, Windsor
+# Service type: 24/7 Emergency Mobile Tyre Service
+# Response time: 60-minute guarantee
