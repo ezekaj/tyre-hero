@@ -268,19 +268,19 @@ const App = () => {
       }}
     >
       {/* Phone Number at Top */}
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+      <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-40">
         <a
           href="tel:08000000000"
           onClick={() => {
             trackPhoneCall('Top Phone Number');
             trackEmergencyClick('Phone Call', 'Top Phone Number');
           }}
-          className="relative inline-block text-2xl md:text-3xl font-black text-white hover:text-red-400 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-6 py-3 border border-red-500/50 group"
+          className="relative inline-block text-lg sm:text-xl md:text-2xl font-black text-white hover:text-red-400 transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-4 py-2 sm:px-6 sm:py-3 border border-red-500/50 group"
         >
-          <span className="flex items-center space-x-3">
-            <div className="w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
+          <span className="flex items-center space-x-2">
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-400 rounded-full animate-ping"></div>
             <span className="text-red-300 font-bold">0800 000 0000</span>
-            <div className="w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-400 rounded-full animate-ping"></div>
           </span>
           <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
         </a>
@@ -296,7 +296,9 @@ const App = () => {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'brightness(0.7) contrast(1.1)' }}
+          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3C/svg%3E"
         >
+          <source src="./videos/tire-showcase.mp4" type="video/mp4" />
           <source src="/videos/tire-showcase.mp4" type="video/mp4" />
         </video>
 
@@ -328,7 +330,7 @@ const App = () => {
             >
               <div className="flex items-center">
                 <img
-                  src="/images/tyrehero-logo-white.svg"
+                  src="./images/tyrehero-logo-white.svg"
                   alt="Tyre Hero Logo"
                   className="h-12 w-auto mr-3"
                 />
@@ -1004,10 +1006,10 @@ const App = () => {
       {/* Floating Emergency Button */}
       <button
         onClick={() => window.location.href = 'tel:08000000000'}
-        className="fixed bottom-4 left-4 md:bottom-10 md:left-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border-2 md:border-4 border-red-400/50 group"
+        className="fixed bottom-4 left-4 md:bottom-10 md:left-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-2 sm:p-3 md:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border border-red-400/50 md:border-4 group"
         aria-label="Call emergency tyre service"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-10 md:w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6 md:h-10 md:w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
         <div className="absolute left-full ml-2 md:ml-4 top-1/2 transform -translate-y-1/2 bg-white text-red-600 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-xs md:text-sm font-bold">
@@ -1023,13 +1025,13 @@ const App = () => {
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => trackConversion('whatsapp_contact', { source: 'floating_button', serviceType: 'Emergency Tyre Service' })}
-        className="fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border-2 md:border-4 border-red-400/50 group"
+        className="fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-2 sm:p-3 md:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border border-red-400/50 md:border-4 group"
         aria-label="Contact via WhatsApp for emergency tyre service"
       >
         {/* WhatsApp Icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 md:h-10 md:w-10"
+          className="h-5 w-5 sm:h-6 sm:w-6 md:h-10 md:w-10"
           fill="currentColor"
           viewBox="0 0 24 24"
         >
