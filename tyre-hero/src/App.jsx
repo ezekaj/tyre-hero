@@ -462,14 +462,14 @@ const App = () => {
               </div>
             </div>
 
-            <h1 className="text-5xl md:text-8xl font-black text-white mb-8 leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black text-white mb-6 md:mb-8 leading-tight tracking-tight">
               <span className="block">YOUR URGENT</span>
               <span className="bg-gradient-to-r from-red-500 via-red-600 to-orange-500 bg-clip-text text-transparent animate-pulse">
                 TYRE RESCUE
               </span>
             </h1>
 
-            <p className="text-xl md:text-3xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-light">
+            <p className="text-base sm:text-lg md:text-xl lg:text-3xl text-gray-300 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed font-light px-4">
               Professional mobile tyre fitting and emergency roadside assistance with
               <span className="font-bold text-red-400 mx-2">guaranteed 60-minute response</span>.
               Serving Slough, Maidenhead & Windsor 24/7 — because tyre emergencies wait for no one.
@@ -547,10 +547,10 @@ const App = () => {
             <div className="inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 mb-8">
               <span className="text-red-300 font-bold text-lg">OUR RESCUE SERVICES</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8">
               Emergency Solutions
             </h2>
-            <p className="text-2xl text-gray-300 max-w-4xl mx-auto font-light">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light px-4">
               Professional mobile tyre fitting and roadside assistance designed for your safety and convenience
             </p>
           </div>
@@ -631,10 +631,10 @@ const App = () => {
             <div className="inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 mb-8">
               <span className="text-red-300 font-bold text-lg">WHY CHOOSE US</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8">
               About Tyre Hero
             </h2>
-            <p className="text-2xl text-gray-300 max-w-4xl mx-auto font-light">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light px-4">
               Your trusted partner for professional tyre solutions in Slough, Maidenhead & Windsor
             </p>
           </div>
@@ -736,10 +736,10 @@ const App = () => {
             <div className="inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 mb-8">
               <span className="text-red-300 font-bold text-lg">CUSTOMER REVIEWS</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8">
               What Our Heroes Say
             </h2>
-            <p className="text-2xl text-gray-300 max-w-4xl mx-auto font-light">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light px-4">
               Don't just take our word for it — hear from drivers we've rescued across Slough, Maidenhead & Windsor
             </p>
           </div>
@@ -805,10 +805,10 @@ const App = () => {
             <div className="inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 mb-8">
               <span className="text-red-300 font-bold text-lg">GET IN TOUCH</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8">
               Emergency Contact
             </h2>
-            <p className="text-2xl text-gray-300 max-w-4xl mx-auto font-light">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light px-4">
               Ready for immediate assistance? Our rescue team is standing by 24 hours a day, 7 days a week.
             </p>
           </div>
@@ -918,14 +918,14 @@ const App = () => {
                 <span className="text-red-300 font-black text-2xl animate-pulse">FINAL EMERGENCY ALERT</span>
               </div>
 
-              <h2 className="text-6xl md:text-8xl font-black text-white mb-10 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black text-white mb-8 md:mb-10 leading-tight">
                 STRANDED?
                 <br />
                 <span className="bg-gradient-to-r from-red-500 via-red-600 to-orange-500 bg-clip-text text-transparent">
                   WE'RE COMING.
                 </span>
               </h2>
-              <p className="text-2xl text-gray-300 mb-14 max-w-4xl mx-auto font-light">
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-10 md:mb-14 max-w-4xl mx-auto font-light px-4">
                 Don't wait on the side of the road. Our expert rescue technicians are ready to help you 24 hours a day, 7 days a week with our ironclad 60-minute response guarantee.
               </p>
 
@@ -1080,6 +1080,42 @@ const App = () => {
           50% { box-shadow: 0 0 60px rgba(239, 68, 68, 1); }
         }
       `}</style>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/448000000000?text=Hi! I need emergency tyre service. Can you help me?"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => trackConversion('whatsapp_contact', { source: 'floating_button', serviceType: 'Emergency Tyre Service' })}
+        className="fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-500 z-50 animate-bounce border-2 md:border-4 border-red-400/50 group"
+        aria-label="Contact via WhatsApp for emergency tyre service"
+      >
+        {/* Phone Icon */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 md:h-10 md:w-10"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+          />
+        </svg>
+
+        {/* Animated ping indicators */}
+        <div className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-4 h-4 md:w-6 md:h-6 bg-red-400 rounded-full animate-ping border-1 md:border-2 border-white"></div>
+        <div className="absolute -bottom-1 -left-1 md:-bottom-2 md:-left-2 w-3 h-3 md:w-4 md:h-4 bg-yellow-400 rounded-full animate-ping animation-delay-1000 border-1 md:border-2 border-white"></div>
+
+        {/* WhatsApp text on hover */}
+        <div className="absolute right-full mr-2 md:mr-4 top-1/2 transform -translate-y-1/2 bg-white text-red-600 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-xs md:text-sm font-bold">
+          WhatsApp Emergency!
+          <div className="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-white rotate-45"></div>
+        </div>
+      </a>
     </div>
   );
 };
