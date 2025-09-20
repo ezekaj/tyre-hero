@@ -220,7 +220,7 @@ const App = () => {
       location: "Slough",
       rating: 5,
       text: "Tyre Hero saved me when I had a flat at 2 AM! They arrived in 45 minutes and had me back on the road quickly and safely with our certified technicians.",
-      avatar: "https://placehold.co/80x80/FF6B6B/FFFFFF?text=SJ",
+      avatar: "./images/avatar-1.svg",
       delay: 300
     },
     {
@@ -228,7 +228,7 @@ const App = () => {
       location: "Maidenhead",
       rating: 5,
       text: "Outstanding service! The technician was knowledgeable, efficient, and even gave me tips on tyre maintenance. Will definitely use them again.",
-      avatar: "https://placehold.co/80x80/4ECDC4/FFFFFF?text=MC",
+      avatar: "./images/avatar-2.svg",
       delay: 600
     },
     {
@@ -236,7 +236,7 @@ const App = () => {
       location: "Windsor",
       rating: 5,
       text: "I was skeptical about the 60-minute guarantee, but they exceeded my expectations. Arrived in 35 minutes and fixed my tyre perfectly. Highly recommend!",
-      avatar: "https://placehold.co/80x80/45B7D1/FFFFFF?text=EW",
+      avatar: "./images/avatar-3.svg",
       delay: 900
     }
   ];
@@ -404,12 +404,12 @@ const App = () => {
               isVisible.hero ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
             }`}
           >
-            {/* Emergency badge */}
-            <div className="mb-8 inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 animate-pulse">
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
-                <span className="text-red-300 font-bold text-lg">60-MINUTE RESPONSE GUARANTEE</span>
-                <div className="w-3 h-3 bg-red-400 rounded-full animate-ping animation-delay-1000"></div>
+            {/* Emergency badge - subtle */}
+            <div className="mb-8 inline-block bg-gray-800/40 backdrop-blur-sm rounded-full px-6 py-2 border border-gray-600/30">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full opacity-60"></div>
+                <span className="text-gray-400 font-medium text-sm">60-MINUTE RESPONSE GUARANTEE</span>
+                <div className="w-2 h-2 bg-green-400 rounded-full opacity-60"></div>
               </div>
             </div>
 
@@ -552,25 +552,6 @@ const App = () => {
             ))}
           </div>
 
-          {/* Service guarantee badge */}
-          <div className="mt-20 text-center">
-            <div className="inline-block bg-gradient-to-r from-red-500 to-red-600 text-white px-12 py-6 rounded-3xl shadow-3xl transform hover:scale-105 transition-all duration-500 border-4 border-red-400/50 group relative overflow-hidden">
-              <div className="flex items-center justify-center space-x-4">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <span className="font-black text-2xl">ALL SERVICES BACKED BY OUR 60-MINUTE RESPONSE GUARANTEE</span>
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -921,7 +902,7 @@ const App = () => {
           <div className="flex flex-col md:flex-row justify-between items-center mb-12">
             <div className="flex items-center space-x-4 mb-8 md:mb-0">
               <img
-                src="/images/tyrehero-logo-white.svg"
+                src="./images/tyrehero-logo-white.svg"
                 alt="Tyre Hero Logo"
                 className="h-16 w-auto"
               />
