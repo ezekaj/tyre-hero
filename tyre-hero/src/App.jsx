@@ -283,83 +283,9 @@ const App = () => {
           }}
         ></div>
 
-        {/* Animated particle field */}
-        {[...Array(60)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-red-400 rounded-full opacity-40 animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 5}s`,
-              transform: `translate3d(0, 0, 0)`
-            }}
-          ></div>
-        ))}
 
-        {/* Dynamic grid that responds to scroll */}
-        <div className="absolute inset-0 opacity-10">
-          {[...Array(25)].map((_, i) => (
-            <div
-              key={`grid-h-${i}`}
-              className="absolute w-full border-t border-red-500/30"
-              style={{
-                top: `${i * 4}%`,
-                opacity: `calc(${1 - (scrollY / 2000)} * 0.1)`,
-                transform: `translate3d(0, calc(var(--scroll-y) * ${0.1 + i * 0.02}px), 0)`
-              }}
-            ></div>
-          ))}
-          {[...Array(25)].map((_, i) => (
-            <div
-              key={`grid-v-${i}`}
-              className="absolute h-full border-l border-red-500/30"
-              style={{
-                left: `${i * 4}%`,
-                opacity: `calc(${1 - (scrollY / 2000)} * 0.1)`,
-                transform: `translate3d(calc(var(--scroll-y) * ${0.1 + i * 0.02}px), 0, 0)`
-              }}
-            ></div>
-          ))}
-        </div>
 
-        {/* Animated road with perspective */}
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-gray-900 via-gray-800 to-transparent">
-          <div className="absolute bottom-8 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse"></div>
-          <div className="absolute bottom-16 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-50 animate-pulse" style={{ animationDelay: '1s' }}></div>
 
-          {/* Moving lane markers */}
-          <div className="absolute bottom-0 left-0 right-0 h-8 flex items-end">
-            <div className="w-full flex justify-between">
-              {[...Array(15)].map((_, i) => (
-                <div
-                  key={i}
-                  className="w-2 h-4 bg-yellow-400 animate-pulse"
-                  style={{
-                    animationDelay: `${i * 0.3}s`,
-                    animationDuration: '2s',
-                    transform: `translateY(calc(var(--scroll-y) * -${0.1 + i * 0.05}px))`
-                  }}
-                ></div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Night sky stars (only visible at night) */}
-        {isNight && [...Array(40)].map((_, i) => (
-          <div
-            key={`star-${i}`}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-60 animate-twinkle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 50}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`
-            }}
-          ></div>
-        ))}
       </div>
 
       {/* Navigation Menu */}
@@ -396,9 +322,6 @@ const App = () => {
                   }`}
                 >
                   {item.label}
-                  {activeSection === item.id && (
-                    <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-400 rounded-full animate-ping"></span>
-                  )}
                 </button>
               ))}
             </nav>
@@ -474,6 +397,26 @@ const App = () => {
               <span className="font-bold text-red-400 mx-2">guaranteed 60-minute response</span>.
               Serving Slough, Maidenhead & Windsor 24/7 — because tyre emergencies wait for no one.
             </p>
+
+            {/* Prominent clickable phone number */}
+            <div className="mb-12">
+              <a
+                href="tel:08000000000"
+                onClick={() => {
+                  trackPhoneCall('Prominent Phone Number');
+                  trackEmergencyClick('Phone Call', 'Middle Phone Number');
+                }}
+                className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white hover:text-red-400 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-red-500/20 to-red-600/20 backdrop-blur-sm rounded-2xl px-8 py-4 border-2 border-red-500/50 hover:border-red-400 hover:shadow-2xl hover:shadow-red-500/50 group"
+              >
+                <span className="flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 md:h-16 md:w-16 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  0800 000 0000
+                </span>
+                <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
+              </a>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-16">
               <button
@@ -569,8 +512,6 @@ const App = () => {
                   {/* Animated gradient border on hover */}
                   <div className={`absolute inset-0 bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-10 rounded-4xl transition-opacity duration-700 blur-xl`}></div>
 
-                  {/* Pulsing corner indicator */}
-                  <div className="absolute top-4 right-4 w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
 
                   <div className="relative z-10">
                     <div className="w-28 h-28 mb-8 rounded-3xl overflow-hidden group-hover:scale-110 transition-transform duration-500 shadow-2xl border-2 border-red-500/30 group-hover:border-red-500/60">
@@ -1037,49 +978,18 @@ const App = () => {
       {/* Floating Emergency Button */}
       <button
         onClick={() => window.location.href = 'tel:08000000000'}
-        className="fixed bottom-10 right-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-6 rounded-3xl shadow-4xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-500 z-50 animate-bounce border-4 border-red-400/50 group"
+        className="fixed bottom-4 left-4 md:bottom-10 md:left-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border-2 md:border-4 border-red-400/50 group"
+        aria-label="Call emergency tyre service"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-10 md:w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
-        <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-400 rounded-full animate-ping border-2 border-black"></div>
-        <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-yellow-400 rounded-full animate-ping animation-delay-1000 border-2 border-black"></div>
+        <div className="absolute left-full ml-2 md:ml-4 top-1/2 transform -translate-y-1/2 bg-white text-red-600 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-xs md:text-sm font-bold">
+          Call Emergency!
+          <div className="absolute top-1/2 -left-1 transform -translate-y-1/2 w-2 h-2 bg-white rotate-45"></div>
+        </div>
       </button>
 
-      {/* Custom CSS for advanced animations */}
-      <style jsx>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 0.8; }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-twinkle {
-          animation: twinkle 3s infinite;
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .animate-fade-in {
-          animation: fade-in 1s forwards;
-        }
-        .animation-delay-1000 {
-          animation-delay: 1s;
-        }
-        .emergency-mode {
-          animation: emergency-pulse 0.5s infinite;
-        }
-        @keyframes emergency-pulse {
-          0%, 100% { box-shadow: 0 0 30px rgba(239, 68, 68, 0.8); }
-          50% { box-shadow: 0 0 60px rgba(239, 68, 68, 1); }
-        }
-      `}</style>
 
       {/* Floating WhatsApp Button */}
       <a
@@ -1087,28 +997,19 @@ const App = () => {
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => trackConversion('whatsapp_contact', { source: 'floating_button', serviceType: 'Emergency Tyre Service' })}
-        className="fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-500 z-50 animate-bounce border-2 md:border-4 border-red-400/50 group"
+        className="fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border-2 md:border-4 border-red-400/50 group"
         aria-label="Contact via WhatsApp for emergency tyre service"
       >
-        {/* Phone Icon */}
+        {/* WhatsApp Icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 md:h-10 md:w-10"
-          fill="none"
+          fill="currentColor"
           viewBox="0 0 24 24"
-          stroke="currentColor"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-          />
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.51 3.488"/>
         </svg>
 
-        {/* Animated ping indicators */}
-        <div className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-4 h-4 md:w-6 md:h-6 bg-red-400 rounded-full animate-ping border-1 md:border-2 border-white"></div>
-        <div className="absolute -bottom-1 -left-1 md:-bottom-2 md:-left-2 w-3 h-3 md:w-4 md:h-4 bg-yellow-400 rounded-full animate-ping animation-delay-1000 border-1 md:border-2 border-white"></div>
 
         {/* WhatsApp text on hover */}
         <div className="absolute right-full mr-2 md:mr-4 top-1/2 transform -translate-y-1/2 bg-white text-red-600 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-xs md:text-sm font-bold">
