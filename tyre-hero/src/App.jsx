@@ -220,7 +220,7 @@ const App = () => {
       location: "Slough",
       rating: 5,
       text: "Tyre Hero saved me when I had a flat at 2 AM! They arrived in 45 minutes and had me back on the road quickly and safely with our certified technicians.",
-      avatar: "./images/avatar-1.svg",
+      avatar: "./images/emergency-callout.jpeg",
       delay: 300
     },
     {
@@ -228,7 +228,7 @@ const App = () => {
       location: "Maidenhead",
       rating: 5,
       text: "Outstanding service! The technician was knowledgeable, efficient, and even gave me tips on tyre maintenance. Will definitely use them again.",
-      avatar: "./images/avatar-2.svg",
+      avatar: "./images/mobile-service.jpg",
       delay: 600
     },
     {
@@ -236,7 +236,7 @@ const App = () => {
       location: "Windsor",
       rating: 5,
       text: "I was skeptical about the 60-minute guarantee, but they exceeded my expectations. Arrived in 35 minutes and fixed my tyre perfectly. Highly recommend!",
-      avatar: "./images/avatar-3.svg",
+      avatar: "./images/puncture-repair.jpg",
       delay: 900
     }
   ];
@@ -413,7 +413,7 @@ const App = () => {
               </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black text-white mb-6 md:mb-8 leading-tight tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 md:mb-6 leading-tight tracking-tight">
               <span className="block">YOUR URGENT</span>
               <span className="bg-gradient-to-r from-red-500 via-red-600 to-orange-500 bg-clip-text text-transparent animate-pulse">
                 TYRE RESCUE
@@ -434,7 +434,7 @@ const App = () => {
                   trackEmergencyClick('Emergency Call', 'Hero CTA');
                   window.location.href = 'tel:08000000000';
                 }}
-                className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-6 px-12 rounded-3xl text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-300 hover:rotate-2 animate-pulse border-4 border-red-400/50 group relative overflow-hidden"
+                className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-3 px-6 sm:py-4 sm:px-8 md:py-6 md:px-12 rounded-2xl sm:rounded-3xl text-lg sm:text-xl md:text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-300 hover:rotate-2 animate-pulse border-2 sm:border-4 border-red-400/50 group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -448,7 +448,7 @@ const App = () => {
 
               <button
                 onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-                className="border-4 border-gray-600 text-gray-300 font-black py-6 px-12 rounded-3xl text-2xl hover:bg-gray-800 hover:border-red-500 hover:text-red-400 transition-all duration-300 transform hover:scale-105 relative group backdrop-blur-sm"
+                className="border-2 sm:border-4 border-gray-600 text-gray-300 font-black py-3 px-6 sm:py-4 sm:px-8 md:py-6 md:px-12 rounded-2xl sm:rounded-3xl text-lg sm:text-xl md:text-2xl hover:bg-gray-800 hover:border-red-500 hover:text-red-400 transition-all duration-300 transform hover:scale-105 relative group backdrop-blur-sm"
               >
                 <span className="relative z-10 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -499,7 +499,7 @@ const App = () => {
             <div className="inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 mb-8">
               <span className="text-red-300 font-bold text-lg">OUR RESCUE SERVICES</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-6 md:mb-8">
               Emergency Solutions
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light px-4">
@@ -562,7 +562,7 @@ const App = () => {
             <div className="inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 mb-8">
               <span className="text-red-300 font-bold text-lg">WHY CHOOSE US</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-6 md:mb-8">
               About Tyre Hero
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light px-4">
@@ -667,7 +667,7 @@ const App = () => {
             <div className="inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 mb-8">
               <span className="text-red-300 font-bold text-lg">CUSTOMER REVIEWS</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-6 md:mb-8">
               What Our Heroes Say
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light px-4">
@@ -736,7 +736,7 @@ const App = () => {
             <div className="inline-block bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-8 py-3 border border-red-500/50 mb-8">
               <span className="text-red-300 font-bold text-lg">GET IN TOUCH</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-6 md:mb-8">
               Emergency Contact
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light px-4">
@@ -946,22 +946,6 @@ const App = () => {
             Serving Slough, Maidenhead & Windsor. Developed by ELO Group.
           </p>
 
-          <div className="flex flex-wrap justify-center space-x-12 text-lg text-gray-500">
-            <span className="flex items-center animate-pulse">
-              <span className="w-3 h-3 bg-red-400 rounded-full mr-3 animate-ping"></span>
-              24/7 Emergency Service
-            </span>
-            <span>•</span>
-            <span className="flex items-center animate-pulse" style={{ animationDelay: '1s' }}>
-              <span className="w-3 h-3 bg-red-400 rounded-full mr-3 animate-ping"></span>
-              60-Minute Guarantee
-            </span>
-            <span>•</span>
-            <span className="flex items-center animate-pulse" style={{ animationDelay: '2s' }}>
-              <span className="w-3 h-3 bg-red-400 rounded-full mr-3 animate-ping"></span>
-              Licensed & Insured
-            </span>
-          </div>
         </div>
       </footer>
 
