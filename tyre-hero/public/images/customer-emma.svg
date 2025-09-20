@@ -1,0 +1,26 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fce7f3"/>
+      <stop offset="100%" stop-color="#f9a8d4"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg3)"/>
+  <!-- Face -->
+  <circle cx="100" cy="85" r="48" fill="#f4c2a1"/>
+  <!-- Hair (longer, feminine style) -->
+  <path d="M50 65Q50 35 100 35Q150 35 150 65Q150 75 130 85Q120 90 100 88Q80 90 70 85Q50 75 50 65Z" fill="#a0522d"/>
+  <!-- Eyes -->
+  <circle cx="85" cy="80" r="4" fill="#2c1810"/>
+  <circle cx="115" cy="80" r="4" fill="#2c1810"/>
+  <!-- Eyelashes -->
+  <path d="M83 76L85 74M87 76L85 74" stroke="#2c1810" stroke-width="1"/>
+  <path d="M113 76L115 74M117 76L115 74" stroke="#2c1810" stroke-width="1"/>
+  <!-- Nose -->
+  <ellipse cx="100" cy="90" rx="2" ry="3" fill="#e6956f"/>
+  <!-- Mouth (with lipstick) -->
+  <ellipse cx="100" cy="105" rx="8" ry="3" fill="#dc2626"/>
+  <!-- Necklace -->
+  <circle cx="100" cy="130" r="4" fill="#fbbf24"/>
+  <path d="M85 125Q100 120 115 125" stroke="#fbbf24" stroke-width="2" fill="none"/>
+</svg>

@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+// Import service images
+import tyreReplacementImg from '/images/tyre-replacement.jpg';
+import punctureRepairImg from '/images/puncture-repair.jpg';
+import tyreFittingImg from '/images/tyre-fitting-machine.jpg';
+import emergencyCalloutImg from '/images/emergency-callout.jpeg';
+
 // Enhanced Conversion Tracking for Google Ads & Analytics
 const trackConversion = (conversionType, details = {}) => {
   try {
@@ -163,7 +169,7 @@ const App = () => {
     {
       title: "Emergency Tyre Replacement",
       description: "Immediate roadside tyre replacement service. We come to you anywhere, anytime with premium quality tyres in stock.",
-      image: "/images/tyre-replacement.jpg",
+      image: tyreReplacementImg,
       stats: "5000+ Served",
       color: "from-red-500 to-red-600",
       delay: 200,
@@ -176,7 +182,7 @@ const App = () => {
     {
       title: "Professional Puncture Repair",
       description: "Expert puncture repair using industry-standard techniques. Get back on the road quickly and safely with our certified technicians.",
-      image: "/images/puncture-repair.jpg",
+      image: punctureRepairImg,
       stats: "98% Success Rate",
       color: "from-blue-500 to-blue-600",
       delay: 400,
@@ -189,7 +195,7 @@ const App = () => {
     {
       title: "Mobile Tyre Fitting",
       description: "Professional mobile tyre fitting service using state-of-the-art equipment. We bring the workshop to you.",
-      image: "/images/tyre-fitting-machine.jpg",
+      image: tyreFittingImg,
       stats: "15+ Years Expertise",
       color: "from-purple-500 to-purple-600",
       delay: 600,
@@ -202,7 +208,7 @@ const App = () => {
     {
       title: "24/7 Emergency Callout",
       description: "Round-the-clock emergency tyre service. No matter the time or location, we're here to help when you need us most.",
-      image: "/images/emergency-callout.jpeg",
+      image: emergencyCalloutImg,
       stats: "24/7 Available",
       color: "from-green-500 to-green-600",
       delay: 800,
@@ -220,7 +226,7 @@ const App = () => {
       location: "Slough",
       rating: 5,
       text: "Tyre Hero saved me when I had a flat at 2 AM! They arrived in 45 minutes and had me back on the road quickly and safely with our certified technicians.",
-      avatar: "./images/emergency-callout.jpeg",
+      avatar: "./images/customer-sarah.svg",
       delay: 300
     },
     {
@@ -228,7 +234,7 @@ const App = () => {
       location: "Maidenhead",
       rating: 5,
       text: "Outstanding service! The technician was knowledgeable, efficient, and even gave me tips on tyre maintenance. Will definitely use them again.",
-      avatar: "./images/mobile-service.jpg",
+      avatar: "./images/customer-michael.svg",
       delay: 600
     },
     {
@@ -236,7 +242,7 @@ const App = () => {
       location: "Windsor",
       rating: 5,
       text: "I was skeptical about the 60-minute guarantee, but they exceeded my expectations. Arrived in 35 minutes and fixed my tyre perfectly. Highly recommend!",
-      avatar: "./images/puncture-repair.jpg",
+      avatar: "./images/customer-emma.svg",
       delay: 900
     }
   ];
@@ -480,15 +486,6 @@ const App = () => {
             </div>
           </div>
 
-          {/* Floating car illustration */}
-          <div className="absolute -bottom-24 left-1/2 transform -translate-x-1/2 animate-float">
-            <div className="w-32 h-16 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg relative shadow-2xl">
-              <div className="absolute top-2 left-2 w-6 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
-              <div className="absolute top-2 right-2 w-6 h-3 bg-yellow-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-              <div className="absolute -bottom-2 left-3 w-4 h-4 bg-gray-900 rounded-full border-2 border-gray-600"></div>
-              <div className="absolute -bottom-2 right-3 w-4 h-4 bg-gray-900 rounded-full border-2 border-gray-600"></div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -517,28 +514,28 @@ const App = () => {
                 style={{ transitionDelay: `${service.delay}ms` }}
                 onClick={service.action}
               >
-                <div className="bg-gray-900/90 backdrop-blur-xl rounded-4xl p-10 shadow-3xl hover:shadow-red-500/20 transform hover:-translate-y-6 transition-all duration-700 border border-gray-700/50 h-full flex flex-col hover:border-red-500/50 relative overflow-hidden hover:scale-105">
+                <div className="bg-gray-900/90 backdrop-blur-xl rounded-4xl p-4 sm:p-6 md:p-10 shadow-3xl hover:shadow-red-500/20 transform hover:-translate-y-6 transition-all duration-700 border border-gray-700/50 h-full flex flex-col hover:border-red-500/50 relative overflow-hidden hover:scale-105">
                   {/* Animated gradient border on hover */}
                   <div className={`absolute inset-0 bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-10 rounded-4xl transition-opacity duration-700 blur-xl`}></div>
 
 
                   <div className="relative z-10">
-                    <div className="w-28 h-28 mb-8 rounded-3xl overflow-hidden group-hover:scale-110 transition-transform duration-500 shadow-2xl border-2 border-red-500/30 group-hover:border-red-500/60">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 mb-4 sm:mb-6 md:mb-8 rounded-2xl sm:rounded-3xl overflow-hidden group-hover:scale-110 transition-transform duration-500 shadow-2xl border-2 border-red-500/30 group-hover:border-red-500/60">
                       <img
                         src={service.image}
                         alt={service.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <h3 className="text-3xl font-black text-white mb-6 group-hover:text-red-400 transition-colors duration-300">
+                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black text-white mb-3 sm:mb-4 md:mb-6 group-hover:text-red-400 transition-colors duration-300">
                       {service.title}
                     </h3>
-                    <p className="text-gray-300 leading-relaxed mb-8 text-lg">
+                    <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base md:text-lg">
                       {service.description}
                     </p>
 
-                    <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-6 py-3 inline-block mb-8 border border-red-500/30">
-                      <span className="text-red-400 font-black text-xl">{service.stats}</span>
+                    <div className="bg-black/40 backdrop-blur-sm rounded-xl sm:rounded-2xl px-3 sm:px-4 md:px-6 py-2 sm:py-3 inline-block mb-4 sm:mb-6 md:mb-8 border border-red-500/30">
+                      <span className="text-red-400 font-black text-sm sm:text-base md:text-lg lg:text-xl">{service.stats}</span>
                     </div>
 
                     {/* Animated underline with glow */}
@@ -572,22 +569,22 @@ const App = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-10">
-              <div className="bg-gradient-to-br from-red-500/20 to-red-600/20 backdrop-blur-2xl rounded-4xl p-12 border border-red-500/30 relative overflow-hidden">
+              <div className="bg-gradient-to-br from-red-500/20 to-red-600/20 backdrop-blur-2xl rounded-2xl sm:rounded-3xl md:rounded-4xl p-4 sm:p-6 md:p-8 lg:p-12 border border-red-500/30 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-transparent opacity-50"></div>
 
                 <div className="relative z-10">
-                  <h3 className="text-4xl font-black text-white mb-8 flex items-center">
-                    <span className="w-16 h-16 bg-red-500/30 rounded-2xl flex items-center justify-center mr-6">
-                      <svg className="w-8 h-8 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-4 sm:mb-6 md:mb-8 flex items-center">
+                    <span className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 bg-red-500/30 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 md:mr-6">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     </span>
                     Our Mission
                   </h3>
-                  <p className="text-gray-300 mb-8 text-xl leading-relaxed">
+                  <p className="text-gray-300 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
                     At Tyre Hero, we're dedicated to providing exceptional roadside assistance with a focus on safety, speed, and reliability. Our team of certified technicians is available 24/7 to get you back on the road quickly and safely.
                   </p>
-                  <p className="text-gray-300 mb-8 text-xl leading-relaxed">
+                  <p className="text-gray-300 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
                     With over 15 years of experience serving the local community, we've built our reputation on trust, quality service, and the use of premium tyres and equipment.
                   </p>
 
@@ -601,10 +598,10 @@ const App = () => {
                     ].map((stat, index) => (
                       <div
                         key={index}
-                        className="bg-black/30 backdrop-blur-sm rounded-3xl p-6 border border-gray-700/50 text-center hover:bg-red-500/20 hover:border-red-500/50 transition-all duration-500 transform hover:scale-105"
+                        className="bg-black/30 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-3 sm:p-4 md:p-6 border border-gray-700/50 text-center hover:bg-red-500/20 hover:border-red-500/50 transition-all duration-500 transform hover:scale-105"
                       >
-                        <div className={`text-4xl font-black text-${stat.color}-400 mb-3`}>{stat.number}</div>
-                        <div className="text-gray-300 font-medium">{stat.label}</div>
+                        <div className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-${stat.color}-400 mb-2 sm:mb-3`}>{stat.number}</div>
+                        <div className="text-gray-300 font-medium text-xs sm:text-sm md:text-base">{stat.label}</div>
                       </div>
                     ))}
                   </div>
@@ -613,18 +610,18 @@ const App = () => {
             </div>
 
             <div className="relative">
-              <div className="bg-gradient-to-br from-red-500/30 to-red-600/30 backdrop-blur-3xl rounded-4xl p-12 h-full border border-red-500/50 relative overflow-hidden">
+              <div className="bg-gradient-to-br from-red-500/30 to-red-600/30 backdrop-blur-3xl rounded-2xl sm:rounded-3xl md:rounded-4xl p-4 sm:p-6 md:p-8 lg:p-12 h-full border border-red-500/50 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-transparent opacity-30"></div>
 
                 <div className="relative z-10 space-y-8">
                   <div className="text-center">
-                    <div className="w-32 h-32 mb-6 bg-red-500 rounded-full flex items-center justify-center animate-bounce shadow-2xl">
-                      <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 mb-4 sm:mb-6 bg-red-500 rounded-full flex items-center justify-center animate-bounce shadow-2xl">
+                      <svg className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm4 14a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <h4 className="text-4xl font-black text-white mb-6">Trusted by Local Drivers</h4>
-                    <p className="text-gray-300 text-center text-xl">
+                    <h4 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-4 sm:mb-6">Trusted by Local Drivers</h4>
+                    <p className="text-gray-300 text-center text-sm sm:text-base md:text-lg lg:text-xl">
                       Over 5,000 satisfied customers across Slough, Maidenhead and Windsor have chosen us for their tyre needs.
                     </p>
                   </div>
@@ -637,13 +634,13 @@ const App = () => {
                     ].map((item, index) => (
                       <div
                         key={index}
-                        className="flex items-start p-6 bg-black/40 backdrop-blur-sm rounded-3xl border border-gray-700/50 hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-500 group transform hover:scale-105"
+                        className="flex items-start p-3 sm:p-4 md:p-6 bg-black/40 backdrop-blur-sm rounded-2xl sm:rounded-3xl border border-gray-700/50 hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-500 group transform hover:scale-105"
                         style={{ animationDelay: `${item.delay}ms` }}
                       >
-                        <div className="w-4 h-4 bg-red-400 rounded-full mr-5 flex-shrink-0 mt-2"></div>
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-400 rounded-full mr-3 sm:mr-4 md:mr-5 flex-shrink-0 mt-1 sm:mt-2"></div>
                         <div>
-                          <h5 className="text-white font-black text-xl mb-3">{item.title}</h5>
-                          <p className="text-gray-300 text-lg">{item.desc}</p>
+                          <h5 className="text-white font-black text-base sm:text-lg md:text-xl mb-2 sm:mb-3">{item.title}</h5>
+                          <p className="text-gray-300 text-sm sm:text-base md:text-lg">{item.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -679,18 +676,18 @@ const App = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-gray-900/90 backdrop-blur-2xl rounded-4xl p-10 shadow-2xl border border-gray-700/50 hover:border-red-500/50 transform hover:-translate-y-4 transition-all duration-700 group hover:scale-105"
+                className="bg-gray-900/90 backdrop-blur-2xl rounded-2xl sm:rounded-3xl md:rounded-4xl p-4 sm:p-6 md:p-10 shadow-2xl border border-gray-700/50 hover:border-red-500/50 transform hover:-translate-y-4 transition-all duration-700 group hover:scale-105"
                 style={{ transitionDelay: `${testimonial.delay}ms` }}
               >
                 <div className="flex items-center mb-8">
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
-                    className="w-20 h-20 rounded-full border-4 border-red-500/50 mr-6 hover:scale-110 transition-transform duration-500"
+                    className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-2 sm:border-3 md:border-4 border-red-500/50 mr-3 sm:mr-4 md:mr-6 hover:scale-110 transition-transform duration-500"
                   />
                   <div>
-                    <h4 className="text-white font-black text-2xl">{testimonial.name}</h4>
-                    <p className="text-red-400 text-lg">{testimonial.location}</p>
+                    <h4 className="text-white font-black text-lg sm:text-xl md:text-2xl">{testimonial.name}</h4>
+                    <p className="text-red-400 text-sm sm:text-base md:text-lg">{testimonial.location}</p>
                   </div>
                 </div>
 
@@ -699,7 +696,7 @@ const App = () => {
                     <svg
                       key={i}
                       xmlns="http://www.w3.org/2000/svg"
-                      className={`h-8 w-8 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-600'}`}
+                      className={`h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-600'}`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -708,7 +705,7 @@ const App = () => {
                   ))}
                 </div>
 
-                <p className="text-gray-300 text-xl leading-relaxed italic">
+                <p className="text-gray-300 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed italic">
                   "{testimonial.text}"
                 </p>
 
@@ -720,7 +717,7 @@ const App = () => {
           <div className="mt-20 text-center">
             <button
               onClick={() => document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' })}
-              className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-6 px-12 rounded-3xl text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-500 border-4 border-red-400/50 group relative overflow-hidden"
+              className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-3 sm:py-4 md:py-6 px-6 sm:px-8 md:px-12 rounded-2xl sm:rounded-3xl text-lg sm:text-xl md:text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-500 border-2 sm:border-3 md:border-4 border-red-400/50 group relative overflow-hidden"
             >
               <span className="relative z-10">Read More Hero Stories</span>
               <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
@@ -747,8 +744,8 @@ const App = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Information */}
             <div className="space-y-10">
-              <div className="bg-gradient-to-br from-red-500/30 to-red-600/30 backdrop-blur-3xl rounded-4xl p-12 border border-red-500/50">
-                <h3 className="text-4xl font-black text-white mb-10 text-center">Call for Immediate Rescue</h3>
+              <div className="bg-gradient-to-br from-red-500/30 to-red-600/30 backdrop-blur-3xl rounded-2xl sm:rounded-3xl md:rounded-4xl p-4 sm:p-6 md:p-8 lg:p-12 border border-red-500/50">
+                <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-6 sm:mb-8 md:mb-10 text-center">Call for Immediate Rescue</h3>
 
                 <div className="space-y-8">
                   {[
@@ -779,7 +776,7 @@ const App = () => {
                   ].map((contact, index) => (
                     <div
                       key={index}
-                      className="flex items-start p-8 bg-black/40 backdrop-blur-xl rounded-3xl border border-gray-700/50 hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-500 group transform hover:scale-105 hover:rotate-1 cursor-pointer"
+                      className="flex items-start p-4 sm:p-6 md:p-8 bg-black/40 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-gray-700/50 hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-500 group transform hover:scale-105 hover:rotate-1 cursor-pointer"
                       onClick={() => {
                         if (contact.icon === 'phone') {
                           window.location.href = 'tel:08000000000';
@@ -791,7 +788,7 @@ const App = () => {
                         }
                       }}
                     >
-                      <div className="w-12 h-12 mr-6 flex-shrink-0 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mr-3 sm:mr-4 md:mr-6 flex-shrink-0 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
                         {contact.icon === 'phone' ? (
                           <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
@@ -808,24 +805,24 @@ const App = () => {
                         )}
                       </div>
                       <div>
-                        <h4 className="text-white font-black text-xl mb-2">{contact.title}</h4>
-                        <p className={`text-${contact.color}-400 font-black text-${contact.size} mb-3`}>{contact.value}</p>
-                        <p className="text-gray-300">{contact.desc}</p>
+                        <h4 className="text-white font-black text-base sm:text-lg md:text-xl mb-1 sm:mb-2">{contact.title}</h4>
+                        <p className={`text-${contact.color}-400 font-black text-sm sm:text-base md:text-lg lg:text-${contact.size} mb-2 sm:mb-3`}>{contact.value}</p>
+                        <p className="text-gray-300 text-sm sm:text-base">{contact.desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-10 p-8 bg-red-500/20 rounded-3xl border border-red-500/50 backdrop-blur-xl">
-                  <div className="flex items-center mb-4">
-                    <div className="w-8 h-8 bg-red-500/50 rounded-full flex items-center justify-center mr-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="mt-6 sm:mt-8 md:mt-10 p-4 sm:p-6 md:p-8 bg-red-500/20 rounded-2xl sm:rounded-3xl border border-red-500/50 backdrop-blur-xl">
+                  <div className="flex items-center mb-3 sm:mb-4">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-500/50 rounded-full flex items-center justify-center mr-3 sm:mr-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <h4 className="text-red-400 font-black text-2xl">60-MINUTE GUARANTEE</h4>
+                    <h4 className="text-red-400 font-black text-lg sm:text-xl md:text-2xl">60-MINUTE GUARANTEE</h4>
                   </div>
-                  <p className="text-gray-300 text-xl">
+                  <p className="text-gray-300 text-sm sm:text-base md:text-lg lg:text-xl">
                     We promise to arrive at your location within 60 minutes or less, day or night. Your safety is our absolute priority.
                   </p>
                   <div className="mt-4 w-full h-2 bg-gradient-to-r from-red-500 to-red-600 rounded-full animate-pulse"></div>
@@ -840,33 +837,33 @@ const App = () => {
       {/* Final CTA Section — Heroic Call to Action */}
       <section className="relative z-10 py-24 px-6 text-center bg-gradient-to-r from-red-500/20 to-red-600/20 backdrop-blur-3xl">
         <div className="max-w-5xl mx-auto">
-          <div className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-3xl rounded-4xl shadow-4xl p-16 md:p-20 border border-gray-700/50 relative overflow-hidden">
+          <div className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-3xl rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-4xl p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 border border-gray-700/50 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-transparent opacity-50"></div>
             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500 to-red-600 animate-pulse"></div>
 
             <div className="relative z-10">
-              <div className="inline-block bg-red-500/40 rounded-full px-10 py-4 mb-10 border border-red-500/50 animate-pulse">
-                <span className="text-red-300 font-black text-2xl animate-pulse">FINAL EMERGENCY ALERT</span>
+              <div className="inline-block bg-red-500/40 rounded-full px-4 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 mb-6 sm:mb-8 md:mb-10 border border-red-500/50 animate-pulse">
+                <span className="text-red-300 font-black text-sm sm:text-base md:text-lg lg:text-2xl animate-pulse">FINAL EMERGENCY ALERT</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black text-white mb-8 md:mb-10 leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-8xl font-black text-white mb-6 sm:mb-8 md:mb-10 leading-tight">
                 STRANDED?
                 <br />
                 <span className="bg-gradient-to-r from-red-500 via-red-600 to-orange-500 bg-clip-text text-transparent">
                   WE'RE COMING.
                 </span>
               </h2>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-10 md:mb-14 max-w-4xl mx-auto font-light px-4">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-300 mb-8 sm:mb-10 md:mb-14 max-w-4xl mx-auto font-light px-4">
                 Don't wait on the side of the road. Our expert rescue technicians are ready to help you 24 hours a day, 7 days a week with our ironclad 60-minute response guarantee.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-10 justify-center items-center mb-14">
+              <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 md:gap-10 justify-center items-center mb-10 sm:mb-12 md:mb-14">
                 <button
                   onClick={() => window.location.href = 'tel:08000000000'}
-                  className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-8 px-16 rounded-4xl text-3xl shadow-4xl hover:shadow-red-500/50 transform hover:scale-105 transition-all duration-500 hover:rotate-3 animate-pulse border-4 border-red-400/50 group relative overflow-hidden"
+                  className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-4 sm:py-6 md:py-8 px-8 sm:px-12 md:px-16 rounded-2xl sm:rounded-3xl md:rounded-4xl text-lg sm:text-xl md:text-2xl lg:text-3xl shadow-4xl hover:shadow-red-500/50 transform hover:scale-105 transition-all duration-500 hover:rotate-3 animate-pulse border-2 sm:border-3 md:border-4 border-red-400/50 group relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 mr-2 sm:mr-3 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                     </svg>
                     CALL RESCUE: 0800 000 0000
@@ -876,8 +873,8 @@ const App = () => {
                 </button>
               </div>
 
-              <div className="border-t border-gray-700/50 pt-10">
-                <div className="flex flex-wrap justify-center gap-16 text-gray-400">
+              <div className="border-t border-gray-700/50 pt-6 sm:pt-8 md:pt-10">
+                <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 lg:gap-16 text-gray-400">
                   {[
                     { text: "60-Minute Response Guarantee" },
                     { text: "24/7 Availability • 365 Days" },
@@ -886,7 +883,7 @@ const App = () => {
                   ].map((item, index) => (
                     <div key={index} className="flex items-center space-x-4">
                       <div className="w-2 h-2 bg-red-400 rounded-full"></div>
-                      <span className="text-xl font-medium">{item.text}</span>
+                      <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -925,23 +922,23 @@ const App = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-gray-400">
               <div className="text-center md:text-left">
                 <h4 className="text-white font-black text-2xl mb-4">Emergency Contact</h4>
-                <p className="text-2xl font-black text-red-400 mb-2">0800 000 0000</p>
-                <p className="text-xl">rescue@tyrehero.co.uk</p>
+                <p className="text-lg sm:text-xl md:text-2xl font-black text-red-400 mb-2">0800 000 0000</p>
+                <p className="text-base sm:text-lg md:text-xl">rescue@tyrehero.co.uk</p>
               </div>
               <div className="text-center">
                 <h4 className="text-white font-black text-2xl mb-4">Service Area</h4>
-                <p className="text-2xl font-black">Slough, Maidenhead, Windsor</p>
-                <p className="text-xl">And all surrounding areas</p>
+                <p className="text-lg sm:text-xl md:text-2xl font-black">Slough, Maidenhead, Windsor</p>
+                <p className="text-base sm:text-lg md:text-xl">And all surrounding areas</p>
               </div>
               <div className="text-center md:text-right">
                 <h4 className="text-white font-black text-2xl mb-4">Always Available</h4>
-                <p className="text-2xl font-black">24 hours a day</p>
-                <p className="text-xl">7 days a week • 365 days a year</p>
+                <p className="text-lg sm:text-xl md:text-2xl font-black">24 hours a day</p>
+                <p className="text-base sm:text-lg md:text-xl">7 days a week • 365 days a year</p>
               </div>
             </div>
           </div>
 
-          <p className="text-gray-400 text-xl mb-8">
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl mb-8">
             © 2025 Tyre Hero. Professional mobile tyre fitting and emergency roadside assistance service.
             Serving Slough, Maidenhead & Windsor. Developed by ELO Group.
           </p>
