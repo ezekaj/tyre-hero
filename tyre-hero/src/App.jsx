@@ -383,18 +383,18 @@ const App = () => {
             </div>
 
             {/* Phone Number - Desktop: between logo and nav, Mobile: between logo and hamburger */}
-            <div className="flex-1 flex justify-center">
+            <div className="flex-1 flex justify-center md:justify-start md:ml-3">
               <a
                 href="tel:08000000000"
                 onClick={() => {
                   trackPhoneCall('Header Phone Number');
                   trackEmergencyClick('Phone Call', 'Header Phone Number');
                 }}
-                className="relative px-2 py-1 text-xs font-medium transition-all duration-300 rounded text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
+                className="relative px-2 py-1 font-medium transition-all duration-300 rounded text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
               >
                 <span className="flex items-center space-x-1 flex-nowrap min-w-fit">
                   <div className="w-1 h-1 bg-red-400 rounded-full animate-ping flex-shrink-0"></div>
-                  <span className="text-red-300 font-medium text-xs whitespace-nowrap">0800 000 0000</span>
+                  <span className="text-red-300 font-medium text-xs md:text-sm whitespace-nowrap">0800 000 0000</span>
                   <div className="w-1 h-1 bg-red-400 rounded-full animate-ping flex-shrink-0"></div>
                 </span>
               </a>
