@@ -382,25 +382,27 @@ const App = () => {
               </div>
             </div>
 
+            {/* Phone Number - Desktop: between logo and nav, Mobile: between logo and hamburger */}
+            <div className="flex-1 flex justify-center">
+              <a
+                href="tel:08000000000"
+                onClick={() => {
+                  trackPhoneCall('Header Phone Number');
+                  trackEmergencyClick('Phone Call', 'Header Phone Number');
+                }}
+                className="relative px-2 py-1 text-xs font-medium transition-all duration-300 rounded text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
+              >
+                <span className="flex items-center space-x-1">
+                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping"></div>
+                  <span className="text-red-300 font-medium text-xs">0800 000 0000</span>
+                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping"></div>
+                </span>
+              </a>
+            </div>
 
-            {/* Desktop Navigation with integrated phone number */}
+            {/* Desktop Navigation */}
             <div className={`relative group ${isMenuOpen ? 'hidden' : ''}`}>
               <nav className="hidden md:flex space-x-1 relative z-10">
-                {/* Phone number as first nav item on desktop */}
-                <a
-                  href="tel:08000000000"
-                  onClick={() => {
-                    trackPhoneCall('Header Phone Number');
-                    trackEmergencyClick('Phone Call', 'Header Phone Number');
-                  }}
-                  className="relative px-3 py-2 text-xs font-medium transition-all duration-300 rounded-lg text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group mr-3"
-                >
-                  <span className="flex items-center space-x-1.5">
-                    <div className="w-1.5 h-1.5 bg-red-400 rounded-full animate-ping"></div>
-                    <span className="text-red-300 font-medium text-xs">0800 000 0000</span>
-                    <div className="w-1.5 h-1.5 bg-red-400 rounded-full animate-ping"></div>
-                  </span>
-                </a>
                 {navItems.map((item) => (
                   <button
                     key={item.id}
@@ -440,19 +442,18 @@ const App = () => {
           {isMenuOpen && (
             <div className="md:hidden mt-4 pb-4 border-t border-gray-700/50">
               <nav className="flex flex-col space-y-3">
-{navItems.map((item, index) => (
-                  <div key={item.id}>
-                    <button
-                      onClick={() => scrollToSection(item.id)}
-                      className={`px-6 py-4 text-left text-sm font-medium transition-all duration-300 rounded-xl w-full ${
-                        activeSection === item.id
-                          ? 'text-white bg-red-500/20 border border-red-500/50'
-                          : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  </div>
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`px-6 py-4 text-left text-sm font-medium transition-all duration-300 rounded-xl w-full ${
+                      activeSection === item.id
+                        ? 'text-white bg-red-500/20 border border-red-500/50'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
                 ))}
               </nav>
             </div>
@@ -924,8 +925,8 @@ const App = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 mr-2 sm:mr-3 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                     </svg>
-                    0800 000 0000
-                  </span>
+                    EMERGENCY: 0800 000 0000
+                    </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                   <div className="absolute -inset-2 bg-gradient-to-r from-red-400 to-pink-500 rounded-4xl opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-500"></div>
                 </button>
@@ -1004,25 +1005,11 @@ const App = () => {
         </div>
       </footer>
 
-      {/* Floating Emergency Button */}
-      <button
-        onClick={() => window.location.href = 'tel:08000000000'}
-        className="fixed bottom-4 left-4 md:bottom-10 md:left-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-2 sm:p-3 md:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border border-red-400/50 md:border-4 group"
-        aria-label="Call emergency tyre service"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6 md:h-10 md:w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-        </svg>
-        <div className="absolute left-full ml-2 md:ml-4 top-1/2 transform -translate-y-1/2 bg-white text-red-600 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-xs md:text-sm font-bold">
-          Call Emergency!
-          <div className="absolute top-1/2 -left-1 transform -translate-y-1/2 w-2 h-2 bg-white rotate-45"></div>
-        </div>
-      </button>
 
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/448000000000?text=Hi! I need emergency tyre service. Can you help me?"
+        href="https://wa.me/?text=Hi! I need emergency tyre service. Can you help me?"
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => trackConversion('whatsapp_contact', { source: 'floating_button', serviceType: 'Emergency Tyre Service' })}
