@@ -970,7 +970,7 @@ const App = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-gray-400 hover:text-red-400 transition-colors duration-500 font-black text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap"
+                  className="text-gray-400 hover:text-red-400 transition-colors duration-500 font-black text-sm sm:text-base md:text-lg lg:text-xl whitespace-nowrap"
                 >
                   {item.label}
                 </button>
