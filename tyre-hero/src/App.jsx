@@ -965,12 +965,12 @@ const App = () => {
               />
             </div>
 
-            <div className="flex space-x-8">
+            <div className="flex space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-gray-400 hover:text-red-400 transition-colors duration-500 font-black text-lg"
+                  className="text-gray-400 hover:text-red-400 transition-colors duration-500 font-black text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap"
                 >
                   {item.label}
                 </button>
