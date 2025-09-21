@@ -333,7 +333,7 @@ const App = () => {
                   trackPhoneCall('Header Phone Number');
                   trackEmergencyClick('Phone Call', 'Header Phone Number');
                 }}
-                className="relative inline-block text-sm lg:text-base font-black text-white hover:text-red-400 transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-3 py-2 lg:px-4 lg:py-2 border border-red-500/50 group"
+                className="relative px-5 py-3 text-sm font-medium transition-all duration-300 rounded-xl text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
               >
                 <span className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
@@ -973,7 +973,7 @@ const App = () => {
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => trackConversion('whatsapp_contact', { source: 'floating_button', serviceType: 'Emergency Tyre Service' })}
-        className="fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-2 sm:p-3 md:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border border-red-400/50 md:border-4 group"
+        className="fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-gradient-to-r from-green-500 to-green-600 text-white p-2 sm:p-3 md:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-green-500/50 transform hover:scale-110 transition-all duration-300 z-50 border border-green-400/50 md:border-4 group"
         aria-label="Contact via WhatsApp for emergency tyre service"
       >
         {/* WhatsApp Icon */}
@@ -988,7 +988,7 @@ const App = () => {
 
 
         {/* WhatsApp text on hover */}
-        <div className="absolute right-full mr-2 md:mr-4 top-1/2 transform -translate-y-1/2 bg-white text-red-600 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-xs md:text-sm font-bold">
+        <div className="absolute right-full mr-2 md:mr-4 top-1/2 transform -translate-y-1/2 bg-white text-green-600 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-xs md:text-sm font-bold">
           WhatsApp Emergency!
           <div className="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-white rotate-45"></div>
         </div>
