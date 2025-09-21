@@ -392,10 +392,10 @@ const App = () => {
                 }}
                 className="relative px-2 py-1 text-xs font-medium transition-all duration-300 rounded text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
               >
-                <span className="flex items-center space-x-1">
-                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping"></div>
-                  <span className="text-red-300 font-medium text-xs">0800 000 0000</span>
-                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping"></div>
+                <span className="flex items-center space-x-1 flex-nowrap min-w-fit">
+                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping flex-shrink-0"></div>
+                  <span className="text-red-300 font-medium text-xs whitespace-nowrap">0800 000 0000</span>
+                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping flex-shrink-0"></div>
                 </span>
               </a>
             </div>
