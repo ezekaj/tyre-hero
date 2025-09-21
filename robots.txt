@@ -12,6 +12,32 @@ Disallow: /node_modules/
 Disallow: /src/
 Disallow: /*.map
 
+# Security - Block sensitive directories
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.well-known/
+Disallow: /api/
+Disallow: /backend/
+Disallow: /staging/
+Disallow: /test/
+Disallow: /dev/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /security-log/
+Disallow: /error-log/
+Disallow: /backup/
+Disallow: /config/
+
+# Block vulnerability scanners
+User-agent: Nikto
+Disallow: /
+
+User-agent: sqlmap
+Disallow: /
+
+User-agent: w3af
+Disallow: /
+
 # Special instructions for search engines
 User-agent: Googlebot
 Allow: /
@@ -22,7 +48,7 @@ Allow: /
 Crawl-delay: 2
 
 # Sitemap location
-Sitemap: https://tyrehero.co.uk/sitemap.xml
+Sitemap: https://tyrehero.uk/sitemap.xml
 
 # Emergency service priority for local search
 # Primary service areas: Slough, Maidenhead, Windsor
