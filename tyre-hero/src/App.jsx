@@ -469,10 +469,10 @@ const App = () => {
             {/* Trust indicators with icons */}
             <div className="flex flex-wrap justify-center gap-12 text-gray-400">
               {[
-                { label: "60-Minute Guarantee", delay: 0 },
-                { label: "24/7 Service", delay: 200 },
-                { label: "Licensed & Insured", delay: 400 },
-                { label: "5-Star Rated", delay: 600 }
+                { label: "Slough & Surroundings", delay: 0 },
+                { label: "Maidenhead & Windsor", delay: 200 },
+                { label: "Eton & Datchet", delay: 400 },
+                { label: "Burnham & Taplow", delay: 600 }
               ].map((item, index) => (
                 <div
                   key={index}
