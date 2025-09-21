@@ -921,11 +921,11 @@ const App = () => {
                   onClick={() => window.location.href = 'tel:08000000000'}
                   className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-4 sm:py-6 md:py-8 px-8 sm:px-12 md:px-16 rounded-2xl sm:rounded-3xl md:rounded-4xl text-lg sm:text-xl md:text-2xl lg:text-3xl shadow-4xl hover:shadow-red-500/50 transform hover:scale-105 transition-all duration-500 hover:rotate-3 animate-pulse border-2 sm:border-3 md:border-4 border-red-400/50 group relative overflow-hidden"
                 >
-                  <span className="relative z-10 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 mr-2 sm:mr-3 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <span className="relative z-10 flex items-center whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 mr-2 sm:mr-3 md:mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                     </svg>
-                    EMERGENCY: 0800 000 0000
+                    <span className="whitespace-nowrap">EMERGENCY: 0800 000 0000</span>
                     </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                   <div className="absolute -inset-2 bg-gradient-to-r from-red-400 to-pink-500 rounded-4xl opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-500"></div>
