@@ -326,19 +326,19 @@ const App = () => {
             </div>
 
             {/* Phone Number in Center */}
-            <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
+            <div className="flex absolute left-1/2 transform -translate-x-1/2">
               <a
                 href="tel:08000000000"
                 onClick={() => {
                   trackPhoneCall('Header Phone Number');
                   trackEmergencyClick('Phone Call', 'Header Phone Number');
                 }}
-                className="relative px-5 py-3 text-sm font-medium transition-all duration-300 rounded-xl text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
+                className="relative px-2 py-2 md:px-5 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 rounded-lg md:rounded-xl text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
               >
-                <span className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
-                  <span className="text-red-300 font-bold">0800 000 0000</span>
-                  <div className="w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
+                <span className="flex items-center space-x-1 md:space-x-2">
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-red-400 rounded-full animate-ping"></div>
+                  <span className="text-red-300 font-bold text-xs md:text-sm">0800 000 0000</span>
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-red-400 rounded-full animate-ping"></div>
                 </span>
                 <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
               </a>
