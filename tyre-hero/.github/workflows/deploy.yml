@@ -31,9 +31,16 @@ jobs:
 
     - name: Build project
       run: npm run build
+      env:
+        NODE_ENV: production
 
     - name: Copy CNAME to dist
       run: cp CNAME dist/ || echo "No CNAME file"
+
+    - name: Verify build output
+      run: |
+        ls -la dist/
+        echo "Build completed at $(date)"
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
