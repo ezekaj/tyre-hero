@@ -6,47 +6,104 @@ import punctureRepairImg from '/images/puncture-repair.jpg';
 import tyreFittingImg from '/images/tyre-fitting-machine.jpg';
 import emergencyCalloutImg from '/images/emergency-callout.jpeg';
 
-// Enhanced Conversion Tracking for Google Ads & Analytics
+// Enhanced Conversion Tracking for Google Ads & Analytics with Security
+// Rate limiting storage
+const trackingRateLimit = new Map();
+
+// Data sanitization function
+const sanitizeTrackingData = (data) => {
+  if (typeof data !== 'object' || data === null) return {};
+
+  const sanitized = {};
+  for (const [key, value] of Object.entries(data)) {
+    // Remove potentially sensitive data and sanitize strings
+    if (typeof value === 'string') {
+      sanitized[key] = value.replace(/[<>\"'&]/g, '').substring(0, 100);
+    } else if (typeof value === 'number' && value >= 0 && value <= 999999) {
+      sanitized[key] = value;
+    } else if (typeof value === 'boolean') {
+      sanitized[key] = value;
+    }
+  }
+  return sanitized;
+};
+
+// Rate limiting check (max 10 calls per minute per type)
+const isRateLimited = (conversionType) => {
+  const now = Date.now();
+  const key = conversionType;
+  const calls = trackingRateLimit.get(key) || [];
+
+  // Remove calls older than 1 minute
+  const recentCalls = calls.filter(time => now - time < 60000);
+
+  if (recentCalls.length >= 10) {
+    return true;
+  }
+
+  recentCalls.push(now);
+  trackingRateLimit.set(key, recentCalls);
+  return false;
+};
+
 const trackConversion = (conversionType, details = {}) => {
   try {
+    // Security checks
+    if (!conversionType || typeof conversionType !== 'string') {
+      console.warn('Invalid conversion type provided');
+      return;
+    }
+
+    // Rate limiting
+    if (isRateLimited(conversionType)) {
+      console.warn(`Rate limit exceeded for conversion type: ${conversionType}`);
+      return;
+    }
+
+    // Sanitize input data
+    const sanitizedDetails = sanitizeTrackingData(details);
+
     // Google Ads Conversion Tracking
-    if (window.gtag) {
+    if (window.gtag && typeof window.gtag === 'function') {
       window.gtag('event', 'conversion', {
         'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
         'transaction_id': `${conversionType}_${Date.now()}`,
-        'value': details.value || 0,
+        'value': sanitizedDetails.value || 0,
         'currency': 'GBP',
         'event_category': 'Emergency Service',
         'event_label': conversionType,
-        'custom_parameter_1': details.location || 'Slough,Maidenhead,Windsor',
+        'custom_parameter_1': sanitizedDetails.location || 'Slough,Maidenhead,Windsor',
         'custom_parameter_2': 'Emergency Mobile Tyre Service'
       });
     }
 
     // Google Analytics Enhanced Event Tracking
-    if (window.gtag) {
+    if (window.gtag && typeof window.gtag === 'function') {
       window.gtag('event', conversionType, {
         'event_category': 'Emergency Service Conversion',
-        'event_label': details.label || conversionType,
-        'value': details.value || 0,
+        'event_label': sanitizedDetails.label || conversionType,
+        'value': sanitizedDetails.value || 0,
         'currency': 'GBP',
-        'service_type': details.serviceType || 'Emergency Tyre Service',
-        'location': details.location || 'Slough,Maidenhead,Windsor',
+        'service_type': sanitizedDetails.serviceType || 'Emergency Tyre Service',
+        'location': sanitizedDetails.location || 'Slough,Maidenhead,Windsor',
         'response_time_guarantee': '60 minutes'
       });
     }
 
     // Facebook Pixel Conversion Tracking
-    if (window.fbq) {
+    if (window.fbq && typeof window.fbq === 'function') {
       window.fbq('track', 'Lead', {
-        content_name: details.serviceName || 'Emergency Tyre Service',
+        content_name: sanitizedDetails.serviceName || 'Emergency Tyre Service',
         content_category: 'Automotive Emergency Services',
-        value: details.value || 0,
+        value: sanitizedDetails.value || 0,
         currency: 'GBP'
       });
     }
 
-    console.log(`Conversion tracked: ${conversionType}`, details);
+    // Console logging only in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`Conversion tracked: ${conversionType}`, sanitizedDetails);
+    }
   } catch (error) {
     console.error('Conversion tracking error:', error);
   }

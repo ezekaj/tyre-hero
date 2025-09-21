@@ -1,0 +1,22 @@
+Contact: mailto:security@tyrehero.uk
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://tyrehero.uk/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://tyrehero.uk/.well-known/security.txt
+Policy: https://tyrehero.uk/security-policy
+Acknowledgments: https://tyrehero.uk/security-thanks
+
+# Security Contact Information
+# Tyre Hero Emergency Service - Security Team
+#
+# Please report security vulnerabilities responsibly
+# We appreciate your efforts to improve our security
+# Expected response time: 24-48 hours
+#
+# For urgent security issues affecting customer safety:
+# Email: security@tyrehero.uk
+# Phone: +44 800 000 0000 (24/7 emergency line)
+#
+# Bug Bounty: We appreciate responsible disclosure
+# Scope: Production systems at tyrehero.uk
+# Out of scope: Development/staging environments
