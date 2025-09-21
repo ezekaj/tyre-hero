@@ -326,21 +326,21 @@ const App = () => {
             </div>
 
             {/* Mobile Phone Number in Center */}
-            <div className="md:hidden flex absolute left-1/2 transform -translate-x-1/2">
+            <div className="md:hidden flex absolute left-1/2 transform -translate-x-1/2 translate-x-4">
               <a
                 href="tel:08000000000"
                 onClick={() => {
                   trackPhoneCall('Header Phone Number');
                   trackEmergencyClick('Phone Call', 'Header Phone Number');
                 }}
-                className="relative px-2 py-2 text-xs font-medium transition-all duration-300 rounded-lg text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
+                className="relative px-1.5 py-1 text-xs font-medium transition-all duration-300 rounded text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
               >
                 <span className="flex items-center space-x-1">
-                  <div className="w-1.5 h-1.5 bg-red-400 rounded-full animate-ping"></div>
-                  <span className="text-red-300 font-bold text-xs">0800 000 0000</span>
-                  <div className="w-1.5 h-1.5 bg-red-400 rounded-full animate-ping"></div>
+                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping"></div>
+                  <span className="text-red-300 font-medium text-xs">0800 000 0000</span>
+                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping"></div>
                 </span>
-                <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-red-400 to-pink-500 rounded opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
               </a>
             </div>
 
@@ -354,14 +354,14 @@ const App = () => {
                     trackPhoneCall('Header Phone Number');
                     trackEmergencyClick('Phone Call', 'Header Phone Number');
                   }}
-                  className="relative px-5 py-3 text-sm font-medium transition-all duration-300 rounded-xl text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group mr-4"
+                  className="relative px-3 py-2 text-xs font-medium transition-all duration-300 rounded-lg text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group mr-3"
                 >
-                  <span className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
-                    <span className="text-red-300 font-bold">0800 000 0000</span>
-                    <div className="w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
+                  <span className="flex items-center space-x-1.5">
+                    <div className="w-1.5 h-1.5 bg-red-400 rounded-full animate-ping"></div>
+                    <span className="text-red-300 font-medium text-xs">0800 000 0000</span>
+                    <div className="w-1.5 h-1.5 bg-red-400 rounded-full animate-ping"></div>
                   </span>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-red-400 to-pink-500 rounded-lg opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
                 </a>
                 {navItems.map((item) => (
                   <button
