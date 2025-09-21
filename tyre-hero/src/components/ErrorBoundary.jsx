@@ -42,7 +42,7 @@ class ErrorBoundary extends React.Component {
 
               <div className="space-y-6 mb-12">
                 <a
-                  href="tel:0800-000-0000"
+                  href="tel:08000000000"
                   className="block bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-6 px-12 rounded-3xl text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-300 border-4 border-red-400/50"
                 >
                   CALL EMERGENCY: 0800 000 0000
