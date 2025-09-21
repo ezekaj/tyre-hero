@@ -325,8 +325,8 @@ const App = () => {
               </div>
             </div>
 
-            {/* Mobile Phone Number in Center */}
-            <div className="md:hidden flex absolute left-1/2 transform -translate-x-1/2 translate-x-4">
+            {/* Mobile Phone Number positioned to avoid logo */}
+            <div className="md:hidden flex absolute right-16 top-1/2 transform -translate-y-1/2">
               <a
                 href="tel:08000000000"
                 onClick={() => {
