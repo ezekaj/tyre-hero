@@ -375,8 +375,6 @@ const App = () => {
                   </button>
                 ))}
               </nav>
-              {/* Animated background effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
             </div>
 
             {/* Mobile menu button */}
