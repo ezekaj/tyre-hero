@@ -384,7 +384,7 @@ const App = () => {
 
 
             {/* Desktop Navigation with integrated phone number */}
-            <div className="relative group">
+            <div className={`relative group ${isMenuOpen ? 'hidden' : ''}`}>
               <nav className="hidden md:flex space-x-1 relative z-10">
                 {/* Phone number as first nav item on desktop */}
                 <a
