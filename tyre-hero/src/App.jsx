@@ -340,7 +340,6 @@ const App = () => {
                   <span className="text-red-300 font-medium text-xs">0800 000 0000</span>
                   <div className="w-1 h-1 bg-red-400 rounded-full animate-ping"></div>
                 </span>
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-red-400 to-pink-500 rounded opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
               </a>
             </div>
 
@@ -361,7 +360,6 @@ const App = () => {
                     <span className="text-red-300 font-medium text-xs">0800 000 0000</span>
                     <div className="w-1.5 h-1.5 bg-red-400 rounded-full animate-ping"></div>
                   </span>
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-red-400 to-pink-500 rounded-lg opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
                 </a>
                 {navItems.map((item) => (
                   <button
