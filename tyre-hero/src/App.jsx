@@ -382,23 +382,6 @@ const App = () => {
               </div>
             </div>
 
-            {/* Mobile Phone Number centered between logo and hamburger menu */}
-            <div className="md:hidden flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 -translate-x-2.5">
-              <a
-                href="tel:08000000000"
-                onClick={() => {
-                  trackPhoneCall('Header Phone Number');
-                  trackEmergencyClick('Phone Call', 'Header Phone Number');
-                }}
-                className="relative px-1.5 py-1 text-xs font-medium transition-all duration-300 rounded text-white bg-red-500/20 border border-red-500/50 shadow-lg hover:text-white hover:bg-red-500/30 group"
-              >
-                <span className="flex items-center space-x-1">
-                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping"></div>
-                  <span className="text-red-300 font-medium text-xs">0800 000 0000</span>
-                  <div className="w-1 h-1 bg-red-400 rounded-full animate-ping"></div>
-                </span>
-              </a>
-            </div>
 
             {/* Desktop Navigation with integrated phone number */}
             <div className="relative group">
