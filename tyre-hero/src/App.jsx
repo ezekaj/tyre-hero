@@ -344,21 +344,25 @@ const App = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`relative px-5 py-3 text-sm font-medium transition-all duration-300 rounded-xl ${
-                    activeSection === item.id
-                      ? 'text-white bg-red-500/20 border border-red-500/50 shadow-lg'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </nav>
+            <div className="relative group">
+              <nav className="hidden md:flex space-x-1 relative z-10">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`relative px-5 py-3 text-sm font-medium transition-all duration-300 rounded-xl ${
+                      activeSection === item.id
+                        ? 'text-white bg-red-500/20 border border-red-500/50 shadow-lg'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </nav>
+              {/* Animated background effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
+            </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden">
