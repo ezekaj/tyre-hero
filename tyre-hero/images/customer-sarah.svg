@@ -1,0 +1,23 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff9c4"/>
+      <stop offset="100%" stop-color="#ffe395"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg)"/>
+  <!-- Face -->
+  <circle cx="100" cy="80" r="50" fill="#fdbb74"/>
+  <!-- Hair -->
+  <path d="M50 60Q50 30 100 30Q150 30 150 60Q50 50 50 60Z" fill="#8b5934"/>
+  <!-- Eyes -->
+  <circle cx="85" cy="75" r="4" fill="#333333"/>
+  <circle cx="115" cy="75" r="4" fill="#333333"/>
+  <!-- Nose -->
+  <ellipse cx="100" cy="85" rx="2" ry="4" fill="#e69153"/>
+  <!-- Mouth -->
+  <path d="M90 95Q95 100 100 95Q105 100 110 95" stroke="#333333" stroke-width="2" fill="none"/>
+  <!-- Earrings -->
+  <circle cx="65" cy="78" r="3" fill="#ffd700"/>
+  <circle cx="135" cy="78" r="3" fill="#ffd700"/>
+</svg>
