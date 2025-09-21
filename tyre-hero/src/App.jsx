@@ -1008,7 +1008,31 @@ const App = () => {
 
 
 
-      {/* Floating WhatsApp Button */}
+      {/* Floating Phone Call Button - Positioned bottom left */}
+      <a
+        href="tel:08000000000"
+        onClick={() => trackConversion('phone_call', { source: 'floating_button', serviceType: 'Emergency Tyre Service' })}
+        className="fixed bottom-4 left-4 md:bottom-10 md:left-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-2 sm:p-3 md:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border border-red-400/50 md:border-4 group"
+        aria-label="Call emergency tyre service now"
+      >
+        {/* Phone Icon */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 sm:h-6 sm:w-6 md:h-10 md:w-10"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+        </svg>
+
+        {/* Phone text on hover */}
+        <div className="absolute left-full ml-2 md:ml-4 top-1/2 transform -translate-y-1/2 bg-white text-red-600 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-xs md:text-sm font-bold">
+          Call Emergency!
+          <div className="absolute top-1/2 -left-1 transform -translate-y-1/2 w-2 h-2 bg-white rotate-45"></div>
+        </div>
+      </a>
+
+      {/* Floating WhatsApp Button - Positioned bottom right */}
       <a
         href="https://wa.me/?text=Hi! I need emergency tyre service. Can you help me?"
         target="_blank"
