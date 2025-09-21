@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+// Force deploy: Sep 21 2025 19:20
 
 // Import service images
 import tyreReplacementImg from '/images/tyre-replacement.jpg';
