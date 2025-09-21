@@ -925,7 +925,7 @@ const App = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 mr-2 sm:mr-3 md:mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                     </svg>
-                    <span className="whitespace-nowrap">EMERGENCY: 0800 000 0000</span>
+                    <span className="whitespace-nowrap">0800 000 0000</span>
                     </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                   <div className="absolute -inset-2 bg-gradient-to-r from-red-400 to-pink-500 rounded-4xl opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-500"></div>
