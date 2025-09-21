@@ -273,24 +273,6 @@ const App = () => {
         '--scroll-y': `${scrollY}px`
       }}
     >
-      {/* Phone Number at Top */}
-      <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-40">
-        <a
-          href="tel:08000000000"
-          onClick={() => {
-            trackPhoneCall('Top Phone Number');
-            trackEmergencyClick('Phone Call', 'Top Phone Number');
-          }}
-          className="relative inline-block text-lg sm:text-xl md:text-2xl font-black text-white hover:text-red-400 transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-4 py-2 sm:px-6 sm:py-3 border border-red-500/50 group"
-        >
-          <span className="flex items-center space-x-2">
-            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-400 rounded-full animate-ping"></div>
-            <span className="text-red-300 font-bold">0800 000 0000</span>
-            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-400 rounded-full animate-ping"></div>
-          </span>
-          <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
-        </a>
-      </div>
 
       {/* Video Background System */}
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -341,6 +323,25 @@ const App = () => {
                   className="h-12 w-auto mr-3"
                 />
               </div>
+            </div>
+
+            {/* Phone Number in Center */}
+            <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
+              <a
+                href="tel:08000000000"
+                onClick={() => {
+                  trackPhoneCall('Header Phone Number');
+                  trackEmergencyClick('Phone Call', 'Header Phone Number');
+                }}
+                className="relative inline-block text-sm lg:text-base font-black text-white hover:text-red-400 transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-red-500/30 to-red-600/30 backdrop-blur-sm rounded-full px-3 py-2 lg:px-4 lg:py-2 border border-red-500/50 group"
+              >
+                <span className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
+                  <span className="text-red-300 font-bold">0800 000 0000</span>
+                  <div className="w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
+                </span>
+                <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
+              </a>
             </div>
 
             {/* Desktop Navigation */}
