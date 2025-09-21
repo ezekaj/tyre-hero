@@ -440,18 +440,19 @@ const App = () => {
           {isMenuOpen && (
             <div className="md:hidden mt-4 pb-4 border-t border-gray-700/50">
               <nav className="flex flex-col space-y-3">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`px-6 py-4 text-left text-sm font-medium transition-all duration-300 rounded-xl ${
-                      activeSection === item.id
-                        ? 'text-white bg-red-500/20 border border-red-500/50'
-                        : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
+{navItems.map((item, index) => (
+                  <div key={item.id}>
+                    <button
+                      onClick={() => scrollToSection(item.id)}
+                      className={`px-6 py-4 text-left text-sm font-medium transition-all duration-300 rounded-xl w-full ${
+                        activeSection === item.id
+                          ? 'text-white bg-red-500/20 border border-red-500/50'
+                          : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  </div>
                 ))}
               </nav>
             </div>
