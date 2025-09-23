@@ -1034,7 +1034,7 @@ const App = () => {
 
       {/* Floating WhatsApp Button - Positioned bottom right */}
       <a
-        href="https://wa.me/?text=Hi! I need emergency tyre service. Can you help me?"
+        href="https://wa.me/447757669877?text=Hi! I need emergency tyre service. Can you help me?"
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => trackConversion('whatsapp_contact', { source: 'floating_button', serviceType: 'Emergency Tyre Service' })}
