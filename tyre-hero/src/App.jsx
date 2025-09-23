@@ -988,7 +988,7 @@ const App = () => {
               <div className="text-center md:text-left">
                 <h4 className="text-white font-black text-2xl mb-4">Emergency Contact</h4>
                 <p className="text-lg sm:text-xl md:text-2xl font-black text-red-400 mb-2">07757 669 877</p>
-                <p className="text-base sm:text-lg md:text-xl">rescue@tyrehero.co.uk</p>
+                <p className="text-base sm:text-lg md:text-xl">emergency@tyrehero.uk</p>
               </div>
               <div className="text-center">
                 <h4 className="text-white font-black text-2xl mb-4">Service Area</h4>
