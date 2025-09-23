@@ -234,7 +234,7 @@ const App = () => {
       action: () => {
         trackPhoneCall('Service Card - Emergency Tyre Replacement');
         trackEmergencyClick('Emergency Tyre Replacement', 'Service Card');
-        window.location.href = 'tel:08000000000';
+        window.location.href = 'tel:+447757669877';
       }
     },
     {
@@ -247,7 +247,7 @@ const App = () => {
       action: () => {
         trackPhoneCall('Service Card - Professional Puncture Repair');
         trackEmergencyClick('Professional Puncture Repair', 'Service Card');
-        window.location.href = 'tel:08000000000';
+        window.location.href = 'tel:+447757669877';
       }
     },
     {
@@ -260,7 +260,7 @@ const App = () => {
       action: () => {
         trackPhoneCall('Service Card - Mobile Tyre Fitting');
         trackEmergencyClick('Mobile Tyre Fitting', 'Service Card');
-        window.location.href = 'tel:08000000000';
+        window.location.href = 'tel:+447757669877';
       }
     },
     {
@@ -273,7 +273,7 @@ const App = () => {
       action: () => {
         trackPhoneCall('Service Card - 24/7 Emergency Callout');
         trackEmergencyClick('24/7 Emergency Callout', 'Service Card');
-        window.location.href = 'tel:08000000000';
+        window.location.href = 'tel:+447757669877';
       }
     }
   ];
@@ -386,7 +386,7 @@ const App = () => {
             {/* Phone Number - Desktop: between logo and nav, Mobile: between logo and hamburger */}
             <div className="flex-1 flex justify-center md:justify-start md:ml-3">
               <a
-                href="tel:08000000000"
+                href="tel:+447757669877"
                 onClick={() => {
                   trackPhoneCall('Header Phone Number');
                   trackEmergencyClick('Phone Call', 'Header Phone Number');
@@ -395,7 +395,7 @@ const App = () => {
               >
                 <span className="flex items-center space-x-1 flex-nowrap min-w-fit">
                   <div className="w-1 h-1 bg-red-400 rounded-full animate-ping flex-shrink-0"></div>
-                  <span className="text-red-300 font-medium text-xs md:text-sm whitespace-nowrap">0800 000 0000</span>
+                  <span className="text-red-300 font-medium text-xs md:text-sm whitespace-nowrap">07757 669 877</span>
                   <div className="w-1 h-1 bg-red-400 rounded-full animate-ping flex-shrink-0"></div>
                 </span>
               </a>
@@ -498,7 +498,7 @@ const App = () => {
                 onClick={() => {
                   trackPhoneCall('Hero Section CTA');
                   trackEmergencyClick('Emergency Call', 'Hero CTA');
-                  window.location.href = 'tel:08000000000';
+                  window.location.href = 'tel:+447757669877';
                 }}
                 className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-3 px-6 sm:py-4 sm:px-8 md:py-6 md:px-12 rounded-2xl sm:rounded-3xl text-lg sm:text-xl md:text-2xl shadow-3xl hover:shadow-red-500/40 transform hover:scale-105 transition-all duration-300 hover:rotate-2 animate-pulse border-2 sm:border-4 border-red-400/50 group relative overflow-hidden"
               >
@@ -506,7 +506,7 @@ const App = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                   </svg>
-                  0800 000 0000
+                  07757 669 877
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
@@ -812,7 +812,7 @@ const App = () => {
                     {
                       icon: "phone",
                       title: "EMERGENCY HOTLINE",
-                      value: "0800 000 0000",
+                      value: "07757 669 877",
                       desc: "24/7 Response • 60-Minute Guarantee",
                       color: "red",
                       size: "4xl"
@@ -839,7 +839,7 @@ const App = () => {
                       className="flex items-start p-4 sm:p-6 md:p-8 bg-black/40 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-gray-700/50 hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-500 group transform hover:scale-105 hover:rotate-1 cursor-pointer"
                       onClick={() => {
                         if (contact.icon === 'phone') {
-                          window.location.href = 'tel:08000000000';
+                          window.location.href = 'tel:+447757669877';
                         } else if (contact.icon === 'email') {
                           window.location.href = 'mailto:rescue@tyrehero.co.uk';
                         } else {
@@ -919,14 +919,14 @@ const App = () => {
 
               <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 md:gap-10 justify-center items-center mb-10 sm:mb-12 md:mb-14">
                 <button
-                  onClick={() => window.location.href = 'tel:08000000000'}
+                  onClick={() => window.location.href = 'tel:+447757669877'}
                   className="bg-gradient-to-r from-red-500 to-red-600 text-white font-black py-4 sm:py-6 md:py-8 px-8 sm:px-12 md:px-16 rounded-2xl sm:rounded-3xl md:rounded-4xl text-lg sm:text-xl md:text-2xl lg:text-3xl shadow-4xl hover:shadow-red-500/50 transform hover:scale-105 transition-all duration-500 hover:rotate-3 animate-pulse border-2 sm:border-3 md:border-4 border-red-400/50 group relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center whitespace-nowrap">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 mr-2 sm:mr-3 md:mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                     </svg>
-                    <span className="whitespace-nowrap">0800 000 0000</span>
+                    <span className="whitespace-nowrap">07757 669 877</span>
                     </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                   <div className="absolute -inset-2 bg-gradient-to-r from-red-400 to-pink-500 rounded-4xl opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-500"></div>
@@ -982,7 +982,7 @@ const App = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-gray-400">
               <div className="text-center md:text-left">
                 <h4 className="text-white font-black text-2xl mb-4">Emergency Contact</h4>
-                <p className="text-lg sm:text-xl md:text-2xl font-black text-red-400 mb-2">0800 000 0000</p>
+                <p className="text-lg sm:text-xl md:text-2xl font-black text-red-400 mb-2">07757 669 877</p>
                 <p className="text-base sm:text-lg md:text-xl">rescue@tyrehero.co.uk</p>
               </div>
               <div className="text-center">
@@ -1010,7 +1010,7 @@ const App = () => {
 
       {/* Floating Phone Call Button - Positioned bottom left */}
       <a
-        href="tel:08000000000"
+        href="tel:+447757669877"
         onClick={() => trackConversion('phone_call', { source: 'floating_button', serviceType: 'Emergency Tyre Service' })}
         className="fixed bottom-4 left-4 md:bottom-10 md:left-10 bg-gradient-to-r from-red-500 to-red-600 text-white p-2 sm:p-3 md:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-red-500/50 transform hover:scale-110 transition-all duration-300 z-50 border border-red-400/50 md:border-4 group"
         aria-label="Call emergency tyre service now"
