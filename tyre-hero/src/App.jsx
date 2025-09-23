@@ -532,7 +532,12 @@ const App = () => {
                 { label: "Slough & Surroundings", delay: 0 },
                 { label: "Maidenhead & Windsor", delay: 200 },
                 { label: "Eton & Datchet", delay: 400 },
-                { label: "Burnham & Taplow", delay: 600 }
+                { label: "Burnham & Taplow", delay: 600 },
+                { label: "London", delay: 800 },
+                { label: "Reading", delay: 1000 },
+                { label: "Oxford", delay: 1200 },
+                { label: "High Wycombe", delay: 1400 },
+                { label: "Watford", delay: 1600 }
               ].map((item, index) => (
                 <div
                   key={index}
@@ -998,10 +1003,20 @@ const App = () => {
             </div>
           </div>
 
-          <p className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl mb-8">
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl mb-4">
             © 2025 Tyre Hero. Professional mobile tyre fitting and emergency roadside assistance service.
             Serving Slough, Maidenhead & Windsor. Developed by ELO Group.
           </p>
+
+          {/* Business Information */}
+          <div className="text-gray-500 text-xs sm:text-sm mb-8">
+            <p className="mb-2">
+              <span className="font-semibold">Business Address:</span> SL1 1RX, United Kingdom
+            </p>
+            <p>
+              <span className="font-semibold">TIN Number:</span> Nj721420A
+            </p>
+          </div>
 
         </div>
       </footer>
