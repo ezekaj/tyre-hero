@@ -34,7 +34,11 @@
     <meta name="business.category" content="Emergency Services, Automotive Services, Mobile Services">
     <meta name="business.hours" content="24/7/365">
     <meta name="business.phone" content="07757 669 877">
-    <meta name="business.service_area" content="Slough, Maidenhead, Windsor, Berkshire, UK">
+    <meta name="business.service_area" content="Slough, Maidenhead, Windsor, London, Reading, Oxford, High Wycombe, Watford, UK">
+    <meta name="business.tin" content="Nj721420A">
+    <meta name="business.address" content="SL1 1RX, United Kingdom">
+    <meta name="business.registration" content="Nj721420A">
+    <meta name="business.postal_code" content="SL1 1RX">
 
     <!-- Additional Local Keywords -->
     <meta name="location" content="Slough SL1, Maidenhead SL6, Windsor SL4, Berkshire, UK">
@@ -133,8 +137,12 @@
       gtag('event', 'page_view', {
         event_category: 'Emergency Service',
         event_label: 'Tyre Hero Landing Page',
-        custom_parameter_1: 'Slough,Maidenhead,Windsor',
-        custom_parameter_2: 'Emergency Mobile Tyre Service'
+        custom_parameter_1: 'Slough,Maidenhead,Windsor,London,Reading,Oxford,High Wycombe,Watford',
+        custom_parameter_2: 'Emergency Mobile Tyre Service',
+        custom_parameter_3: 'SL1 1RX',
+        custom_parameter_4: 'Nj721420A',
+        business_address: 'SL1 1RX, United Kingdom',
+        business_tin: 'Nj721420A'
       });
     </script>
 
@@ -146,6 +154,10 @@
           'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
           'phone_conversion_number': '07757 669 877',
           'phone_conversion_type': 'call',
+          'business_location': 'SL1 1RX, United Kingdom',
+          'business_tin': 'Nj721420A',
+          'service_area': 'Slough,Maidenhead,Windsor,London,Reading,Oxford,High Wycombe,Watford',
+          'business_type': 'Emergency Mobile Tyre Service',
           ...params
         });
       };
@@ -240,10 +252,13 @@
           "@type": "PostalAddress",
           "addressLocality": "Slough",
           "addressRegion": "Berkshire",
-          "postalCode": "SL1",
+          "postalCode": "SL1 1RX",
           "addressCountry": "GB",
-          "streetAddress": "Mobile Service - Covers Slough, Maidenhead & Windsor"
+          "streetAddress": "Mobile Service - Covers Slough, Maidenhead, Windsor, London, Reading, Oxford"
         },
+        "taxID": "Nj721420A",
+        "vatID": "Nj721420A",
+        "legalName": "Tyre Hero Emergency Mobile Service",
         "sameAs": [
           "https://facebook.com/tyrehero",
           "https://twitter.com/tyrehero",
