@@ -1,6 +1,8 @@
-# Tyre Hero Emergency Service
+# Tyre Hero
 
 Professional mobile tyre fitting and emergency roadside assistance service with 60-minute response guarantee.
+
+**Live Site:** https://tyrehero.uk
 
 ## Features
 
@@ -8,29 +10,32 @@ Professional mobile tyre fitting and emergency roadside assistance service with 
 - Professional puncture repair
 - Wheel balancing & alignment
 - Fleet & commercial service
+- Mobile-first responsive design
+- Service area coverage map
 
-## Deployment
+## Tech Stack
 
-This website is automatically deployed to GitHub Pages using GitHub Actions.
-
-## Development
-
-This project uses:
 - React.js
 - Tailwind CSS
-- CRACO for customizing Create React App
+- CRACO (Create React App Configuration Override)
 
-To run locally:
+## Run Locally
+
 ```bash
+npm install
 npm start
 ```
 
-To build for production:
+## Build
+
 ```bash
 npm run build
 ```
 
-To deploy to GitHub Pages:
-```bash
-npm run deploy
-```
+## Deployment
+
+Automatically deployed to GitHub Pages via GitHub Actions on push to `master`.
+
+---
+
+Built by ELO from [Z.E Digital Tech](https://zedigital.tech)
